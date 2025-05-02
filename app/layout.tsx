@@ -2,7 +2,13 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+// Настройка шрифта Inter с различными вариантами начертания
+const inter = Inter({
+  subsets: ["latin", "cyrillic"], // Добавляем cyrillic для поддержки русского языка
+  weight: ["400", "500", "600", "700"], // Добавляем различные начертания, включая Regular (400)
+  variable: "--font-inter", // Переменная для использования в Tailwind
+  display: "swap", // Улучшение производительности загрузки шрифта
+})
 
 export const metadata: Metadata = {
   title: "Hippocrat Digital | Цифровые решения для медицины",
@@ -17,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <head>
-        {/* Важно: Next.js автоматически добавляет теги link для стилей после сборки */}
+        {/* Добавляем шрифт Fixedsys для заголовков, как в Hippocrat AI */}
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
       </head>
       <body className={`${inter.variable} font-sans bg-slate-950 text-white`}>
