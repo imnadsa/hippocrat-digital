@@ -25,6 +25,14 @@ export default function RootLayout({
       <head>
         {/* Добавляем шрифт Fixedsys для заголовков, как в Hippocrat AI */}
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
+        
+        {/* Добавляем метатеги для убеждения браузера использовать правильные шрифты */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style jsx global>{`
+          html, body {
+            font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+          }
+        `}</style>
       </head>
       <body className={`${inter.variable} font-sans bg-slate-950 text-white`}>
         {children}
