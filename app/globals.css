@@ -200,6 +200,29 @@ h3.font-fixedsys {
   letter-spacing: 0;
 }
 
+/* Явные базовые стили для решения проблем с рендерингом */
+body {
+  background-color: #0f172a;
+  color: #fff;
+}
+
+.bg-slate-950 {
+  background-color: #0f172a !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.text-teal-400 {
+  color: #2dd4bf !important;
+}
+
+.text-indigo-400 {
+  color: #6366f1 !important;
+}
+
+/* Остальные стили из оригинального файла */
 /* Анимация для маркетинговой инфографики */
 @keyframes dashboard-pulse {
   0%, 100% {
