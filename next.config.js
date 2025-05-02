@@ -13,12 +13,9 @@ const nextConfig = {
   // Добавляем поддержку шрифтов
   images: {
     domains: ['fonts.cdnfonts.com'],
-  },
+  }
   
-  // Включаем экспериментальные возможности App Router
-  experimental: {
-    appDir: true,
-  },
+  // Удалена устаревшая экспериментальная опция appDir, которая теперь включена по умолчанию
 }
 
 module.exports = nextConfig
