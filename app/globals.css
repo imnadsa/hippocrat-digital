@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Использование Inter как основного шрифта */
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -55,6 +60,20 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+/* Переопределение для использования Fixedsys только для определенных элементов */
+.font-fixedsys {
+  font-family: "Fixedsys Excelsior 3.01", monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Для заголовков используем Fixedsys */
+h1.font-fixedsys,
+h2.font-fixedsys,
+h3.font-fixedsys {
+  font-family: "Fixedsys Excelsior 3.01", monospace;
+  letter-spacing: 0;
 }
 
 /* Custom scrollbar for webkit browsers */
@@ -186,20 +205,6 @@ html {
   background-image: linear-gradient(to right, #2dd4bf, #6366f1, #2dd4bf);
 }
 
-/* Шрифт Fixedsys для заголовков и важных элементов */
-.font-fixedsys {
-  font-family: "Fixedsys Excelsior 3.01", monospace;
-  letter-spacing: 0.5px;
-}
-
-/* Для заголовков используем Fixedsys */
-h1.font-fixedsys,
-h2.font-fixedsys,
-h3.font-fixedsys {
-  font-family: "Fixedsys Excelsior 3.01", monospace;
-  letter-spacing: 0;
-}
-
 /* Явные базовые стили для решения проблем с рендерингом */
 body {
   background-color: #0f172a;
@@ -222,7 +227,6 @@ body {
   color: #6366f1 !important;
 }
 
-/* Остальные стили из оригинального файла */
 /* Анимация для маркетинговой инфографики */
 @keyframes dashboard-pulse {
   0%, 100% {
