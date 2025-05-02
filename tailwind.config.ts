@@ -124,7 +124,7 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     // Добавляет плагин для безопасной области на мобильных устройствах с челками и нижними панелями
-    ({ addBase }) => {
+    ({ addBase }: { addBase: (base: Record<string, any>) => void }) => {
       addBase({
         'html': { 
           WebkitTapHighlightColor: 'transparent',
