@@ -2,31 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Принудительно устанавливаем Inter для всего текста */
-html, body, p, div, span, h1, h2, h3, h4, h5, h6, button, input, select, textarea {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-}
-
-/* Только явные элементы с классом font-fixedsys должны использовать Fixedsys */
-.font-fixedsys {
-  font-family: "Fixedsys Excelsior 3.01", monospace !important;
-  letter-spacing: 0.5px;
-}
-
-/* Для заголовков с классом font-fixedsys используем Fixedsys */
-h1.font-fixedsys,
-h2.font-fixedsys,
-h3.font-fixedsys {
-  font-family: "Fixedsys Excelsior 3.01", monospace !important;
-  letter-spacing: 0;
-}
-
-/* Явно устанавливаем font-mono для избегания конфликтов */
-.font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
-}
-
 @layer base {
+  /* Принудительно устанавливаем Inter для всего текста */
+  html, body, p, div, span, h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -70,15 +51,32 @@ h3.font-fixedsys {
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
-
-@layer base {
+  
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+/* Только явные элементы с классом font-fixedsys должны использовать Fixedsys */
+.font-fixedsys {
+  font-family: "Fixedsys Excelsior 3.01", monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Для заголовков с классом font-fixedsys используем Fixedsys */
+h1.font-fixedsys,
+h2.font-fixedsys,
+h3.font-fixedsys {
+  font-family: "Fixedsys Excelsior 3.01", monospace;
+  letter-spacing: 0;
+}
+
+/* Явно устанавливаем font-mono для избегания конфликтов */
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /* Custom scrollbar for webkit browsers */
@@ -217,19 +215,19 @@ body {
 }
 
 .bg-slate-950 {
-  background-color: #0f172a !important;
+  background-color: #0f172a;
 }
 
 .text-white {
-  color: #fff !important;
+  color: #fff;
 }
 
 .text-teal-400 {
-  color: #2dd4bf !important;
+  color: #2dd4bf;
 }
 
 .text-indigo-400 {
-  color: #6366f1 !important;
+  color: #6366f1;
 }
 
 /* Анимация для маркетинговой инфографики */
