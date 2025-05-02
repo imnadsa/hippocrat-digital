@@ -27,6 +27,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"], // Устанавливаем Inter в качестве основного шрифта
+        fixedsys: ['"Fixedsys Excelsior 3.01"', "monospace"], // Оставляем Fixedsys для заголовков
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
