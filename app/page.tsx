@@ -15,15 +15,30 @@ import Footer from "@/components/footer"
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
-  // Handle scroll for sticky header
+  // Fix for hydration errors - only run after client-side mount
   useEffect(() => {
+    setIsMounted(true)
+    
+    // Set initial scroll state
+    if (typeof window !== 'undefined') {
+      setScrolled(window.scrollY > 20)
+    }
+    
+    // Add scroll event listener
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
+    
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Don't render anything until client-side mount to prevent hydration errors
+  if (!isMounted) {
+    return <div className="min-h-screen bg-slate-950"></div>
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
