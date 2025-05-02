@@ -29,7 +29,8 @@ export default function MarketingAnimation() {
     
     // Настраиваем камеру
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = isMobile ? 25 : 20;
+    // Уменьшаем расстояние камеры для мобильных устройств, чтобы ДНК была крупнее
+    camera.position.z = isMobile ? 15 : 20;
 
     // Настраиваем рендерер с прозрачным фоном и сглаживанием
     const renderer = new THREE.WebGLRenderer({ 
@@ -69,10 +70,15 @@ export default function MarketingAnimation() {
 
     // Параметры ДНК
     const createDna = () => {
-      const helixRadius = 5; // Радиус спирали
-      const helixHeight = 18; // Высота спирали
-      const numBases = isMobile ? 20 : 30; // Количество пар оснований
+      // Увеличиваем размер ДНК для мобильных
+      const helixRadius = isMobile ? 6 : 5; // Радиус спирали (больше для мобильных)
+      const helixHeight = isMobile ? 15 : 18; // Высота спирали (компактнее для мобильных)
+      const numBases = isMobile ? 25 : 30; // Количество пар оснований
       const turns = 2.5; // Количество витков спирали
+      
+      // Увеличиваем размер элементов ДНК для мобильных устройств
+      const nucleotideSize = isMobile ? 0.55 : 0.4; // Размер нуклеотидов
+      const backboneSize = isMobile ? 0.2 : 0.15; // Размер соединений
       
       const segments = [];
       const connectors = [];
@@ -85,7 +91,7 @@ export default function MarketingAnimation() {
         const y = (ratio - 0.5) * helixHeight;
         
         // Создаем сферы для первой цепи
-        const sphere1Geometry = new THREE.SphereGeometry(0.4, 12, 12);
+        const sphere1Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
         const sphere1 = new THREE.Mesh(
           sphere1Geometry, 
           i % 2 === 0 ? primaryMaterial : secondaryMaterial
@@ -99,7 +105,7 @@ export default function MarketingAnimation() {
         );
         
         // Создаем сферы для второй цепи (смещение на 180 градусов)
-        const sphere2Geometry = new THREE.SphereGeometry(0.4, 12, 12);
+        const sphere2Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
         const sphere2 = new THREE.Mesh(
           sphere2Geometry, 
           i % 2 === 0 ? secondaryMaterial : primaryMaterial
@@ -132,7 +138,6 @@ export default function MarketingAnimation() {
         connector.position.copy(center);
         
         // Вычисляем правильную ориентацию для соединителя
-        // Это сложный математический расчет для поворота цилиндра между двумя точками
         const axis = new THREE.Vector3(0, 1, 0);
         connector.quaternion.setFromUnitVectors(
           axis, 
@@ -151,7 +156,7 @@ export default function MarketingAnimation() {
             opacity: 0.5 
           });
           
-          const backboneGeometry1 = new THREE.CylinderGeometry(0.15, 0.15, 1, 6);
+          const backboneGeometry1 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
           const backbone1 = new THREE.Mesh(backboneGeometry1, backboneMaterial1);
           
           const prev1 = segments[segments.length - 4]; // Предыдущая сфера на первой спирали
@@ -183,7 +188,7 @@ export default function MarketingAnimation() {
             opacity: 0.5 
           });
           
-          const backboneGeometry2 = new THREE.CylinderGeometry(0.15, 0.15, 1, 6);
+          const backboneGeometry2 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
           const backbone2 = new THREE.Mesh(backboneGeometry2, backboneMaterial2);
           
           const prev2 = segments[segments.length - 3]; // Предыдущая сфера на второй спирали
@@ -218,12 +223,16 @@ export default function MarketingAnimation() {
     
     // Добавляем немного случайных частиц вокруг ДНК для эффекта
     const addParticles = () => {
-      const particleCount = isMobile ? 40 : 80;
+      const particleCount = isMobile ? 50 : 80; // Увеличили для мобильных
       const particles = [];
       
       for (let i = 0; i < particleCount; i++) {
         // Создаем частицы в форме маленьких сфер
-        const size = Math.random() * 0.15 + 0.05;
+        // Увеличиваем размер частиц для мобильных устройств
+        const size = isMobile ? 
+          (Math.random() * 0.25 + 0.1) : // Размер для мобильных
+          (Math.random() * 0.15 + 0.05); // Размер для десктопа
+        
         const geometry = new THREE.SphereGeometry(size, 6, 6);
         
         // Случайно выбираем цвет
@@ -236,9 +245,13 @@ export default function MarketingAnimation() {
         const particle = new THREE.Mesh(geometry, material);
         
         // Размещаем частицы случайно вокруг ДНК
+        // Размещаем ближе к центру на мобильных для лучшей видимости
         const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 10 + 6;
-        const height = (Math.random() - 0.5) * 20;
+        const radius = isMobile ? 
+          (Math.random() * 8 + 5) : // Радиус для мобильных
+          (Math.random() * 10 + 6); // Радиус для десктопа
+          
+        const height = (Math.random() - 0.5) * (isMobile ? 14 : 20);
         
         particle.position.set(
           Math.cos(angle) * radius,
@@ -247,11 +260,14 @@ export default function MarketingAnimation() {
         );
         
         // Добавляем случайную скорость движения для каждой частицы
+        // Увеличиваем скорость для мобильных устройств для лучшей видимости анимации
+        const speedMultiplier = isMobile ? 0.03 : 0.02;
+        
         particle.userData = {
           velocity: new THREE.Vector3(
-            (Math.random() - 0.5) * 0.02,
-            (Math.random() - 0.5) * 0.02,
-            (Math.random() - 0.5) * 0.02
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier
           ),
           originalPosition: particle.position.clone(),
           maxDistance: Math.random() * 2 + 1
@@ -286,8 +302,9 @@ export default function MarketingAnimation() {
     };
 
     // Функция для вращения ДНК
+    // Увеличиваем скорость вращения для мобильных устройств
     const rotateDna = () => {
-      dnaGroup.rotation.y += 0.005;
+      dnaGroup.rotation.y += isMobile ? 0.007 : 0.005;
     };
 
     // Основная функция анимации
@@ -352,10 +369,7 @@ export default function MarketingAnimation() {
         style={{ background: "transparent" }}
       />
       
-      {/* Тонкая подсказка - адаптивный размер шрифта */}
-      <div className="absolute bottom-2 right-2 text-[10px] md:text-xs text-teal-400/40 font-light tracking-wide">
-        Интерактивная трехмерная ДНК
-      </div>
+      {/* Удалена надпись "Интерактивная трехмерная ДНК" */}
     </div>
   );
 }
