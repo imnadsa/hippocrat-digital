@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from "@/components/ui/button"
 import { Sparkles } from "lucide-react"
 import MarketingAnimation from "@/components/marketing-animation"
@@ -13,12 +12,12 @@ export default function HeroSection() {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
-
+  
   // Функция для открытия внешних ссылок
   const openExternalLink = (url: string) => {
     window.open(url, "_blank")
   }
-
+  
   return (
     <section className="container mx-auto px-4 pt-32 pb-16 md:py-32 flex flex-col md:flex-row items-center">
       <div className="md:w-1/2 space-y-6 mb-10 md:mb-0">
@@ -53,22 +52,9 @@ export default function HeroSection() {
             Узнать больше
           </Button>
         </div>
-
-        {/* Преимущества */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-slate-800/50 mt-8">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-teal-400 font-fixedsys">1</div>
-            <div className="text-sm text-slate-400">Эксперты в медицинском маркетинге</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-indigo-400 font-fixedsys">2</div>
-            <div className="text-sm text-slate-400">Полный спектр digital-услуг</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-teal-400 font-fixedsys">3</div>
-            <div className="text-sm text-slate-400">Прозрачная отчетность</div>
-          </div>
-        </div>
+        
+        {/* Блок преимуществ удален */}
+        
       </div>
       <div className="w-full md:w-1/2 h-[250px] md:h-[400px] relative">
         <MarketingAnimation />
