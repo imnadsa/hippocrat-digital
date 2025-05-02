@@ -43,153 +43,260 @@ export default function MarketingAnimation() {
     // Цвета в стиле Hippocrat AI
     const primaryColor = new THREE.Color(0x2dd4bf); // teal-400
     const secondaryColor = new THREE.Color(0x6366f1); // indigo-400
-    const primaryMaterial = new THREE.MeshBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 });
-    const secondaryMaterial = new THREE.MeshBasicMaterial({ color: secondaryColor, transparent: true, opacity: 0.8 });
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
+    
+    // Создаем материалы с разной прозрачностью для красивого эффекта
+    const primaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: primaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const secondaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: secondaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const connectorMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xffffff, 
+      transparent: true, 
+      opacity: 0.3 
+    });
 
-    // Создаем группу для сети нейронов
-    const networkGroup = new THREE.Group();
-    scene.add(networkGroup);
+    // Создаем группу для ДНК
+    const dnaGroup = new THREE.Group();
+    scene.add(dnaGroup);
 
-    // Создаем сеть нейронов вместо ДНК для лучшего соответствия стилю Hippocrat AI
-    const createNeuralNetwork = () => {
-      // Создаем узлы (нейроны)
-      const nodes = [];
-      const nodeCount = isMobile ? 40 : 70;
-      const volumeSize = 15;
-
-      // Создаем нейроны (узлы) случайно распределенные в пространстве
-      for (let i = 0; i < nodeCount; i++) {
-        const x = (Math.random() - 0.5) * volumeSize;
-        const y = (Math.random() - 0.5) * volumeSize;
-        const z = (Math.random() - 0.5) * volumeSize;
+    // Параметры ДНК
+    const createDna = () => {
+      const helixRadius = 5; // Радиус спирали
+      const helixHeight = 18; // Высота спирали
+      const numBases = isMobile ? 20 : 30; // Количество пар оснований
+      const turns = 2.5; // Количество витков спирали
+      
+      const segments = [];
+      const connectors = [];
+      
+      // Создаем две спирали ДНК с соединяющими элементами
+      for (let i = 0; i < numBases; i++) {
+        // Вычисляем позицию на спирали
+        const ratio = i / numBases;
+        const angle = ratio * Math.PI * 2 * turns;
+        const y = (ratio - 0.5) * helixHeight;
         
-        const useSecondary = Math.random() > 0.7;
-        const radius = Math.random() * 0.2 + 0.1;
-        const detail = isMobile ? 4 : 8;
-        
-        const sphereGeometry = new THREE.SphereGeometry(radius, detail, detail);
-        const sphere = new THREE.Mesh(
-          sphereGeometry, 
-          useSecondary ? secondaryMaterial : primaryMaterial
+        // Создаем сферы для первой цепи
+        const sphere1Geometry = new THREE.SphereGeometry(0.4, 12, 12);
+        const sphere1 = new THREE.Mesh(
+          sphere1Geometry, 
+          i % 2 === 0 ? primaryMaterial : secondaryMaterial
         );
         
-        sphere.position.set(x, y, z);
+        // Позиция на первой спирали
+        sphere1.position.set(
+          Math.cos(angle) * helixRadius,
+          y,
+          Math.sin(angle) * helixRadius
+        );
         
-        // Добавляем случайную скорость движения для каждого узла
-        sphere.userData = {
-          velocity: new THREE.Vector3(
-            (Math.random() - 0.5) * 0.01,
-            (Math.random() - 0.5) * 0.01,
-            (Math.random() - 0.5) * 0.01
-          ),
-          // Сохраняем оригинальную позицию для расчета границ движения
-          originalPosition: new THREE.Vector3(x, y, z)
-        };
+        // Создаем сферы для второй цепи (смещение на 180 градусов)
+        const sphere2Geometry = new THREE.SphereGeometry(0.4, 12, 12);
+        const sphere2 = new THREE.Mesh(
+          sphere2Geometry, 
+          i % 2 === 0 ? secondaryMaterial : primaryMaterial
+        );
         
-        networkGroup.add(sphere);
-        nodes.push(sphere);
-      }
-
-      // Создаем связи между близкими узлами
-      const maxDistance = 6;
-      const lines = [];
-      
-      for (let i = 0; i < nodes.length; i++) {
-        const node1 = nodes[i];
+        // Позиция на второй спирали
+        sphere2.position.set(
+          Math.cos(angle + Math.PI) * helixRadius,
+          y,
+          Math.sin(angle + Math.PI) * helixRadius
+        );
         
-        for (let j = i + 1; j < nodes.length; j++) {
-          const node2 = nodes[j];
-          const distance = node1.position.distanceTo(node2.position);
+        // Добавляем сферы в группу ДНК
+        dnaGroup.add(sphere1);
+        dnaGroup.add(sphere2);
+        
+        segments.push(sphere1, sphere2);
+        
+        // Создаем соединитель между спиралями (перекладина ДНК)
+        const connectorGeometry = new THREE.CylinderGeometry(0.1, 0.1, helixRadius * 2, 6);
+        const connector = new THREE.Mesh(connectorGeometry, connectorMaterial);
+        
+        // Размещаем и ориентируем соединитель
+        const connectorDirection = new THREE.Vector3().subVectors(sphere2.position, sphere1.position);
+        const center = new THREE.Vector3().addVectors(
+          sphere1.position, 
+          connectorDirection.clone().multiplyScalar(0.5)
+        );
+        
+        connector.position.copy(center);
+        
+        // Вычисляем правильную ориентацию для соединителя
+        // Это сложный математический расчет для поворота цилиндра между двумя точками
+        const axis = new THREE.Vector3(0, 1, 0);
+        connector.quaternion.setFromUnitVectors(
+          axis, 
+          connectorDirection.clone().normalize()
+        );
+        
+        dnaGroup.add(connector);
+        connectors.push(connector);
+        
+        // Добавляем линию между последовательными основаниями на каждой спирали
+        if (i > 0) {
+          // Для первой спирали
+          const backboneMaterial1 = new THREE.MeshBasicMaterial({ 
+            color: primaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
           
-          if (distance < maxDistance) {
-            // Создаем линию между узлами
-            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-              node1.position,
-              node2.position
-            ]);
-            
-            const line = new THREE.Line(lineGeometry, lineMaterial);
-            networkGroup.add(line);
-            
-            // Сохраняем ссылки на связанные узлы для обновления линий при анимации
-            line.userData = {
-              startNode: node1,
-              endNode: node2,
-              initialOpacity: 0.2 + (maxDistance - distance) / maxDistance * 0.3
-            };
-            
-            lines.push(line);
-          }
+          const backboneGeometry1 = new THREE.CylinderGeometry(0.15, 0.15, 1, 6);
+          const backbone1 = new THREE.Mesh(backboneGeometry1, backboneMaterial1);
+          
+          const prev1 = segments[segments.length - 4]; // Предыдущая сфера на первой спирали
+          const backbone1Direction = new THREE.Vector3().subVectors(
+            sphere1.position, 
+            prev1.position
+          );
+          
+          const backbone1Center = new THREE.Vector3().addVectors(
+            prev1.position, 
+            backbone1Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone1.position.copy(backbone1Center);
+          backbone1.scale.y = backbone1Direction.length() * 0.9;
+          
+          const backbone1Axis = new THREE.Vector3(0, 1, 0);
+          backbone1.quaternion.setFromUnitVectors(
+            backbone1Axis, 
+            backbone1Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone1);
+          
+          // Для второй спирали
+          const backboneMaterial2 = new THREE.MeshBasicMaterial({ 
+            color: secondaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
+          
+          const backboneGeometry2 = new THREE.CylinderGeometry(0.15, 0.15, 1, 6);
+          const backbone2 = new THREE.Mesh(backboneGeometry2, backboneMaterial2);
+          
+          const prev2 = segments[segments.length - 3]; // Предыдущая сфера на второй спирали
+          const backbone2Direction = new THREE.Vector3().subVectors(
+            sphere2.position, 
+            prev2.position
+          );
+          
+          const backbone2Center = new THREE.Vector3().addVectors(
+            prev2.position, 
+            backbone2Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone2.position.copy(backbone2Center);
+          backbone2.scale.y = backbone2Direction.length() * 0.9;
+          
+          const backbone2Axis = new THREE.Vector3(0, 1, 0);
+          backbone2.quaternion.setFromUnitVectors(
+            backbone2Axis, 
+            backbone2Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone2);
         }
       }
       
-      return { nodes, lines };
+      return { segments, connectors };
     };
 
-    const network = createNeuralNetwork();
-
-    // Обновляем позиции нейронов и связей
-    const updateNetwork = () => {
-      const maxOffset = 1.5; // Максимальное смещение от оригинальной позиции
+    // Создаем ДНК
+    const dna = createDna();
+    
+    // Добавляем немного случайных частиц вокруг ДНК для эффекта
+    const addParticles = () => {
+      const particleCount = isMobile ? 40 : 80;
+      const particles = [];
       
-      // Обновляем узлы
-      network.nodes.forEach(node => {
-        // Получаем данные о скорости и исходной позиции
-        const { velocity, originalPosition } = node.userData;
+      for (let i = 0; i < particleCount; i++) {
+        // Создаем частицы в форме маленьких сфер
+        const size = Math.random() * 0.15 + 0.05;
+        const geometry = new THREE.SphereGeometry(size, 6, 6);
+        
+        // Случайно выбираем цвет
+        const material = new THREE.MeshBasicMaterial({ 
+          color: Math.random() > 0.5 ? primaryColor : secondaryColor, 
+          transparent: true, 
+          opacity: Math.random() * 0.5 + 0.2
+        });
+        
+        const particle = new THREE.Mesh(geometry, material);
+        
+        // Размещаем частицы случайно вокруг ДНК
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 10 + 6;
+        const height = (Math.random() - 0.5) * 20;
+        
+        particle.position.set(
+          Math.cos(angle) * radius,
+          height,
+          Math.sin(angle) * radius
+        );
+        
+        // Добавляем случайную скорость движения для каждой частицы
+        particle.userData = {
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.02,
+            (Math.random() - 0.5) * 0.02,
+            (Math.random() - 0.5) * 0.02
+          ),
+          originalPosition: particle.position.clone(),
+          maxDistance: Math.random() * 2 + 1
+        };
+        
+        scene.add(particle);
+        particles.push(particle);
+      }
+      
+      return particles;
+    };
+    
+    const particles = addParticles();
+    
+    // Функция для обновления позиций частиц
+    const updateParticles = () => {
+      particles.forEach(particle => {
+        // Получаем данные о скорости и максимальном расстоянии
+        const { velocity, originalPosition, maxDistance } = particle.userData;
         
         // Обновляем позицию
-        node.position.add(velocity);
+        particle.position.add(velocity);
         
-        // Проверяем, не слишком ли далеко узел отошел от своего исходного положения
-        const offsetVector = node.position.clone().sub(originalPosition);
-        const offset = offsetVector.length();
+        // Вычисляем расстояние от исходной позиции
+        const distance = particle.position.distanceTo(originalPosition);
         
-        // Если узел слишком далеко, меняем направление его движения
-        if (offset > maxOffset) {
+        // Если частица слишком далеко улетела, меняем направление движения
+        if (distance > maxDistance) {
           velocity.negate();
         }
       });
-      
-      // Обновляем линии
-      network.lines.forEach(line => {
-        const { startNode, endNode, initialOpacity } = line.userData;
-        
-        // Обновляем геометрию линии в соответствии с новыми позициями узлов
-        const points = [startNode.position, endNode.position];
-        
-        // Заменяем геометрию линии на новую
-        line.geometry.dispose();
-        line.geometry = new THREE.BufferGeometry().setFromPoints(points);
-        
-        // Меняем прозрачность линии в зависимости от расстояния между узлами
-        const distance = startNode.position.distanceTo(endNode.position);
-        const maxDistance = 6;
-        
-        if (distance < maxDistance) {
-          const opacity = initialOpacity * (1 - distance / maxDistance);
-          line.material.opacity = opacity;
-          line.visible = true;
-        } else {
-          line.visible = false;
-        }
-      });
     };
 
-    // Поворот всей сети для эффекта 3D
-    const rotateNetwork = () => {
-      networkGroup.rotation.y += 0.001;
-      networkGroup.rotation.x += 0.0005;
+    // Функция для вращения ДНК
+    const rotateDna = () => {
+      dnaGroup.rotation.y += 0.005;
     };
 
-    // Функция анимации
+    // Основная функция анимации
     const animate = () => {
       const animationId = requestAnimationFrame(animate);
-      updateNetwork();
-      rotateNetwork();
+      updateParticles();
+      rotateDna();
       renderer.render(scene, camera);
       
-      // Сохраняем ID анимации для очистки
       return animationId;
     };
 
@@ -222,17 +329,16 @@ export default function MarketingAnimation() {
       }
       
       // Освобождаем память от геометрий и материалов
-      network.lines.forEach(line => {
-        line.geometry.dispose();
+      scene.traverse(object => {
+        if (object instanceof THREE.Mesh) {
+          object.geometry.dispose();
+          if (object.material instanceof THREE.Material) {
+            object.material.dispose();
+          } else if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          }
+        }
       });
-      
-      network.nodes.forEach(node => {
-        node.geometry.dispose();
-      });
-      
-      primaryMaterial.dispose();
-      secondaryMaterial.dispose();
-      lineMaterial.dispose();
       
       renderer.dispose();
     };
@@ -248,7 +354,7 @@ export default function MarketingAnimation() {
       
       {/* Тонкая подсказка - адаптивный размер шрифта */}
       <div className="absolute bottom-2 right-2 text-[10px] md:text-xs text-teal-400/40 font-light tracking-wide">
-        Интерактивная нейронная сеть
+        Интерактивная трехмерная ДНК
       </div>
     </div>
   );
