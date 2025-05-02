@@ -34,7 +34,7 @@ export default function Header({ scrolled }: HeaderProps) {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <Logo size="md" />
+        <Logo size="lg" />
 
         {/* Tagline - hidden on mobile */}
         <div className="hidden md:block text-center text-sm md:text-base truncate max-w-[200px] lg:max-w-none text-teal-300">
