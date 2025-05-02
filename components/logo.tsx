@@ -24,7 +24,7 @@ const sizeConfig = {
   },
 }
 
-export default function Logo({ size = "md" }: LogoProps) {
+export default function Logo({ size = "lg" }: LogoProps) {
   const { className } = sizeConfig[size]
 
   return (
@@ -36,7 +36,7 @@ export default function Logo({ size = "md" }: LogoProps) {
           <path stroke="#4FD1C5" strokeLinecap="round" strokeLinejoin="round" strokeWidth="18" d="M395.319 413.78h93.893c14.445 0 28.89 21.69 43.335 21.69 12.485 0 35.762-10.803 46.512 9.608 3.397 6.451-1.14 13.821-7.87 16.614-15.587 6.47-32.948 15.258-38.642 17.157l-43.335-14.459m93.893-14.46 66.101-26.468a24.658 24.658 0 0 1 12.655-1.518c15.121 2.162 19.392 21.989 6.506 30.198L557.95 522.479a28.866 28.866 0 0 1-23.447 3.408l-139.184-39.808m101.115-173.518v36.149c0 19.965 16.169 36.15 36.113 36.15 19.945 0 36.113-16.185 36.113-36.15v-36.149m-72.226 0v-36.15c0-19.965 16.169-36.15 36.113-36.15 19.945 0 36.113 16.185 36.113 36.15v36.15m-72.226 0h72.226"/>
         </svg>
       </div>
-      <div className="text-white font-fixedsys text-lg md:text-xl">
+      <div className="text-white font-fixedsys text-xl md:text-2xl font-bold">
         <span className="text-teal-400">Hippocrat</span>
         <span className="text-indigo-400">Digital</span>
       </div>
