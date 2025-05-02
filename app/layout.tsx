@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <head>
-        {/* Добавляем шрифт Fixedsys для заголовков, как в Hippocrat AI */}
+        {/* Важно: Next.js автоматически добавляет теги link для стилей после сборки */}
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
       </head>
-      <body className={`${inter.variable} font-sans`}>
+      <body className={`${inter.variable} font-sans bg-slate-950 text-white`}>
         {children}
       </body>
     </html>
