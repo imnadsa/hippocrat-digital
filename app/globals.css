@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Определение переменной для глубокого темного фона */
+:root {
+  --deep-dark-bg: #0b101b;
+}
+
 @layer base {
   /* Принудительно устанавливаем Inter для всего текста */
   html, body, p, div, span, h1, h2, h3, h4, h5, h6, button, input, select, textarea {
@@ -210,12 +215,12 @@ html {
 
 /* Явные базовые стили для решения проблем с рендерингом */
 body {
-  background-color: #0f172a;
+  background-color: var(--deep-dark-bg);
   color: #fff;
 }
 
 .bg-slate-950 {
-  background-color: #0f172a;
+  background-color: var(--deep-dark-bg) !important;
 }
 
 .text-white {
