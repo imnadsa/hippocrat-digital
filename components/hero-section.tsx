@@ -19,7 +19,7 @@ export default function HeroSection() {
   }
   
   return (
-    <section className="container mx-auto px-4 pt-32 pb-16 md:py-32 flex flex-col md:flex-row items-center">
+    <section className="container mx-auto px-4 pt-32 pb-16 md:py-32 flex flex-col md:flex-row items-center bg-[#0b101b]">
       <div className="md:w-1/2 space-y-6 mb-10 md:mb-0">
         <div className="flex items-center gap-2 mb-4">
           <div className="px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-xs flex items-center gap-1">
