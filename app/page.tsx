@@ -37,11 +37,11 @@ export default function Home() {
 
   // Don't render anything until client-side mount to prevent hydration errors
   if (!isMounted) {
-    return <div className="min-h-screen bg-slate-950"></div>
+    return <div className="min-h-screen bg-[#0b101b]"></div>
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-[#0b101b] text-white">
       <Header scrolled={scrolled} />
       
       <main>
