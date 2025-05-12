@@ -2,6 +2,15 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import TargetingHero from "@/components/services/targeting-hero"
+import TargetingAdvantages from "@/components/services/targeting-advantages"
+import TargetingProcess from "@/components/services/targeting-process"
+import TargetingResults from "@/components/services/targeting-results"
+import TargetingFeatures from "@/components/services/targeting-features"
+import TargetingPortfolio from "@/components/services/targeting-portfolio"
+import TargetingPricing from "@/components/services/targeting-pricing"
+import TargetingFaq from "@/components/services/targeting-faq"
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function TargetingPage() {
@@ -32,11 +41,15 @@ export default function TargetingPage() {
       <Header scrolled={scrolled} />
       
       <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">Таргетированная реклама</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+        <TargetingHero />
+        <TargetingAdvantages />
+        <TargetingProcess />
+        <TargetingResults />
+        <TargetingFeatures />
+        <TargetingPortfolio />
+        <TargetingPricing />
+        <TargetingFaq />
+        <CtaSection />
       </main>
 
       <Footer />
