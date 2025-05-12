@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import WebsitesHero from "@/components/services/websites-hero"
+import WebsitesApproach from "@/components/services/websites-approach"
+import WebsitesTechnologies from "@/components/services/websites-technologies"
+import WebsitesFeatures from "@/components/services/websites-features"
+import WebsitesProcess from "@/components/services/websites-process"
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function WebsitesPage() {
@@ -32,11 +38,12 @@ export default function WebsitesPage() {
       <Header scrolled={scrolled} />
       
       <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">Создание сайтов</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+        <WebsitesHero />
+        <WebsitesApproach />
+        <WebsitesTechnologies />
+        <WebsitesFeatures />
+        <WebsitesProcess />
+        <CtaSection />
       </main>
 
       <Footer />
