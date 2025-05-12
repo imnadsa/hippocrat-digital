@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import AiHero from "@/components/services/ai-hero"
+import AiSolutions from "@/components/services/ai-solutions"
+import AiIntegration from "@/components/services/ai-integration"
+import AiBenefits from "@/components/services/ai-benefits"
+import AiCases from "@/components/services/ai-cases"
+import AiPackages from "@/components/services/ai-packages"
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function AiSolutionsPage() {
@@ -32,11 +39,13 @@ export default function AiSolutionsPage() {
       <Header scrolled={scrolled} />
       
       <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">ИИ-решения</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+        <AiHero />
+        <AiSolutions />
+        <AiIntegration />
+        <AiBenefits />
+        <AiCases />
+        <AiPackages />
+        <CtaSection />
       </main>
 
       <Footer />
