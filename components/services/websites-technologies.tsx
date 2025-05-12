@@ -136,7 +136,7 @@ export default function WebsitesTechnologies() {
                     ? 'from-teal-500 to-indigo-600' 
                     : 'from-indigo-500 to-purple-600'
                 } flex items-center justify-center shadow-lg`}>
-                  <technologies.activeTab.icon size={32} className="text-white" />
+                  {React.createElement(technologies[activeTab].icon, { size: 32, className: "text-white" })}
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold font-fixedsys text-white">{technologies[activeTab].category}</h3>
