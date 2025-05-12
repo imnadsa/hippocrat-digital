@@ -9,7 +9,7 @@ import {
   ClipboardCheck,
   BarChart3,
   Stethoscope,
-  Pills
+  Pill
 } from "lucide-react"
 
 export default function AiSolutions() {
