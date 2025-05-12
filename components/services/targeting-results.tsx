@@ -1,6 +1,6 @@
 "use client"
 
-import { TrendingUp, DollarSign, Users, Calendar, Growth } from "lucide-react"
+import { TrendingUp, DollarSign, Users, Calendar, BarChart3 } from "lucide-react"
 
 export default function TargetingResults() {
   const results = [
@@ -98,7 +98,7 @@ export default function TargetingResults() {
               </div>
               
               <div className="bg-slate-900/50 rounded-lg p-4 text-center">
-                <Growth size={24} className="mx-auto text-indigo-400 mb-2" />
+                <BarChart3 size={24} className="mx-auto text-indigo-400 mb-2" />
                 <div className="text-xl font-bold font-fixedsys text-white mb-1">89%</div>
                 <div className="text-slate-400 text-sm">Точность попадания в ЦА</div>
               </div>
