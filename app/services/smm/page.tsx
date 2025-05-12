@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import SmmHero from "@/components/services/smm-hero"
+import SmmStrategy from "@/components/services/smm-strategy"
+import SmmPlatforms from "@/components/services/smm-platforms"
+import SmmResults from "@/components/services/smm-results"
+import SmmCases from "@/components/services/smm-cases"
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function SmmPage() {
@@ -32,11 +38,12 @@ export default function SmmPage() {
       <Header scrolled={scrolled} />
       
       <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">SMM</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+        <SmmHero />
+        <SmmStrategy />
+        <SmmPlatforms />
+        <SmmResults />
+        <SmmCases />
+        <CtaSection />
       </main>
 
       <Footer />
