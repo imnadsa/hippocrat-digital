@@ -43,7 +43,7 @@ const blogData: BlogMeta[] = [
     date: "2025-05-15",
     category: "AI",
     tags: ["AI", "ИИ в медицине", "Медицинский маркетинг"],
-    image: "/blog/images/gamification-guide.jpg",
+    image: "/public/gamification-guide.jpg",
     readTime: 8
   },
   {
