@@ -1,4 +1,5 @@
-// lib/blog.ts - Исправленная версия с правильными путями
+import fs from 'fs'
+import path from 'path'
 
 // Типы для блога
 export interface BlogPost {
@@ -89,16 +90,18 @@ const blogData: BlogMeta[] = [
 ]
 
 // Функция для чтения контента статьи из файла
-async function getArticleContent(slug: string): Promise<string> {
+function getArticleContent(slug: string): string {
   try {
-    // ИСПРАВЛЕН ПУТЬ: читаем из public/content/blog/
-    const response = await fetch(`/content/blog/${slug}.md`)
-    if (!response.ok) {
-      console.log(`Article ${slug} not found at /content/blog/${slug}.md`)
+    // Читаем из public/content/blog/
+    const filePath = path.join(process.cwd(), 'public', 'content', 'blog', `${slug}.md`)
+    
+    if (!fs.existsSync(filePath)) {
+      console.log(`File not found: ${filePath}`)
       throw new Error(`Article ${slug} not found`)
     }
-    const content = await response.text()
-    console.log(`Successfully loaded article ${slug}`)
+    
+    const content = fs.readFileSync(filePath, 'utf8')
+    console.log(`Successfully loaded article ${slug} from ${filePath}`)
     return content
   } catch (error) {
     console.error(`Error loading article ${slug}:`, error)
@@ -111,7 +114,7 @@ async function getArticleContent(slug: string): Promise<string> {
 - Файл \`${slug}.md\` не найден в папке \`public/content/blog/\`
 - Проблема с загрузкой файла
 
-Пожалуйста, убедитесь, что файл существует по пути: \`public/content/blog/${slug}.md\`
+Путь к файлу: \`public/content/blog/${slug}.md\`
     `
   }
 }
@@ -131,7 +134,7 @@ export function getAllPosts(): BlogMeta[] {
   return blogData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+export function getPostBySlug(slug: string): BlogPost | null {
   const post = blogData.find(p => p.slug === slug)
   if (!post) {
     console.log(`Post metadata not found for slug: ${slug}`)
@@ -139,7 +142,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   }
 
   console.log(`Loading content for post: ${slug}`)
-  const content = await getArticleContent(slug)
+  const content = getArticleContent(slug)
 
   return {
     ...post,
