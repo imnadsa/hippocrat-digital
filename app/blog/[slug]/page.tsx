@@ -12,7 +12,7 @@ interface Props {
 
 // Генерация метаданных для SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+  const post = await getPostBySlug(params.slug)
 
   if (!post) {
     return {
@@ -62,8 +62,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: Props) {
+  const post = await getPostBySlug(params.slug)
 
   if (!post) {
     notFound()
@@ -109,7 +109,7 @@ export default function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="min-h-screen bg-slate-950">
+      <div className="min-h-screen bg-slate-950 pt-20">
         {/* Breadcrumbs */}
         <div className="bg-slate-900/30 border-b border-slate-800">
           <div className="container mx-auto px-4 py-4">
