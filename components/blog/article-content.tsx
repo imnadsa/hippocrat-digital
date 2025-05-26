@@ -34,18 +34,20 @@ function parseMarkdown(markdown: string): string {
     // Горизонтальные линии
     .replace(/^---$/gim, '<div class="my-12 flex items-center"><div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div><div class="mx-4"><div class="w-2 h-2 bg-teal-500 rounded-full"></div></div><div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div></div>')
 
-  // Специальные компоненты
-  html = html
-    .replace(/<Alert type="info">\s*\*\*([^*]+)\*\*\s*(.+?)\s*<\/Alert>/gs, 
-      '<div class="border-l-4 border-blue-500 bg-blue-500/10 p-6 my-6 rounded-r-lg"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><svg class="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></div><div class="flex-1 text-blue-300"><strong>$1</strong> $2</div></div></div>')
-    
-    .replace(/<Alert type="success">\s*\*\*([^*]+)\*\*\s*(.+?)\s*<\/Alert>/gs, 
-      '<div class="border-l-4 border-green-500 bg-green-500/10 p-6 my-6 rounded-r-lg"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg></div><div class="flex-1 text-green-300"><strong>$1</strong> $2</div></div></div>')
-    
-    .replace(/<Highlight>\s*(.+?)\s*<\/Highlight>/gs, 
-      '<div class="bg-gradient-to-r from-teal-500/10 to-indigo-500/10 border border-teal-500/30 rounded-lg p-6 my-6"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><div class="w-6 h-6 bg-gradient-to-br from-teal-500 to-indigo-500 rounded-full flex items-center justify-center"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div></div><div class="flex-1 text-slate-200">$1</div></div></div>')
+  // Специальные компоненты - используем многострочную обработку
+  // Alert info
+  const alertInfoRegex = /<Alert type="info">[\s\S]*?\*\*([^*]+)\*\*[\s\S]*?(.*?)[\s\S]*?<\/Alert>/gi
+  html = html.replace(alertInfoRegex, '<div class="border-l-4 border-blue-500 bg-blue-500/10 p-6 my-6 rounded-r-lg"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><svg class="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg></div><div class="flex-1 text-blue-300"><strong>$1</strong> $2</div></div></div>')
+  
+  // Alert success
+  const alertSuccessRegex = /<Alert type="success">[\s\S]*?\*\*([^*]+)\*\*[\s\S]*?(.*?)[\s\S]*?<\/Alert>/gi
+  html = html.replace(alertSuccessRegex, '<div class="border-l-4 border-green-500 bg-green-500/10 p-6 my-6 rounded-r-lg"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg></div><div class="flex-1 text-green-300"><strong>$1</strong> $2</div></div></div>')
+  
+  // Highlight компонент
+  const highlightRegex = /<Highlight>[\s\S]*?(.*?)[\s\S]*?<\/Highlight>/gi
+  html = html.replace(highlightRegex, '<div class="bg-gradient-to-r from-teal-500/10 to-indigo-500/10 border border-teal-500/30 rounded-lg p-6 my-6"><div class="flex items-start"><div class="flex-shrink-0 mr-3"><div class="w-6 h-6 bg-gradient-to-br from-teal-500 to-indigo-500 rounded-full flex items-center justify-center"><svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg></div></div><div class="flex-1 text-slate-200">$1</div></div></div>')
 
-  // Обработка таблиц (простой парсер)
+  // Обработка таблиц
   const tableRegex = /\|(.+)\|\n\|(.+)\|\n((?:\|(.+)\|\n?)*)/g
   html = html.replace(tableRegex, (match, headers, separator, rows) => {
     const headerCells = headers.split('|').map((h: string) => `<th class="text-left p-4 font-semibold text-white border-r border-slate-700 last:border-r-0">${h.trim()}</th>`).join('')
