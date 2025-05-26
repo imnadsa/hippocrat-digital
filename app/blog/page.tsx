@@ -1,0 +1,197 @@
+import { Metadata } from 'next'
+import { getAllPosts, getAllCategories } from '@/lib/blog'
+import BlogHero from '@/components/blog/blog-hero'
+import BlogList from '@/components/blog/blog-list'
+import CategoryFilter from '@/components/blog/category-filter'
+
+export const metadata: Metadata = {
+  title: 'Блог | Hippocrat Digital - Медицинский маркетинг',
+  description: 'Профессиональные статьи о медицинском маркетинге, цифровых решениях для клиник и трендах в healthcare индустрии.',
+  keywords: 'медицинский маркетинг, цифровая медицина, healthcare, клиники, медицинские центры',
+  openGraph: {
+    title: 'Блог Hippocrat Digital',
+    description: 'Экспертные статьи о медицинском маркетинге и цифровых решениях',
+    type: 'website',
+    images: [
+      {
+        url: '/blog/og-blog.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Блог Hippocrat Digital',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Блог Hippocrat Digital',
+    description: 'Экспертные статьи о медицинском маркетинге',
+    images: ['/blog/og-blog.jpg'],
+  },
+}
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { category?: string; search?: string }
+}) {
+  const allPosts = getAllPosts()
+  const categories = getAllCategories()
+  
+  // Фильтрация постов
+  let filteredPosts = allPosts
+  
+  if (searchParams.category && searchParams.category !== 'all') {
+    filteredPosts = allPosts.filter(
+      post => post.category.toLowerCase() === searchParams.category?.toLowerCase()
+    )
+  }
+  
+  if (searchParams.search) {
+    const searchTerm = searchParams.search.toLowerCase()
+    filteredPosts = filteredPosts.filter(
+      post =>
+        post.title.toLowerCase().includes(searchTerm) ||
+        post.description.toLowerCase().includes(searchTerm) ||
+        post.category.toLowerCase().includes(searchTerm)
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-950">
+      {/* Hero секция */}
+      <BlogHero />
+      
+      {/* Основной контент */}
+      <div className="container mx-auto px-4 py-16">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Основной контент */}
+          <main className="flex-1">
+            {/* Фильтры */}
+            <div className="mb-8">
+              <CategoryFilter 
+                categories={categories}
+                currentCategory={searchParams.category}
+                totalPosts={allPosts.length}
+                filteredCount={filteredPosts.length}
+              />
+            </div>
+
+            {/* Результаты поиска */}
+            {searchParams.search && (
+              <div className="mb-6 p-4 bg-slate-900/50 rounded-lg border border-slate-800">
+                <p className="text-slate-300">
+                  Результаты поиска по запросу: <span className="text-teal-400 font-medium">"{searchParams.search}"</span>
+                </p>
+                <p className="text-sm text-slate-400 mt-1">
+                  Найдено статей: {filteredPosts.length}
+                </p>
+              </div>
+            )}
+
+            {/* Список статей */}
+            <BlogList posts={filteredPosts} />
+
+            {/* Если статей нет */}
+            {filteredPosts.length === 0 && (
+              <div className="text-center py-16">
+                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-900 flex items-center justify-center">
+                  <svg className="w-12 h-12 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  Статьи не найдены
+                </h3>
+                <p className="text-slate-400 mb-6">
+                  {searchParams.search 
+                    ? 'Попробуйте изменить поисковый запрос'
+                    : 'В данной категории пока нет статей'
+                  }
+                </p>
+                {(searchParams.category || searchParams.search) && (
+                  <a
+                    href="/blog"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white font-medium rounded-lg hover:from-teal-600 hover:to-indigo-600 transition-all duration-300"
+                  >
+                    Показать все статьи
+                  </a>
+                )}
+              </div>
+            )}
+          </main>
+
+          {/* Сайдбар (на мобильных скрыт) */}
+          <aside className="hidden lg:block w-80">
+            <div className="sticky top-24 space-y-8">
+              {/* Поиск */}
+              <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-800">
+                <h3 className="text-lg font-semibold text-white mb-4">
+                  Поиск по блогу
+                </h3>
+                <form action="/blog" method="get" className="space-y-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="search"
+                      placeholder="Поиск статей..."
+                      defaultValue={searchParams.search}
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    />
+                    <button
+                      type="submit"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-teal-400"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </button>
+                  </div>
+                  {searchParams.category && (
+                    <input type="hidden" name="category" value={searchParams.category} />
+                  )}
+                </form>
+              </div>
+
+              {/* Статистика */}
+              <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-800">
+                <h3 className="text-lg font-semibold text-white mb-4">
+                  Статистика блога
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Всего статей:</span>
+                    <span className="text-teal-400 font-medium">{allPosts.length}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Категорий:</span>
+                    <span className="text-indigo-400 font-medium">{categories.length}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Последнее обновление:</span>
+                    <span className="text-slate-300 text-sm">
+                      {allPosts[0]?.date 
+                        ? new Date(allPosts[0].date).toLocaleDateString('ru-RU')
+                        : 'Нет статей'
+                      }
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* О блоге */}
+              <div className="bg-gradient-to-br from-teal-500/10 to-indigo-500/10 rounded-xl p-6 border border-teal-500/20">
+                <h3 className="text-lg font-semibold text-white mb-3">
+                  О нашем блоге
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  Мы делимся экспертными знаниями в области медицинского маркетинга, 
+                  цифровых решений для клиник и актуальными трендами healthcare индустрии.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  )
+}
