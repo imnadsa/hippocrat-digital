@@ -1,9 +1,4 @@
-// lib/blog.ts - Версия без использования fs модуля
-import { promises as fs } from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-
-// lib/blog.ts - Версия с отдельными файлами статей
+// lib/blog.ts - Исправленная версия с правильными путями
 
 // Типы для блога
 export interface BlogPost {
@@ -29,7 +24,7 @@ export interface BlogMeta {
   readTime?: number
 }
 
-// Только метаданные статей - контент в отдельных файлах
+// Метаданные статей
 const blogData: BlogMeta[] = [
   {
     slug: "digital-marketing-2024",
@@ -96,15 +91,28 @@ const blogData: BlogMeta[] = [
 // Функция для чтения контента статьи из файла
 async function getArticleContent(slug: string): Promise<string> {
   try {
-    // В браузере используем fetch для чтения файлов
+    // ИСПРАВЛЕН ПУТЬ: читаем из public/content/blog/
     const response = await fetch(`/content/blog/${slug}.md`)
     if (!response.ok) {
+      console.log(`Article ${slug} not found at /content/blog/${slug}.md`)
       throw new Error(`Article ${slug} not found`)
     }
-    return await response.text()
+    const content = await response.text()
+    console.log(`Successfully loaded article ${slug}`)
+    return content
   } catch (error) {
     console.error(`Error loading article ${slug}:`, error)
-    return `# Статья не найдена\n\nК сожалению, содержимое статьи временно недоступно.`
+    // Возвращаем заглушку с информацией об ошибке
+    return `# ${slug}
+
+К сожалению, содержимое этой статьи временно недоступно.
+
+Возможные причины:
+- Файл \`${slug}.md\` не найден в папке \`public/content/blog/\`
+- Проблема с загрузкой файла
+
+Пожалуйста, убедитесь, что файл существует по пути: \`public/content/blog/${slug}.md\`
+    `
   }
 }
 
@@ -125,8 +133,12 @@ export function getAllPosts(): BlogMeta[] {
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const post = blogData.find(p => p.slug === slug)
-  if (!post) return null
+  if (!post) {
+    console.log(`Post metadata not found for slug: ${slug}`)
+    return null
+  }
 
+  console.log(`Loading content for post: ${slug}`)
   const content = await getArticleContent(slug)
 
   return {
