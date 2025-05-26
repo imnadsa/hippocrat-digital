@@ -1,39 +1,18 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { Metadata } from 'next'
 import { getAllPosts, getAllCategories } from '@/lib/blog'
-import BlogHero from '@/components/blog/blog-hero'
 import BlogList from '@/components/blog/blog-list'
 import CategoryFilter from '@/components/blog/category-filter'
+import Header from '@/components/header'
 
-export const metadata: Metadata = {
-  title: 'Блог | Hippocrat Digital - Медицинский маркетинг',
-  description: 'Профессиональные статьи о медицинском маркетинге, цифровых решениях для клиник и трендах в healthcare индустрии.',
-  keywords: 'медицинский маркетинг, цифровая медицина, healthcare, клиники, медицинские центры',
-  openGraph: {
-    title: 'Блог Hippocrat Digital',
-    description: 'Экспертные статьи о медицинском маркетинге и цифровых решениях',
-    type: 'website',
-    images: [
-      {
-        url: '/blog/og-blog.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Блог Hippocrat Digital',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Блог Hippocrat Digital',
-    description: 'Экспертные статьи о медицинском маркетинге',
-    images: ['/blog/og-blog.jpg'],
-  },
-}
-
-export default async function BlogPage({
+export default function BlogPage({
   searchParams,
 }: {
   searchParams: { category?: string; search?: string }
 }) {
+  const [scrolled, setScrolled] = useState(false)
   const allPosts = getAllPosts()
   const categories = getAllCategories()
   
@@ -56,10 +35,99 @@ export default async function BlogPage({
     )
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-slate-950">
-      {/* Hero секция */}
-      <BlogHero />
+      {/* Header */}
+      <Header scrolled={scrolled} />
+      
+      {/* Hero секция - упрощенная */}
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        {/* Простой фон без лишних элементов */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+          <div className="absolute top-20 left-20 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* Содержимое */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            {/* Бейдж */}
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-500/20 to-indigo-500/20 rounded-full border border-teal-500/30 mb-8">
+              <svg className="w-4 h-4 text-teal-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span className="text-sm font-medium text-slate-300">Экспертный блог</span>
+            </div>
+
+            {/* Заголовок */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                Блог
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                Hippocrat Digital
+              </span>
+            </h1>
+
+            {/* Описание */}
+            <p className="text-xl md:text-2xl text-slate-400 mb-8 leading-relaxed">
+              Профессиональные статьи о медицинском маркетинге, 
+              <br className="hidden md:block" />
+              цифровых решениях для клиник и трендах в healthcare
+            </p>
+
+            {/* Статистика */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-12">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-teal-400 mb-1">{allPosts.length}+</div>
+                <div className="text-sm text-slate-500 uppercase tracking-wider">Экспертных статей</div>
+              </div>
+              <div className="hidden sm:block w-px h-12 bg-slate-700"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-indigo-400 mb-1">{categories.length}+</div>
+                <div className="text-sm text-slate-500 uppercase tracking-wider">Тематик</div>
+              </div>
+              <div className="hidden sm:block w-px h-12 bg-slate-700"></div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">1000+</div>
+                <div className="text-sm text-slate-500 uppercase tracking-wider">Читателей</div>
+              </div>
+            </div>
+
+            {/* CTA кнопки */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="#blog-content"
+                className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white font-medium rounded-xl hover:from-teal-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-500/25"
+              >
+                Читать статьи
+                <svg className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+              
+              <a
+                href="/"
+                className="group inline-flex items-center px-8 py-4 bg-slate-800/50 text-white font-medium rounded-xl border border-slate-700 hover:bg-slate-700/50 hover:border-slate-600 transition-all duration-300"
+              >
+                <svg className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                На главную
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
       
       {/* Основной контент */}
       <div className="container mx-auto px-4 py-16">
@@ -120,7 +188,7 @@ export default async function BlogPage({
             )}
           </main>
 
-          {/* Сайдбар (на мобильных скрыт) */}
+          {/* Сайдбар */}
           <aside className="hidden lg:block w-80">
             <div className="sticky top-24 space-y-8">
               {/* Поиск */}
