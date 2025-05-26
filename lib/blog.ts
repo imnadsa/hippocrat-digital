@@ -1,5 +1,4 @@
-import fs from 'fs'
-import path from 'path'
+// lib/blog.ts - Правильная серверная версия
 
 // Типы для блога
 export interface BlogPost {
@@ -89,9 +88,19 @@ const blogData: BlogMeta[] = [
   }
 ]
 
-// Функция для чтения контента статьи из файла
+// Функция для чтения контента статьи из файла - ТОЛЬКО на сервере
 function getArticleContent(slug: string): string {
+  // Проверяем, что мы на сервере
+  if (typeof window !== 'undefined') {
+    console.log('Running in browser - returning fallback content')
+    return `# ${slug}\n\nЗагружается...`
+  }
+
   try {
+    // Динамический импорт fs только на сервере
+    const fs = require('fs')
+    const path = require('path')
+    
     // Читаем из public/content/blog/
     const filePath = path.join(process.cwd(), 'public', 'content', 'blog', `${slug}.md`)
     
