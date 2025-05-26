@@ -1,8 +1,7 @@
-import fs from 'fs'
+// lib/blog.ts - Версия без использования fs модуля
+import { promises as fs } from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-
-const contentDirectory = path.join(process.cwd(), 'content/blog')
 
 // Типы для блога
 export interface BlogPost {
@@ -28,113 +27,268 @@ export interface BlogMeta {
   readTime?: number
 }
 
-// Получить все категории
+// Статичные данные блога (временное решение)
+const blogData: BlogMeta[] = [
+  {
+    slug: "digital-marketing-2024",
+    title: "Цифровой маркетинг в медицине: тренды 2024 года",
+    description: "Разбираем основные тенденции цифрового маркетинга в healthcare сфере и прогнозы на будущий год",
+    date: "2024-05-20",
+    category: "Маркетинг",
+    tags: ["цифровой маркетинг", "healthcare", "тренды", "медицина"],
+    image: "/blog/images/digital-marketing-2024.jpg",
+    readTime: 5
+  },
+  {
+    slug: "medical-seo-guide",
+    title: "SEO для медицинских сайтов: полное руководство",
+    description: "Подробное руководство по поисковой оптимизации медицинских сайтов с учетом требований YMYL",
+    date: "2024-05-15",
+    category: "SEO",
+    tags: ["SEO", "медицинские сайты", "YMYL", "поисковая оптимизация"],
+    image: "/blog/images/medical-seo-guide.jpg",
+    readTime: 8
+  },
+  {
+    slug: "diagnostika-serdca",
+    title: "Современная диагностика сердечно-сосудистых заболеваний",
+    description: "Обзор современных методов диагностики сердечно-сосудистых заболеваний: от классической ЭКГ до инновационных технологий",
+    date: "2024-05-25",
+    category: "Кардиология",
+    tags: ["кардиология", "диагностика", "ЭКГ", "эхокардиография", "современные технологии"],
+    image: "/blog/images/heart-diagnostics.jpg",
+    readTime: 12
+  },
+  {
+    slug: "telemedicina-trendy",
+    title: "Телемедицина: будущее здравоохранения уже здесь",
+    description: "Как телемедицинские решения меняют подход к лечению пациентов и какие возможности открывают для медицинских учреждений",
+    date: "2024-05-10",
+    category: "Технологии",
+    tags: ["телемедицина", "цифровые технологии", "healthcare", "инновации"],
+    image: "/blog/images/telemedicine-trends.jpg",
+    readTime: 7
+  },
+  {
+    slug: "marketing-klinik-2024",
+    title: "Маркетинг частных клиник: эффективные стратегии 2024",
+    description: "Разбираем работающие стратегии продвижения частных медицинских центров в условиях высокой конкуренции",
+    date: "2024-05-05",
+    category: "Маркетинг",
+    tags: ["маркетинг клиник", "стратегии продвижения", "частная медицина", "реклама"],
+    image: "/blog/images/clinic-marketing.jpg",
+    readTime: 9
+  },
+  {
+    slug: "ai-v-meditsine",
+    title: "Искусственный интеллект в медицине: реальность и перспективы",
+    description: "Как ИИ уже сейчас помогает врачам в диагностике и лечении, и какие изменения нас ждут в будущем",
+    date: "2024-04-30",
+    category: "Технологии",
+    tags: ["искусственный интеллект", "AI в медицине", "диагностика", "инновации"],
+    image: "/blog/images/ai-medicine.jpg",
+    readTime: 10
+  }
+]
+
+// Контент статей
+const blogContent: Record<string, string> = {
+  "digital-marketing-2024": `
+# Цифровой маркетинг в медицине: тренды 2024 года
+
+Медицинская индустрия стремительно адаптируется к цифровым изменениям. В этой статье мы рассмотрим **ключевые тренды** цифрового маркетинга в healthcare на 2024 год.
+
+## Основные тенденции
+
+### 1. Персонализированный контент
+
+Пациенты все больше ожидают **персонализированный подход** к коммуникации. Медицинские учреждения должны:
+
+- Сегментировать аудиторию по возрасту и потребностям
+- Создавать целевой контент для разных групп пациентов
+- Использовать данные для улучшения пользовательского опыта
+
+### 2. Телемедицина и цифровые консультации
+
+*Телемедицина* стала неотъемлемой частью современного здравоохранения:
+
+> **Важно:** 78% пациентов готовы использовать телемедицинские услуги для консультаций.
+
+Медицинские центры должны интегрировать телемедицину в свою маркетинговую стратегию.
+
+## Практические рекомендации
+
+<Alert type="success">
+**Совет эксперта:** Начните с аудита вашего текущего цифрового присутствия, прежде чем внедрять новые стратегии.
+</Alert>
+
+1. **Оптимизируйте сайт** для мобильных устройств
+2. **Развивайте контент-маркетинг** с фокусом на образование пациентов
+3. **Используйте социальные сети** для построения доверия
+
+## Заключение
+
+Цифровой маркетинг в медицине требует деликатного подхода, учитывающего специфику отрасли и потребности пациентов.
+
+<Highlight>
+Успешная цифровая стратегия в healthcare строится на доверии, экспертности и персонализации.
+</Highlight>
+  `,
+  
+  "medical-seo-guide": `
+# SEO для медицинских сайтов: полное руководство
+
+Поисковая оптимизация медицинских сайтов имеет свои **особенности и требования**. В этом руководстве разберем все аспекты SEO для healthcare.
+
+## Особенности медицинского SEO
+
+### YMYL-требования Google
+
+Медицинские сайты попадают под категорию *"Your Money or Your Life"* (YMYL), что означает повышенные требования к:
+
+- **Экспертности** (Expertise)
+- **Авторитетности** (Authoritativeness)  
+- **Достоверности** (Trustworthiness)
+
+### Ключевые факторы ранжирования
+
+<Alert type="info">
+Google особенно строго оценивает медицинские сайты из-за их влияния на здоровье и безопасность людей.
+</Alert>
+
+## Техническая оптимизация
+
+### Обязательные страницы
+
+1. **О клинике** - с информацией о лицензиях
+2. **Врачи** - с указанием квалификации
+3. **Политика конфиденциальности**
+4. **Контакты** - с полными данными
+
+## Контентная стратегия
+
+| Тип контента | Цель | Примеры |
+|--------------|------|---------|
+| Образовательный | Информирование | Статьи о заболеваниях |
+| Сервисный | Описание услуг | Страницы процедур |
+| Экспертный | Демонстрация опыта | Кейсы лечения |
+
+<Highlight>
+Весь медицинский контент должен быть написан или проверен квалифицированными специалистами.
+</Highlight>
+
+## Локальное SEO
+
+Для медицинских учреждений критически важна **локальная оптимизация**:
+
+- Настройка Google My Business
+- Сбор и обработка отзывов пациентов
+- Локальные ключевые слова
+- NAP-консистентность
+
+---
+
+*Нужна помощь с SEO вашего медицинского сайта? Обратитесь к экспертам Hippocrat Digital!*
+  `,
+
+  "diagnostika-serdca": `
+# Современная диагностика сердечно-сосудистых заболеваний
+
+Сердечно-сосудистые заболевания остаются **ведущей причиной смертности** во всем мире. Ранняя и точная диагностика является ключевым фактором успешного лечения и профилактики осложнений.
+
+## Классические методы диагностики
+
+### Электрокардиография (ЭКГ)
+
+**ЭКГ** остается золотым стандартом первичной диагностики сердечных заболеваний. Этот метод позволяет:
+
+- Выявить нарушения ритма сердца
+- Диагностировать ишемические изменения
+- Определить признаки гипертрофии камер сердца
+- Оценить проводящую систему сердца
+
+<Alert type="info">
+**Важно знать:** Стандартная ЭКГ фиксирует активность сердца только в течение нескольких секунд. Для выявления преходящих нарушений используется холтеровское мониторирование.
+</Alert>
+
+### Эхокардиография (УЗИ сердца)
+
+*Эхокардиография* предоставляет детальную информацию о структуре и функции сердца:
+
+#### Основные параметры оценки:
+
+1. **Сократительная функция левого желудочка**
+2. **Состояние клапанного аппарата**
+3. **Толщина стенок миокарда**
+4. **Размеры камер сердца**
+5. **Наличие жидкости в перикарде**
+
+## Современные методы визуализации
+
+### Компьютерная томография сердца (КТ)
+
+**Мультиспиральная компьютерная томография** (МСКТ) с контрастированием позволяет:
+
+- Визуализировать коронарные артерии неинвазивно
+- Оценить степень кальциноза сосудов
+- Выявить аномалии развития сердца
+- Диагностировать тромбоэмболию легочной артерии
+
+<Highlight>
+КТ-коронарография может заменить инвазивную коронарографию у пациентов с низким и промежуточным риском ИБС.
+</Highlight>
+
+## Заключение
+
+Современная диагностика сердечно-сосудистых заболеваний стремительно развивается благодаря внедрению новых технологий. **Ключевой задачей** остается разумное сочетание классических и инновационных методов.
+  `
+}
+
+// Функции для работы с данными
 export function getAllCategories(): string[] {
-  const posts = getAllPosts()
-  const categories = posts.map(post => post.category)
+  const categories = blogData.map(post => post.category)
   return Array.from(new Set(categories)).sort()
 }
 
-// Получить все теги
 export function getAllTags(): string[] {
-  const posts = getAllPosts()
-  const tags = posts.flatMap(post => post.tags || [])
+  const tags = blogData.flatMap(post => post.tags || [])
   return Array.from(new Set(tags)).sort()
 }
 
-// Получить все посты (только метаданные)
 export function getAllPosts(): BlogMeta[] {
-  // Проверяем существование папки
-  if (!fs.existsSync(contentDirectory)) {
-    return []
-  }
-
-  const fileNames = fs.readdirSync(contentDirectory)
-  const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.mdx'))
-    .map(fileName => {
-      const slug = fileName.replace(/\.mdx$/, '')
-      const fullPath = path.join(contentDirectory, fileName)
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
-
-      // Вычисляем время чтения (примерно 200 слов в минуту)
-      const wordCount = content.split(/\s+/).length
-      const readTime = Math.ceil(wordCount / 200)
-
-      return {
-        slug,
-        title: data.title || 'Без названия',
-        description: data.description || '',
-        date: data.date || new Date().toISOString(),
-        category: data.category || 'Общее',
-        tags: data.tags || [],
-        image: data.image || null,
-        readTime
-      }
-    })
-
-  // Сортируем по дате (новые первыми)
-  return allPostsData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return blogData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
-// Получить пост по slug
 export function getPostBySlug(slug: string): BlogPost | null {
-  try {
-    const fullPath = path.join(contentDirectory, `${slug}.mdx`)
-    
-    if (!fs.existsSync(fullPath)) {
-      return null
-    }
+  const post = blogData.find(p => p.slug === slug)
+  if (!post) return null
 
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
+  const content = blogContent[slug] || `# ${post.title}\n\nСодержимое статьи будет добавлено позже.`
 
-    // Вычисляем время чтения
-    const wordCount = content.split(/\s+/).length
-    const readTime = Math.ceil(wordCount / 200)
-
-    return {
-      slug,
-      title: data.title || 'Без названия',
-      description: data.description || '',
-      date: data.date || new Date().toISOString(),
-      category: data.category || 'Общее',
-      tags: data.tags || [],
-      image: data.image || null,
-      content,
-      readTime
-    }
-  } catch (error) {
-    console.error(`Ошибка при чтении поста ${slug}:`, error)
-    return null
+  return {
+    ...post,
+    content
   }
 }
 
-// Получить посты по категории
 export function getPostsByCategory(category: string): BlogMeta[] {
-  const allPosts = getAllPosts()
-  return allPosts.filter(post => 
+  return blogData.filter(post => 
     post.category.toLowerCase() === category.toLowerCase()
   )
 }
 
-// Получить посты по тегу
 export function getPostsByTag(tag: string): BlogMeta[] {
-  const allPosts = getAllPosts()
-  return allPosts.filter(post => 
+  return blogData.filter(post => 
     post.tags?.some(postTag => 
       postTag.toLowerCase() === tag.toLowerCase()
     )
   )
 }
 
-// Поиск постов
 export function searchPosts(query: string): BlogMeta[] {
-  const allPosts = getAllPosts()
   const searchTerm = query.toLowerCase()
   
-  return allPosts.filter(post => 
+  return blogData.filter(post => 
     post.title.toLowerCase().includes(searchTerm) ||
     post.description.toLowerCase().includes(searchTerm) ||
     post.category.toLowerCase().includes(searchTerm) ||
@@ -142,13 +296,11 @@ export function searchPosts(query: string): BlogMeta[] {
   )
 }
 
-// Получить похожие посты
 export function getSimilarPosts(currentSlug: string, limit: number = 3): BlogMeta[] {
-  const currentPost = getPostBySlug(currentSlug)
+  const currentPost = blogData.find(p => p.slug === currentSlug)
   if (!currentPost) return []
 
-  const allPosts = getAllPosts()
-  const otherPosts = allPosts.filter(post => post.slug !== currentSlug)
+  const otherPosts = blogData.filter(post => post.slug !== currentSlug)
 
   // Сортируем по релевантности (категория + теги)
   const scoredPosts = otherPosts.map(post => {
@@ -174,7 +326,6 @@ export function getSimilarPosts(currentSlug: string, limit: number = 3): BlogMet
     .map(item => item.post)
 }
 
-// Утилита для форматирования даты
 export function formatDate(dateString: string): string {
   const date = new Date(dateString)
   return date.toLocaleDateString('ru-RU', {
@@ -184,7 +335,6 @@ export function formatDate(dateString: string): string {
   })
 }
 
-// Утилита для создания excerpt из контента
 export function createExcerpt(content: string, maxLength: number = 150): string {
   // Убираем markdown разметку
   const plainText = content
