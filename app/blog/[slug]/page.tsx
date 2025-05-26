@@ -11,8 +11,8 @@ interface Props {
 }
 
 // Генерация метаданных для SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+export function generateMetadata({ params }: Props): Metadata {
+  const post = getPostBySlug(params.slug)
 
   if (!post) {
     return {
@@ -55,15 +55,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // Генерация статических путей
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const posts = getAllPosts()
   return posts.map((post) => ({
     slug: post.slug,
   }))
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const post = await getPostBySlug(params.slug)
+export default function BlogPostPage({ params }: Props) {
+  const post = getPostBySlug(params.slug)
 
   if (!post) {
     notFound()
