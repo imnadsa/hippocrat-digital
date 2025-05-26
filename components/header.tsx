@@ -64,6 +64,16 @@ export default function Header({ scrolled }: HeaderProps) {
             О нас
           </Button>
           
+          {/* Кнопка Блог */}
+          <Link href="/blog">
+            <Button 
+              variant="ghost" 
+              className="text-slate-300 hover:text-teal-400 hover:bg-transparent"
+            >
+              Блог
+            </Button>
+          </Link>
+          
           {/* Services Dropdown */}
           <div 
             className="relative"
@@ -138,6 +148,17 @@ export default function Header({ scrolled }: HeaderProps) {
               О нас
             </Button>
             
+            {/* Кнопка Блог в мобильном меню */}
+            <Link href="/blog">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Блог
+              </Button>
+            </Link>
+            
             {/* Mobile Services Dropdown */}
             <div>
               <Button 
@@ -180,13 +201,6 @@ export default function Header({ scrolled }: HeaderProps) {
               onClick={() => scrollToSection("team")}
             >
               Команда
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50"
-              onClick={() => scrollToSection("blog")}
-            >
-              Блог
             </Button>
             <Button
               className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-2"
