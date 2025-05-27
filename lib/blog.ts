@@ -53,7 +53,7 @@ const blogData: BlogMeta[] = [
     date: "2025-05-25",
     category: "AI автоматизации",
     tags: ["AI автоматизация", "диагностика", "ЭКГ", "эхокардиография", "современные технологии"],
-    image: "/blog/images/heart-diagnostics.jpg",
+    image: "/blog/images/ai-inmed.jpg",
     readTime: 9
   },
   {
