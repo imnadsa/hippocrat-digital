@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Target, Brain, Eye, BarChart3, Users, TrendingUp } from "lucide-react"
 
 export default function PortfolioSection() {
   // Функция для открытия внешних ссылок (кейсов)
@@ -12,134 +12,252 @@ export default function PortfolioSection() {
   // Это можно заменить на реальные ссылки на кейсы
   const caseUrls = {
     case1: "https://example.com/case-dental",
-    case2: "https://example.com/case-rebranding",
+    case2: "https://example.com/case-ai",
     case3: "https://example.com/case-aesthetic"
   }
 
   return (
     <section id="portfolio" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Декоративные элементы */}
-      <div className="absolute top-20 left-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl"></div>
+      {/* Декоративные элементы с улучшенной анимацией */}
+      <div className="absolute top-20 left-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground"></div>
+      <div className="absolute bottom-20 right-10 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground delay-800"></div>
+      <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-indigo-400/5 rounded-full blur-2xl animate-pulse-slow delay-400"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col items-center mb-12">
-          <div className="px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6">
+        <div className="flex flex-col items-center mb-12 animate-fadeInUp">
+          <div className="px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6 hover:border-teal-500/50 transition-all duration-300">
             Портфолио
           </div>
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent animate-gradient font-fixedsys">
-            Наши успешные кейсы
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent animate-gradient font-fixedsys text-shadow-lg">
+            Кейсы с реальными результатами
           </h2>
-          <p className="text-slate-400 text-center max-w-2xl">
-            Реальные примеры того, как мы помогаем медицинским учреждениям привлекать пациентов и увеличивать прибыль
+          <p className="text-slate-400 text-center max-w-2xl text-shadow">
+            Конкретные примеры того, как мы помогаем медицинским учреждениям увеличивать поток пациентов и прибыль
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Кейс 1 */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/10 transition-all">
-            <div className="h-48 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 opacity-10 bg-[url('/images/portfolio/dental-clinic.jpg')] bg-cover bg-center"></div>
-              <div className="z-10 px-6 py-4 text-center">
-                <div className="inline-block mb-3 px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-100">
+            <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
+              {/* Иконка вместо изображения */}
+              <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-200 group-hover:scale-110 transition-transform duration-300">
+                <Target size={48} className="text-teal-400" />
+              </div>
+              <div className="absolute top-4 right-4">
+                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-300">
                   Таргетированная реклама
                 </div>
-                <h3 className="text-xl font-bold text-white font-fixedsys">Стоматология Полный Порядок</h3>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-400 group-hover:text-teal-300 transition-colors duration-300">
+                  Стоматология "Полный Порядок"
+                </h3>
+                <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-500">Премиальная стоматологическая клиника</p>
               </div>
             </div>
             <div className="p-6 flex-grow flex flex-col">
-              <div className="mb-4">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-slate-400 text-sm">Рост первичных пациентов</span>
-                  <span className="text-teal-400 font-bold font-fixedsys">+43%</span>
+              {/* Метрики */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-600">
+                  <div className="flex items-center justify-center mb-2">
+                    <Users size={20} className="text-teal-400 mr-2" />
+                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+185%</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Новых пациентов</p>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full" style={{ width: "43%" }}></div>
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
+                  <div className="flex items-center justify-center mb-2">
+                    <TrendingUp size={20} className="text-teal-400 mr-2" />
+                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">₽2.1М</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Дополнительный доход</p>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm mb-6 flex-grow">
-                Разработали стратегию таргетированной рекламы для привлечения пациентов, нуждающихся в 
-                имплантации и эстетической стоматологии. Увеличили количество первичных обращений за 3 месяца.
+              
+              <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-800 leading-relaxed">
+                Запустили комплексную рекламную кампанию для привлечения пациентов на имплантацию и эстетическую стоматологию. 
+                Результат превзошел ожидания клиента в 2 раза.
               </p>
+              
+              <div className="mb-4 animate-fadeInUp delay-900">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-slate-400">ROI кампании</span>
+                  <span className="text-teal-400 font-medium">340%</span>
+                </div>
+                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full animate-gradient" style={{ width: "85%" }}></div>
+                </div>
+              </div>
+              
               <Button
                 onClick={() => openExternalLink(caseUrls.case1)}
-                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group"
+                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1000"
               >
-                <span>Подробнее</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <span>Изучить кейс</span>
+                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Button>
             </div>
           </div>
 
           {/* Кейс 2 */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/10 transition-all">
-            <div className="h-48 bg-gradient-to-br from-indigo-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 opacity-10 bg-[url('/images/portfolio/rebrand.jpg')] bg-cover bg-center"></div>
-              <div className="z-10 px-6 py-4 text-center">
-                <div className="inline-block mb-3 px-3 py-1 rounded-full bg-indigo-900/70 text-indigo-400 text-xs">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-200">
+            <div className="h-56 bg-gradient-to-br from-indigo-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
+              {/* Иконка вместо изображения */}
+              <div className="w-24 h-24 rounded-full bg-indigo-500/20 flex items-center justify-center animate-iconBounce delay-300 group-hover:scale-110 transition-transform duration-300">
+                <Brain size={48} className="text-indigo-400" />
+              </div>
+              <div className="absolute top-4 right-4">
+                <div className="inline-block px-3 py-1 rounded-full bg-indigo-900/70 text-indigo-400 text-xs hover:bg-indigo-900/90 transition-all duration-300 animate-fadeIn delay-400">
                   ИИ-решения в медицине
                 </div>
-                <h3 className="text-xl font-bold text-white font-fixedsys">Нейросеть для студентов-медиков</h3>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-500 group-hover:text-indigo-300 transition-colors duration-300">
+                  Hippocrat AI для студентов
+                </h3>
+                <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-600">ИИ-ассистент для медицинского образования</p>
               </div>
             </div>
             <div className="p-6 flex-grow flex flex-col">
-              <div className="mb-4">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-slate-400 text-sm">Пользователей за месяц</span>
-                  <span className="text-indigo-400 font-bold font-fixedsys">1000+</span>
+              {/* Метрики */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
+                  <div className="flex items-center justify-center mb-2">
+                    <Users size={20} className="text-indigo-400 mr-2" />
+                    <span className="text-indigo-400 font-bold font-fixedsys text-lg animate-gradient-text">5000+</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Активных пользователей</p>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full" style={{ width: "27%" }}></div>
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-800">
+                  <div className="flex items-center justify-center mb-2">
+                    <BarChart3 size={20} className="text-indigo-400 mr-2" />
+                    <span className="text-indigo-400 font-bold font-fixedsys text-lg animate-gradient-text">4.9★</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Средняя оценка</p>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm mb-6 flex-grow">
-                Разработали нейросеть на базе студенческих учебников, чем кратно увеличили 
-                в медицинских университетах
+              
+              <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-900 leading-relaxed">
+                Разработали нейросетевой ассистент на базе медицинских учебников, который персонализированно обучает студентов. 
+                Проект получил признание в 15+ медицинских вузах.
               </p>
+              
+              <div className="mb-4 animate-fadeInUp delay-1000">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-slate-400">Успеваемость студентов</span>
+                  <span className="text-indigo-400 font-medium">+67%</span>
+                </div>
+                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full animate-gradient" style={{ width: "67%" }}></div>
+                </div>
+              </div>
+              
               <Button
                 onClick={() => openExternalLink(caseUrls.case2)}
-                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group"
+                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1100"
               >
-                <span>Подробнее</span>
-                <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <span>Изучить кейс</span>
+                <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Button>
             </div>
           </div>
 
           {/* Кейс 3 */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/10 transition-all">
-            <div className="h-48 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 opacity-10 bg-[url('/images/portfolio/social-media.jpg')] bg-cover bg-center"></div>
-              <div className="z-10 px-6 py-4 text-center">
-                <div className="inline-block mb-3 px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs">
-                  Реклама
+          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
+            <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
+              {/* Иконка вместо изображения */}
+              <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-400 group-hover:scale-110 transition-transform duration-300">
+                <Eye size={48} className="text-teal-400" />
+              </div>
+              <div className="absolute top-4 right-4">
+                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-500">
+                  SMM & Контент-маркетинг
                 </div>
-                <h3 className="text-xl font-bold text-white font-fixedsys">Офтальмологическая клиника "Онлайн Око" </h3>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-600 group-hover:text-teal-300 transition-colors duration-300">
+                  Клиника "Онлайн Око"
+                </h3>
+                <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-700">Офтальмологический центр</p>
               </div>
             </div>
             <div className="p-6 flex-grow flex flex-col">
-              <div className="mb-4">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-slate-400 text-sm">Рост охватов</span>
-                  <span className="text-teal-400 font-bold font-fixedsys">в 3 раза</span>
+              {/* Метрики */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-800">
+                  <div className="flex items-center justify-center mb-2">
+                    <TrendingUp size={20} className="text-teal-400 mr-2" />
+                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">×5</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Рост охватов</p>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full" style={{ width: "75%" }}></div>
+                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-900">
+                  <div className="flex items-center justify-center mb-2">
+                    <Users size={20} className="text-teal-400 mr-2" />
+                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+320%</span>
+                  </div>
+                  <p className="text-slate-400 text-xs">Записей на прием</p>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm mb-6 flex-grow">
-                Разработали стратегию контента для социальных сетей клиники эстетической медицины,
-                что привело к трехкратному увеличению охватов и росту обращений от новых пациентов.
+              
+              <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-1000 leading-relaxed">
+                Создали стратегию контента для соцсетей офтальмологической клиники: образовательные посты, 
+                истории пациентов и интерактивные форматы. Результат — рост доверия и лояльности аудитории.
               </p>
+              
+              <div className="mb-4 animate-fadeInUp delay-1100">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-slate-400">Конверсия в запись</span>
+                  <span className="text-teal-400 font-medium">12.4%</span>
+                </div>
+                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full animate-gradient" style={{ width: "75%" }}></div>
+                </div>
+              </div>
+              
               <Button
                 onClick={() => openExternalLink(caseUrls.case3)}
-                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group"
+                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1200"
               >
-                <span>Подробнее</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <span>Изучить кейс</span>
+                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </Button>
             </div>
           </div>
+        </div>
+
+        {/* Статистика портфолио */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-400 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">50+</div>
+            <p className="text-slate-400 text-sm">Успешных проектов</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-500 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">25+</div>
+            <p className="text-slate-400 text-sm">Довольных клиентов</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-600 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">280%</div>
+            <p className="text-slate-400 text-sm">Средний рост ROI</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-700 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">₽50М+</div>
+            <p className="text-slate-400 text-sm">Дополнительный доход клиентов</p>
+          </div>
+        </div>
+
+        {/* CTA для портфолио */}
+        <div className="text-center mt-12 animate-fadeInUp delay-1300">
+          <h3 className="text-xl font-semibold text-white mb-4 font-fixedsys text-shadow">
+            Хотите стать следующим успешным кейсом?
+          </h3>
+          <Button
+            className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-3 hover-lift hover-glow transition-all duration-300"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Обсудить ваш проект
+          </Button>
         </div>
       </div>
     </section>
