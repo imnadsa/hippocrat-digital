@@ -41,11 +41,8 @@ export default function BlogSection() {
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="h-56 bg-gradient-to-br from-teal-900/80 to-slate-900 relative overflow-hidden">
               {/* Иконка вместо изображения */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-200 group-hover:scale-110 transition-transform duration-300">
-                  <BookOpen size={40} className="text-teal-400" />
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-[url('/public/blog/images/gamification-guide.jpg')] bg-cover bg-center opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 animate-fadeInUp delay-200">
                 <div className="flex gap-3 text-xs text-slate-400 mb-3">
@@ -59,15 +56,14 @@ export default function BlogSection() {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-500 group-hover:text-teal-300 transition-colors duration-300">
-                  ИИ в медицинском маркетинге: от чат-ботов до персонализации
+                  Геймификация в здравоохранении: от чат-ботов до персонализации
                 </h3>
               </div>
             </div>
             
             <div className="p-6 flex-grow flex flex-col">
               <p className="text-slate-400 text-sm mb-4 flex-grow animate-fadeInUp delay-600 leading-relaxed">
-                Как искусственный интеллект революционизирует привлечение пациентов: автоматизация записи, 
-                персонализированные рекламные кампании и аналитика поведения пациентов.
+                Как мотивировать пациентов следить за здоровьем и приходить в вашу клинику еще раз
               </p>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded-full">5 мин чтения</span>
