@@ -48,7 +48,7 @@ export default function BlogSection() {
                 <div className="flex gap-3 text-xs text-slate-400 mb-3">
                   <div className="flex items-center animate-fadeInLeft delay-300">
                     <Calendar size={12} className="mr-1 animate-iconBounce delay-400" />
-                    <span>15 мая 2025</span>
+                    <span>25 мая 2025</span>
                   </div>
                   <div className="flex items-center animate-fadeInLeft delay-400">
                     <User size={12} className="mr-1 animate-iconBounce delay-500" />
@@ -84,17 +84,14 @@ export default function BlogSection() {
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="h-56 bg-gradient-to-br from-indigo-900/80 to-slate-900 relative overflow-hidden">
               {/* Иконка вместо изображения */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-indigo-500/20 flex items-center justify-center animate-iconBounce delay-300 group-hover:scale-110 transition-transform duration-300">
-                  <TrendingUp size={40} className="text-indigo-400" />
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-[url('/blog/images/digital-marketing-2024.jpg')] bg-cover bg-center opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 animate-fadeInUp delay-300">
                 <div className="flex gap-3 text-xs text-slate-400 mb-3">
                   <div className="flex items-center animate-fadeInLeft delay-400">
                     <Calendar size={12} className="mr-1 animate-iconBounce delay-500" />
-                    <span>10 мая 2025</span>
+                    <span>15 мая 2025</span>
                   </div>
                   <div className="flex items-center animate-fadeInLeft delay-500">
                     <User size={12} className="mr-1 animate-iconBounce delay-600" />
@@ -102,15 +99,15 @@ export default function BlogSection() {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-600 group-hover:text-indigo-300 transition-colors duration-300">
-                  Топ-7 трендов digital-маркетинга в медицине 2025
+                  Цифровой маркетинг в медицине: тренды 2025 года
                 </h3>
               </div>
             </div>
             
             <div className="p-6 flex-grow flex flex-col">
               <p className="text-slate-400 text-sm mb-4 flex-grow animate-fadeInUp delay-700 leading-relaxed">
-                Анализ ключевых тенденций года: видеоконтент для медицинских услуг, 
-                отзывы пациентов, телемедицина и мобильные приложения для клиник.
+                Разбираем основные тенденции цифрового маркетинга в healthcare 
+                сфере и прогнозы на будущий год 
               </p>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded-full">7 мин чтения</span>
