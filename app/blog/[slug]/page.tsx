@@ -215,8 +215,12 @@ export default function BlogPostPage({ params }: Props) {
             <div className="border-t border-slate-800 pt-12 mt-16">
               <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-2xl p-8 border border-slate-700/50">
                 <div className="flex items-start space-x-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-2xl">HD</span>
+                  <div className="w-20 h-20 rounded-full flex-shrink-0 overflow-hidden">
+                    <img
+                      src="/blog/image/hippocrat-logo.jpg"
+                      alt="Hippocrat Digital Logo"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-white mb-2">
