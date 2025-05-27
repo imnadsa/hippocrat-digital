@@ -18,71 +18,75 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800 py-12">
-      <div className="container mx-auto px-4">
+    <footer className="bg-slate-950 border-t border-slate-800 py-12 relative overflow-hidden">
+      {/* Декоративные элементы */}
+      <div className="absolute top-0 left-1/4 w-24 h-24 bg-teal-500/5 rounded-full blur-2xl animate-pulse-slow"></div>
+      <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl animate-pulse-slow delay-400"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3 mb-6 md:mb-0">
+          <div className="flex items-center gap-3 mb-6 md:mb-0 animate-fadeInLeft hover-lift transition-all duration-300">
             <Logo size="sm" />
           </div>
 
           <div className="flex flex-wrap justify-center md:flex-row gap-8 md:gap-16 mb-6 md:mb-0">
-            <div className="w-full sm:w-auto">
-              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys">Контакты</h3>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer">
+            <div className="w-full sm:w-auto animate-fadeInUp delay-100">
+              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Контакты</h3>
+              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
                 info@hippocrat.digital
               </p>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer">
+              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
                 +7 (977) 100-44-19
               </p>
             </div>
 
-            <div className="w-full sm:w-auto">
-              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys">Навигация</h3>
+            <div className="w-full sm:w-auto animate-fadeInUp delay-200">
+              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Навигация</h3>
               <p 
-                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer"
+                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
                 onClick={() => scrollToSection("about")}
               >
                 О нас
               </p>
               <p 
-                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer"
+                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
                 onClick={() => scrollToSection("services")}
               >
                 Услуги
               </p>
               <p 
-                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer"
+                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
                 onClick={() => scrollToSection("portfolio")}
               >
                 Кейсы
               </p>
               <p 
-                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer"
+                className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
                 onClick={() => scrollToSection("blog")}
               >
                 Блог
               </p>
             </div>
 
-            <div className="w-full sm:w-auto">
-              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys">
+            <div className="w-full sm:w-auto animate-fadeInUp delay-300">
+              <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">
                 Правовая информация
               </h3>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer">
+              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
                 Условия использования
               </p>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors cursor-pointer">
+              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
                 Политика конфиденциальности
               </p>
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 animate-fadeInRight delay-400">
             {/* Telegram кнопка */}
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-slate-700 text-slate-400 hover:text-teal-400 hover:border-teal-500"
+              className="rounded-full border-slate-700 text-slate-400 hover:text-teal-400 hover:border-teal-500 hover:bg-teal-950/20 hover-lift hover:scale-110 transition-all duration-300 animate-scaleUp delay-500"
               onClick={() => openExternalLink("https://t.me/imnadsa")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -97,7 +101,7 @@ export default function Footer() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-slate-700 text-slate-400 hover:text-teal-400 hover:border-teal-500"
+              className="rounded-full border-slate-700 text-slate-400 hover:text-teal-400 hover:border-teal-500 hover:bg-teal-950/20 hover-lift hover:scale-110 transition-all duration-300 animate-scaleUp delay-600"
               onClick={() => openExternalLink("https://vk.com")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -110,7 +114,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <div className="mt-8 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm animate-fadeInUp delay-700">
           © {new Date().getFullYear()} Hippocrat Digital. Все права защищены.
         </div>
       </div>
