@@ -2,20 +2,16 @@
 
 import { MousePointer, Globe, MessageSquare, Search, Cpu } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function ServicesSection() {
-  // Функция для открытия внешних ссылок
-  const openExternalLink = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer")
-  }
-
-  // Это можно заменить на реальные ссылки на сервисы с описанием услуг
+  // Ссылки на страницы услуг
   const serviceUrls = {
-    targeting: "https://example.com/targeting",
-    websites: "https://example.com/websites",
-    smm: "https://example.com/smm",
-    contextual: "https://example.com/context",
-    ai: "https://example.com/ai-solutions"
+    targeting: "/services/targeting",
+    websites: "/services/websites",
+    smm: "/services/smm",
+    contextual: "/services/contextual",
+    ai: "/services/ai-solutions"
   }
 
   return (
@@ -48,13 +44,14 @@ export default function ServicesSection() {
               Точное попадание в вашу целевую аудиторию в социальных сетях. Привлекаем пациентов,
               которым действительно нужны ваши услуги.
             </p>
-            <Button
-              variant="outline"
-              className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
-              onClick={() => openExternalLink(serviceUrls.targeting)}
-            >
-              Подробнее
-            </Button>
+            <Link href={serviceUrls.targeting}>
+              <Button
+                variant="outline"
+                className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
+              >
+                Подробнее
+              </Button>
+            </Link>
           </div>
 
           {/* Услуга 2: Создание сайтов */}
@@ -67,13 +64,14 @@ export default function ServicesSection() {
               Медицинские сайты, которые конвертируют посетителей в пациентов. 
               Современный дизайн, оптимизация для поисковых систем, адаптация для мобильных устройств.
             </p>
-            <Button
-              variant="outline"
-              className="w-full border-indigo-700 text-indigo-400 hover:bg-indigo-950/50 hover:border-indigo-500 mt-auto hover-lift transition-all duration-300"
-              onClick={() => openExternalLink(serviceUrls.websites)}
-            >
-              Подробнее
-            </Button>
+            <Link href={serviceUrls.websites}>
+              <Button
+                variant="outline"
+                className="w-full border-indigo-700 text-indigo-400 hover:bg-indigo-950/50 hover:border-indigo-500 mt-auto hover-lift transition-all duration-300"
+              >
+                Подробнее
+              </Button>
+            </Link>
           </div>
 
           {/* Услуга 3: SMM */}
@@ -86,13 +84,14 @@ export default function ServicesSection() {
               Стратегическое управление репутацией и продвижение в социальных медиа.
               Создаем и поддерживаем сообщество вокруг вашей клиники.
             </p>
-            <Button
-              variant="outline"
-              className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
-              onClick={() => openExternalLink(serviceUrls.smm)}
-            >
-              Подробнее
-            </Button>
+            <Link href={serviceUrls.smm}>
+              <Button
+                variant="outline"
+                className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
+              >
+                Подробнее
+              </Button>
+            </Link>
           </div>
 
           {/* Услуга 4: Контекстная реклама */}
@@ -105,13 +104,14 @@ export default function ServicesSection() {
               Показ рекламы тем, кто уже ищет ваши услуги. 
               Быстрый способ привлечь целевых пациентов через поисковые системы, когда им нужна медицинская помощь.
             </p>
-            <Button
-              variant="outline"
-              className="w-full border-indigo-700 text-indigo-400 hover:bg-indigo-950/50 hover:border-indigo-500 mt-auto hover-lift transition-all duration-300"
-              onClick={() => openExternalLink(serviceUrls.contextual)}
-            >
-              Подробнее
-            </Button>
+            <Link href={serviceUrls.contextual}>
+              <Button
+                variant="outline"
+                className="w-full border-indigo-700 text-indigo-400 hover:bg-indigo-950/50 hover:border-indigo-500 mt-auto hover-lift transition-all duration-300"
+              >
+                Подробнее
+              </Button>
+            </Link>
           </div>
 
           {/* Услуга 5: ИИ-Решения */}
@@ -124,13 +124,14 @@ export default function ServicesSection() {
               Инновационные технологии для оптимизации работы клиники. 
               Чат-боты для записи и консультаций, персонализированные коммуникации с пациентами и аналитика.
             </p>
-            <Button
-              variant="outline"
-              className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
-              onClick={() => openExternalLink(serviceUrls.ai)}
-            >
-              Подробнее
-            </Button>
+            <Link href={serviceUrls.ai}>
+              <Button
+                variant="outline"
+                className="w-full border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 mt-auto hover-lift transition-all duration-300"
+              >
+                Подробнее
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
