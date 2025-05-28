@@ -12,7 +12,7 @@ export default function BlogSection() {
   // Ссылки на статьи блога на вашем сайте
   const articleUrls = {
     article1: "/blog/gamification-guide", // Статья о геймификации
-    article2: "/blog/digital-marketing-2025", // Статья о трендах 2025
+    article2: "/blog/digital-marketing-2024", // Статья о трендах 2025
     article3: "/blog/ai-inmed" // Статья об ИИ-ассистентах
   }
 
