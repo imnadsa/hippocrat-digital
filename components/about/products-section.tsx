@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, BarChart3 } from 'lucide-react';
+import { Users } from 'lucide-react';
 
 export default function ProductsSection() {
   const products = [
@@ -11,7 +11,7 @@ export default function ProductsSection() {
       iconImage: '/blog/images/hippocrat-logo.jpg',
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
-      image: '/blog/images/hippocrat-ai.jpg'
+      image: '/about/products/hippocrat-ai.jpg'
     },
     {
       name: 'Hippocrat MedCall AI',
@@ -21,7 +21,7 @@ export default function ProductsSection() {
       iconImage: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
-      image: '/blog/images/medcall-ai.jpg'
+      image: '/about/products/medcall-ai.jpg'
     }
   ];
 
@@ -114,23 +114,12 @@ export default function ProductsSection() {
                   <div className="flex-1 max-w-lg">
                     <div className="relative group">
                       <div className={`absolute inset-0 bg-gradient-to-r ${product.bgGradient} rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500`}></div>
-                      <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6 transform group-hover:scale-105 transition-transform duration-500">
+                      <div className="relative overflow-hidden rounded-2xl transform group-hover:scale-105 transition-transform duration-500">
                         <img 
                           src={product.image} 
                           alt={product.name}
-                          className="w-full h-64 object-cover rounded-xl"
+                          className="w-full h-64 object-cover"
                         />
-                        
-                        {/* Overlay Stats */}
-                        <div className="absolute top-8 right-8 bg-slate-900/80 backdrop-blur-sm border border-slate-600 rounded-xl p-3">
-                          <div className="flex items-center space-x-2">
-                            <BarChart3 className="w-5 h-5 text-teal-400" />
-                            <div>
-                              <p className="text-xs text-gray-400">Активность</p>
-                              <p className="text-white font-semibold text-sm">↗ +150%</p>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
