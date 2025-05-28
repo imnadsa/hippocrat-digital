@@ -1,5 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
 import HeroSection from '@/components/about/hero-section';
 import StorySection from '@/components/about/story-section';
 import WhyUsSection from '@/components/about/why-us-section';
@@ -22,6 +24,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-950">
+      {/* Header */}
+      <Header />
+      
       {/* Hero Section */}
       <HeroSection />
       
@@ -42,6 +47,9 @@ export default function AboutPage() {
       
       {/* CTA Section */}
       <CTASection />
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
