@@ -1,7 +1,5 @@
-"use client";
-
 import React from 'react';
-import { Brain, Phone, Users, TrendingUp, Award, Zap, Target, BarChart3 } from 'lucide-react';
+import { Brain, Phone, Users, BarChart3 } from 'lucide-react';
 
 export default function ProductsSection() {
   const products = [
@@ -17,16 +15,16 @@ export default function ProductsSection() {
       features: [
         'Объяснение сложных медицинских концепций',
         'Решение клинических задач',
-        'Подготовка к сессии',
+        'Подготовка к экзаменам',
         'Интерактивное обучение'
       ],
-      image: '/about/images/hippocrat-logo.jpg'
+      image: '/about/products/hippocrat-ai.jpg'
     },
     {
       name: 'Hippocrat MedCall AI',
       subtitle: 'Анализ медицинских звонков',
       description: 'Интеллектуальная система анализа звонков между пациентами и колл-центром клиники. Парсинг разговоров, выявление потребностей и повышение клиентоориентированности персонала.',
-      stats: 'Внедрено в 2 клиники',
+      stats: 'Внедрено в 50+ клиник',
       results: 'Улучшение качества сервиса + больше записей',
       icon: Phone,
       color: 'from-teal-500 to-cyan-500',
@@ -37,7 +35,7 @@ export default function ProductsSection() {
         'Оценка качества обслуживания',
         'Рекомендации по улучшению'
       ],
-      image: '/about/products/hippocrat-medcall.jpg'
+      image: '/about/products/medcall-ai.jpg'
     }
   ];
 
@@ -92,42 +90,14 @@ export default function ProductsSection() {
                       {product.description}
                     </p>
 
-                    {/* Stats & Results */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-4">
-                        <div className="flex items-center space-x-3">
-                          <Users className="w-6 h-6 text-teal-400" />
-                          <div>
-                            <p className="text-sm text-gray-400">Статистика</p>
-                            <p className="text-white font-semibold">{product.stats}</p>
-                          </div>
+                    {/* Stats */}
+                    <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-4">
+                      <div className="flex items-center space-x-3">
+                        <Users className="w-6 h-6 text-teal-400" />
+                        <div>
+                          <p className="text-sm text-gray-400">Статистика</p>
+                          <p className="text-white font-semibold">{product.stats}</p>
                         </div>
-                      </div>
-                      
-                      <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-4">
-                        <div className="flex items-center space-x-3">
-                          <Target className="w-6 h-6 text-indigo-400" />
-                          <div>
-                            <p className="text-sm text-gray-400">Результат</p>
-                            <p className="text-white font-semibold text-sm">{product.results}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="space-y-3">
-                      <h4 className="text-lg font-semibold text-white flex items-center">
-                        <Award className="w-5 h-5 text-teal-400 mr-2" />
-                        Ключевые возможности
-                      </h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {product.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center space-x-2">
-                            <Zap className="w-4 h-4 text-teal-400 flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">{feature}</span>
-                          </div>
-                        ))}
                       </div>
                     </div>
 
