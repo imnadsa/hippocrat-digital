@@ -84,7 +84,7 @@ export default function BlogSection() {
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="h-56 bg-gradient-to-br from-indigo-900/80 to-slate-900 relative overflow-hidden">
               {/* Изображение статьи */}
-              <div className="absolute inset-0 bg-[url('/blog/images/digital-marketing-2025.jpg')] bg-cover bg-center opacity-30"></div>
+              <div className="absolute inset-0 bg-[url('/blog/images/digital-marketing-2024.jpg')] bg-cover bg-center opacity-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 animate-fadeInUp delay-300">
