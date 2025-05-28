@@ -11,7 +11,7 @@ export default function TeamSection() {
       education: 'Лечебное дело, МГМУ',
       expertise: 'Стратегия, медицинский маркетинг',
       image: '/blog/images/alexa.jpg',
-      description: '6 лет опыта в digital, автор 2+ успешных медицинских проектов.',
+      description: '5 лет опыта в digital, автор 2+ успешных медицинских проектов.',
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'antpshkin.infp@bk.ru',
@@ -24,8 +24,8 @@ export default function TeamSection() {
       education: 'Лечебное дело, РНИМУ',
       expertise: 'SMM, контент-стратегия',
       image: '/blog/images/alexp.jpg',
-      description: 'Эксперт, ставший экспертом по медицинскому SMM. Создала 5+ вирусных кампаний для клиник.',
-      achievements: ['Рост охватов +500%'],
+      description: 'Глава отдела маркетинга, ставший экспертом по медицинскому SMM. Создал 2 вирусных кампаний для клиник.',
+      achievements: ['Рост охватов +200%'],
       contacts: {
         email: 'alexp@hippocrat.digital',
         telegram: 'https://t.me/permyakovalex'
@@ -37,7 +37,7 @@ export default function TeamSection() {
       education: 'Лечебное дело, МГМУ',
       expertise: 'AI, машинное обучение, разработка',
       image: '/about/team/alexk.jpg',
-      description: 'Основатель Hippocrat AI. Разработал 3+ AI-решений для медицинской отрасли.',
+      description: 'Основатель Hippocrat AI. Разработал 2 AI-решений для медицинской отрасли.',
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'alexk@hippocrat.digital',
