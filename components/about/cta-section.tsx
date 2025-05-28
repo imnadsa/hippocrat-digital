@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Phone, MessageCircle, CheckCircle, Brain, Stethoscope, TrendingUp } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MessageCircle, CheckCircle } from 'lucide-react';
 
 export default function CTASection() {
   const [formData, setFormData] = useState({
@@ -43,13 +43,6 @@ export default function CTASection() {
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/10 to-indigo-400/10 rounded-full blur-3xl animate-gradient"></div>
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-3xl animate-gradient delay-1000"></div>
-      </div>
-
-      {/* Floating Medical Icons */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <Brain className="absolute top-1/4 left-1/6 w-8 h-8 text-teal-400 animate-float" />
-        <Stethoscope className="absolute top-3/4 right-1/6 w-10 h-10 text-indigo-400 animate-float delay-1000" />
-        <TrendingUp className="absolute bottom-1/3 left-1/2 w-6 h-6 text-purple-400 animate-float delay-500" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
