@@ -21,7 +21,7 @@ export default function ProductsSection() {
       iconImage: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
-      image: '/blog/images/hippocrat-medcall.jpg'
+      image: '/blog/images/medcall-ai.jpg'
     }
   ];
 
