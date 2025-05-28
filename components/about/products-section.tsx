@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { Brain, Phone, Users, TrendingUp, Award, Zap, Target, BarChart3 } from 'lucide-react';
 
