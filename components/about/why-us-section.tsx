@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { Stethoscope, Zap, TrendingUp, MapPin } from 'lucide-react';
 
@@ -47,7 +45,7 @@ export default function WhyUsSection() {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fadeInUp">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Почему мы <span className="text-teal-400">разные</span>
+            Почему мы <span className="text-teal-400">лучше</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Уникальное сочетание медицинских знаний и digital-экспертизы
@@ -85,9 +83,6 @@ export default function WhyUsSection() {
                     <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                       {advantage.description}
                     </p>
-
-                    {/* Hover Effect Line */}
-                    <div className="absolute bottom-0 left-8 right-8 h-0.5 bg-gradient-to-r from-teal-400 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                   </div>
                 </div>
               </div>
