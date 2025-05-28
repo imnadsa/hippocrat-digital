@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { Target, Award, Eye, Lightbulb, TrendingUp, Users, Shield, Rocket } from 'lucide-react';
 
@@ -11,6 +9,7 @@ export default function ValuesSection() {
       description: 'Работаем на конкретные цели и измеримые результаты. Каждый проект должен приносить реальную пользу клиенту.',
       color: 'from-green-500 to-emerald-600',
       bgColor: 'from-green-500/10 to-emerald-600/10',
+      metrics: ['ROI +200%', 'Конверсия +150%'],
       illustration: TrendingUp
     },
     {
@@ -19,6 +18,7 @@ export default function ValuesSection() {
       description: 'Глубокие знания медицины и маркетинга. Команда профессионалов с медицинским образованием и цифровыми навыками.',
       color: 'from-blue-500 to-indigo-600',
       bgColor: 'from-blue-500/10 to-indigo-600/10',
+      metrics: ['5+ лет опыта', '50+ проектов'],
       illustration: Users
     },
     {
@@ -27,6 +27,7 @@ export default function ValuesSection() {
       description: 'Честные отчеты и открытое общение. Клиент всегда знает, на что тратится бюджет и какие результаты получает.',
       color: 'from-cyan-500 to-teal-600',
       bgColor: 'from-cyan-500/10 to-teal-600/10',
+      metrics: ['100% отчетность', 'Еженедельные созвоны'],
       illustration: Shield
     },
     {
@@ -95,7 +96,7 @@ export default function ValuesSection() {
 
                     {/* Metrics */}
                     <div className="space-y-2 mb-4">
-                      {value.metrics.map((metric, idx) => (
+                      {value.metrics?.map((metric, idx) => (
                         <div key={idx} className="flex items-center justify-center space-x-2">
                           <div className={`w-2 h-2 bg-gradient-to-r ${value.color} rounded-full`}></div>
                           <span className="text-sm text-gray-300">{metric}</span>
@@ -115,6 +116,97 @@ export default function ValuesSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Values in Action Section */}
+        <div className="animate-fadeInUp delay-500">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-sm border border-slate-600 rounded-2xl p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Наши ценности в действии
+                </h3>
+                <p className="text-gray-400">
+                  Как принципы работы превращаются в результаты для клиентов
+                </p>
+              </div>
+
+              {/* Action Examples */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-slate-800/50 border border-slate-600 rounded-xl p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Target className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-2">Результат для клиники "Здоровье+"</h4>
+                      <p className="text-sm text-gray-400 mb-3">
+                        Увеличили количество записей на 180% за 3 месяца благодаря точной настройке таргетинга
+                      </p>
+                      <div className="flex items-center space-x-4 text-xs">
+                        <span className="text-green-400">↗ +180% записей</span>
+                        <span className="text-blue-400">-40% стоимость лида</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/50 border border-slate-600 rounded-xl p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-teal-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Eye className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-2">Прозрачность с "МедЦентр СПб"</h4>
+                      <p className="text-sm text-gray-400 mb-3">
+                        Еженедельные отчеты по каждому рублю бюджета и детальная аналитика всех кампаний
+                      </p>
+                      <div className="flex items-center space-x-4 text-xs">
+                        <span className="text-teal-400">52 отчета в год</span>
+                        <span className="text-indigo-400">100% прозрачность</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/50 border border-slate-600 rounded-xl p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Award className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-2">Экспертность для стоматологии "Смайл"</h4>
+                      <p className="text-sm text-gray-400 mb-3">
+                        Медицинское образование команды помогло создать контент, который привлек +300% пациентов
+                      </p>
+                      <div className="flex items-center space-x-4 text-xs">
+                        <span className="text-blue-400">↗ +300% охват</span>
+                        <span className="text-purple-400">Вирусный контент</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/50 border border-slate-600 rounded-xl p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Lightbulb className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-2">AI-инновации для "ПроМед"</h4>
+                      <p className="text-sm text-gray-400 mb-3">
+                        Внедрили Hippocrat MedCall AI, что повысило качество обслуживания на 250%
+                      </p>
+                      <div className="flex items-center space-x-4 text-xs">
+                        <span className="text-yellow-400">↗ +250% качество</span>
+                        <span className="text-orange-400">AI-решение</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Quote Section */}
