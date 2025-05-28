@@ -60,11 +60,11 @@ export default function ProductsSection() {
                     {/* Header */}
                     <div className="space-y-4">
                       <div className="flex items-center space-x-4">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${product.color} rounded-2xl flex items-center justify-center transform hover:scale-110 transition-transform duration-300 overflow-hidden`}>
+                        <div className="w-16 h-16 rounded-2xl overflow-hidden transform hover:scale-110 transition-transform duration-300">
                           <img 
                             src={product.iconImage} 
                             alt={`${product.name} logo`}
-                            className="w-12 h-12 object-contain rounded-lg"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                         <div>
