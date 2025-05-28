@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Mail, Phone, MessageCircle, CheckCircle, Brain, Stethoscope, TrendingUp } from 'lucide-react';
@@ -16,7 +18,7 @@ export default function CTASection() {
     'Hippocrat MedCall AI (для клиник)',
     'SMM для медицинских организаций',
     'Веб-разработка медицинских сайтов',
-    'Контекстная реклама для клиники',
+    'Контекстная реклама в healthcare',
     'Комплексный digital-маркетинг',
     'Консультация по стратегии'
   ];
@@ -78,7 +80,7 @@ export default function CTASection() {
                     'Персональное КП с расчетом ROI',
                     'Демонстрацию наших AI-продуктов',
                     'Консультацию по digital-стратегии',
-                    'Анализ текущих цифровых активностей'
+                    'Анализ текущих маркетинговых активностей'
                   ].map((benefit, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-teal-400 flex-shrink-0" />
@@ -104,7 +106,7 @@ export default function CTASection() {
                     className="flex items-center space-x-3 text-gray-300 hover:text-teal-400 transition-colors duration-300"
                   >
                     <Phone className="w-5 h-5" />
-                    <span>+7 (977) 100-44-19</span>
+                    <span>+7 (999) 123-45-67</span>
                   </a>
                 </div>
               </div>
@@ -118,7 +120,7 @@ export default function CTASection() {
                     ))}
                   </div>
                   <div>
-                    <p className="text-white font-medium">4+ довольных клиентов</p>
+                    <p className="text-white font-medium">100+ довольных клиентов</p>
                     <p className="text-gray-400 text-sm">присоединились к Hippocrat Digital</p>
                   </div>
                 </div>
