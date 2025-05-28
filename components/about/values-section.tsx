@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { Target, Award, Eye, Lightbulb, TrendingUp, Users, Shield, Rocket } from 'lucide-react';
 
