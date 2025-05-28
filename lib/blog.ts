@@ -27,7 +27,7 @@ export interface BlogMeta {
 // Метаданные статей
 const blogData: BlogMeta[] = [
   {
-    slug: "digital-marketing-2025",
+    slug: "digital-marketing-2024",
     title: "Цифровой маркетинг в медицине: тренды 2025 года",
     description: "Разбираем основные тенденции цифрового маркетинга в healthcare сфере и прогнозы на будущий год",
     date: "2025-05-20",
