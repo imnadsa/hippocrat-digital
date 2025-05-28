@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Mail, Linkedin, Twitter, Award, BookOpen, Code } from 'lucide-react';
+import { Mail, Award, BookOpen, Code } from 'lucide-react';
 
 export default function TeamSection() {
   const teamMembers = [
@@ -15,8 +15,7 @@ export default function TeamSection() {
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'antpshkin.infp@bk.ru',
-        linkedin: '#',
-        twitter: '#'
+        telegram: 'https://t.me/username'
       }
     },
     {
@@ -29,8 +28,7 @@ export default function TeamSection() {
       achievements: ['Рост охватов +500%'],
       contacts: {
         email: 'alexp@hippocrat.digital',
-        linkedin: '#',
-        twitter: '#'
+        telegram: 'https://t.me/username'
       }
     },
     {
@@ -43,8 +41,7 @@ export default function TeamSection() {
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'alexk@hippocrat.digital',
-        linkedin: '#',
-        twitter: '#'
+        telegram: 'https://t.me/username'
       }
     },
   ];
@@ -68,15 +65,15 @@ export default function TeamSection() {
           </p>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        {/* Team Grid - Centered */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {teamMembers.map((member, index) => (
             <div 
               key={member.name}
               className={`group animate-fadeInUp delay-${(index + 1) * 100}`}
             >
               {/* Card */}
-              <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6 transition-all duration-500 hover:border-teal-400/50 hover:transform hover:scale-105 hover-glow h-full">
+              <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6 transition-all duration-500 hover:border-teal-400/50 hover:transform hover:scale-105 hover-glow h-full mx-auto" style={{ maxWidth: '320px' }}>
                 {/* Photo */}
                 <div className="relative mb-6">
                   <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-slate-600 group-hover:border-teal-400 transition-colors duration-300">
@@ -131,7 +128,7 @@ export default function TeamSection() {
                   </ul>
                 </div>
 
-                {/* Contact Buttons */}
+                {/* Contact Buttons - Telegram only */}
                 <div className="flex justify-center space-x-3">
                   <a 
                     href={`mailto:${member.contacts.email}`}
@@ -140,16 +137,12 @@ export default function TeamSection() {
                     <Mail className="w-4 h-4 text-gray-400 group-hover/btn:text-white" />
                   </a>
                   <a 
-                    href={member.contacts.linkedin}
+                    href={member.contacts.telegram}
                     className="w-8 h-8 bg-slate-700 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors duration-300 group/btn"
                   >
-                    <Linkedin className="w-4 h-4 text-gray-400 group-hover/btn:text-white" />
-                  </a>
-                  <a 
-                    href={member.contacts.twitter}
-                    className="w-8 h-8 bg-slate-700 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors duration-300 group/btn"
-                  >
-                    <Twitter className="w-4 h-4 text-gray-400 group-hover/btn:text-white" />
+                    <svg className="w-4 h-4 text-gray-400 group-hover/btn:text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
+                    </svg>
                   </a>
                 </div>
 
