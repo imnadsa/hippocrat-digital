@@ -17,11 +17,11 @@ export default function ProductsSection() {
       name: 'Hippocrat MedCall AI',
       subtitle: 'Анализ медицинских звонков',
       description: 'Интеллектуальная система анализа звонков между пациентами и колл-центром клиники. Парсинг разговоров, выявление потребностей и повышение клиентоориентированности персонала.',
-      stats: 'Внедрено в 50+ клиник',
+      stats: 'Внедрено в 2 клиники',
       iconImage: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
-      image: '/blog/images/medcall-ai.jpg'
+      image: '/blog/images/hippocrat-medcall.jpg'
     }
   ];
 
@@ -118,7 +118,7 @@ export default function ProductsSection() {
                         <img 
                           src={product.image} 
                           alt={product.name}
-                          className="w-full h-64 object-cover"
+                          className="w-full h-80 object-contain bg-slate-800/30"
                         />
                       </div>
                     </div>
