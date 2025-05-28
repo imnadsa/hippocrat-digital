@@ -64,22 +64,6 @@ export default function StorySection() {
             <p className="text-gray-400">Эффективные стратегии для медицины</p>
           </div>
         </div>
-
-        {/* Bottom Visual */}
-        <div className="mt-20 text-center animate-fadeInUp delay-600">
-          <div className="relative mx-auto max-w-2xl">
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8">
-              <img 
-                src="/about/team-story.jpg" 
-                alt="Команда Hippocrat Digital - студенты-медики" 
-                className="w-full h-64 object-cover rounded-xl mb-4"
-              />
-              <p className="text-gray-400 italic">
-                Студенты-медики, создающие будущее цифрового здравоохранения
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
