@@ -56,13 +56,14 @@ export default function Header({ scrolled }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-4 items-center">
-          <Button 
-            variant="ghost" 
-            className="text-slate-300 hover:text-teal-400 hover:bg-transparent"
-            onClick={() => scrollToSection("about")}
-          >
-            О нас
-          </Button>
+          <Link href="/about">
+            <Button 
+              variant="ghost" 
+              className="text-slate-300 hover:text-teal-400 hover:bg-transparent"
+            >
+              О нас
+            </Button>
+          </Link>
           
           {/* Кнопка Блог */}
           <Link href="/blog">
@@ -140,13 +141,15 @@ export default function Header({ scrolled }: HeaderProps) {
             <div className="text-center text-sm mb-2 text-teal-300">
               «Digital решения в медицине»
             </div>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50"
-              onClick={() => scrollToSection("about")}
-            >
-              О нас
-            </Button>
+            <Link href="/about">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                О нас
+              </Button>
+            </Link>
             
             {/* Кнопка Блог в мобильном меню */}
             <Link href="/blog">
