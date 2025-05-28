@@ -1,5 +1,6 @@
-import React from 'react';
-import { Metadata } from 'next';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/about/hero-section';
@@ -10,22 +11,23 @@ import ProductsSection from '@/components/about/products-section';
 import ValuesSection from '@/components/about/values-section';
 import CTASection from '@/components/about/cta-section';
 
-export const metadata: Metadata = {
-  title: 'О нас | Hippocrat Digital - Цифровые решения для медицины',
-  description: 'Команда экспертов с медицинским образованием и 5+ лет опыта в digital. Знаем медицину изнутри, делаем маркетинг снаружи.',
-  keywords: 'о компании, команда hippocrat digital, медицинский маркетинг, цифровые решения для медицины',
-  openGraph: {
-    title: 'О нас | Hippocrat Digital',
-    description: 'Команда экспертов с медицинским образованием и 5+ лет опыта в digital',
-    images: ['/about/hero-image.jpg'],
-  },
-};
-
 export default function AboutPage() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-950">
       {/* Header */}
-      <Header />
+      <Header scrolled={scrolled} />
       
       {/* Hero Section */}
       <HeroSection />
