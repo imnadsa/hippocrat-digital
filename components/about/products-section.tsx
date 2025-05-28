@@ -92,9 +92,21 @@ export default function ProductsSection() {
 
                     {/* CTA */}
                     <div className="pt-4">
-                      <button className={`bg-gradient-to-r ${product.color} hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg`}>
-                        Узнать больше
-                      </button>
+                      {product.name === 'Hippocrat AI' ? (
+                        <a 
+                          href="https://productradar.ru/product/hippocrat-ai/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          <button className={`bg-gradient-to-r ${product.color} hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg`}>
+                            Узнать больше
+                          </button>
+                        </a>
+                      ) : (
+                        <button className={`bg-gradient-to-r ${product.color} hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg`}>
+                          Узнать больше
+                        </button>
+                      )}
                     </div>
                   </div>
 
