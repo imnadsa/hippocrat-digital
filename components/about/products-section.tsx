@@ -9,7 +9,7 @@ export default function ProductsSection() {
       description: 'Революционное решение, которое помогает студентам-медикам решать 99% задач медицинского образования. Умный помощник для изучения анатомии, патологии, фармакологии и клинических случаев.',
       stats: '1200+ студентов',
       results: 'Революция в изучении медицины',
-      icon: '/about/products/hippocrat-logo.jpg',
+      icon: Brain,
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
       features: [
@@ -18,7 +18,7 @@ export default function ProductsSection() {
         'Подготовка к экзаменам',
         'Интерактивное обучение'
       ],
-      image: '/blog/images/hippocrat-logo.jpg'
+      image: '/about/products/hippocrat-ai.jpg'
     },
     {
       name: 'Hippocrat MedCall AI',
@@ -26,7 +26,7 @@ export default function ProductsSection() {
       description: 'Интеллектуальная система анализа звонков между пациентами и колл-центром клиники. Парсинг разговоров, выявление потребностей и повышение клиентоориентированности персонала.',
       stats: 'Внедрено в 50+ клиник',
       results: 'Улучшение качества сервиса + больше записей',
-      icon: '/blog/images/hippocrat-medcall.jpg',
+      icon: Phone,
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
       features: [
@@ -35,7 +35,7 @@ export default function ProductsSection() {
         'Оценка качества обслуживания',
         'Рекомендации по улучшению'
       ],
-      image: '/blog/images/hippocrat-medcall.jpg'
+      image: '/about/products/medcall-ai.jpg'
     }
   ];
 
@@ -61,7 +61,6 @@ export default function ProductsSection() {
         {/* Products */}
         <div className="space-y-16 max-w-7xl mx-auto">
           {products.map((product, index) => {
-            const Icon = product.icon;
             const isEven = index % 2 === 0;
             
             return (
@@ -75,8 +74,12 @@ export default function ProductsSection() {
                     {/* Header */}
                     <div className="space-y-4">
                       <div className="flex items-center space-x-4">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${product.color} rounded-2xl flex items-center justify-center transform hover:scale-110 transition-transform duration-300`}>
-                          <Icon className="w-8 h-8 text-white" />
+                        <div className={`w-16 h-16 bg-gradient-to-r ${product.color} rounded-2xl flex items-center justify-center transform hover:scale-110 transition-transform duration-300 overflow-hidden`}>
+                          <img 
+                            src={product.iconImage} 
+                            alt={`${product.name} logo`}
+                            className="w-12 h-12 object-contain rounded-lg"
+                          />
                         </div>
                         <div>
                           <h3 className="text-3xl font-bold text-white">{product.name}</h3>
