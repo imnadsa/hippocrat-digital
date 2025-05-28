@@ -9,7 +9,7 @@ export default function ProductsSection() {
       description: 'Революционное решение, которое помогает студентам-медикам решать 99% задач медицинского образования. Умный помощник для изучения анатомии, патологии, фармакологии и клинических случаев.',
       stats: '1200+ студентов',
       results: 'Революция в изучении медицины',
-      icon: Brain,
+      icon: '/about/products/hippocrat-logo.jpg',
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
       features: [
@@ -18,7 +18,7 @@ export default function ProductsSection() {
         'Подготовка к экзаменам',
         'Интерактивное обучение'
       ],
-      image: '/about/products/hippocrat-ai.jpg'
+      image: '/blog/images/hippocrat-logo.jpg'
     },
     {
       name: 'Hippocrat MedCall AI',
@@ -26,7 +26,7 @@ export default function ProductsSection() {
       description: 'Интеллектуальная система анализа звонков между пациентами и колл-центром клиники. Парсинг разговоров, выявление потребностей и повышение клиентоориентированности персонала.',
       stats: 'Внедрено в 50+ клиник',
       results: 'Улучшение качества сервиса + больше записей',
-      icon: Phone,
+      icon: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
       features: [
@@ -35,7 +35,7 @@ export default function ProductsSection() {
         'Оценка качества обслуживания',
         'Рекомендации по улучшению'
       ],
-      image: '/about/products/medcall-ai.jpg'
+      image: '/blog/images/hippocrat-medcall.jpg'
     }
   ];
 
