@@ -15,7 +15,7 @@ export default function TeamSection() {
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'antpshkin.infp@bk.ru',
-        telegram: 'https://t.me/username'
+        telegram: 'https://t.me/imnadsa'
       }
     },
     {
@@ -28,7 +28,7 @@ export default function TeamSection() {
       achievements: ['Рост охватов +500%'],
       contacts: {
         email: 'alexp@hippocrat.digital',
-        telegram: 'https://t.me/username'
+        telegram: 'https://t.me/permyakovalex'
       }
     },
     {
@@ -41,7 +41,7 @@ export default function TeamSection() {
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
         email: 'alexk@hippocrat.digital',
-        telegram: 'https://t.me/username'
+        telegram: 'https://t.me/crazyponchik'
       }
     },
   ];
