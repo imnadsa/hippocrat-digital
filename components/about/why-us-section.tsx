@@ -104,23 +104,10 @@ export default function WhyUsSection() {
                     Получите бесплатную консультацию и узнайте, как мы можем помочь вашей медицинской организации
                   </p>
                 </div>
-
-                {/* Right Image */}
-                <div className="flex-shrink-0">
-                  <img 
-                    src="/about/advantages-illustration.jpg" 
-                    alt="Преимущества Hippocrat Digital" 
-                    className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-xl border-2 border-slate-600"
-                  />
-                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-20 left-20 w-2 h-20 bg-gradient-to-b from-teal-400 to-transparent rounded-full opacity-30 animate-pulse-slow hidden lg:block"></div>
-        <div className="absolute bottom-20 right-20 w-2 h-16 bg-gradient-to-b from-indigo-400 to-transparent rounded-full opacity-30 animate-pulse-slow delay-1000 hidden lg:block"></div>
       </div>
     </section>
   );
