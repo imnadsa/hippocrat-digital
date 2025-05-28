@@ -11,7 +11,7 @@ export default function ProductsSection() {
       iconImage: '/blog/images/hippocrat-logo.jpg',
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
-      image: '/about/products/hippocrat-ai.jpg'
+      image: '/blog/images/hippocrat-ai.jpg'
     },
     {
       name: 'Hippocrat MedCall AI',
@@ -21,7 +21,7 @@ export default function ProductsSection() {
       iconImage: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
-      image: '/about/products/medcall-ai.jpg'
+      image: '/blog/images/medcall-ai.jpg'
     }
   ];
 
