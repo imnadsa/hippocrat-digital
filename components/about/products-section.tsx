@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, Phone, Users, BarChart3 } from 'lucide-react';
+import { Users, BarChart3 } from 'lucide-react';
 
 export default function ProductsSection() {
   const products = [
@@ -8,16 +8,9 @@ export default function ProductsSection() {
       subtitle: 'Первая ИИ модель для студентов-медиков',
       description: 'Революционное решение, которое помогает студентам-медикам решать 99% задач медицинского образования. Умный помощник для изучения анатомии, патологии, фармакологии и клинических случаев.',
       stats: '1200+ студентов',
-      results: 'Революция в изучении медицины',
-      icon: Brain,
+      iconImage: '/blog/images/hippocrat-logo.jpg',
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
-      features: [
-        'Объяснение сложных медицинских концепций',
-        'Решение клинических задач',
-        'Подготовка к экзаменам',
-        'Интерактивное обучение'
-      ],
       image: '/about/products/hippocrat-ai.jpg'
     },
     {
@@ -25,16 +18,9 @@ export default function ProductsSection() {
       subtitle: 'Анализ медицинских звонков',
       description: 'Интеллектуальная система анализа звонков между пациентами и колл-центром клиники. Парсинг разговоров, выявление потребностей и повышение клиентоориентированности персонала.',
       stats: 'Внедрено в 50+ клиник',
-      results: 'Улучшение качества сервиса + больше записей',
-      icon: Phone,
+      iconImage: '/blog/images/hippocrat-medcall.jpg',
       color: 'from-teal-500 to-cyan-500',
       bgGradient: 'from-teal-500/10 to-cyan-500/10',
-      features: [
-        'Анализ тональности разговора',
-        'Выявление ключевых потребностей',
-        'Оценка качества обслуживания',
-        'Рекомендации по улучшению'
-      ],
       image: '/about/products/medcall-ai.jpg'
     }
   ];
