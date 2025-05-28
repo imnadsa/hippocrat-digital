@@ -28,11 +28,15 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* Член команды 1 */}
+          {/* Член команды 1 - Антошкин */}
           <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-teal-500 to-teal-700 flex items-center justify-center text-white text-xl font-bold animate-scaleUp delay-200 hover:scale-110 transition-transform duration-300">
-                А
+              <div className="w-20 h-20 rounded-full overflow-hidden animate-scaleUp delay-200 hover:scale-110 transition-transform duration-300">
+                <img 
+                  src="/blog/images/alexa.jpg" 
+                  alt="Александр Антошкин"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="animate-fadeInLeft delay-200">
                 <h3 className="text-xl font-semibold font-fixedsys text-shadow">Александр Антошкин</h3>
@@ -63,7 +67,7 @@ export default function TeamSection() {
             </div>
           </div>
 
-          {/* Член команды 2 */}
+          {/* Член команды 2 - Кухто */}
           <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-500 to-indigo-700 flex items-center justify-center text-white text-xl font-bold animate-scaleUp delay-300 hover:scale-110 transition-transform duration-300">
@@ -98,11 +102,15 @@ export default function TeamSection() {
             </div>
           </div>
 
-          {/* Член команды 3 */}
+          {/* Член команды 3 - Пермяков */}
           <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-300">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-teal-500 to-teal-700 flex items-center justify-center text-white text-xl font-bold animate-scaleUp delay-400 hover:scale-110 transition-transform duration-300">
-                А
+              <div className="w-20 h-20 rounded-full overflow-hidden animate-scaleUp delay-400 hover:scale-110 transition-transform duration-300">
+                <img 
+                  src="/blog/images/alexp.jpg" 
+                  alt="Александр Пермяков"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="animate-fadeInLeft delay-400">
                 <h3 className="text-xl font-semibold font-fixedsys text-shadow">Александр Пермяков</h3>
