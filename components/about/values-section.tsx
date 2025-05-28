@@ -116,8 +116,12 @@ export default function ValuesSection() {
                   Наши ценности — это не просто слова на сайте. Это принципы, по которым мы живем и работаем каждый день, создавая value для наших клиентов.
                 </blockquote>
                 <div className="flex items-center justify-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-400 to-indigo-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold">HD</span>
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
+                    <img 
+                      src="/blog/images/hippocrat-logo.jpg" 
+                      alt="Hippocrat Digital Logo"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="text-left">
                     <p className="text-white font-semibold">Команда Hippocrat Digital</p>
