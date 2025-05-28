@@ -128,17 +128,14 @@ export default function BlogSection() {
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-300">
             <div className="h-56 bg-gradient-to-br from-teal-900/80 to-slate-900 relative overflow-hidden">
               {/* Иконка вместо изображения */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-400 group-hover:scale-110 transition-transform duration-300">
-                  <Shield size={40} className="text-teal-400" />
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-[url('/blog/images/ai-inmed.jpg')] bg-cover bg-center opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 animate-fadeInUp delay-400">
                 <div className="flex gap-3 text-xs text-slate-400 mb-3">
                   <div className="flex items-center animate-fadeInLeft delay-500">
                     <Calendar size={12} className="mr-1 animate-iconBounce delay-600" />
-                    <span>5 мая 2025</span>
+                    <span>26 мая 2025</span>
                   </div>
                   <div className="flex items-center animate-fadeInLeft delay-600">
                     <User size={12} className="mr-1 animate-iconBounce delay-700" />
@@ -146,19 +143,19 @@ export default function BlogSection() {
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-700 group-hover:text-teal-300 transition-colors duration-300">
-                  Законы медицинской рекламы: полное руководство 2025
+                  Чат-боты и ИИ-ассистенты: автоматизация коммуникации с пациентами
                 </h3>
               </div>
             </div>
             
             <div className="p-6 flex-grow flex flex-col">
               <p className="text-slate-400 text-sm mb-4 flex-grow animate-fadeInUp delay-800 leading-relaxed">
-                Подробное руководство по соблюдению российского законодательства при рекламе медицинских услуг: 
-                что можно, что нельзя и как избежать штрафов.
+                Анализируем, как чат-боты на базе ИИ помогают клиникам отвечать на вопросы пациентов, записывать на приём и 
+                напоминать о приёме лекарств. Делимся примерами успешных чат-ботов и советами по их разработке для медицинских учреждений. 
               </p>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded-full">10 мин чтения</span>
-                <span className="text-xs text-teal-400 font-medium">Законы и Этика</span>
+                <span className="text-xs text-teal-400 font-medium">ИИ автоматизация</span>
               </div>
               <Button
                 variant="ghost"
