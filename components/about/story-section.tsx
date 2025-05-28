@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { GraduationCap, Lightbulb, Building, Calendar } from 'lucide-react';
 
