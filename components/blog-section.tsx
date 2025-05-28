@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button"
 import { Calendar, User, ArrowUpRight, BookOpen, TrendingUp, Shield } from "lucide-react"
 
 export default function BlogSection() {
-  // Функция для открытия внешних ссылок
-  const openExternalLink = (url: string) => {
-    window.open(url, "_blank", "noopener,noreferrer")
+  // Функция для открытия внутренних ссылок
+  const openInternalLink = (url: string) => {
+    window.location.href = url
   }
 
-  // Это можно заменить на реальные ссылки на статьи
+  // Ссылки на статьи блога на вашем сайте
   const articleUrls = {
-    article1: "https://example.com/article-ai",
-    article2: "https://example.com/article-trends",
-    article3: "https://example.com/article-ethical-marketing"
+    article1: "/blog/gamification-guide", // Статья о геймификации
+    article2: "/blog/digital-marketing-2025", // Статья о трендах 2025
+    article3: "/blog/ai-inmed" // Статья об ИИ-ассистентах
   }
 
   return (
@@ -37,10 +37,10 @@ export default function BlogSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Статья 1 */}
+          {/* Статья 1 - Геймификация */}
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="h-56 bg-gradient-to-br from-teal-900/80 to-slate-900 relative overflow-hidden">
-              {/* Иконка вместо изображения */}
+              {/* Изображение статьи */}
               <div className="absolute inset-0 bg-[url('/blog/images/gamification-guide.jpg')] bg-cover bg-center opacity-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
@@ -72,7 +72,7 @@ export default function BlogSection() {
               <Button
                 variant="ghost"
                 className="justify-between group hover:bg-slate-800/50 flex w-full hover-lift transition-all duration-300 animate-fadeInUp delay-700"
-                onClick={() => openExternalLink(articleUrls.article1)}
+                onClick={() => openInternalLink(articleUrls.article1)}
               >
                 <span className="text-teal-400 font-medium">Читать полностью</span>
                 <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -80,11 +80,11 @@ export default function BlogSection() {
             </div>
           </div>
 
-          {/* Статья 2 */}
+          {/* Статья 2 - Тренды 2025 */}
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="h-56 bg-gradient-to-br from-indigo-900/80 to-slate-900 relative overflow-hidden">
-              {/* Иконка вместо изображения */}
-              <div className="absolute inset-0 bg-[url('/blog/images/digital-marketing-2024.jpg')] bg-cover bg-center opacity-30"></div>
+              {/* Изображение статьи */}
+              <div className="absolute inset-0 bg-[url('/blog/images/digital-marketing-2025.jpg')] bg-cover bg-center opacity-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 animate-fadeInUp delay-300">
@@ -116,7 +116,7 @@ export default function BlogSection() {
               <Button
                 variant="ghost"
                 className="justify-between group hover:bg-slate-800/50 flex w-full hover-lift transition-all duration-300 animate-fadeInUp delay-800"
-                onClick={() => openExternalLink(articleUrls.article2)}
+                onClick={() => openInternalLink(articleUrls.article2)}
               >
                 <span className="text-indigo-400 font-medium">Читать полностью</span>
                 <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -124,10 +124,10 @@ export default function BlogSection() {
             </div>
           </div>
 
-          {/* Статья 3 */}
+          {/* Статья 3 - ИИ-ассистенты */}
           <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl overflow-hidden hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 flex flex-col group hover-lift blur-backdrop animate-slideInStagger delay-300">
             <div className="h-56 bg-gradient-to-br from-teal-900/80 to-slate-900 relative overflow-hidden">
-              {/* Иконка вместо изображения */}
+              {/* Изображение статьи */}
               <div className="absolute inset-0 bg-[url('/blog/images/ai-inmed.jpg')] bg-cover bg-center opacity-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
@@ -160,7 +160,7 @@ export default function BlogSection() {
               <Button
                 variant="ghost"
                 className="justify-between group hover:bg-slate-800/50 flex w-full hover-lift transition-all duration-300 animate-fadeInUp delay-900"
-                onClick={() => openExternalLink(articleUrls.article3)}
+                onClick={() => openInternalLink(articleUrls.article3)}
               >
                 <span className="text-teal-400 font-medium">Читать полностью</span>
                 <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -174,7 +174,7 @@ export default function BlogSection() {
           <Button
             variant="outline"
             className="border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 px-8 py-3 hover-lift transition-all duration-300"
-            onClick={() => openExternalLink("/blog")}
+            onClick={() => openInternalLink("/blog")}
           >
             Все статьи блога
           </Button>
