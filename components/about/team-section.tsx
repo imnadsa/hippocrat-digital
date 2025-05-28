@@ -10,7 +10,7 @@ export default function TeamSection() {
       role: 'CEO & Основатель',
       education: 'Лечебное дело, МГМУ',
       expertise: 'Стратегия, медицинский маркетинг',
-      image: '/about/team/alexa.jpg',
+      image: '/blog/images/alexa.jpg',
       description: '6 лет опыта в digital, автор 2+ успешных медицинских проектов.',
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
@@ -23,7 +23,7 @@ export default function TeamSection() {
       role: 'CMO & Директор по маркетингу',
       education: 'Лечебное дело, РНИМУ',
       expertise: 'SMM, контент-стратегия',
-      image: '/about/team/alexp.jpg',
+      image: '/blog/images/alexp.jpg',
       description: 'Эксперт, ставший экспертом по медицинскому SMM. Создала 5+ вирусных кампаний для клиник.',
       achievements: ['Рост охватов +500%'],
       contacts: {
