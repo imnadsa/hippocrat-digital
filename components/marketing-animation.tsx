@@ -96,7 +96,7 @@ export default function MarketingAnimation() {
       color: tealColor,
       metalness: 0.1,
       roughness: 0.1,
-      transparency: 0.7,
+      transparent: true,
       opacity: 0.7,
       envMapIntensity: 1
     });
