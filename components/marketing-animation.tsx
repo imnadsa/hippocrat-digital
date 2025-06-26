@@ -330,7 +330,7 @@ export default function MarketingAnimation() {
       buildingGroup.add(windowGroup);
 
       // Добавим userData для потенциальной анимации света
-      glass.userData.emissiveIntensity = windowMaterial.emissiveIntensity;
+      glass.userData.initialEmissiveIntensity = windowMaterial.emissiveIntensity; // Сохраняем начальное значение
       glass.userData.pulsating = Math.random() > 0.7; // Случайное включение/выключение пульсации
       glass.userData.pulseOffset = Math.random() * Math.PI * 2; // Смещение для асинхронной пульсации
 
@@ -435,9 +435,15 @@ export default function MarketingAnimation() {
       // Анимация пульсации света в окнах
       windows.forEach((windowMesh) => {
         if (windowMesh.userData.pulsating) {
-          windowMesh.material.emissiveIntensity =
-            windowMesh.userData.emissiveIntensity +
-            Math.sin(elapsedTime * 3 + windowMesh.userData.pulseOffset) * 0.2;
+          // Проверяем, что material является MeshStandardMaterial или MeshPhongMaterial
+          if (
+            windowMesh.material instanceof THREE.MeshStandardMaterial ||
+            windowMesh.material instanceof THREE.MeshPhongMaterial
+          ) {
+            windowMesh.material.emissiveIntensity =
+              windowMesh.userData.initialEmissiveIntensity + // Используем сохраненное начальное значение
+              Math.sin(elapsedTime * 3 + windowMesh.userData.pulseOffset) * 0.2;
+          }
         }
       });
 
