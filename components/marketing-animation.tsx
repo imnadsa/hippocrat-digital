@@ -3,98 +3,70 @@
 import { useEffect, useRef, useState } from "react"
 import * as THREE from 'three';
 
-interface ServiceNode {
+interface Service {
   id: string;
   name: string;
   description: string;
-  metrics: string[];
-  color: THREE.Color;
-  position: THREE.Vector3;
+  benefits: string[];
+  position: { x: number; y: number };
+  color: string;
   icon: string;
-  connections: string[];
 }
 
 export default function MarketingAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const raycasterRef = useRef<THREE.Raycaster>(new THREE.Raycaster());
-  const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2());
-  const nodesRef = useRef<Map<string, THREE.Mesh>>(new Map());
+  const clinicGroupRef = useRef<THREE.Group | null>(null);
 
-  // Определяем узлы услуг
-  const services: ServiceNode[] = [
+  // Определяем услуги
+  const services: Service[] = [
     {
-      id: 'clinic',
-      name: 'Ваша клиника',
-      description: 'Центр цифровой трансформации',
-      metrics: ['Комплексная автоматизация', 'Рост прибыли +250%'],
-      color: new THREE.Color(0xffffff),
-      position: new THREE.Vector3(0, 0, 0),
-      icon: '🏥',
-      connections: ['chatbot', 'crm', 'analytics', 'marketing', 'telemedicine', 'ai']
-    },
-    {
-      id: 'chatbot',
+      id: 'ai-chat',
       name: 'AI Чат-бот 24/7',
-      description: 'Автоматический ассистент для пациентов',
-      metrics: ['+150% скорость ответа', '-80% нагрузка на персонал'],
-      color: new THREE.Color(0x2dd4bf),
-      position: new THREE.Vector3(5, 3, 0),
-      icon: '🤖',
-      connections: ['clinic', 'crm']
-    },
-    {
-      id: 'crm',
-      name: 'CRM система',
-      description: 'Управление пациентами и записями',
-      metrics: ['+200% эффективность', '0% потерянных записей'],
-      color: new THREE.Color(0x6366f1),
-      position: new THREE.Vector3(5, -3, 0),
-      icon: '📊',
-      connections: ['clinic', 'chatbot', 'analytics']
+      description: 'Автоматический помощник для записи пациентов',
+      benefits: ['Ответы за 5 секунд', 'Экономия 80% времени персонала', 'Работает круглосуточно'],
+      position: { x: -150, y: -120 },
+      color: '#2dd4bf',
+      icon: '🤖'
     },
     {
       id: 'analytics',
       name: 'Аналитика в реальном времени',
-      description: 'Дашборды и отчеты для руководства',
-      metrics: ['100% прозрачность', 'Решения на данных'],
-      color: new THREE.Color(0x2dd4bf),
-      position: new THREE.Vector3(0, -5, 0),
-      icon: '📈',
-      connections: ['clinic', 'crm', 'marketing']
+      description: 'Полный контроль над показателями клиники',
+      benefits: ['ROI каждого канала', 'Прогнозы и тренды', 'Готовые отчеты'],
+      position: { x: 0, y: -140 },
+      color: '#6366f1',
+      icon: '📊'
+    },
+    {
+      id: 'crm',
+      name: 'CRM для клиник',
+      description: 'Управление пациентами и записями',
+      benefits: ['Электронные карты', 'История посещений', 'Автоматические напоминания'],
+      position: { x: 150, y: -120 },
+      color: '#2dd4bf',
+      icon: '💾'
     },
     {
       id: 'marketing',
       name: 'Digital маркетинг',
-      description: 'Привлечение пациентов онлайн',
-      metrics: ['ROI 300%+', '-50% стоимость привлечения'],
-      color: new THREE.Color(0x6366f1),
-      position: new THREE.Vector3(-5, -3, 0),
-      icon: '🎯',
-      connections: ['clinic', 'analytics']
+      description: 'Привлечение пациентов из интернета',
+      benefits: ['Таргетированная реклама', 'SEO оптимизация', 'Соцсети и контент'],
+      position: { x: -120, y: 100 },
+      color: '#6366f1',
+      icon: '🎯'
     },
     {
       id: 'telemedicine',
       name: 'Телемедицина',
       description: 'Онлайн консультации с врачами',
-      metrics: ['+500% охват пациентов', 'Новый источник дохода'],
-      color: new THREE.Color(0x2dd4bf),
-      position: new THREE.Vector3(-5, 3, 0),
-      icon: '💻',
-      connections: ['clinic', 'ai']
-    },
-    {
-      id: 'ai',
-      name: 'AI диагностика',
-      description: 'Помощь врачам в постановке диагнозов',
-      metrics: ['+40% точность', '-30% время диагностики'],
-      color: new THREE.Color(0x6366f1),
-      position: new THREE.Vector3(0, 5, 0),
-      icon: '🧠',
-      connections: ['clinic', 'telemedicine']
+      benefits: ['Новый источник дохода', 'Расширение географии', 'Удобство для пациентов'],
+      position: { x: 120, y: 100 },
+      color: '#2dd4bf',
+      icon: '💻'
     }
   ];
 
@@ -118,13 +90,13 @@ export default function MarketingAnimation() {
     
     // Настраиваем камеру
     const camera = new THREE.PerspectiveCamera(
-      50,
+      45,
       width / height,
       0.1,
       1000
     );
-    camera.position.set(0, 0, isMobile ? 25 : 20);
-    camera.lookAt(0, 0, 0);
+    camera.position.set(15, 15, 15);
+    camera.lookAt(0, 2, 0);
 
     // Настраиваем рендерер
     const renderer = new THREE.WebGLRenderer({ 
@@ -133,202 +105,160 @@ export default function MarketingAnimation() {
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
 
     // Освещение
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
-    // Группа для всего графа
-    const graphGroup = new THREE.Group();
-    scene.add(graphGroup);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(10, 10, 5);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
 
-    // Создаем фоновую сетку
-    const createGrid = () => {
-      const gridHelper = new THREE.GridHelper(30, 30, 0x1e293b, 0x1e293b);
-      gridHelper.rotation.x = Math.PI / 2;
-      gridHelper.position.z = -2;
-      graphGroup.add(gridHelper);
+    // Группа для клиники
+    const clinicGroup = new THREE.Group();
+    clinicGroupRef.current = clinicGroup;
+    scene.add(clinicGroup);
+
+    // Создаем платформу
+    const platformGeometry = new THREE.CylinderGeometry(8, 8, 0.5, 32);
+    const platformMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0x1e293b,
+      emissive: 0x0a0e1a,
+      emissiveIntensity: 0.1
+    });
+    const platform = new THREE.Mesh(platformGeometry, platformMaterial);
+    platform.position.y = -0.25;
+    platform.receiveShadow = true;
+    clinicGroup.add(platform);
+
+    // Создаем здание клиники (простая но узнаваемая форма)
+    const buildingGroup = new THREE.Group();
+
+    // Основное здание
+    const buildingGeometry = new THREE.BoxGeometry(6, 4, 5);
+    const buildingMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0xf8f9fa,
+      emissive: 0xf8f9fa,
+      emissiveIntensity: 0.1
+    });
+    const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+    building.position.y = 2;
+    building.castShadow = true;
+    buildingGroup.add(building);
+
+    // Крыша
+    const roofGeometry = new THREE.ConeGeometry(4.5, 2, 4);
+    const roofMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0xe74c3c
+    });
+    const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+    roof.position.y = 5;
+    roof.rotation.y = Math.PI / 4;
+    buildingGroup.add(roof);
+
+    // Медицинский крест на фасаде
+    const createMedicalCross = () => {
+      const crossMaterial = new THREE.MeshPhongMaterial({
+        color: 0xe74c3c,
+        emissive: 0xe74c3c,
+        emissiveIntensity: 0.3
+      });
+
+      // Вертикальная часть
+      const verticalGeometry = new THREE.BoxGeometry(0.5, 2, 0.1);
+      const vertical = new THREE.Mesh(verticalGeometry, crossMaterial);
+      vertical.position.set(0, 2, 2.55);
+      buildingGroup.add(vertical);
+
+      // Горизонтальная часть
+      const horizontalGeometry = new THREE.BoxGeometry(1.5, 0.5, 0.1);
+      const horizontal = new THREE.Mesh(horizontalGeometry, crossMaterial);
+      horizontal.position.set(0, 2, 2.55);
+      buildingGroup.add(horizontal);
     };
-    createGrid();
 
-    // Создаем линии соединений
-    const connections: THREE.Line[] = [];
-    const createConnections = () => {
-      const lineMaterial = new THREE.LineBasicMaterial({
+    createMedicalCross();
+
+    // Окна
+    const createWindows = () => {
+      const windowGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.1);
+      const windowMaterial = new THREE.MeshPhongMaterial({
         color: 0x2dd4bf,
-        opacity: 0.3,
-        transparent: true
+        emissive: 0x2dd4bf,
+        emissiveIntensity: 0.5,
+        transparent: true,
+        opacity: 0.8
       });
 
-      services.forEach(service => {
-        service.connections.forEach(targetId => {
-          const target = services.find(s => s.id === targetId);
-          if (target && service.id < targetId) { // Избегаем дублирования линий
-            const points = [];
-            points.push(service.position);
-            points.push(target.position);
-            
-            const geometry = new THREE.BufferGeometry().setFromPoints(points);
-            const line = new THREE.Line(geometry, lineMaterial);
-            line.userData = { from: service.id, to: targetId };
-            connections.push(line);
-            graphGroup.add(line);
-          }
-        });
+      const windowPositions = [
+        { x: -1.5, y: 2.5, z: 2.51 },
+        { x: 1.5, y: 2.5, z: 2.51 },
+        { x: -1.5, y: 1, z: 2.51 },
+        { x: 1.5, y: 1, z: 2.51 },
+        // Боковые окна
+        { x: 3.01, y: 2.5, z: 0 },
+        { x: 3.01, y: 1, z: 0 },
+        { x: -3.01, y: 2.5, z: 0 },
+        { x: -3.01, y: 1, z: 0 }
+      ];
+
+      windowPositions.forEach(pos => {
+        const window = new THREE.Mesh(windowGeometry, windowMaterial);
+        window.position.set(pos.x, pos.y, pos.z);
+        buildingGroup.add(window);
       });
     };
 
-    // Создаем узлы
-    const createNodes = () => {
-      services.forEach(service => {
-        // Группа для узла
-        const nodeGroup = new THREE.Group();
-        nodeGroup.position.copy(service.position);
+    createWindows();
 
-        // Основной узел
-        const nodeGeometry = new THREE.SphereGeometry(
-          service.id === 'clinic' ? 1.5 : 1,
-          32,
-          32
-        );
+    // Вход
+    const entranceGeometry = new THREE.BoxGeometry(1.2, 2, 0.2);
+    const entranceMaterial = new THREE.MeshPhongMaterial({
+      color: 0x2dd4bf,
+      transparent: true,
+      opacity: 0.7
+    });
+    const entrance = new THREE.Mesh(entranceGeometry, entranceMaterial);
+    entrance.position.set(0, 1, 2.52);
+    buildingGroup.add(entrance);
+
+    clinicGroup.add(buildingGroup);
+
+    // Создаем плавающие частицы вокруг клиники
+    const particles: THREE.Mesh[] = [];
+    const createParticles = () => {
+      for (let i = 0; i < 30; i++) {
+        const geometry = new THREE.SphereGeometry(0.05, 8, 8);
+        const material = new THREE.MeshBasicMaterial({
+          color: Math.random() > 0.5 ? 0x2dd4bf : 0x6366f1,
+          transparent: true,
+          opacity: 0.6
+        });
+        const particle = new THREE.Mesh(geometry, material);
         
-        const nodeMaterial = new THREE.MeshPhongMaterial({
-          color: service.color,
-          emissive: service.color,
-          emissiveIntensity: service.id === 'clinic' ? 0.5 : 0.3,
-          transparent: true,
-          opacity: 0.9
-        });
-
-        const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-        node.userData = service;
-        nodesRef.current.set(service.id, node);
-        nodeGroup.add(node);
-
-        // Внешнее кольцо для узла
-        const ringGeometry = new THREE.TorusGeometry(
-          service.id === 'clinic' ? 2 : 1.3,
-          0.1,
-          16,
-          100
-        );
-        const ringMaterial = new THREE.MeshBasicMaterial({
-          color: service.color,
-          transparent: true,
-          opacity: 0.5
-        });
-        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-        nodeGroup.add(ring);
-
-        // Сохраняем ссылку на кольцо
-        node.userData.ring = ring;
-
-        // Орбитальные частицы для центральной клиники
-        if (service.id === 'clinic') {
-          const createOrbitParticles = () => {
-            for (let i = 0; i < 20; i++) {
-              const particleGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-              const particleMaterial = new THREE.MeshBasicMaterial({
-                color: Math.random() > 0.5 ? 0x2dd4bf : 0x6366f1,
-                transparent: true,
-                opacity: 0.8
-              });
-              const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-              
-              const angle = (i / 20) * Math.PI * 2;
-              const radius = 2.5;
-              particle.position.x = Math.cos(angle) * radius;
-              particle.position.y = Math.sin(angle) * radius;
-              particle.userData = { angle, radius, speed: 0.5 + Math.random() * 0.5 };
-              
-              nodeGroup.add(particle);
-            }
-          };
-          createOrbitParticles();
-        }
-
-        graphGroup.add(nodeGroup);
-      });
-    };
-
-    createConnections();
-    createNodes();
-
-    // Создаем плавающие частицы данных
-    const dataParticles: { 
-      mesh: THREE.Mesh; 
-      path: THREE.Vector3[]; 
-      progress: number;
-      speed: number;
-    }[] = [];
-
-    const createDataParticle = () => {
-      const particleGeometry = new THREE.OctahedronGeometry(0.15, 0);
-      const particleMaterial = new THREE.MeshPhongMaterial({
-        color: Math.random() > 0.5 ? 0x2dd4bf : 0x6366f1,
-        emissive: Math.random() > 0.5 ? 0x2dd4bf : 0x6366f1,
-        emissiveIntensity: 0.8
-      });
-      const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-
-      // Выбираем случайное соединение
-      const connection = connections[Math.floor(Math.random() * connections.length)];
-      const fromId = connection.userData.from;
-      const toId = connection.userData.to;
-      const fromNode = services.find(s => s.id === fromId);
-      const toNode = services.find(s => s.id === toId);
-
-      if (fromNode && toNode) {
-        dataParticles.push({
-          mesh: particle,
-          path: [fromNode.position, toNode.position],
-          progress: 0,
-          speed: 0.005 + Math.random() * 0.005
-        });
-        graphGroup.add(particle);
-      }
-
-      return particle;
-    };
-
-    // Создаем начальные частицы
-    const particleInterval = setInterval(() => {
-      if (dataParticles.length < (isMobile ? 10 : 20)) {
-        createDataParticle();
-      }
-    }, 500);
-
-    // Обработчики мыши
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-      // Проверяем пересечения с узлами
-      raycasterRef.current.setFromCamera(mouseRef.current, camera);
-      const intersects = raycasterRef.current.intersectObjects(Array.from(nodesRef.current.values()));
-      
-      if (intersects.length > 0) {
-        const node = intersects[0].object.userData as ServiceNode;
-        setHoveredNode(node.id);
-        container.style.cursor = 'pointer';
-      } else {
-        setHoveredNode(null);
-        container.style.cursor = 'default';
+        const angle = (i / 30) * Math.PI * 2;
+        const radius = 5 + Math.random() * 2;
+        particle.position.x = Math.cos(angle) * radius;
+        particle.position.y = Math.random() * 6;
+        particle.position.z = Math.sin(angle) * radius;
+        
+        particle.userData = {
+          angle,
+          radius,
+          speed: 0.2 + Math.random() * 0.3,
+          ySpeed: Math.random() * 0.01 - 0.005
+        };
+        
+        particles.push(particle);
+        scene.add(particle);
       }
     };
 
-    const handleClick = () => {
-      if (hoveredNode) {
-        setSelectedNode(hoveredNode);
-      } else {
-        setSelectedNode(null);
-      }
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('click', handleClick);
+    createParticles();
 
     // Анимация
     const clock = new THREE.Clock();
@@ -336,88 +266,23 @@ export default function MarketingAnimation() {
       const animationId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
       
-      // Медленное вращение всего графа
-      graphGroup.rotation.z = Math.sin(elapsedTime * 0.1) * 0.05;
+      // Медленное вращение клиники
+      clinicGroup.rotation.y = elapsedTime * 0.1;
       
-      // Анимация узлов
-      nodesRef.current.forEach((node, id) => {
-        const service = node.userData as ServiceNode;
-        const ring = node.userData.ring as THREE.Mesh;
+      // Легкое покачивание здания
+      buildingGroup.position.y = Math.sin(elapsedTime * 0.5) * 0.05;
+      
+      // Анимация частиц
+      particles.forEach(particle => {
+        const { angle, radius, speed, ySpeed } = particle.userData;
+        const newAngle = angle + elapsedTime * speed;
+        particle.position.x = Math.cos(newAngle) * radius;
+        particle.position.z = Math.sin(newAngle) * radius;
+        particle.position.y += ySpeed;
         
-        // Пульсация узлов
-        const scale = 1 + Math.sin(elapsedTime * 2) * 0.05;
-        if (id === 'clinic') {
-          node.scale.setScalar(scale * 1.2);
-        } else {
-          node.scale.setScalar(scale);
-        }
-        
-        // Вращение колец
-        ring.rotation.z = elapsedTime * 0.5;
-        
-        // Подсветка при наведении
-        if (hoveredNode === id) {
-          node.scale.setScalar(1.3);
-          if (node.material instanceof THREE.MeshPhongMaterial) {
-            node.material.emissiveIntensity = 0.8;
-          }
-          ring.scale.setScalar(1.2);
-        } else {
-          if (node.material instanceof THREE.MeshPhongMaterial) {
-            node.material.emissiveIntensity = id === 'clinic' ? 0.5 : 0.3;
-          }
-          ring.scale.setScalar(1);
-        }
-
-        // Анимация орбитальных частиц для клиники
-        if (id === 'clinic') {
-          node.parent?.children.forEach(child => {
-            if (child.userData.angle !== undefined) {
-              const { angle, radius, speed } = child.userData;
-              const newAngle = angle + elapsedTime * speed;
-              child.position.x = Math.cos(newAngle) * radius;
-              child.position.y = Math.sin(newAngle) * radius;
-              child.position.z = Math.sin(newAngle * 2) * 0.5;
-            }
-          });
-        }
-      });
-
-      // Анимация частиц данных
-      dataParticles.forEach((particle, index) => {
-        particle.progress += particle.speed;
-        
-        if (particle.progress <= 1) {
-          // Интерполяция позиции
-          const position = new THREE.Vector3().lerpVectors(
-            particle.path[0],
-            particle.path[1],
-            particle.progress
-          );
-          particle.mesh.position.copy(position);
-          particle.mesh.rotation.x += 0.1;
-          particle.mesh.rotation.y += 0.1;
-        } else {
-          // Перезапуск частицы
-          graphGroup.remove(particle.mesh);
-          dataParticles.splice(index, 1);
-        }
-      });
-
-      // Подсветка соединений при наведении
-      connections.forEach(line => {
-        const { from, to } = line.userData;
-        if (hoveredNode && (from === hoveredNode || to === hoveredNode)) {
-          if (line.material instanceof THREE.LineBasicMaterial) {
-            line.material.opacity = 0.8;
-            line.material.color = new THREE.Color(0x2dd4bf);
-          }
-        } else {
-          if (line.material instanceof THREE.LineBasicMaterial) {
-            line.material.opacity = 0.3;
-            line.material.color = new THREE.Color(0x2dd4bf);
-          }
-        }
+        // Сброс позиции если частица улетела слишком высоко или низко
+        if (particle.position.y > 7) particle.position.y = -1;
+        if (particle.position.y < -1) particle.position.y = 7;
       });
 
       renderer.render(scene, camera);
@@ -445,11 +310,8 @@ export default function MarketingAnimation() {
 
     // Очистка
     return () => {
-      clearInterval(particleInterval);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('resize', checkMobile);
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('click', handleClick);
       cancelAnimationFrame(animationId);
       
       if (containerRef.current && renderer.domElement.parentElement === containerRef.current) {
@@ -469,7 +331,7 @@ export default function MarketingAnimation() {
       
       renderer.dispose();
     };
-  }, [isMobile, hoveredNode]);
+  }, [isMobile]);
 
   return (
     <div className="w-full h-full relative overflow-hidden">
@@ -479,40 +341,135 @@ export default function MarketingAnimation() {
         style={{ background: "transparent" }}
       />
       
-      {/* Информационная панель при наведении */}
-      {hoveredNode && (
-        <div className="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-md border border-teal-500/30 rounded-lg p-4 max-w-xs animate-fadeIn">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">{services.find(s => s.id === hoveredNode)?.icon}</span>
-            <h3 className="text-teal-400 font-bold text-lg">
-              {services.find(s => s.id === hoveredNode)?.name}
-            </h3>
-          </div>
-          <p className="text-slate-300 text-sm mb-3">
-            {services.find(s => s.id === hoveredNode)?.description}
-          </p>
-          <div className="space-y-1">
-            {services.find(s => s.id === hoveredNode)?.metrics.map((metric, idx) => (
-              <div key={idx} className="text-sm">
-                <span className="text-teal-400 font-semibold">✓</span>
-                <span className="text-slate-300 ml-1">{metric}</span>
+      {/* Услуги вокруг клиники */}
+      {services.map((service) => (
+        <div
+          key={service.id}
+          className="absolute"
+          style={{
+            left: `calc(50% + ${service.position.x}px)`,
+            top: `calc(50% + ${service.position.y}px)`,
+            transform: 'translate(-50%, -50%)'
+          }}
+        >
+          {/* Пульсирующий круг услуги */}
+          <button
+            className={`
+              relative w-16 h-16 rounded-full cursor-pointer
+              transition-all duration-300 hover:scale-110
+              ${hoveredService === service.id ? 'scale-110' : ''}
+            `}
+            style={{
+              background: service.color,
+              boxShadow: `0 0 20px ${service.color}40`
+            }}
+            onMouseEnter={() => setHoveredService(service.id)}
+            onMouseLeave={() => setHoveredService(null)}
+            onClick={() => setSelectedService(selectedService === service.id ? null : service.id)}
+          >
+            <span className="text-2xl absolute inset-0 flex items-center justify-center">
+              {service.icon}
+            </span>
+            
+            {/* Пульсирующие кольца */}
+            <div 
+              className="absolute inset-0 rounded-full animate-ping"
+              style={{
+                background: service.color,
+                opacity: 0.2
+              }}
+            />
+            <div 
+              className="absolute inset-0 rounded-full animate-ping"
+              style={{
+                background: service.color,
+                opacity: 0.1,
+                animationDelay: '0.5s'
+              }}
+            />
+          </button>
+
+          {/* Линия соединения с клиникой */}
+          <svg
+            className="absolute pointer-events-none"
+            style={{
+              width: '200px',
+              height: '200px',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: -1
+            }}
+          >
+            <line
+              x1="100"
+              y1="100"
+              x2={100 - service.position.x / 2}
+              y2={100 - service.position.y / 2}
+              stroke={service.color}
+              strokeWidth="1"
+              opacity="0.3"
+              strokeDasharray="5,5"
+            />
+          </svg>
+
+          {/* Информационная карточка */}
+          {selectedService === service.id && (
+            <div className="absolute z-10 animate-fadeIn" style={{
+              left: service.position.x > 0 ? 'auto' : '80px',
+              right: service.position.x > 0 ? '80px' : 'auto',
+              top: service.position.y > 0 ? 'auto' : '80px',
+              bottom: service.position.y > 0 ? '80px' : 'auto',
+              width: '280px'
+            }}>
+              <div className="bg-slate-900/95 backdrop-blur-md border border-teal-500/30 rounded-lg p-5 shadow-2xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">{service.icon}</span>
+                  <h3 className="text-lg font-bold text-teal-400">
+                    {service.name}
+                  </h3>
+                </div>
+                <p className="text-sm text-slate-300 mb-4">
+                  {service.description}
+                </p>
+                <div className="space-y-2">
+                  {service.benefits.map((benefit, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <span 
+                        className="text-xs mt-0.5"
+                        style={{ color: service.color }}
+                      >
+                        ✓
+                      </span>
+                      <span className="text-xs text-slate-300">
+                        {benefit}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedService(null);
+                  }}
+                  className="mt-4 w-full py-2 text-sm border rounded-md transition-colors"
+                  style={{
+                    borderColor: service.color + '50',
+                    color: service.color
+                  }}
+                >
+                  Закрыть
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      )}
-      
-      {/* Подсказка внизу */}
+      ))}
+
+      {/* Подсказка */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
-        <p className="text-slate-300 text-sm bg-slate-900/80 backdrop-blur-sm px-6 py-3 rounded-full flex items-center gap-3">
-          <span className="inline-block w-3 h-3 bg-white rounded-full"></span>
-          <span className="font-semibold">Ваша клиника</span>
-          <span className="text-slate-400 mx-2">→</span>
-          <span className="inline-flex gap-1">
-            <span className="inline-block w-2 h-2 bg-teal-400 rounded-full"></span>
-            <span className="inline-block w-2 h-2 bg-indigo-400 rounded-full"></span>
-          </span>
-          <span>Digital решения</span>
+        <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full">
+          Нажмите на услуги вокруг клиники
         </p>
       </div>
     </div>
