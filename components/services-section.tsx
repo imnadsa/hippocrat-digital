@@ -1,8 +1,17 @@
 "use client"
 
-import { MousePointer, Globe, MessageSquare, Search, Cpu } from "lucide-react"
+import { Globe, MessageSquare, Search, Cpu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+
+// Компонент кастомной SVG иконки для таргетированной рекламы
+const TargetingIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 72 72">
+    <rect width="72" height="72" fill="currentColor" fillOpacity="0.1" rx="36"/>
+    <path fill="currentColor" d="M32.604 24.36a1.35 1.35 0 0 0-1.351 1.351v.08a1.35 1.35 0 0 0 2.702 0v-.08a1.35 1.35 0 0 0-1.351-1.35ZM27.2 24.36a1.35 1.35 0 0 0-1.35 1.351v.08a1.35 1.35 0 0 0 2.701 0v-.08a1.35 1.35 0 0 0-1.35-1.35ZM21.797 24.36a1.35 1.35 0 0 0-1.35 1.351v.08a1.35 1.35 0 0 0 2.7 0v-.08a1.35 1.35 0 0 0-1.35-1.35Z"/>
+    <path fill="currentColor" d="M50.356 29.178v-8.827A1.35 1.35 0 0 0 49.005 19H16.351A1.35 1.35 0 0 0 15 20.35v31.104c0 .746.605 1.351 1.35 1.351h28.788c1.215.409 2.516.63 3.867.63 6.709 0 12.166-5.457 12.166-12.166 0-6.252-4.74-11.416-10.815-12.09Zm-32.654-7.476h29.952v7.476c-.901.1-1.773.3-2.604.586H17.702v-8.062Zm0 28.401V32.465h22.915a12.143 12.143 0 0 0-3.703 7.453h-3.522l-2.314-4.095a1.35 1.35 0 0 0-1.176-.686h-8.105a1.35 1.35 0 0 0-1.176 2.015l2.327 4.117-2.327 4.117a1.351 1.351 0 0 0 1.177 2.016h8.104a1.35 1.35 0 0 0 1.176-.687l2.314-4.095h3.522a12.143 12.143 0 0 0 3.735 7.483H17.702Zm7.585-10.184-1.175-2.08h5.002l1.175 2.08h-5.002Zm5.002 2.701-1.175 2.08h-5.002l1.175-2.08h5.002Zm18.716 8.114c-4.76 0-8.71-3.533-9.368-8.114h2.74c.629 3.084 3.361 5.412 6.628 5.412a6.77 6.77 0 0 0 6.763-6.763 6.77 6.77 0 0 0-6.763-6.763c-3.267 0-6 2.328-6.627 5.412h-2.74c.657-4.58 4.607-8.113 9.367-8.113 5.219 0 9.464 4.245 9.464 9.464s-4.245 9.465-9.464 9.465Zm0-10.816h-3.83a4.067 4.067 0 0 1 3.83-2.71 4.066 4.066 0 0 1 4.061 4.061 4.066 4.066 0 0 1-4.061 4.062 4.068 4.068 0 0 1-3.83-2.71h3.83a1.35 1.35 0 0 0 0-2.703Z"/>
+  </svg>
+)
 
 export default function ServicesSection() {
   // Ссылки на страницы услуг
@@ -37,7 +46,7 @@ export default function ServicesSection() {
           {/* Услуга 1: Таргетированная реклама */}
           <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-5 animate-iconBounce delay-200">
-              <MousePointer size={28} />
+              <TargetingIcon />
             </div>
             <h3 className="text-xl font-semibold mb-2 font-fixedsys text-shadow">Таргетированная реклама</h3>
             <p className="text-slate-400 text-sm mb-6 flex-grow">
