@@ -36,8 +36,8 @@ export default function MarketingAnimation() {
     },
     {
       id: 'diagnostics',
-      name: 'Диагностический центр',
-      description: 'Автоматизация анализов',
+      name: 'Таргетированная реклама',
+      description: 'Увеличение пациентопотока',
       metrics: ['+200% пациентов в день', '-60% ошибок'],
       color: new THREE.Color(0x6366f1),
       position: new THREE.Vector3(-3, 0.5, 0),
@@ -45,9 +45,9 @@ export default function MarketingAnimation() {
     },
     {
       id: 'doctors',
-      name: 'Кабинеты врачей',
+      name: 'Создание сайтов',
       description: 'Электронные карты',
-      metrics: ['+40% приемов в день', '100% цифровизация'],
+      metrics: ['100% цифровизация'],
       color: new THREE.Color(0x2dd4bf),
       position: new THREE.Vector3(3, 0.5, 0),
       icon: '👨‍⚕️'
