@@ -476,14 +476,20 @@ export default function MarketingAnimation() {
         // Пульсация колец
         const ringScale = 1 + Math.sin(elapsedTime * 3 + index) * 0.3;
         ring.scale.set(ringScale, ringScale, 1);
-        ring.material.opacity = 0.3 + Math.sin(elapsedTime * 3 + index) * 0.2;
+        if (ring.material instanceof THREE.Material) {
+          ring.material.opacity = 0.3 + Math.sin(elapsedTime * 3 + index) * 0.2;
+        }
         
         // Подсветка при наведении
         if (hoveredZone === zone.id) {
-          marker.material.emissiveIntensity = 0.8;
+          if (marker.material instanceof THREE.MeshPhongMaterial) {
+            marker.material.emissiveIntensity = 0.8;
+          }
           marker.scale.setScalar(1.2);
         } else {
-          marker.material.emissiveIntensity = 0.5;
+          if (marker.material instanceof THREE.MeshPhongMaterial) {
+            marker.material.emissiveIntensity = 0.5;
+          }
           marker.scale.setScalar(1);
         }
       });
