@@ -10,6 +10,7 @@ interface ClinicZone {
   metrics: string[];
   color: THREE.Color;
   position: THREE.Vector3;
+  icon: string;
 }
 
 export default function MarketingAnimation() {
@@ -20,6 +21,7 @@ export default function MarketingAnimation() {
   const sceneRef = useRef<THREE.Scene | null>(null);
   const raycasterRef = useRef<THREE.Raycaster>(new THREE.Raycaster());
   const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2());
+  const clinicGroupRef = useRef<THREE.Group | null>(null);
 
   // Выносим zones за пределы useEffect
   const zones: ClinicZone[] = [
@@ -29,7 +31,8 @@ export default function MarketingAnimation() {
       description: 'AI-ассистент для записи',
       metrics: ['+150% скорость обслуживания', '-80% время ожидания'],
       color: new THREE.Color(0x2dd4bf),
-      position: new THREE.Vector3(0, 0.5, 3)
+      position: new THREE.Vector3(0, 0.5, 3),
+      icon: '🤖'
     },
     {
       id: 'diagnostics',
@@ -37,7 +40,8 @@ export default function MarketingAnimation() {
       description: 'Автоматизация анализов',
       metrics: ['+200% пациентов в день', '-60% ошибок'],
       color: new THREE.Color(0x6366f1),
-      position: new THREE.Vector3(-3, 0.5, 0)
+      position: new THREE.Vector3(-3, 0.5, 0),
+      icon: '🔬'
     },
     {
       id: 'doctors',
@@ -45,7 +49,8 @@ export default function MarketingAnimation() {
       description: 'Электронные карты',
       metrics: ['+40% приемов в день', '100% цифровизация'],
       color: new THREE.Color(0x2dd4bf),
-      position: new THREE.Vector3(3, 0.5, 0)
+      position: new THREE.Vector3(3, 0.5, 0),
+      icon: '👨‍⚕️'
     },
     {
       id: 'analytics',
@@ -53,7 +58,8 @@ export default function MarketingAnimation() {
       description: 'Real-time дашборды',
       metrics: ['ROI +250%', 'Прозрачность 100%'],
       color: new THREE.Color(0x6366f1),
-      position: new THREE.Vector3(0, 3.5, 0)
+      position: new THREE.Vector3(0, 3.5, 0),
+      icon: '📊'
     }
   ];
 
@@ -77,7 +83,7 @@ export default function MarketingAnimation() {
     
     // Настраиваем камеру для изометрической проекции
     const aspect = width / height;
-    const frustumSize = isMobile ? 15 : 12;
+    const frustumSize = isMobile ? 18 : 15; // Увеличил размер камеры
     const camera = new THREE.OrthographicCamera(
       frustumSize * aspect / -2,
       frustumSize * aspect / 2,
@@ -87,9 +93,9 @@ export default function MarketingAnimation() {
       1000
     );
     
-    // Изометрический угол
-    camera.position.set(20, 20, 20);
-    camera.lookAt(0, 0, 0);
+    // Изометрический угол с более высокой позицией
+    camera.position.set(20, 25, 20); // Поднял камеру выше
+    camera.lookAt(0, 2, 0); // Смотрит чуть выше центра
 
     // Настраиваем рендерер
     const renderer = new THREE.WebGLRenderer({ 
@@ -145,6 +151,7 @@ export default function MarketingAnimation() {
 
     // Группа для всей клиники
     const clinicGroup = new THREE.Group();
+    clinicGroupRef.current = clinicGroup;
     scene.add(clinicGroup);
 
     // Создаем платформу-основание
@@ -166,6 +173,29 @@ export default function MarketingAnimation() {
     building.castShadow = true;
     building.receiveShadow = true;
     clinicGroup.add(building);
+
+    // Добавляем красный крест на крышу
+    const createRedCross = () => {
+      const crossMaterial = new THREE.MeshPhongMaterial({
+        color: 0xff0000,
+        emissive: 0xff0000,
+        emissiveIntensity: 0.3
+      });
+
+      // Вертикальная часть креста
+      const verticalGeometry = new THREE.BoxGeometry(0.5, 0.1, 2);
+      const vertical = new THREE.Mesh(verticalGeometry, crossMaterial);
+      vertical.position.set(0, 6.1, 0);
+      clinicGroup.add(vertical);
+
+      // Горизонтальная часть креста
+      const horizontalGeometry = new THREE.BoxGeometry(2, 0.1, 0.5);
+      const horizontal = new THREE.Mesh(horizontalGeometry, crossMaterial);
+      horizontal.position.set(0, 6.1, 0);
+      clinicGroup.add(horizontal);
+    };
+
+    createRedCross();
 
     // Добавляем окна с подсветкой
     const createWindows = () => {
@@ -232,11 +262,28 @@ export default function MarketingAnimation() {
     sign.position.set(0, 5.5, 5.05);
     clinicGroup.add(sign);
 
-    // Создаем интерактивные зоны - используем уже определенный массив zones
+    // Добавляем текст "КЛИНИКА" на вывеску
+    const createClinicText = () => {
+      const textGeometry = new THREE.BoxGeometry(4, 0.6, 0.05);
+      const textMaterial = new THREE.MeshBasicMaterial({
+        color: 0x0f172a
+      });
+      const text = new THREE.Mesh(textGeometry, textMaterial);
+      text.position.set(0, 5.5, 5.1);
+      clinicGroup.add(text);
+    };
 
-    // Создаем визуальные маркеры для зон
+    createClinicText();
+
+    // Создаем интерактивные зоны - используем уже определенный массив zones
+    
+    // Создаем визуальные маркеры для зон с улучшенной видимостью
     const zoneMarkers: THREE.Mesh[] = [];
     zones.forEach(zone => {
+      // Создаем группу для зоны
+      const zoneGroup = new THREE.Group();
+      
+      // Основной маркер - светящийся цилиндр
       const markerGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2, 8);
       const markerMaterial = new THREE.MeshPhongMaterial({
         color: zone.color,
@@ -249,7 +296,7 @@ export default function MarketingAnimation() {
       marker.position.copy(zone.position);
       marker.userData = zone;
       zoneMarkers.push(marker);
-      clinicGroup.add(marker);
+      zoneGroup.add(marker);
 
       // Добавляем пульсирующее кольцо
       const ringGeometry = new THREE.RingGeometry(0.8, 1, 32);
@@ -263,27 +310,54 @@ export default function MarketingAnimation() {
       ring.position.copy(zone.position);
       ring.position.y = 0.1;
       ring.rotation.x = -Math.PI / 2;
-      clinicGroup.add(ring);
+      zoneGroup.add(ring);
       
-      // Анимация пульсации
+      // Добавляем стрелку указатель сверху
+      const arrowGeometry = new THREE.ConeGeometry(0.3, 0.8, 4);
+      const arrowMaterial = new THREE.MeshPhongMaterial({
+        color: zone.color,
+        emissive: zone.color,
+        emissiveIntensity: 0.8
+      });
+      const arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
+      arrow.position.copy(zone.position);
+      arrow.position.y += 2.5;
+      arrow.rotation.z = Math.PI;
+      zoneGroup.add(arrow);
+      
+      // Сохраняем ссылки для анимации
       marker.userData.ring = ring;
+      marker.userData.arrow = arrow;
+      
+      clinicGroup.add(zoneGroup);
     });
 
     // Создаем анимированных пациентов
     const createPatient = () => {
-      const patientGeometry = new THREE.CapsuleGeometry(0.15, 0.5, 4, 8);
-      const patientMaterial = new THREE.MeshPhongMaterial({
+      const patientGroup = new THREE.Group();
+      
+      // Тело пациента
+      const bodyGeometry = new THREE.CapsuleGeometry(0.15, 0.3, 4, 8);
+      const bodyMaterial = new THREE.MeshPhongMaterial({
         color: Math.random() > 0.5 ? 0x2dd4bf : 0x6366f1,
         emissive: 0x2dd4bf,
         emissiveIntensity: 0.2
       });
-      const patient = new THREE.Mesh(patientGeometry, patientMaterial);
-      patient.castShadow = true;
-      return patient;
+      const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+      body.castShadow = true;
+      patientGroup.add(body);
+      
+      // Голова
+      const headGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+      const head = new THREE.Mesh(headGeometry, bodyMaterial);
+      head.position.y = 0.35;
+      patientGroup.add(head);
+      
+      return patientGroup;
     };
 
-    const patients: THREE.Mesh[] = [];
-    const patientPaths: { mesh: THREE.Mesh; path: THREE.Vector3[]; currentIndex: number; speed: number }[] = [];
+    const patients: THREE.Group[] = [];
+    const patientPaths: { mesh: THREE.Group; path: THREE.Vector3[]; currentIndex: number; speed: number }[] = [];
 
     // Создаем несколько пациентов с путями
     for (let i = 0; i < (isMobile ? 3 : 5); i++) {
@@ -423,12 +497,19 @@ export default function MarketingAnimation() {
 
     // Анимация
     const clock = new THREE.Clock();
+    let autoRotate = true; // Флаг для автоматического вращения
+    
     const animate = () => {
       const animationId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
       
-      // Вращение клиники
-      clinicGroup.rotation.y = Math.sin(elapsedTime * 0.1) * 0.1;
+      // Вращение клиники только когда нет наведения
+      if (autoRotate && !hoveredZone) {
+        clinicGroup.rotation.y = Math.sin(elapsedTime * 0.1) * 0.1;
+      } else if (hoveredZone) {
+        // Плавно останавливаем вращение при наведении
+        clinicGroup.rotation.y *= 0.95;
+      }
       
       // Анимация пациентов
       patientPaths.forEach(patientData => {
@@ -440,6 +521,10 @@ export default function MarketingAnimation() {
         if (direction.length() > 0.1) {
           direction.normalize();
           mesh.position.add(direction.multiplyScalar(speed));
+          
+          // Поворот в направлении движения
+          const angle = Math.atan2(direction.x, direction.z);
+          mesh.rotation.y = angle;
         } else {
           // Переход к следующей точке
           patientData.currentIndex = (currentIndex + 1) % path.length;
@@ -470,6 +555,7 @@ export default function MarketingAnimation() {
       zoneMarkers.forEach((marker, index) => {
         const zone = marker.userData as ClinicZone;
         const ring = marker.userData.ring as THREE.Mesh;
+        const arrow = marker.userData.arrow as THREE.Mesh;
         
         // Пульсация маркеров
         const scale = 1 + Math.sin(elapsedTime * 2 + index) * 0.1;
@@ -482,17 +568,23 @@ export default function MarketingAnimation() {
           ring.material.opacity = 0.3 + Math.sin(elapsedTime * 3 + index) * 0.2;
         }
         
+        // Анимация стрелок
+        arrow.position.y = zone.position.y + 2.5 + Math.sin(elapsedTime * 2 + index) * 0.2;
+        arrow.rotation.y = elapsedTime * 2;
+        
         // Подсветка при наведении
         if (hoveredZone === zone.id) {
           if (marker.material instanceof THREE.MeshPhongMaterial) {
             marker.material.emissiveIntensity = 0.8;
           }
           marker.scale.setScalar(1.2);
+          arrow.scale.setScalar(1.5);
         } else {
           if (marker.material instanceof THREE.MeshPhongMaterial) {
             marker.material.emissiveIntensity = 0.5;
           }
           marker.scale.setScalar(1);
+          arrow.scale.setScalar(1);
         }
       });
 
@@ -531,6 +623,7 @@ export default function MarketingAnimation() {
       const width = containerRect.width;
       const height = containerRect.height;
       const aspect = width / height;
+      const frustumSize = isMobile ? 18 : 15;
       
       camera.left = frustumSize * aspect / -2;
       camera.right = frustumSize * aspect / 2;
@@ -578,12 +671,25 @@ export default function MarketingAnimation() {
         style={{ background: "transparent" }}
       />
       
+      {/* Заголовок сверху */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center">
+        <h3 className="text-teal-400 text-lg font-bold mb-1">
+          Умная клиника будущего
+        </h3>
+        <p className="text-slate-400 text-sm">
+          Кликните на светящиеся зоны для изучения возможностей
+        </p>
+      </div>
+      
       {/* Информационная панель при наведении */}
       {hoveredZone && (
-        <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md border border-teal-500/30 rounded-lg p-4 max-w-xs animate-fadeIn">
-          <h3 className="text-teal-400 font-bold text-lg mb-2">
-            {zones.find(z => z.id === hoveredZone)?.name}
-          </h3>
+        <div className="absolute top-16 left-4 bg-slate-900/90 backdrop-blur-md border border-teal-500/30 rounded-lg p-4 max-w-xs animate-fadeIn">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-2xl">{zones.find(z => z.id === hoveredZone)?.icon}</span>
+            <h3 className="text-teal-400 font-bold text-lg">
+              {zones.find(z => z.id === hoveredZone)?.name}
+            </h3>
+          </div>
           <p className="text-slate-300 text-sm mb-3">
             {zones.find(z => z.id === hoveredZone)?.description}
           </p>
@@ -594,15 +700,57 @@ export default function MarketingAnimation() {
               </div>
             ))}
           </div>
+          <div className="mt-3 text-xs text-slate-400">
+            Кликните для подробной информации
+          </div>
+        </div>
+      )}
+      
+      {/* Детальная информация при клике */}
+      {selectedZone && (
+        <div className="absolute inset-x-4 bottom-4 md:left-auto md:right-4 md:w-96 bg-slate-900/95 backdrop-blur-md border border-teal-500/50 rounded-lg p-6 animate-fadeInUp">
+          <button
+            onClick={() => setSelectedZone(null)}
+            className="absolute top-4 right-4 text-slate-400 hover:text-teal-400 transition-colors"
+          >
+            ✕
+          </button>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl">{zones.find(z => z.id === selectedZone)?.icon}</span>
+            <div>
+              <h3 className="text-teal-400 font-bold text-xl">
+                {zones.find(z => z.id === selectedZone)?.name}
+              </h3>
+              <p className="text-slate-400 text-sm">
+                {zones.find(z => z.id === selectedZone)?.description}
+              </p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {zones.find(z => z.id === selectedZone)?.metrics.map((metric, idx) => (
+              <div key={idx} className="bg-slate-800/50 rounded-md p-3">
+                <span className="text-teal-400 font-bold text-lg">{metric}</span>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => setSelectedZone(null)}
+            className="mt-4 w-full bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/50 text-teal-400 py-2 px-4 rounded-lg transition-all duration-300"
+          >
+            Закрыть
+          </button>
         </div>
       )}
       
       {/* Подсказка внизу */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
-        <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full">
-          {isMobile ? 'Нажмите на зоны клиники' : 'Наведите курсор на зоны клиники'}
-        </p>
-      </div>
+      {!selectedZone && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
+          <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2">
+            <span className="inline-block w-2 h-2 bg-teal-400 rounded-full animate-pulse"></span>
+            {isMobile ? 'Нажмите на светящиеся зоны' : 'Наведите курсор на светящиеся зоны'}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
