@@ -21,6 +21,42 @@ export default function MarketingAnimation() {
   const raycasterRef = useRef<THREE.Raycaster>(new THREE.Raycaster());
   const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2());
 
+  // Выносим zones за пределы useEffect
+  const zones: ClinicZone[] = [
+    {
+      id: 'reception',
+      name: 'Умная регистратура',
+      description: 'AI-ассистент для записи',
+      metrics: ['+150% скорость обслуживания', '-80% время ожидания'],
+      color: new THREE.Color(0x2dd4bf),
+      position: new THREE.Vector3(0, 0.5, 3)
+    },
+    {
+      id: 'diagnostics',
+      name: 'Диагностический центр',
+      description: 'Автоматизация анализов',
+      metrics: ['+200% пациентов в день', '-60% ошибок'],
+      color: new THREE.Color(0x6366f1),
+      position: new THREE.Vector3(-3, 0.5, 0)
+    },
+    {
+      id: 'doctors',
+      name: 'Кабинеты врачей',
+      description: 'Электронные карты',
+      metrics: ['+40% приемов в день', '100% цифровизация'],
+      color: new THREE.Color(0x2dd4bf),
+      position: new THREE.Vector3(3, 0.5, 0)
+    },
+    {
+      id: 'analytics',
+      name: 'Центр аналитики',
+      description: 'Real-time дашборды',
+      metrics: ['ROI +250%', 'Прозрачность 100%'],
+      color: new THREE.Color(0x6366f1),
+      position: new THREE.Vector3(0, 3.5, 0)
+    }
+  ];
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -196,41 +232,7 @@ export default function MarketingAnimation() {
     sign.position.set(0, 5.5, 5.05);
     clinicGroup.add(sign);
 
-    // Создаем интерактивные зоны
-    const zones: ClinicZone[] = [
-      {
-        id: 'reception',
-        name: 'Умная регистратура',
-        description: 'AI-ассистент для записи',
-        metrics: ['+150% скорость обслуживания', '-80% время ожидания'],
-        color: tealColor,
-        position: new THREE.Vector3(0, 0.5, 3)
-      },
-      {
-        id: 'diagnostics',
-        name: 'Диагностический центр',
-        description: 'Автоматизация анализов',
-        metrics: ['+200% пациентов в день', '-60% ошибок'],
-        color: indigoColor,
-        position: new THREE.Vector3(-3, 0.5, 0)
-      },
-      {
-        id: 'doctors',
-        name: 'Кабинеты врачей',
-        description: 'Электронные карты',
-        metrics: ['+40% приемов в день', '100% цифровизация'],
-        color: tealColor,
-        position: new THREE.Vector3(3, 0.5, 0)
-      },
-      {
-        id: 'analytics',
-        name: 'Центр аналитики',
-        description: 'Real-time дашборды',
-        metrics: ['ROI +250%', 'Прозрачность 100%'],
-        color: indigoColor,
-        position: new THREE.Vector3(0, 3.5, 0)
-      }
-    ];
+    // Создаем интерактивные зоны - используем уже определенный массив zones
 
     // Создаем визуальные маркеры для зон
     const zoneMarkers: THREE.Mesh[] = [];
