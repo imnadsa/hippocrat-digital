@@ -1,638 +1,375 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import * as THREE from "three";
-
-// Стили для модальных окон и анимаций
-const CustomStyles = () => (
-    <style>{`
-    @keyframes subtle-pulse { 
-      0%, 100% { transform: scale(1); opacity: 0.15; } 
-      50% { transform: scale(1.3); opacity: 0; } 
-    }
-    .animate-subtle-pulse { animation: subtle-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-    
-    /* Стили для tooltip на десктопе */
-    .service-tooltip {
-      animation: tooltipFadeIn 0.2s ease-out forwards;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-    
-    @keyframes tooltipFadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    
-    /* Стили для мобильного модального окна */
-    .mobile-modal-overlay { 
-      background-color: rgba(11, 16, 27, 0.8); 
-      backdrop-filter: blur(10px); 
-      -webkit-backdrop-filter: blur(10px); 
-    }
-    
-    .mobile-modal-content { 
-      animation: slideUp 0.3s ease-out forwards; 
-    }
-    
-    @keyframes slideUp { 
-      from { transform: translateY(100%); } 
-      to { transform: translateY(0); } 
-    }
-    
-    .mobile-modal-exit {
-      animation: slideDown 0.3s ease-out forwards;
-    }
-    
-    @keyframes slideDown {
-      from { transform: translateY(0); }
-      to { transform: translateY(100%); }
-    }
-  `}</style>
-);
-
-interface Service {
-    id: string;
-    name: string;
-    description: string;
-    benefits: string[];
-    position: { x: number; y: number };
-    color: string;
-    iconSvg: string;
-}
-
-// Массив услуг с обновленными цветами в соответствии с глобальными стилями
-const services: Service[] = [
-    {
-      id: "ai-chat",
-      name: "AI Чат-бот 24/7",
-      description: "Автоматический помощник для записи пациентов",
-      benefits: ["Ответы за 5 секунд", "Экономия 80% времени персонала", "Работает круглосуточно"],
-      position: { x: -250, y: -140 },
-      color: "#6366f1", // indigo-500
-      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>',
-    },
-    {
-      id: "analytics",
-      name: "Аналитика в реальном времени",
-      description: "Полный контроль над показателями клиники",
-      benefits: ["ROI каждого канала", "Прогнозы и тренды", "Готовые отчеты"],
-      position: { x: 0, y: -200 },
-      color: "#2dd4bf", // teal-400
-      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>',
-    },
-    {
-      id: "crm",
-      name: "CRM для клиник",
-      description: "Управление пациентами и записями",
-      benefits: ["Электронные карты", "История посещений", "Автоматические напоминания"],
-      position: { x: 250, y: -140 },
-      color: "#6366f1", // indigo-500
-      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>',
-    },
-    {
-      id: "marketing",
-      name: "Digital маркетинг",
-      description: "Привлечение пациентов из интернета",
-      benefits: ["Таргетированная реклама", "SEO оптимизация", "Соцсети и контент"],
-      position: { x: -200, y: 140 },
-      color: "#2dd4bf", // teal-400
-      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
-    },
-    {
-      id: "telemedicine",
-      name: "Телемедицина",
-      description: "Онлайн консультации с врачами",
-      benefits: ["Новый источник дохода", "Расширение географии", "Удобство для пациентов"],
-      position: { x: 200, y: 140 },
-      color: "#6366f1", // indigo-500
-      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>',
-    },
-];
+import { useEffect, useRef, useState } from "react"
+import * as THREE from 'three';
 
 export default function MarketingAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeService, setActiveService] = useState<Service | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-
-  const getServiceButtonPosition = useCallback((service: Service) => {
-    if (isMobile) {
-        const baseRadius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
-        const angleStep = (Math.PI * 1.5) / (services.length - 1);
-        const index = services.findIndex((s) => s.id === service.id);
-        const angle = index * angleStep - (Math.PI * 1.5) / 2 - Math.PI / 4;
-        return { x: Math.cos(angle) * baseRadius, y: Math.sin(angle) * baseRadius + window.innerHeight * 0.2 };
-    }
-    return service.position;
-  }, [isMobile]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    // Проверка размера экрана для мобильных устройств
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
 
+    // Если компонент не смонтирован, выходим
     if (!containerRef.current) return;
 
+    // Получаем размеры контейнера
     const container = containerRef.current;
-    const { width, height } = container.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
 
-    // Цвета из глобальных стилей
-    const primaryColor = new THREE.Color("#e91e63"); // Красный/розовый для сердца
-    const secondaryColor = new THREE.Color("#2dd4bf"); // teal-400
-    const accentColor = new THREE.Color("#6366f1"); // indigo-500
-    const glowColor = new THREE.Color("#ff0066"); // Яркий розовый для свечения
-    const darkBgColor = new THREE.Color("#0b101b"); // --deep-dark-bg
-
+    // Создаем сцену
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(darkBgColor, 10, 50);
     
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    // Настраиваем камеру
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    // Уменьшаем расстояние камеры для мобильных устройств, чтобы ДНК была крупнее
+    camera.position.z = isMobile ? 15 : 20;
 
+    // Настраиваем рендерер с прозрачным фоном и сглаживанием
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true,
+      antialias: true 
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
-    
-    // Освещение
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-    
-    // Основной направленный свет
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(10, 20, 10);
-    directionalLight.castShadow = true;
-    scene.add(directionalLight);
-    
-    // Дополнительные точечные источники света для объема
-    const pointLight1 = new THREE.PointLight(primaryColor, 2, 20);
-    pointLight1.position.set(0, 0, 5);
-    scene.add(pointLight1);
-    
-    const pointLight2 = new THREE.PointLight(secondaryColor, 1, 15);
-    pointLight2.position.set(-5, 0, -5);
-    scene.add(pointLight2);
 
-    const setCameraPosition = () => {
-      if (isMobile) {
-        camera.position.set(0, 0, 25);
-      } else {
-        camera.position.set(0, 0, 30);
-      }
-      camera.lookAt(0, 0, 0);
-      camera.updateProjectionMatrix();
-    };
-    setCameraPosition();
+    // Цвета в стиле Hippocrat AI
+    const primaryColor = new THREE.Color(0x2dd4bf); // teal-400
+    const secondaryColor = new THREE.Color(0x6366f1); // indigo-400
+    
+    // Создаем материалы с разной прозрачностью для красивого эффекта
+    const primaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: primaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const secondaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: secondaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const connectorMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xffffff, 
+      transparent: true, 
+      opacity: 0.3 
+    });
 
-    // Главная группа для сердца
-    const heartGroup = new THREE.Group();
-    scene.add(heartGroup);
+    // Создаем группу для ДНК
+    const dnaGroup = new THREE.Group();
+    scene.add(dnaGroup);
 
-    // Создание геометрии сердца через точки
-    const createHeartShape = () => {
-      const heartVertices: THREE.Vector3[] = [];
+    // Параметры ДНК
+    const createDna = () => {
+      // Увеличиваем размер ДНК для мобильных
+      const helixRadius = isMobile ? 6 : 5; // Радиус спирали (больше для мобильных)
+      const helixHeight = isMobile ? 15 : 18; // Высота спирали (компактнее для мобильных)
+      const numBases = isMobile ? 25 : 30; // Количество пар оснований
+      const turns = 2.5; // Количество витков спирали
       
-      // Параметрическое уравнение для 3D сердца
-      for (let theta = 0; theta < Math.PI * 2; theta += 0.1) {
-        for (let phi = -Math.PI; phi < Math.PI; phi += 0.1) {
-          const r = 2;
-          const x = r * 16 * Math.pow(Math.sin(theta), 3) / 10;
-          const y = -r * (13 * Math.cos(theta) - 5 * Math.cos(2 * theta) - 2 * Math.cos(3 * theta) - Math.cos(4 * theta)) / 10;
-          const z = r * Math.sin(phi) * (1 + 0.2 * Math.sin(theta)) * 0.8;
+      // Увеличиваем размер элементов ДНК для мобильных устройств
+      const nucleotideSize = isMobile ? 0.55 : 0.4; // Размер нуклеотидов
+      const backboneSize = isMobile ? 0.2 : 0.15; // Размер соединений
+      
+      const segments = [];
+      const connectors = [];
+      
+      // Создаем две спирали ДНК с соединяющими элементами
+      for (let i = 0; i < numBases; i++) {
+        // Вычисляем позицию на спирали
+        const ratio = i / numBases;
+        const angle = ratio * Math.PI * 2 * turns;
+        const y = (ratio - 0.5) * helixHeight;
+        
+        // Создаем сферы для первой цепи
+        const sphere1Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
+        const sphere1 = new THREE.Mesh(
+          sphere1Geometry, 
+          i % 2 === 0 ? primaryMaterial : secondaryMaterial
+        );
+        
+        // Позиция на первой спирали
+        sphere1.position.set(
+          Math.cos(angle) * helixRadius,
+          y,
+          Math.sin(angle) * helixRadius
+        );
+        
+        // Создаем сферы для второй цепи (смещение на 180 градусов)
+        const sphere2Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
+        const sphere2 = new THREE.Mesh(
+          sphere2Geometry, 
+          i % 2 === 0 ? secondaryMaterial : primaryMaterial
+        );
+        
+        // Позиция на второй спирали
+        sphere2.position.set(
+          Math.cos(angle + Math.PI) * helixRadius,
+          y,
+          Math.sin(angle + Math.PI) * helixRadius
+        );
+        
+        // Добавляем сферы в группу ДНК
+        dnaGroup.add(sphere1);
+        dnaGroup.add(sphere2);
+        
+        segments.push(sphere1, sphere2);
+        
+        // Создаем соединитель между спиралями (перекладина ДНК)
+        const connectorGeometry = new THREE.CylinderGeometry(0.1, 0.1, helixRadius * 2, 6);
+        const connector = new THREE.Mesh(connectorGeometry, connectorMaterial);
+        
+        // Размещаем и ориентируем соединитель
+        const connectorDirection = new THREE.Vector3().subVectors(sphere2.position, sphere1.position);
+        const center = new THREE.Vector3().addVectors(
+          sphere1.position, 
+          connectorDirection.clone().multiplyScalar(0.5)
+        );
+        
+        connector.position.copy(center);
+        
+        // Вычисляем правильную ориентацию для соединителя
+        const axis = new THREE.Vector3(0, 1, 0);
+        connector.quaternion.setFromUnitVectors(
+          axis, 
+          connectorDirection.clone().normalize()
+        );
+        
+        dnaGroup.add(connector);
+        connectors.push(connector);
+        
+        // Добавляем линию между последовательными основаниями на каждой спирали
+        if (i > 0) {
+          // Для первой спирали
+          const backboneMaterial1 = new THREE.MeshBasicMaterial({ 
+            color: primaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
           
-          heartVertices.push(new THREE.Vector3(x, y, z));
+          const backboneGeometry1 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
+          const backbone1 = new THREE.Mesh(backboneGeometry1, backboneMaterial1);
+          
+          const prev1 = segments[segments.length - 4]; // Предыдущая сфера на первой спирали
+          const backbone1Direction = new THREE.Vector3().subVectors(
+            sphere1.position, 
+            prev1.position
+          );
+          
+          const backbone1Center = new THREE.Vector3().addVectors(
+            prev1.position, 
+            backbone1Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone1.position.copy(backbone1Center);
+          backbone1.scale.y = backbone1Direction.length() * 0.9;
+          
+          const backbone1Axis = new THREE.Vector3(0, 1, 0);
+          backbone1.quaternion.setFromUnitVectors(
+            backbone1Axis, 
+            backbone1Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone1);
+          
+          // Для второй спирали
+          const backboneMaterial2 = new THREE.MeshBasicMaterial({ 
+            color: secondaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
+          
+          const backboneGeometry2 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
+          const backbone2 = new THREE.Mesh(backboneGeometry2, backboneMaterial2);
+          
+          const prev2 = segments[segments.length - 3]; // Предыдущая сфера на второй спирали
+          const backbone2Direction = new THREE.Vector3().subVectors(
+            sphere2.position, 
+            prev2.position
+          );
+          
+          const backbone2Center = new THREE.Vector3().addVectors(
+            prev2.position, 
+            backbone2Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone2.position.copy(backbone2Center);
+          backbone2.scale.y = backbone2Direction.length() * 0.9;
+          
+          const backbone2Axis = new THREE.Vector3(0, 1, 0);
+          backbone2.quaternion.setFromUnitVectors(
+            backbone2Axis, 
+            backbone2Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone2);
         }
       }
       
-      return heartVertices;
+      return { segments, connectors };
     };
 
-    // Создание системы частиц для сердца
-    const heartVertices = createHeartShape();
-    const particleCount = heartVertices.length;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const sizes = new Float32Array(particleCount);
-    const opacities = new Float32Array(particleCount);
-
-    heartVertices.forEach((vertex, i) => {
-      positions[i * 3] = vertex.x;
-      positions[i * 3 + 1] = vertex.y;
-      positions[i * 3 + 2] = vertex.z;
-      
-      // Градиент цвета от центра к краям
-      const distanceFromCenter = vertex.length() / 5;
-      const color = new THREE.Color().lerpColors(primaryColor, glowColor, distanceFromCenter);
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
-      
-      sizes[i] = Math.random() * 0.3 + 0.1;
-      opacities[i] = Math.random() * 0.5 + 0.5;
-    });
-
-    const heartGeometry = new THREE.BufferGeometry();
-    heartGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    heartGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    heartGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-    heartGeometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
-
-    // Шейдеры для частиц
-    const vertexShader = `
-      attribute float size;
-      attribute float opacity;
-      varying vec3 vColor;
-      varying float vOpacity;
-      
-      void main() {
-        vColor = color;
-        vOpacity = opacity;
-        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = size * (300.0 / -mvPosition.z);
-        gl_Position = projectionMatrix * mvPosition;
-      }
-    `;
-
-    const fragmentShader = `
-      varying vec3 vColor;
-      varying float vOpacity;
-      
-      void main() {
-        float r = distance(gl_PointCoord, vec2(0.5, 0.5));
-        if (r > 0.5) discard;
-        
-        float intensity = 1.0 - smoothstep(0.0, 0.5, r);
-        vec3 glow = vColor * intensity * 2.0;
-        
-        gl_FragColor = vec4(glow, vOpacity * intensity);
-      }
-    `;
-
-    const heartMaterial = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      vertexColors: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      transparent: true,
-    });
-
-    const heartMesh = new THREE.Points(heartGeometry, heartMaterial);
-    heartGroup.add(heartMesh);
-
-    // Создание "кровеносных сосудов" - связей с услугами
-    const createVessel = (startPos: THREE.Vector3, endPos: THREE.Vector3, color: string) => {
-      const points = [];
-      const segments = 20;
-      
-      for (let i = 0; i <= segments; i++) {
-        const t = i / segments;
-        const x = startPos.x + (endPos.x - startPos.x) * t;
-        const y = startPos.y + (endPos.y - startPos.y) * t;
-        const z = startPos.z + (endPos.z - startPos.z) * t;
-        
-        // Добавляем волнистость
-        const wave = Math.sin(t * Math.PI * 2) * 0.5;
-        points.push(new THREE.Vector3(x, y + wave, z));
-      }
-      
-      const curve = new THREE.CatmullRomCurve3(points);
-      const tubeGeometry = new THREE.TubeGeometry(curve, 40, 0.1, 8, false);
-      
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(color),
-        emissive: new THREE.Color(color),
-        emissiveIntensity: 0.5,
-        roughness: 0.3,
-        metalness: 0.5,
-      });
-      
-      return new THREE.Mesh(tubeGeometry, material);
-    };
-
-    // Добавляем сосуды к услугам
-    const vessels: THREE.Mesh[] = [];
-    services.forEach((service, index) => {
-      const angle = (index / services.length) * Math.PI * 2;
-      const startPos = new THREE.Vector3(
-        Math.cos(angle) * 2,
-        Math.sin(angle) * 1,
-        0
-      );
-      const endPos = new THREE.Vector3(
-        service.position.x / 40,
-        service.position.y / 40,
-        5
-      );
-      
-      const vessel = createVessel(startPos, endPos, service.color);
-      vessels.push(vessel);
-      heartGroup.add(vessel);
-    });
-
-    // Создание дополнительных эффектов - плавающие частицы крови
-    const bloodParticles: THREE.Mesh[] = [];
-    const createBloodParticle = () => {
-      const geometry = new THREE.SphereGeometry(0.05, 8, 8);
-      const material = new THREE.MeshStandardMaterial({
-        color: primaryColor,
-        emissive: primaryColor,
-        emissiveIntensity: 1,
-        roughness: 0,
-        metalness: 0.5,
-      });
-      
-      const particle = new THREE.Mesh(geometry, material);
-      const vesselIndex = Math.floor(Math.random() * vessels.length);
-      particle.userData = {
-        vesselIndex,
-        t: Math.random(),
-        speed: 0.005 + Math.random() * 0.01
-      };
-      
-      return particle;
-    };
-
-    // Добавляем частицы крови
-    for (let i = 0; i < 30; i++) {
-      const particle = createBloodParticle();
-      bloodParticles.push(particle);
-      scene.add(particle);
-    }
-
-    // Создание эффекта свечения вокруг сердца
-    const glowGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const glowMaterial = new THREE.MeshBasicMaterial({
-      color: glowColor,
-      transparent: true,
-      opacity: 0.1,
-      side: THREE.BackSide,
-    });
-    const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
-    heartGroup.add(glowMesh);
-
-    // Постобработка: добавляем эффект bloom (свечения)
-    // Примечание: Three.js r128 не имеет встроенных постэффектов, 
-    // поэтому создаем свечение другими способами
-
-    // Данные для анимации пульсации
-    let pulsePhase = 0;
-    const pulseSpeed = 0.03;
+    // Создаем ДНК
+    const dna = createDna();
     
-    const clock = new THREE.Clock();
+    // Добавляем немного случайных частиц вокруг ДНК для эффекта
+    const addParticles = () => {
+      const particleCount = isMobile ? 50 : 80; // Увеличили для мобильных
+      const particles = [];
+      
+      for (let i = 0; i < particleCount; i++) {
+        // Создаем частицы в форме маленьких сфер
+        // Увеличиваем размер частиц для мобильных устройств
+        const size = isMobile ? 
+          (Math.random() * 0.25 + 0.1) : // Размер для мобильных
+          (Math.random() * 0.15 + 0.05); // Размер для десктопа
+        
+        const geometry = new THREE.SphereGeometry(size, 6, 6);
+        
+        // Случайно выбираем цвет
+        const material = new THREE.MeshBasicMaterial({ 
+          color: Math.random() > 0.5 ? primaryColor : secondaryColor, 
+          transparent: true, 
+          opacity: Math.random() * 0.5 + 0.2
+        });
+        
+        const particle = new THREE.Mesh(geometry, material);
+        
+        // Размещаем частицы случайно вокруг ДНК
+        // Размещаем ближе к центру на мобильных для лучшей видимости
+        const angle = Math.random() * Math.PI * 2;
+        const radius = isMobile ? 
+          (Math.random() * 8 + 5) : // Радиус для мобильных
+          (Math.random() * 10 + 6); // Радиус для десктопа
+          
+        const height = (Math.random() - 0.5) * (isMobile ? 14 : 20);
+        
+        particle.position.set(
+          Math.cos(angle) * radius,
+          height,
+          Math.sin(angle) * radius
+        );
+        
+        // Добавляем случайную скорость движения для каждой частицы
+        // Увеличиваем скорость для мобильных устройств для лучшей видимости анимации
+        const speedMultiplier = isMobile ? 0.03 : 0.02;
+        
+        particle.userData = {
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier
+          ),
+          originalPosition: particle.position.clone(),
+          maxDistance: Math.random() * 2 + 1
+        };
+        
+        scene.add(particle);
+        particles.push(particle);
+      }
+      
+      return particles;
+    };
+    
+    const particles = addParticles();
+    
+    // Функция для обновления позиций частиц
+    const updateParticles = () => {
+      particles.forEach(particle => {
+        // Получаем данные о скорости и максимальном расстоянии
+        const { velocity, originalPosition, maxDistance } = particle.userData;
+        
+        // Обновляем позицию
+        particle.position.add(velocity);
+        
+        // Вычисляем расстояние от исходной позиции
+        const distance = particle.position.distanceTo(originalPosition);
+        
+        // Если частица слишком далеко улетела, меняем направление движения
+        if (distance > maxDistance) {
+          velocity.negate();
+        }
+      });
+    };
+
+    // Функция для вращения ДНК
+    // Увеличиваем скорость вращения для мобильных устройств
+    const rotateDna = () => {
+      dnaGroup.rotation.y += isMobile ? 0.007 : 0.005;
+    };
+
+    // Основная функция анимации
     const animate = () => {
       const animationId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
-      
-      // Пульсация сердца
-      pulsePhase += pulseSpeed;
-      const pulseFactor = 1 + Math.sin(pulsePhase) * 0.1;
-      heartMesh.scale.set(pulseFactor, pulseFactor, pulseFactor);
-      
-      // Анимация частиц сердца
-      const positionAttribute = heartGeometry.getAttribute('position') as THREE.BufferAttribute;
-      const positions = positionAttribute.array as Float32Array;
-      
-      heartVertices.forEach((vertex, i) => {
-        const noise = Math.sin(elapsedTime * 2 + i * 0.1) * 0.05;
-        positions[i * 3] = vertex.x + noise;
-        positions[i * 3 + 1] = vertex.y + noise;
-        positions[i * 3 + 2] = vertex.z + noise;
-      });
-      positionAttribute.needsUpdate = true;
-      
-      // Медленное вращение сердца
-      heartGroup.rotation.y = elapsedTime * 0.2;
-      
-      // Анимация свечения
-      glowMesh.scale.set(
-        1 + Math.sin(elapsedTime * 2) * 0.1,
-        1 + Math.sin(elapsedTime * 2) * 0.1,
-        1 + Math.sin(elapsedTime * 2) * 0.1
-      );
-      
-      // Анимация частиц крови по сосудам
-      bloodParticles.forEach((particle) => {
-        const { vesselIndex, t, speed } = particle.userData;
-        particle.userData.t = (t + speed) % 1;
-        
-        // Получаем позицию на кривой сосуда
-        const vessel = vessels[vesselIndex];
-        if (vessel && vessel.geometry instanceof THREE.TubeGeometry) {
-          const curve = (vessel.geometry.parameters as any).path;
-          const position = curve.getPointAt(particle.userData.t);
-          particle.position.copy(position);
-        }
-      });
-      
-      // Анимация сосудов
-      vessels.forEach((vessel, i) => {
-        if (vessel.material && 'emissiveIntensity' in vessel.material) {
-          (vessel.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.5 + Math.sin(elapsedTime * 3 + i) * 0.3;
-        }
-      });
-
+      updateParticles();
+      rotateDna();
       renderer.render(scene, camera);
+      
       return animationId;
     };
+
+    // Запускаем анимацию
     const animationId = animate();
 
+    // Обработчик изменения размера окна
     const handleResize = () => {
       if (!containerRef.current) return;
-      const { width, height } = containerRef.current.getBoundingClientRect();
+      
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const width = containerRect.width;
+      const height = containerRect.height;
+      
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      setCameraPosition();
     };
-    window.addEventListener("resize", handleResize);
 
+    window.addEventListener('resize', handleResize);
+
+    // Очистка при размонтировании компонента
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', checkMobile);
       cancelAnimationFrame(animationId);
-      if (containerRef.current) containerRef.current.innerHTML = "";
-      scene.traverse((object) => {
+      
+      if (containerRef.current) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+      
+      // Освобождаем память от геометрий и материалов
+      scene.traverse(object => {
         if (object instanceof THREE.Mesh) {
           object.geometry.dispose();
-          const material = object.material as THREE.Material | THREE.Material[];
-          if (Array.isArray(material)) material.forEach((m) => m.dispose());
-          else material.dispose();
+          if (object.material instanceof THREE.Material) {
+            object.material.dispose();
+          } else if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          }
         }
       });
+      
       renderer.dispose();
     };
-  }, [isMobile, getServiceButtonPosition]);
-
-  const handleToggleService = (service: Service) => {
-    if (isMobile) {
-      setActiveService((prev) => (prev?.id === service.id ? null : service));
-    }
-  };
-
-  const handleMouseEnter = (service: Service) => !isMobile && setActiveService(service);
-  const handleMouseLeave = () => !isMobile && setActiveService(null);
-
-  const handleCloseMobile = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setActiveService(null);
-      setIsClosing(false);
-    }, 300);
-  };
+  }, [isMobile]);
 
   return (
-    <div className="w-full h-full relative">
-      <CustomStyles />
-      <div ref={containerRef} className="w-full h-full" />
-
-      {/* Кнопки услуг */}
-      {services.map((service) => {
-        const isActive = activeService?.id === service.id;
-        const { x, y } = getServiceButtonPosition(service);
-        return (
-          <div
-            key={service.id}
-            className="absolute"
-            style={{
-              left: `calc(50% + ${x}px)`,
-              top: `calc(50% + ${y}px)`,
-              transform: "translate(-50%, -50%)",
-              zIndex: 10,
-            }}
-            onMouseEnter={() => handleMouseEnter(service)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button
-              className="relative w-16 h-16 rounded-full cursor-pointer transition-all duration-300 flex items-center justify-center p-3 group"
-              style={{
-                background: `linear-gradient(135deg, ${service.color}dd, ${service.color}99)`,
-                boxShadow: isActive 
-                  ? `0 0 30px ${service.color}80, 0 0 60px ${service.color}40` 
-                  : `0 0 15px ${service.color}50`,
-                transform: isActive && !isMobile ? "scale(1.15)" : "scale(1)",
-                border: `2px solid ${service.color}`,
-              }}
-              onClick={() => handleToggleService(service)}
-            >
-              <div
-                className="w-full h-full text-white transition-transform duration-300 group-hover:scale-110"
-                dangerouslySetInnerHTML={{ __html: service.iconSvg }}
-                style={{ filter: `drop-shadow(0px 0px 6px ${service.color})` }}
-              />
-              <div
-                className="absolute inset-0 rounded-full animate-subtle-pulse"
-                style={{ background: service.color }}
-              />
-            </button>
-
-            {/* Desktop Tooltip */}
-            {!isMobile && isActive && (
-              <div
-                className="absolute z-50 w-[300px] service-tooltip"
-                style={{
-                  left: x > 0 ? "auto" : "calc(100% + 20px)",
-                  right: x > 0 ? "calc(100% + 20px)" : "auto",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
-              >
-                <div 
-                  className="relative bg-slate-900/95 backdrop-blur-xl border rounded-xl p-5"
-                  style={{ borderColor: `${service.color}40` }}
-                >
-                  {/* Треугольник-указатель */}
-                  <div
-                    className="absolute w-4 h-4 bg-slate-900/95 transform rotate-45"
-                    style={{
-                      [x > 0 ? 'right' : 'left']: '-8px',
-                      top: '50%',
-                      marginTop: '-8px',
-                      borderLeft: x > 0 ? `1px solid ${service.color}40` : 'none',
-                      borderBottom: x > 0 ? `1px solid ${service.color}40` : 'none',
-                      borderRight: x <= 0 ? `1px solid ${service.color}40` : 'none',
-                      borderTop: x <= 0 ? `1px solid ${service.color}40` : 'none',
-                    }}
-                  />
-                  
-                  <div className="flex items-center gap-3 mb-3">
-                    <div 
-                      className="text-3xl flex-shrink-0" 
-                      style={{ color: service.color }} 
-                      dangerouslySetInnerHTML={{ __html: service.iconSvg }}
-                    />
-                    <h3 className="text-lg font-bold text-white">{service.name}</h3>
-                  </div>
-                  <p className="text-sm text-slate-300 mb-4">{service.description}</p>
-                  <div className="space-y-2">
-                    {service.benefits.map((benefit, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <span className="text-xs mt-0.5" style={{ color: service.color }}>✓</span>
-                        <span className="text-xs text-slate-300">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
-
-      {/* Mobile Modal */}
-      {isMobile && activeService && (
-        <div 
-          className="fixed inset-0 flex items-end justify-center z-50 mobile-modal-overlay"
-          onClick={handleCloseMobile}
-        >
-          <div 
-            className={`bg-slate-900/95 backdrop-blur-xl rounded-t-3xl p-6 shadow-2xl w-full max-w-md border-t ${
-              isClosing ? 'mobile-modal-exit' : 'mobile-modal-content'
-            }`}
-            style={{ borderColor: `${activeService.color}40` }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-16 h-1.5 bg-slate-700 rounded-full mx-auto mb-5"></div>
-            <div className="flex items-center gap-4 mb-4">
-              <div 
-                className="text-4xl flex-shrink-0" 
-                style={{ color: activeService.color }} 
-                dangerouslySetInnerHTML={{ __html: activeService.iconSvg }} 
-              />
-              <h3 className="text-xl font-bold text-white">{activeService.name}</h3>
-            </div>
-            <p className="text-base text-slate-300 mb-5">{activeService.description}</p>
-            <div className="space-y-3 mb-6">
-              {activeService.benefits.map((benefit, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <span className="text-sm mt-0.5" style={{ color: activeService.color }}>✓</span>
-                  <span className="text-sm text-slate-300">{benefit}</span>
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={handleCloseMobile}
-              className="mt-4 w-full py-3 text-base rounded-xl transition-all font-semibold hover:opacity-90"
-              style={{
-                background: `linear-gradient(135deg, ${activeService.color}dd, ${activeService.color}99)`,
-                color: 'white',
-                boxShadow: `0 4px 20px ${activeService.color}40`
-              }}
-            >
-              Понятно
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Подсказка */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
-        <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-800">
-          {isMobile ? "Нажмите" : "Наведите"} на услуги вокруг сердца
-        </p>
-      </div>
+    <div className="w-full h-full relative overflow-hidden">
+      <div 
+        ref={containerRef} 
+        className="w-full h-full" 
+        style={{ background: "transparent" }}
+      />
+      
+      {/* Удалена надпись "Интерактивная трехмерная ДНК" */}
     </div>
   );
 }
