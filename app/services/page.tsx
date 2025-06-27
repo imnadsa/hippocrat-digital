@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import ServicesHero from "@/components/services/services-hero"
+import ServicesOverview from "@/components/services/services-overview"
+import ServicesBenefits from "@/components/services/services-benefits"
+import ServicesProcess from "@/components/services/services-process"
+import ServicesComparison from "@/components/services/services-comparison"
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function ServicesPage() {
@@ -16,11 +22,15 @@ export default function ServicesPage() {
     }
     
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      if (typeof window !== 'undefined') {
+        setScrolled(window.scrollY > 20)
+      }
     }
     
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    if (typeof window !== 'undefined') {
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   if (!isMounted) {
@@ -28,15 +38,16 @@ export default function ServicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0b101b] text-white">
+    <div className="min-h-screen bg-[#0b101b] text-white flex flex-col">
       <Header scrolled={scrolled} />
       
-      <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">Наши услуги</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+      <main className="flex-grow">
+        <ServicesHero />
+        <ServicesOverview />
+        <ServicesBenefits />
+        <ServicesProcess />
+        <ServicesComparison />
+        <CtaSection />
       </main>
 
       <Footer />
