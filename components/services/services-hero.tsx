@@ -16,16 +16,37 @@ import { useState, useEffect } from "react"
 export default function ServicesHero() {
   const [isVisible, setIsVisible] = useState(false)
   const [currentService, setCurrentService] = useState(0)
+  const [windowSize, setWindowSize] = useState({ width: 1024, height: 768 })
 
   useEffect(() => {
     setIsVisible(true)
+    
+    // Функция для обновления размера окна
+    const updateSize = () => {
+      if (typeof window !== 'undefined') {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight })
+      }
+    }
+    
+    // Инициализация размера
+    updateSize()
     
     // Автопереключение услуг
     const interval = setInterval(() => {
       setCurrentService((prev) => (prev + 1) % services.length)
     }, 3500)
     
-    return () => clearInterval(interval)
+    // Слушатель изменения размера окна
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateSize)
+    }
+    
+    return () => {
+      clearInterval(interval)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', updateSize)
+      }
+    }
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -158,96 +179,105 @@ export default function ServicesHero() {
           
           {/* Правая колонка: Анимация услуг */}
           <div className={`lg:w-1/2 ${isVisible ? 'animate-fadeInRight delay-500' : 'opacity-0'}`}>
-            <div className="relative flex items-center justify-center">
-              {/* Центральная область */}
-              <div className="relative w-80 h-80">
-                {/* Центральная иконка */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-r from-teal-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-teal-500/30 animate-pulse-slow">
-                    <TrendingUp size={60} className="text-white" />
-                  </div>
-                </div>
-
-                {/* Орбитальные элементы услуг */}
-                {services.map((service, index) => {
-                  const IconComponent = service.icon
-                  const isActive = currentService === index
-                  const angle = (index * 72) - 90 // Начинаем сверху (-90 градусов)
-                  const radius = 120 // Радиус орбиты
-                  
-                  // Вычисляем позицию на окружности
-                  const x = Math.cos((angle * Math.PI) / 180) * radius
-                  const y = Math.sin((angle * Math.PI) / 180) * radius
-                  
-                  return (
-                    <div
-                      key={index}
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                      style={{
-                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                        animation: isActive ? 'none' : 'float 6s ease-in-out infinite',
-                        animationDelay: `${index * 1.2}s`
-                      }}
-                    >
-                      <div 
-                        className={`relative transition-all duration-500 cursor-pointer group ${
-                          isActive ? 'scale-125 z-20' : 'scale-100 hover:scale-110'
-                        }`}
-                        onClick={() => setCurrentService(index)}
-                      >
-                        {/* Glow effect для активного элемента */}
-                        {isActive && (
-                          <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${
-                            service.color === 'teal' 
-                              ? 'from-teal-500 to-indigo-600' 
-                              : 'from-indigo-500 to-purple-600'
-                          } opacity-30 blur-lg scale-150 animate-pulse`}></div>
-                        )}
-                        
-                        {/* Иконка услуги */}
-                        <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border-2 transition-all duration-500 ${
-                          isActive 
-                            ? `bg-gradient-to-r ${service.color === 'teal' ? 'from-teal-500 to-indigo-600' : 'from-indigo-500 to-purple-600'} border-white/30 shadow-2xl`
-                            : 'bg-slate-800/90 border-slate-700/50 hover:border-slate-600 hover:bg-slate-700/90'
-                        }`}>
-                          <IconComponent 
-                            size={28} 
-                            className={`transition-colors duration-300 ${
-                              isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'
-                            }`} 
-                          />
-                        </div>
-
-                        {/* Пульсирующие кольца для активного элемента */}
-                        {isActive && (
-                          <>
-                            <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-ping"></div>
-                            <div className="absolute inset-0 rounded-full border border-white/10 scale-150 animate-pulse"></div>
-                          </>
-                        )}
-                      </div>
+            <div className="relative flex items-center justify-center px-4 sm:px-8">
+              {/* Контейнер с ограниченными размерами */}
+              <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
+                {/* Responsive размеры */}
+                <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
+                  {/* Центральная иконка */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                    <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-teal-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-teal-500/30 animate-pulse-slow">
+                      <TrendingUp size={windowSize.width > 640 ? 50 : 35} className="text-white" />
                     </div>
-                  )
-                })}
+                  </div>
 
-                {/* Соединительные линии */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-60 h-60 rounded-full border border-slate-700/30 opacity-50"></div>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full border border-slate-700/20 opacity-30"></div>
+                  {/* Орбитальные элементы услуг */}
+                  {services.map((service, index) => {
+                    const IconComponent = service.icon
+                    const isActive = currentService === index
+                    const angle = (index * 72) - 90 // Начинаем сверху (-90 градусов)
+                    
+                    {/* Адаптивный радиус */}
+                    const radius = windowSize.width > 640 ? 
+                      (windowSize.width > 1024 ? 110 : 95) : 75
+                    
+                    // Вычисляем позицию на окружности
+                    const x = Math.cos((angle * Math.PI) / 180) * radius
+                    const y = Math.sin((angle * Math.PI) / 180) * radius
+                    
+                    // Адаптивные размеры иконок
+                    const iconSize = windowSize.width > 640 ? 24 : 20
+                    
+                    return (
+                      <div
+                        key={index}
+                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        style={{
+                          transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                          animation: isActive ? 'none' : 'float 6s ease-in-out infinite',
+                          animationDelay: `${index * 1.2}s`
+                        }}
+                      >
+                        <div 
+                          className={`relative transition-all duration-500 cursor-pointer group ${
+                            isActive ? 'scale-110 sm:scale-125 z-20' : 'scale-100 hover:scale-105 sm:hover:scale-110'
+                          }`}
+                          onClick={() => setCurrentService(index)}
+                        >
+                          {/* Glow effect для активного элемента */}
+                          {isActive && (
+                            <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${
+                              service.color === 'teal' 
+                                ? 'from-teal-500 to-indigo-600' 
+                                : 'from-indigo-500 to-purple-600'
+                            } opacity-30 blur-lg scale-150 animate-pulse`}></div>
+                          )}
+                          
+                          {/* Иконка услуги - адаптивные размеры */}
+                          <div className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border-2 transition-all duration-500 ${
+                            isActive 
+                              ? `bg-gradient-to-r ${service.color === 'teal' ? 'from-teal-500 to-indigo-600' : 'from-indigo-500 to-purple-600'} border-white/30 shadow-2xl`
+                              : 'bg-slate-800/90 border-slate-700/50 hover:border-slate-600 hover:bg-slate-700/90'
+                          }`}>
+                            <IconComponent 
+                              size={iconSize} 
+                              className={`transition-colors duration-300 ${
+                                isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-300'
+                              }`} 
+                            />
+                          </div>
+
+                          {/* Пульсирующие кольца для активного элемента */}
+                          {isActive && (
+                            <>
+                              <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-ping"></div>
+                              <div className="absolute inset-0 rounded-full border border-white/10 scale-150 animate-pulse"></div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+
+                  {/* Соединительные линии - адаптивные */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-60 lg:h-60 rounded-full border border-slate-700/30 opacity-50"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 sm:w-48 sm:h-48 lg:w-52 lg:h-52 rounded-full border border-slate-700/20 opacity-30"></div>
+                  </div>
                 </div>
               </div>
 
               {/* Информация об активной услуге */}
-              <div className="mt-8">
-                <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover-lift transition-all backdrop-blur-sm">
+              <div className="mt-6 sm:mt-8 px-4 sm:px-0">
+                <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 sm:p-6 hover-lift transition-all backdrop-blur-sm">
                   <div className="text-center">
-                    <h4 className="text-xl font-bold font-fixedsys text-white mb-2">
+                    <h4 className="text-lg sm:text-xl font-bold font-fixedsys text-white mb-2">
                       {services[currentService].name}
                     </h4>
-                    <p className="text-slate-400 text-sm mb-3">
+                    <p className="text-slate-400 text-xs sm:text-sm mb-3">
                       {services[currentService].description}
                     </p>
-                    <div className={`text-2xl font-bold font-fixedsys ${
+                    <div className={`text-xl sm:text-2xl font-bold font-fixedsys ${
                       services[currentService].color === 'teal' ? 'text-teal-400' : 'text-indigo-400'
                     }`}>
                       {services[currentService].result}
@@ -257,14 +287,14 @@ export default function ServicesHero() {
               </div>
 
               {/* Индикаторы услуг */}
-              <div className="flex justify-center gap-2 mt-6">
+              <div className="flex justify-center gap-2 mt-4 sm:mt-6">
                 {services.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentService(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                       index === currentService 
-                        ? 'bg-teal-400 w-8' 
+                        ? 'bg-teal-400 w-6 sm:w-8' 
                         : 'bg-slate-600 hover:bg-slate-500'
                     }`}
                   />
@@ -282,7 +312,14 @@ export default function ServicesHero() {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
+          }
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 640px) {
+          .animate-float {
+            animation-duration: 8s; /* Медленнее на мобильных */
           }
         }
       `}</style>
