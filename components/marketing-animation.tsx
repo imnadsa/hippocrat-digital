@@ -1,259 +1,375 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import * as THREE from 'three'
-
-// --- 1. ДАННЫЕ О ВАШИХ УСЛУГАХ ---
-const servicesDataRaw = [
-  { id: 1, title: "Создание сайтов", description: "Разрабатываем сайты и веб-приложения, которые решают задачи вашего бизнеса и привлекают клиентов.", shape: 'Box' },
-  { id: 2, title: "SEO оптимизация", description: "Выводим ваш сайт в топ поисковой выдачи, увеличивая органический трафик и количество лидов.", shape: 'Tetrahedron' },
-  { id: 3, title: "Брендинг", description: "Создаем уникальный и запоминающийся образ компании, который вызывает доверие у вашей аудитории.", shape: 'Icosahedron' },
-  { id: 4, title: "Аналитика и стратегия", description: "Анализируем данные и разрабатываем стратегию для достижения максимальных результатов.", shape: 'Cluster' },
-  { id: 5, title: "Рекламные кампании", description: "Настраиваем и ведем эффективные рекламные кампании, которые приносят целевые заявки.", shape: 'Torus' }
-];
-
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-  shape: string;
-  object?: THREE.Object3D;
-}
-
-const servicesData: Service[] = servicesDataRaw;
+import * as THREE from 'three';
 
 export default function MarketingAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeService, setActiveService] = useState<Service | null>(null);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    // Проверка размера экрана для мобильных устройств
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
+    // Если компонент не смонтирован, выходим
     if (!containerRef.current) return;
 
+    // Получаем размеры контейнера
     const container = containerRef.current;
-    const { width, height } = container.getBoundingClientRect();
-    
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = isMobile ? 18 : 25;
+    const containerRect = container.getBoundingClientRect();
+    const width = containerRect.width;
+    const height = containerRect.height;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    // Создаем сцену
+    const scene = new THREE.Scene();
+    
+    // Настраиваем камеру
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    // Уменьшаем расстояние камеры для мобильных устройств, чтобы ДНК была крупнее
+    camera.position.z = isMobile ? 15 : 20;
+
+    // Настраиваем рендерер с прозрачным фоном и сглаживанием
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true,
+      antialias: true 
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const primaryColor = new THREE.Color(0x2dd4bf);
-    const secondaryColor = new THREE.Color(0x6366f1);
+    // Цвета в стиле Hippocrat AI
+    const primaryColor = new THREE.Color(0x2dd4bf); // teal-400
+    const secondaryColor = new THREE.Color(0x6366f1); // indigo-400
     
-    const primaryMaterial = new THREE.MeshBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 });
-    const secondaryMaterial = new THREE.MeshBasicMaterial({ color: secondaryColor, transparent: true, opacity: 0.8 });
-    const connectorMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
-    const serviceNodeMaterial = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: 0.1,
-        roughness: 0.2,
-        emissive: primaryColor,
-        emissiveIntensity: 0.5
+    // Создаем материалы с разной прозрачностью для красивого эффекта
+    const primaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: primaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const secondaryMaterial = new THREE.MeshBasicMaterial({ 
+      color: secondaryColor, 
+      transparent: true, 
+      opacity: 0.8 
+    });
+    
+    const connectorMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xffffff, 
+      transparent: true, 
+      opacity: 0.3 
     });
 
+    // Создаем группу для ДНК
     const dnaGroup = new THREE.Group();
     scene.add(dnaGroup);
-    
-    const serviceNodes: THREE.Object3D[] = [];
-    const createServiceNodes = () => {
-      const orbitRadius = isMobile ? 10 : 14;
-      const nodeSize = isMobile ? 0.8 : 1;
-      servicesData.forEach((service, index) => {
-        const angle = (index / servicesData.length) * Math.PI * 2;
-        let nodeObject: THREE.Object3D;
 
-        // *** ИСПРАВЛЕНИЕ: Логика создания объекта полностью перенесена внутрь switch ***
-        // Это гарантирует, что для каждого случая объект будет создан корректно.
-        switch(service.shape) {
-          case 'Box': {
-            const geometry = new THREE.BoxGeometry(nodeSize, nodeSize, nodeSize);
-            nodeObject = new THREE.LineSegments(
-              new THREE.EdgesGeometry(geometry),
-              new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 })
-            );
-            break;
-          }
-          case 'Tetrahedron': {
-            const geometry = new THREE.TetrahedronGeometry(nodeSize);
-            nodeObject = new THREE.LineSegments(
-              new THREE.EdgesGeometry(geometry),
-              new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 })
-            );
-            break;
-          }
-          case 'Icosahedron': {
-            const geometry = new THREE.IcosahedronGeometry(nodeSize);
-            nodeObject = new THREE.LineSegments(
-              new THREE.EdgesGeometry(geometry),
-              new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 })
-            );
-            break;
-          }
-          case 'Torus': {
-            const geometry = new THREE.TorusGeometry(nodeSize * 0.8, nodeSize * 0.3, 16, 100);
-            nodeObject = new THREE.LineSegments(
-              new THREE.EdgesGeometry(geometry),
-              new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 })
-            );
-            break;
-          }
-          case 'Cluster': {
-            const clusterGroup = new THREE.Group();
-            for(let i=0; i<5; i++) {
-                const sphereGeo = new THREE.SphereGeometry(nodeSize * 0.3, 8, 8);
-                const sphereMesh = new THREE.Mesh(sphereGeo, serviceNodeMaterial.clone());
-                sphereMesh.position.set((Math.random() - 0.5) * 1.5, (Math.random() - 0.5) * 1.5, (Math.random() - 0.5) * 1.5);
-                clusterGroup.add(sphereMesh);
-            }
-            nodeObject = clusterGroup;
-            break;
-          }
-          default: { // Запасной вариант на случай неизвестной фигуры
-            const geometry = new THREE.SphereGeometry(nodeSize);
-            nodeObject = new THREE.LineSegments(
-                new THREE.EdgesGeometry(geometry),
-                new THREE.LineBasicMaterial({ color: primaryColor, transparent: true, opacity: 0.8 })
-            );
-            break;
-          }
-        }
-
-        service.object = nodeObject;
-        nodeObject.position.set(
-          Math.cos(angle) * orbitRadius,
-          (Math.random() - 0.5) * 8,
-          Math.sin(angle) * orbitRadius
+    // Параметры ДНК
+    const createDna = () => {
+      // Увеличиваем размер ДНК для мобильных
+      const helixRadius = isMobile ? 6 : 5; // Радиус спирали (больше для мобильных)
+      const helixHeight = isMobile ? 15 : 18; // Высота спирали (компактнее для мобильных)
+      const numBases = isMobile ? 25 : 30; // Количество пар оснований
+      const turns = 2.5; // Количество витков спирали
+      
+      // Увеличиваем размер элементов ДНК для мобильных устройств
+      const nucleotideSize = isMobile ? 0.55 : 0.4; // Размер нуклеотидов
+      const backboneSize = isMobile ? 0.2 : 0.15; // Размер соединений
+      
+      const segments = [];
+      const connectors = [];
+      
+      // Создаем две спирали ДНК с соединяющими элементами
+      for (let i = 0; i < numBases; i++) {
+        // Вычисляем позицию на спирали
+        const ratio = i / numBases;
+        const angle = ratio * Math.PI * 2 * turns;
+        const y = (ratio - 0.5) * helixHeight;
+        
+        // Создаем сферы для первой цепи
+        const sphere1Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
+        const sphere1 = new THREE.Mesh(
+          sphere1Geometry, 
+          i % 2 === 0 ? primaryMaterial : secondaryMaterial
         );
-        nodeObject.userData.serviceId = service.id;
-        scene.add(nodeObject);
-        serviceNodes.push(nodeObject);
+        
+        // Позиция на первой спирали
+        sphere1.position.set(
+          Math.cos(angle) * helixRadius,
+          y,
+          Math.sin(angle) * helixRadius
+        );
+        
+        // Создаем сферы для второй цепи (смещение на 180 градусов)
+        const sphere2Geometry = new THREE.SphereGeometry(nucleotideSize, 12, 12);
+        const sphere2 = new THREE.Mesh(
+          sphere2Geometry, 
+          i % 2 === 0 ? secondaryMaterial : primaryMaterial
+        );
+        
+        // Позиция на второй спирали
+        sphere2.position.set(
+          Math.cos(angle + Math.PI) * helixRadius,
+          y,
+          Math.sin(angle + Math.PI) * helixRadius
+        );
+        
+        // Добавляем сферы в группу ДНК
+        dnaGroup.add(sphere1);
+        dnaGroup.add(sphere2);
+        
+        segments.push(sphere1, sphere2);
+        
+        // Создаем соединитель между спиралями (перекладина ДНК)
+        const connectorGeometry = new THREE.CylinderGeometry(0.1, 0.1, helixRadius * 2, 6);
+        const connector = new THREE.Mesh(connectorGeometry, connectorMaterial);
+        
+        // Размещаем и ориентируем соединитель
+        const connectorDirection = new THREE.Vector3().subVectors(sphere2.position, sphere1.position);
+        const center = new THREE.Vector3().addVectors(
+          sphere1.position, 
+          connectorDirection.clone().multiplyScalar(0.5)
+        );
+        
+        connector.position.copy(center);
+        
+        // Вычисляем правильную ориентацию для соединителя
+        const axis = new THREE.Vector3(0, 1, 0);
+        connector.quaternion.setFromUnitVectors(
+          axis, 
+          connectorDirection.clone().normalize()
+        );
+        
+        dnaGroup.add(connector);
+        connectors.push(connector);
+        
+        // Добавляем линию между последовательными основаниями на каждой спирали
+        if (i > 0) {
+          // Для первой спирали
+          const backboneMaterial1 = new THREE.MeshBasicMaterial({ 
+            color: primaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
+          
+          const backboneGeometry1 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
+          const backbone1 = new THREE.Mesh(backboneGeometry1, backboneMaterial1);
+          
+          const prev1 = segments[segments.length - 4]; // Предыдущая сфера на первой спирали
+          const backbone1Direction = new THREE.Vector3().subVectors(
+            sphere1.position, 
+            prev1.position
+          );
+          
+          const backbone1Center = new THREE.Vector3().addVectors(
+            prev1.position, 
+            backbone1Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone1.position.copy(backbone1Center);
+          backbone1.scale.y = backbone1Direction.length() * 0.9;
+          
+          const backbone1Axis = new THREE.Vector3(0, 1, 0);
+          backbone1.quaternion.setFromUnitVectors(
+            backbone1Axis, 
+            backbone1Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone1);
+          
+          // Для второй спирали
+          const backboneMaterial2 = new THREE.MeshBasicMaterial({ 
+            color: secondaryColor, 
+            transparent: true, 
+            opacity: 0.5 
+          });
+          
+          const backboneGeometry2 = new THREE.CylinderGeometry(backboneSize, backboneSize, 1, 6);
+          const backbone2 = new THREE.Mesh(backboneGeometry2, backboneMaterial2);
+          
+          const prev2 = segments[segments.length - 3]; // Предыдущая сфера на второй спирали
+          const backbone2Direction = new THREE.Vector3().subVectors(
+            sphere2.position, 
+            prev2.position
+          );
+          
+          const backbone2Center = new THREE.Vector3().addVectors(
+            prev2.position, 
+            backbone2Direction.clone().multiplyScalar(0.5)
+          );
+          
+          backbone2.position.copy(backbone2Center);
+          backbone2.scale.y = backbone2Direction.length() * 0.9;
+          
+          const backbone2Axis = new THREE.Vector3(0, 1, 0);
+          backbone2.quaternion.setFromUnitVectors(
+            backbone2Axis, 
+            backbone2Direction.clone().normalize()
+          );
+          
+          dnaGroup.add(backbone2);
+        }
+      }
+      
+      return { segments, connectors };
+    };
+
+    // Создаем ДНК
+    const dna = createDna();
+    
+    // Добавляем немного случайных частиц вокруг ДНК для эффекта
+    const addParticles = () => {
+      const particleCount = isMobile ? 50 : 80; // Увеличили для мобильных
+      const particles = [];
+      
+      for (let i = 0; i < particleCount; i++) {
+        // Создаем частицы в форме маленьких сфер
+        // Увеличиваем размер частиц для мобильных устройств
+        const size = isMobile ? 
+          (Math.random() * 0.25 + 0.1) : // Размер для мобильных
+          (Math.random() * 0.15 + 0.05); // Размер для десктопа
+        
+        const geometry = new THREE.SphereGeometry(size, 6, 6);
+        
+        // Случайно выбираем цвет
+        const material = new THREE.MeshBasicMaterial({ 
+          color: Math.random() > 0.5 ? primaryColor : secondaryColor, 
+          transparent: true, 
+          opacity: Math.random() * 0.5 + 0.2
+        });
+        
+        const particle = new THREE.Mesh(geometry, material);
+        
+        // Размещаем частицы случайно вокруг ДНК
+        // Размещаем ближе к центру на мобильных для лучшей видимости
+        const angle = Math.random() * Math.PI * 2;
+        const radius = isMobile ? 
+          (Math.random() * 8 + 5) : // Радиус для мобильных
+          (Math.random() * 10 + 6); // Радиус для десктопа
+          
+        const height = (Math.random() - 0.5) * (isMobile ? 14 : 20);
+        
+        particle.position.set(
+          Math.cos(angle) * radius,
+          height,
+          Math.sin(angle) * radius
+        );
+        
+        // Добавляем случайную скорость движения для каждой частицы
+        // Увеличиваем скорость для мобильных устройств для лучшей видимости анимации
+        const speedMultiplier = isMobile ? 0.03 : 0.02;
+        
+        particle.userData = {
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier,
+            (Math.random() - 0.5) * speedMultiplier
+          ),
+          originalPosition: particle.position.clone(),
+          maxDistance: Math.random() * 2 + 1
+        };
+        
+        scene.add(particle);
+        particles.push(particle);
+      }
+      
+      return particles;
+    };
+    
+    const particles = addParticles();
+    
+    // Функция для обновления позиций частиц
+    const updateParticles = () => {
+      particles.forEach(particle => {
+        // Получаем данные о скорости и максимальном расстоянии
+        const { velocity, originalPosition, maxDistance } = particle.userData;
+        
+        // Обновляем позицию
+        particle.position.add(velocity);
+        
+        // Вычисляем расстояние от исходной позиции
+        const distance = particle.position.distanceTo(originalPosition);
+        
+        // Если частица слишком далеко улетела, меняем направление движения
+        if (distance > maxDistance) {
+          velocity.negate();
+        }
       });
     };
 
-    const createDna = () => { /* Ваш оригинальный код для создания ДНК */ }; // Убедитесь, что этот код на месте
-    createDna();
-    createServiceNodes();
-    
-    // ... остальной код без изменений ...
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    let intersectedObject: THREE.Object3D | null = null;
-    const onPointerMove = (event: PointerEvent) => {
-        if (isMobile) return;
-        const rect = renderer.domElement.getBoundingClientRect();
-        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(serviceNodes, true);
-        if (intersects.length > 0) {
-            let parentObject = intersects[0].object;
-            while (parentObject.parent && !parentObject.userData.serviceId) parentObject = parentObject.parent;
-            if (intersectedObject !== parentObject) {
-                intersectedObject = parentObject;
-                const service = servicesData.find(s => s.id === intersectedObject?.userData.serviceId);
-                setActiveService(service || null);
-            }
-        } else {
-            if (intersectedObject !== null) {
-                intersectedObject = null;
-                setActiveService(null);
-            }
-        }
+    // Функция для вращения ДНК
+    // Увеличиваем скорость вращения для мобильных устройств
+    const rotateDna = () => {
+      dnaGroup.rotation.y += isMobile ? 0.007 : 0.005;
     };
-    const onPointerDown = (event: PointerEvent) => {
-        if (!isMobile) return;
-        const rect = renderer.domElement.getBoundingClientRect();
-        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(serviceNodes, true);
-        if (intersects.length > 0) {
-            let parentObject = intersects[0].object;
-            while (parentObject.parent && !parentObject.userData.serviceId) parentObject = parentObject.parent;
-            const service = servicesData.find(s => s.id === parentObject.userData.serviceId);
-            setActiveService(current => (current?.id === service?.id ? null : service || null));
-        } else {
-            setActiveService(null);
-        }
-    };
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerdown', onPointerDown);
-    const clock = new THREE.Clock();
+
+    // Основная функция анимации
     const animate = () => {
       const animationId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
-      dnaGroup.rotation.y += 0.002;
-      serviceNodes.forEach((node, index) => {
-        const angle = (index / servicesData.length) * Math.PI * 2 + elapsedTime * 0.1;
-        const orbitRadius = isMobile ? 10 : 14;
-        node.position.x = Math.cos(angle) * orbitRadius;
-        node.position.z = Math.sin(angle) * orbitRadius;
-        node.rotation.y += 0.005;
-        node.rotation.x += 0.003;
-        const targetScale = activeService?.id === node.userData.serviceId ? 1.5 : 1.0;
-        node.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
-      });
-      if (activeService && activeService.object && tooltipRef.current) {
-        const screenPosition = new THREE.Vector3();
-        activeService.object.getWorldPosition(screenPosition);
-        screenPosition.project(camera);
-        const rect = renderer.domElement.getBoundingClientRect();
-        const x = (screenPosition.x * 0.5 + 0.5) * rect.width + rect.left;
-        const y = (screenPosition.y * -0.5 + 0.5) * rect.height + rect.top;
-        const offsetX = 20; const offsetY = -20;
-        tooltipRef.current.style.transform = `translate(-50%, -100%) translate(${x + offsetX}px, ${y + offsetY}px)`;
-      }
+      updateParticles();
+      rotateDna();
       renderer.render(scene, camera);
+      
       return animationId;
     };
+
+    // Запускаем анимацию
     const animationId = animate();
+
+    // Обработчик изменения размера окна
     const handleResize = () => {
       if (!containerRef.current) return;
-      const { width, height } = containerRef.current.getBoundingClientRect();
+      
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const width = containerRect.width;
+      const height = containerRect.height;
+      
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
+
     window.addEventListener('resize', handleResize);
+
+    // Очистка при размонтировании компонента
     return () => {
-      cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('resize', checkMobile);
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('pointerdown', onPointerDown);
-      if(containerRef.current && renderer.domElement) containerRef.current.removeChild(renderer.domElement);
+      cancelAnimationFrame(animationId);
+      
+      if (containerRef.current) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+      
+      // Освобождаем память от геометрий и материалов
       scene.traverse(object => {
-        if (object instanceof THREE.Mesh || object instanceof THREE.LineSegments) {
+        if (object instanceof THREE.Mesh) {
           object.geometry.dispose();
-          if(object.material instanceof THREE.Material) object.material.dispose();
-          else if (Array.isArray(object.material)) object.material.forEach(material => material.dispose());
+          if (object.material instanceof THREE.Material) {
+            object.material.dispose();
+          } else if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          }
         }
       });
+      
       renderer.dispose();
     };
   }, [isMobile]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden pointer-events-none">
-      <div ref={containerRef} className="w-full h-full pointer-events-auto" style={{ background: "transparent" }} />
-      <div ref={tooltipRef} className={`fixed top-0 left-0 z-10 p-4 rounded-xl w-[280px] pointer-events-none transition-opacity duration-300 ease-in-out border ${activeService ? 'opacity-100 visible' : 'opacity-0 invisible'}`} style={{ backgroundColor: 'hsla(var(--secondary), 0.5)', borderColor: 'hsla(var(--border), 0.5)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)'}}>
-        {activeService && (
-          <>
-            <h3 className="text-lg font-semibold text-teal-400 mb-2">{activeService.title}</h3>
-            <p className="text-sm leading-relaxed text-foreground/80">{activeService.description}</p>
-          </>
-        )}
-      </div>
+    <div className="w-full h-full relative overflow-hidden">
+      <div 
+        ref={containerRef} 
+        className="w-full h-full" 
+        style={{ background: "transparent" }}
+      />
+      
+      {/* Удалена надпись "Интерактивная трехмерная ДНК" */}
     </div>
   );
 }
