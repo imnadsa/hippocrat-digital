@@ -137,13 +137,15 @@ export default function MarketingAnimation() {
     const { width, height } = container.getBoundingClientRect();
 
     // Цвета из глобальных стилей
-    const primaryAccentColor = new THREE.Color("#6366f1"); // indigo-500
-    const secondaryAccentColor = new THREE.Color("#2dd4bf"); // teal-400
+    const primaryColor = new THREE.Color("#e91e63"); // Красный/розовый для сердца
+    const secondaryColor = new THREE.Color("#2dd4bf"); // teal-400
+    const accentColor = new THREE.Color("#6366f1"); // indigo-500
+    const glowColor = new THREE.Color("#ff0066"); // Яркий розовый для свечения
     const darkBgColor = new THREE.Color("#0b101b"); // --deep-dark-bg
-    const buildingColor = new THREE.Color("#1e293b"); // slate-800
-    const glowColor = new THREE.Color("#2dd4bf"); // teal-400
 
     const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(darkBgColor, 10, 50);
+    
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
@@ -151,218 +153,287 @@ export default function MarketingAnimation() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
     
-    // Освещение в стиле глобальных цветов
-    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-    scene.add(new THREE.HemisphereLight(primaryAccentColor, darkBgColor, 0.6));
+    // Освещение
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    // Основной направленный свет
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(10, 20, 10);
     directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.width = 2048;
-    directionalLight.shadow.mapSize.height = 2048;
     scene.add(directionalLight);
     
-    // Точечный свет с цветом teal
-    const pointLight = new THREE.PointLight(glowColor, 1.5, 15);
-    pointLight.position.set(0, 0, 0);
-    scene.add(pointLight);
+    // Дополнительные точечные источники света для объема
+    const pointLight1 = new THREE.PointLight(primaryColor, 2, 20);
+    pointLight1.position.set(0, 0, 5);
+    scene.add(pointLight1);
+    
+    const pointLight2 = new THREE.PointLight(secondaryColor, 1, 15);
+    pointLight2.position.set(-5, 0, -5);
+    scene.add(pointLight2);
 
     const setCameraPosition = () => {
       if (isMobile) {
-        camera.position.set(0, 5, 20);
-        camera.lookAt(0, 3, 0);
+        camera.position.set(0, 0, 25);
       } else {
-        camera.position.set(0, 8, 22);
-        camera.lookAt(0, 4, 0);
+        camera.position.set(0, 0, 30);
       }
+      camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
     };
     setCameraPosition();
 
-    const clinicGroup = new THREE.Group();
-    scene.add(clinicGroup);
-    
-    const baseBuildingY = 2.7;
+    // Главная группа для сердца
+    const heartGroup = new THREE.Group();
+    scene.add(heartGroup);
 
-    // Основание клиники
-    const baseMaterial = new THREE.MeshStandardMaterial({ 
-      color: buildingColor, 
-      metalness: 0.2, 
-      roughness: 0.8 
-    });
-    
-    const topBase = new THREE.Mesh(new THREE.CylinderGeometry(7, 7, 0.4, 32), baseMaterial);
-    topBase.receiveShadow = true;
-    topBase.position.y = baseBuildingY - 2.7;
-    clinicGroup.add(topBase);
-    
-    // Светящееся основание
-    const emissiveBaseMaterial = new THREE.MeshStandardMaterial({ 
-      color: glowColor, 
-      emissive: glowColor, 
-      emissiveIntensity: 0.8 
-    });
-    const bottomBase = new THREE.Mesh(new THREE.CylinderGeometry(7.2, 7.2, 0.3, 32), emissiveBaseMaterial);
-    bottomBase.position.y = baseBuildingY - 3.05;
-    clinicGroup.add(bottomBase);
-
-    // Здание клиники
-    const buildingMaterial = new THREE.MeshStandardMaterial({ 
-      color: new THREE.Color("#0f172a"), // slate-900
-      metalness: 0.3, 
-      roughness: 0.7 
-    });
-    const building = new THREE.Mesh(new THREE.CylinderGeometry(4, 4, 5, 6), buildingMaterial);
-    building.castShadow = true;
-    building.receiveShadow = true;
-    clinicGroup.add(building);
-
-    // Посох Асклепия
-    const createAsclepiusRod = () => {
-        const group = new THREE.Group();
-        const material = new THREE.MeshStandardMaterial({
-            color: secondaryAccentColor,
-            emissive: secondaryAccentColor,
-            emissiveIntensity: 0.3,
-            metalness: 0.2,
-            roughness: 0.3
-        });
-        
-        const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3, 8), material);
-        group.add(rod);
-
-        const snakeCurve = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(0, -1.4, 0.2),
-            new THREE.Vector3(0.5, -0.8, 0),
-            new THREE.Vector3(-0.5, 0, 0),
-            new THREE.Vector3(0.5, 0.8, 0),
-            new THREE.Vector3(0, 1.4, 0.2),
-        ]);
-        const snake = new THREE.Mesh(new THREE.TubeGeometry(snakeCurve, 20, 0.08, 8, false), material);
-        group.add(snake);
-        
-        group.scale.set(0.8, 0.8, 0.8);
-        return group;
-    };
-    
-    const asclepiusSymbol = createAsclepiusRod();
-    asclepiusSymbol.position.y = 5.5;
-    asclepiusSymbol.rotation.y = Math.PI / 2;
-    clinicGroup.add(asclepiusSymbol);
-
-    // Текст на здании
-    const createTextTexture = (text: string, color: string) => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d')!;
-        canvas.width = 512;
-        canvas.height = 128;
-        context.font = 'bold 60px Inter, Arial';
-        context.fillStyle = color;
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(text, canvas.width / 2, canvas.height / 2);
-        return new THREE.CanvasTexture(canvas);
-    };
-
-    const textTexture = createTextTexture('Клиника', secondaryAccentColor.getStyle());
-    const textMaterial = new THREE.MeshBasicMaterial({ map: textTexture, transparent: true });
-    const textPlane = new THREE.Mesh(new THREE.PlaneGeometry(3, 0.75), textMaterial);
-    textPlane.position.set(0, 3, 4.01);
-    clinicGroup.add(textPlane);
-
-    // ДНК частицы
-    const createDnaStrand = () => {
-        const group = new THREE.Group();
-        const strandLength = 1.2, strandRadius = 0.2;
-        const curvePoints = (offset: number) => Array.from({ length: 10 }, (_, i) => {
-            const y = (i / 9) * strandLength - strandLength / 2;
-            const angle = y * 5 + offset;
-            return new THREE.Vector3(Math.cos(angle) * strandRadius, y, Math.sin(angle) * strandRadius);
-        });
-        
-        const strandMaterial = new THREE.MeshStandardMaterial({ 
-          color: primaryAccentColor, 
-          metalness: 0.4, 
-          roughness: 0.6 
-        });
-        const rungMaterial = new THREE.MeshStandardMaterial({ 
-          color: secondaryAccentColor, 
-          emissive: secondaryAccentColor, 
-          emissiveIntensity: 0.5 
-        });
-        
-        const curve1 = new THREE.CatmullRomCurve3(curvePoints(0));
-        const curve2 = new THREE.CatmullRomCurve3(curvePoints(Math.PI));
-        group.add(new THREE.Mesh(new THREE.TubeGeometry(curve1, 20, 0.025, 8), strandMaterial));
-        group.add(new THREE.Mesh(new THREE.TubeGeometry(curve2, 20, 0.025, 8), strandMaterial));
-
-        for (let i = 0; i < 8; i++) {
-            const t = i / 7, p1 = curve1.getPoint(t), p2 = curve2.getPoint(t);
-            const rung = new THREE.Mesh(
-              new THREE.CylinderGeometry(0.02, 0.02, p1.distanceTo(p2), 3), 
-              rungMaterial
-            );
-            rung.position.copy(p1).lerp(p2, 0.5);
-            rung.lookAt(p1);
-            group.add(rung);
+    // Создание геометрии сердца через точки
+    const createHeartShape = () => {
+      const heartVertices: THREE.Vector3[] = [];
+      
+      // Параметрическое уравнение для 3D сердца
+      for (let theta = 0; theta < Math.PI * 2; theta += 0.1) {
+        for (let phi = -Math.PI; phi < Math.PI; phi += 0.1) {
+          const r = 2;
+          const x = r * 16 * Math.pow(Math.sin(theta), 3) / 10;
+          const y = -r * (13 * Math.cos(theta) - 5 * Math.cos(2 * theta) - 2 * Math.cos(3 * theta) - Math.cos(4 * theta)) / 10;
+          const z = r * Math.sin(phi) * (1 + 0.2 * Math.sin(theta)) * 0.8;
+          
+          heartVertices.push(new THREE.Vector3(x, y, z));
         }
-        return group;
+      }
+      
+      return heartVertices;
     };
-    
-    const particles: THREE.Group[] = [];
-    const numParticles = isMobile ? 15 : 30;
-    for (let i = 0; i < numParticles; i++) {
-        const particleGroup = createDnaStrand();
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 8 + Math.random() * 4;
-        const yPos = Math.random() * 10 - 2;
-        particleGroup.position.set(
-          Math.cos(angle) * radius, 
-          yPos, 
-          Math.sin(angle) * radius
-        );
-        particleGroup.rotation.set(
-          Math.random() * Math.PI, 
-          Math.random() * Math.PI, 
-          0
-        );
-        particleGroup.userData = { 
-          angle, 
-          radius, 
-          orbitSpeed: 0.003 + Math.random() * 0.005, // Медленнее
-          ySpeed: (Math.random() - 0.5) * 0.008, 
-          selfRotationSpeed: (Math.random() - 0.5) * 0.015 
-        };
-        particles.push(particleGroup);
-        scene.add(particleGroup);
+
+    // Создание системы частиц для сердца
+    const heartVertices = createHeartShape();
+    const particleCount = heartVertices.length;
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+    const opacities = new Float32Array(particleCount);
+
+    heartVertices.forEach((vertex, i) => {
+      positions[i * 3] = vertex.x;
+      positions[i * 3 + 1] = vertex.y;
+      positions[i * 3 + 2] = vertex.z;
+      
+      // Градиент цвета от центра к краям
+      const distanceFromCenter = vertex.length() / 5;
+      const color = new THREE.Color().lerpColors(primaryColor, glowColor, distanceFromCenter);
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+      
+      sizes[i] = Math.random() * 0.3 + 0.1;
+      opacities[i] = Math.random() * 0.5 + 0.5;
+    });
+
+    const heartGeometry = new THREE.BufferGeometry();
+    heartGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    heartGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    heartGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    heartGeometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
+
+    // Шейдеры для частиц
+    const vertexShader = `
+      attribute float size;
+      attribute float opacity;
+      varying vec3 vColor;
+      varying float vOpacity;
+      
+      void main() {
+        vColor = color;
+        vOpacity = opacity;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = size * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `;
+
+    const fragmentShader = `
+      varying vec3 vColor;
+      varying float vOpacity;
+      
+      void main() {
+        float r = distance(gl_PointCoord, vec2(0.5, 0.5));
+        if (r > 0.5) discard;
+        
+        float intensity = 1.0 - smoothstep(0.0, 0.5, r);
+        vec3 glow = vColor * intensity * 2.0;
+        
+        gl_FragColor = vec4(glow, vOpacity * intensity);
+      }
+    `;
+
+    const heartMaterial = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      transparent: true,
+    });
+
+    const heartMesh = new THREE.Points(heartGeometry, heartMaterial);
+    heartGroup.add(heartMesh);
+
+    // Создание "кровеносных сосудов" - связей с услугами
+    const createVessel = (startPos: THREE.Vector3, endPos: THREE.Vector3, color: string) => {
+      const points = [];
+      const segments = 20;
+      
+      for (let i = 0; i <= segments; i++) {
+        const t = i / segments;
+        const x = startPos.x + (endPos.x - startPos.x) * t;
+        const y = startPos.y + (endPos.y - startPos.y) * t;
+        const z = startPos.z + (endPos.z - startPos.z) * t;
+        
+        // Добавляем волнистость
+        const wave = Math.sin(t * Math.PI * 2) * 0.5;
+        points.push(new THREE.Vector3(x, y + wave, z));
+      }
+      
+      const curve = new THREE.CatmullRomCurve3(points);
+      const tubeGeometry = new THREE.TubeGeometry(curve, 40, 0.1, 8, false);
+      
+      const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(color),
+        emissive: new THREE.Color(color),
+        emissiveIntensity: 0.5,
+        roughness: 0.3,
+        metalness: 0.5,
+      });
+      
+      return new THREE.Mesh(tubeGeometry, material);
+    };
+
+    // Добавляем сосуды к услугам
+    const vessels: THREE.Mesh[] = [];
+    services.forEach((service, index) => {
+      const angle = (index / services.length) * Math.PI * 2;
+      const startPos = new THREE.Vector3(
+        Math.cos(angle) * 2,
+        Math.sin(angle) * 1,
+        0
+      );
+      const endPos = new THREE.Vector3(
+        service.position.x / 40,
+        service.position.y / 40,
+        5
+      );
+      
+      const vessel = createVessel(startPos, endPos, service.color);
+      vessels.push(vessel);
+      heartGroup.add(vessel);
+    });
+
+    // Создание дополнительных эффектов - плавающие частицы крови
+    const bloodParticles: THREE.Mesh[] = [];
+    const createBloodParticle = () => {
+      const geometry = new THREE.SphereGeometry(0.05, 8, 8);
+      const material = new THREE.MeshStandardMaterial({
+        color: primaryColor,
+        emissive: primaryColor,
+        emissiveIntensity: 1,
+        roughness: 0,
+        metalness: 0.5,
+      });
+      
+      const particle = new THREE.Mesh(geometry, material);
+      const vesselIndex = Math.floor(Math.random() * vessels.length);
+      particle.userData = {
+        vesselIndex,
+        t: Math.random(),
+        speed: 0.005 + Math.random() * 0.01
+      };
+      
+      return particle;
+    };
+
+    // Добавляем частицы крови
+    for (let i = 0; i < 30; i++) {
+      const particle = createBloodParticle();
+      bloodParticles.push(particle);
+      scene.add(particle);
     }
+
+    // Создание эффекта свечения вокруг сердца
+    const glowGeometry = new THREE.SphereGeometry(5, 32, 32);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: glowColor,
+      transparent: true,
+      opacity: 0.1,
+      side: THREE.BackSide,
+    });
+    const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+    heartGroup.add(glowMesh);
+
+    // Постобработка: добавляем эффект bloom (свечения)
+    // Примечание: Three.js r128 не имеет встроенных постэффектов, 
+    // поэтому создаем свечение другими способами
+
+    // Данные для анимации пульсации
+    let pulsePhase = 0;
+    const pulseSpeed = 0.03;
     
     const clock = new THREE.Clock();
     const animate = () => {
-        const animationId = requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
-
-        // Медленное вращение клиники (360 градусов)
-        clinicGroup.rotation.y = elapsedTime * 0.1; // Медленнее в 5 раз
+      const animationId = requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+      
+      // Пульсация сердца
+      pulsePhase += pulseSpeed;
+      const pulseFactor = 1 + Math.sin(pulsePhase) * 0.1;
+      heartMesh.scale.set(pulseFactor, pulseFactor, pulseFactor);
+      
+      // Анимация частиц сердца
+      const positionAttribute = heartGeometry.getAttribute('position') as THREE.BufferAttribute;
+      const positions = positionAttribute.array as Float32Array;
+      
+      heartVertices.forEach((vertex, i) => {
+        const noise = Math.sin(elapsedTime * 2 + i * 0.1) * 0.05;
+        positions[i * 3] = vertex.x + noise;
+        positions[i * 3 + 1] = vertex.y + noise;
+        positions[i * 3 + 2] = vertex.z + noise;
+      });
+      positionAttribute.needsUpdate = true;
+      
+      // Медленное вращение сердца
+      heartGroup.rotation.y = elapsedTime * 0.2;
+      
+      // Анимация свечения
+      glowMesh.scale.set(
+        1 + Math.sin(elapsedTime * 2) * 0.1,
+        1 + Math.sin(elapsedTime * 2) * 0.1,
+        1 + Math.sin(elapsedTime * 2) * 0.1
+      );
+      
+      // Анимация частиц крови по сосудам
+      bloodParticles.forEach((particle) => {
+        const { vesselIndex, t, speed } = particle.userData;
+        particle.userData.t = (t + speed) % 1;
         
-        // Легкая левитация
-        clinicGroup.position.y = baseBuildingY + Math.sin(elapsedTime * 0.5) * 0.1;
+        // Получаем позицию на кривой сосуда
+        const vessel = vessels[vesselIndex];
+        if (vessel && vessel.geometry instanceof THREE.TubeGeometry) {
+          const curve = (vessel.geometry.parameters as any).path;
+          const position = curve.getPointAt(particle.userData.t);
+          particle.position.copy(position);
+        }
+      });
+      
+      // Анимация сосудов
+      vessels.forEach((vessel, i) => {
+        vessel.material.emissiveIntensity = 0.5 + Math.sin(elapsedTime * 3 + i) * 0.3;
+      });
 
-        // Анимация ДНК
-        particles.forEach((p) => {
-            const { angle, radius, orbitSpeed, ySpeed, selfRotationSpeed } = p.userData;
-            p.position.x = Math.cos(angle + elapsedTime * orbitSpeed) * radius;
-            p.position.z = Math.sin(angle + elapsedTime * orbitSpeed) * radius;
-            p.position.y += ySpeed;
-            p.rotation.y += selfRotationSpeed;
-
-            if (p.position.y > 8 || p.position.y < -3) p.userData.ySpeed *= -1;
-        });
-
-        renderer.render(scene, camera);
-        return animationId;
+      renderer.render(scene, camera);
+      return animationId;
     };
     const animationId = animate();
 
@@ -557,7 +628,7 @@ export default function MarketingAnimation() {
       {/* Подсказка */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
         <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-800">
-          {isMobile ? "Нажмите" : "Наведите"} на услуги вокруг клиники
+          {isMobile ? "Нажмите" : "Наведите"} на услуги вокруг сердца
         </p>
       </div>
     </div>
