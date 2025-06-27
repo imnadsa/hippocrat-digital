@@ -429,7 +429,9 @@ export default function MarketingAnimation() {
       
       // Анимация сосудов
       vessels.forEach((vessel, i) => {
-        vessel.material.emissiveIntensity = 0.5 + Math.sin(elapsedTime * 3 + i) * 0.3;
+        if (vessel.material && 'emissiveIntensity' in vessel.material) {
+          (vessel.material as THREE.MeshStandardMaterial).emissiveIntensity = 0.5 + Math.sin(elapsedTime * 3 + i) * 0.3;
+        }
       });
 
       renderer.render(scene, camera);
