@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 
-// --- Стили остаются без изменений ---
+// Стили остаются без изменений
 const CustomStyles = () => (
     <style>{`
     @keyframes gentle-ping { 75%, 100% { transform: scale(1.6); opacity: 0; } }
@@ -26,11 +26,11 @@ interface Service {
 
 // Данные об услугах
 const services: Service[] = [
-    { id: "ai-chat", name: "AI Чат-бот 24/7", description: "Автоматический помощник для записи пациентов", benefits: ["Ответы за 5 секунд", "Экономия 80% времени персонала", "Работает круглосуточно"], position: { x: -300, y: -100 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>', },
+    { id: "ai-chat", name: "AI Чат-бот 24/7", description: "Автоматический помощник для записи пациентов", benefits: ["Ответы за 5 секунд", "Экономия 80% времени персонала", "Работает круглосуточно"], position: { x: -220, y: -120 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>', },
     { id: "analytics", name: "Аналитика в реальном времени", description: "Полный контроль над показателями клиники", benefits: ["ROI каждого канала", "Прогнозы и тренды", "Готовые отчеты"], position: { x: 0, y: -200 }, color: "#2dd4bf", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>', },
-    { id: "crm", name: "CRM для клиник", description: "Управление пациентами и записями", benefits: ["Электронные карты", "История посещений", "Автоматические напоминания"], position: { x: 300, y: -100 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>', },
-    { id: "marketing", name: "Digital маркетинг", description: "Привлечение пациентов из интернета", benefits: ["Таргетированная реклама", "SEO оптимизация", "Соцсети и контент"], position: { x: -250, y: 150 }, color: "#2dd4bf", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15.5c-.83 0-1.5-.67-1.5-1.5S11.17 14.5 12 14.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-3.5-3.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>', },
-    { id: "telemedicine", name: "Телемедицина", description: "Онлайн консультации с врачами", benefits: ["Новый источник дохода", "Расширение географии", "Удобство для пациентов"], position: { x: 250, y: 150 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 12h-2v3h-3v2h5v-5zm-7 9c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM5 12H3V9h3V7H1V4h2v3h2V4h3v3h2v2H7v3H5zm7-10c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/></svg>', },
+    { id: "crm", name: "CRM для клиник", description: "Управление пациентами и записями", benefits: ["Электронные карты", "История посещений", "Автоматические напоминания"], position: { x: 220, y: -120 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>', },
+    { id: "marketing", name: "Digital маркетинг", description: "Привлечение пациентов из интернета", benefits: ["Таргетированная реклама", "SEO оптимизация", "Соцсети и контент"], position: { x: -180, y: 150 }, color: "#2dd4bf", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15.5c-.83 0-1.5-.67-1.5-1.5S11.17 14.5 12 14.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-3.5-3.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>', },
+    { id: "telemedicine", name: "Телемедицина", description: "Онлайн консультации с врачами", benefits: ["Новый источник дохода", "Расширение географии", "Удобство для пациентов"], position: { x: 180, y: 150 }, color: "#6366f1", iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 12h-2v3h-3v2h5v-5zm-7 9c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM5 12H3V9h3V7H1V4h2v3h2V4h3v3h2v2H7v3H5zm7-10c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/></svg>', },
 ];
 
 
@@ -51,7 +51,7 @@ export default function MarketingAnimation() {
   }, [isMobile]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024); // Точка для переключения на мобильный вид
     checkMobile();
     window.addEventListener("resize", checkMobile);
 
@@ -60,13 +60,13 @@ export default function MarketingAnimation() {
     const container = containerRef.current;
     const { width, height } = container.getBoundingClientRect();
 
-    // --- Новая палитра ---
-    const primaryAccentColor = new THREE.Color("#6366f1"); // Для UI и ДНК
-    const secondaryAccentColor = new THREE.Color("#2dd4bf"); // Для UI и ДНК
-    const buildingColor = new THREE.Color(0xe0e7ff); // Стены - светло-серый/лавандовый
-    const windowColor = new THREE.Color(0x3b82f6); // Окна - синий
-    const roofColor = new THREE.Color(0x64748b); // Крыша - серо-синий
-    const crossColor = new THREE.Color(0xef4444); // Крест - красный
+    const primaryAccentColor = new THREE.Color("#6366f1");
+    const secondaryAccentColor = new THREE.Color("#2dd4bf");
+    const buildingColor = new THREE.Color(0xe0e7ff);
+    const windowColor = new THREE.Color(0x3b82f6);
+    const roofColor = new THREE.Color(0x64748b);
+    const crossColor = new THREE.Color(0xef4444);
+    const whiteMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 });
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -78,7 +78,6 @@ export default function MarketingAnimation() {
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
     
-    // Освещение
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
     directionalLight.position.set(10, 15, 20);
@@ -96,26 +95,17 @@ export default function MarketingAnimation() {
     const clinicGroup = new THREE.Group();
     scene.add(clinicGroup);
     
-    // --- Создание новой модели клиники ---
     const wallMaterial = new THREE.MeshStandardMaterial({ color: buildingColor, roughness: 0.8 });
     const roofMaterial = new THREE.MeshStandardMaterial({ color: roofColor, roughness: 0.7 });
-    const windowMaterial = new THREE.MeshStandardMaterial({
-        color: windowColor,
-        emissive: windowColor,
-        emissiveIntensity: 0.3,
-        roughness: 0.2,
-        metalness: 0.1
-    });
+    const windowMaterial = new THREE.MeshStandardMaterial({ color: windowColor, emissive: windowColor, emissiveIntensity: 0.3, roughness: 0.2, metalness: 0.1 });
     
     const allWindows: THREE.Mesh[] = [];
 
-    // Основание
     const base = new THREE.Mesh(new THREE.BoxGeometry(16, 0.4, 8), wallMaterial);
     base.position.y = 0.2;
     base.receiveShadow = true;
     clinicGroup.add(base);
 
-    // Главная башня
     const mainTower = new THREE.Mesh(new THREE.BoxGeometry(6, 5, 5), wallMaterial);
     mainTower.position.y = 2.5;
     mainTower.castShadow = true;
@@ -124,7 +114,6 @@ export default function MarketingAnimation() {
     mainRoof.position.y = 5.15;
     clinicGroup.add(mainRoof);
     
-    // Боковые крылья
     const createWing = (xOffset: number) => {
         const wing = new THREE.Mesh(new THREE.BoxGeometry(5, 3, 4), wallMaterial);
         wing.position.set(xOffset, 1.5, 0.5);
@@ -139,86 +128,52 @@ export default function MarketingAnimation() {
     const leftWing = createWing(-5.5);
     const rightWing = createWing(5.5);
     
-    // Окна
     const createWindow = (parent: THREE.Object3D, pos: THREE.Vector3, w: number, h: number) => {
         const win = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.1), windowMaterial);
         win.position.copy(pos);
         parent.add(win);
         allWindows.push(win);
     };
-    // Окна на башне
     for (let i = 0; i < 2; i++) {
         createWindow(mainTower, new THREE.Vector3(-1.5, 0.8 - i * 2, 2.51), 1.8, 1.2);
         createWindow(mainTower, new THREE.Vector3(1.5, 0.8 - i * 2, 2.51), 1.8, 1.2);
     }
-    // Окна на крыльях
     createWindow(leftWing, new THREE.Vector3(0, 0, 2.01), 3, 1.5);
     createWindow(rightWing, new THREE.Vector3(0, 0, 2.01), 3, 1.5);
 
-    // Вход
-    const door = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2, 0.2), windowMaterial);
-    door.position.set(0, -1.5, 2.51);
-    mainTower.add(door);
-    const stairs = new THREE.Mesh(new THREE.BoxGeometry(2, 0.2, 1), wallMaterial);
-    stairs.position.set(0, 0.1, 4.5);
-    clinicGroup.add(stairs);
-
-    // Крест
-    const crossBg = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 0.2, 32), new THREE.MeshStandardMaterial({color: crossColor}));
-    crossBg.position.set(0, 3.5, 2.6);
+    // Крест (исправленный и более заметный)
+    const crossBg = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 0.3, 32), new THREE.MeshStandardMaterial({color: crossColor}));
+    crossBg.position.set(0, 3.5, 2.55);
     crossBg.rotation.x = Math.PI / 2;
     mainTower.add(crossBg);
-    const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.2, 0.1), wallMaterial);
-    crossV.position.z = 0.15;
-    const crossH = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 0.1), wallMaterial);
-    crossH.position.z = 0.15;
+    const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.5, 0.2), whiteMaterial); // Используем белый материал
+    crossV.position.z = 0.16; // Чуть выдвигаем вперед
+    const crossH = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.4, 0.2), whiteMaterial); // Используем белый материал
+    crossH.position.z = 0.16;
     crossBg.add(crossV, crossH);
+    
+    // --- ДНК Частицы ---
+    const particleContainer = new THREE.Group();
+    // Сдвигаем контейнер с частицами назад, чтобы они не перекрывали клинику
+    particleContainer.position.z = -4;
+    scene.add(particleContainer);
 
-    // Декор (колонны и деревья)
-    for (let i = -1; i <= 1; i += 2) {
-        const column = new THREE.Mesh(new THREE.BoxGeometry(0.3, 3, 0.3), wallMaterial);
-        column.position.set(i * 3, -1.5, 2.1);
-        mainTower.add(column);
-    }
-    const createTree = (pos: THREE.Vector3) => {
-        const tree = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.5, 8), new THREE.MeshStandardMaterial({color: 0x166534}));
-        tree.position.copy(pos);
-        tree.castShadow = true;
-        clinicGroup.add(tree);
-    };
-    for(let i = 0; i < 5; i++) {
-        createTree(new THREE.Vector3(-6 + i * 1.5, 0.75, 3.5));
-        createTree(new THREE.Vector3(6 - i * 1.5, 0.75, 3.5));
-    }
-
-
-    // --- Улучшенные ДНК-частицы ---
     const createDnaStrand = () => {
         const group = new THREE.Group();
         const strandMaterial = new THREE.MeshStandardMaterial({ color: primaryAccentColor, metalness: 0.6, roughness: 0.4 });
-        const rungMaterial = new THREE.MeshStandardMaterial({ color: secondaryAccentColor, emissive: secondaryAccentColor, emissiveIntensity: 1 });
-        
+        const rungMaterial = new THREE.MeshStandardMaterial({ color: secondaryAccentColor, emissive: secondaryAccentColor, emissiveIntensity: 1.2 });
         const curvePoints = (offset: number) => Array.from({ length: 12 }, (_, i) => {
-            const y = (i / 11) * 2 - 1;
-            const angle = y * 4 + offset;
-            return new THREE.Vector3(Math.cos(angle) * 0.3, y, Math.sin(angle) * 0.3);
+            const y = (i / 11) * 2 - 1, angle = y * 4 + offset;
+            return new THREE.Vector3(Math.cos(angle) * 0.4, y, Math.sin(angle) * 0.4);
         });
-
-        const curve1 = new THREE.CatmullRomCurve3(curvePoints(0));
-        const curve2 = new THREE.CatmullRomCurve3(curvePoints(Math.PI));
+        const curve1 = new THREE.CatmullRomCurve3(curvePoints(0)), curve2 = new THREE.CatmullRomCurve3(curvePoints(Math.PI));
         group.add(new THREE.Mesh(new THREE.TubeGeometry(curve1, 32, 0.03, 8), strandMaterial));
         group.add(new THREE.Mesh(new THREE.TubeGeometry(curve2, 32, 0.03, 8), strandMaterial));
-        
-        // Светящиеся сферы как пары оснований
         for (let i = 0; i < 10; i++) {
-            const t = i / 9;
-            const p1 = curve1.getPoint(t);
-            const p2 = curve2.getPoint(t);
-            const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), rungMaterial);
-            sphere1.position.copy(p1);
-            const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), rungMaterial);
-            sphere2.position.copy(p2);
-            group.add(sphere1, sphere2);
+            const t = i / 9, p1 = curve1.getPoint(t), p2 = curve2.getPoint(t);
+            const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), rungMaterial);
+            sphere.position.copy(p1).lerp(p2, 0.5); // Ставим сферу между нитями
+            group.add(sphere);
         }
         return group;
     };
@@ -232,7 +187,7 @@ export default function MarketingAnimation() {
         particleGroup.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
         particleGroup.userData = { angle, radius, orbitSpeed: 0.005 + Math.random() * 0.008, ySpeed: (Math.random() - 0.5) * 0.01, selfRotationSpeed: (Math.random() - 0.5) * 0.02 };
         particles.push(particleGroup);
-        scene.add(particleGroup);
+        particleContainer.add(particleGroup); // Добавляем в контейнер
     }
     
     const clock = new THREE.Clock();
@@ -240,13 +195,10 @@ export default function MarketingAnimation() {
         const animationId = requestAnimationFrame(animate);
         const elapsedTime = clock.getElapsedTime();
 
-        // Пульсация света в окнах
         const pulse = Math.sin(elapsedTime * 2) * 0.1 + 0.4;
-        allWindows.forEach(win => {
-            (win.material as THREE.MeshStandardMaterial).emissiveIntensity = pulse;
-        });
-
-        // Анимация ДНК
+        allWindows.forEach(win => { (win.material as THREE.MeshStandardMaterial).emissiveIntensity = pulse; });
+        
+        // Анимация ДНК в их локальных координатах внутри контейнера
         particles.forEach((p) => {
             const { angle, radius, orbitSpeed, ySpeed, selfRotationSpeed } = p.userData;
             p.position.x = Math.cos(angle + elapsedTime * orbitSpeed) * radius;
@@ -295,24 +247,27 @@ export default function MarketingAnimation() {
   const handleMouseLeave = () => !isMobile && setActiveService(null);
 
   return (
-    <div className="w-full h-full relative">
+    // Этот компонент теперь занимает всю высоту, но на больших экранах (lg) - только половину ширины.
+    // Родительский контейнер на странице должен быть <div className="flex ...">
+    <div className="relative w-full h-full lg:w-1/2">
       <CustomStyles />
       <div ref={containerRef} className="w-full h-full" />
 
-      {services.map((service) => {
+      {/* UI элементы */}
+      {!isMobile && services.map((service) => {
         const isActive = activeService?.id === service.id;
         const { x, y } = getServiceButtonPosition(service);
         return (
           <div
             key={service.id}
             className="absolute"
-            style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: "translate(-50%, -50%)", zIndex: isActive && !isMobile ? 20 : 1 }}
+            style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)`, transform: "translate(-50%, -50%)", zIndex: isActive ? 20 : 1 }}
             onMouseEnter={() => handleMouseEnter(service)}
             onMouseLeave={handleMouseLeave}
           >
             <button
               className="relative w-16 h-16 rounded-full cursor-pointer transition-transform duration-300 flex items-center justify-center p-3 group"
-              style={{ background: `${service.color}e6`, boxShadow: `0 0 20px ${service.color}70`, transform: isActive && !isMobile ? "scale(1.1)" : "scale(1)", border: `2px solid ${service.color}` }}
+              style={{ background: `${service.color}e6`, boxShadow: `0 0 20px ${service.color}70`, transform: isActive ? "scale(1.1)" : "scale(1)", border: `2px solid ${service.color}` }}
               onClick={() => handleToggleService(service)}
             >
               <div className="w-full h-full text-white transition-transform duration-300 group-hover:scale-110" dangerouslySetInnerHTML={{ __html: service.iconSvg }} style={{ filter: `drop-shadow(0px 0px 4px white)` }} />
@@ -320,8 +275,7 @@ export default function MarketingAnimation() {
               <div className="absolute inset-0 rounded-full animate-gentle-ping" style={{ background: service.color, opacity: 0.1, animationDelay: "1s" }} />
             </button>
 
-            {!isMobile && (
-              <div
+            <div
                 className={`absolute z-10 w-[280px] transition-all duration-300 ease-in-out ${ isActive ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
                 style={{ left: x > 0 ? "auto" : "100%", right: x > 0 ? "100%" : "auto", top: "50%", transform: `translate(${x > 0 ? "-16px" : "16px"}, -50%)`, transformOrigin: x > 0 ? "right" : "left" }}
               >
@@ -335,8 +289,7 @@ export default function MarketingAnimation() {
                     {service.benefits.map((benefit, idx) => ( <div key={idx} className="flex items-start gap-2"> <span className="text-xs mt-0.5" style={{ color: service.color }}>✓</span> <span className="text-xs text-slate-300">{benefit}</span> </div> ))}
                   </div>
                 </div>
-              </div>
-            )}
+            </div>
           </div>
         );
       })}
@@ -364,7 +317,7 @@ export default function MarketingAnimation() {
 
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none">
         <p className="text-slate-400 text-sm bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full">
-          {isMobile ? "Нажмите" : "Наведите"} на услуги вокруг клиники
+          {isMobile ? "Нажмите на услуги" : "Наведите на услуги"}
         </p>
       </div>
     </div>
