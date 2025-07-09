@@ -40,23 +40,6 @@ const AIIcon = () => (
     <path fill="currentColor" d="M43.604 40.672c.212.008.416-.026.603-.094a1.63 1.63 0 0 0 1.06-1.517l.206-12.316c.016-.925-.704-1.703-1.606-1.739-.902-.035-1.647.686-1.662 1.611l-.207 12.316c-.016.925.703 1.703 1.606 1.739ZM30.984 26.236 26.841 38.74c-.284.846.198 1.769 1.028 2.05a1.586 1.586 0 0 0 2.036-.99l.684-2.066 5.35-.153.864 2.017c.925 1.944 3.73.785 2.962-1.223l-2.62-6.117-2.621-6.118a1.93 1.93 0 0 0-1.828-1.167 1.85 1.85 0 0 0-1.699 1.227l-.013.037Zm3.59 8.16-2.906.082 1.283-3.872 1.623 3.79Z"/>
     <path fill="currentColor" d="M56.746 19.194c0-.66-.535-1.194-1.194-1.194H17.194c-.66 0-1.194.535-1.194 1.194v28.05c0 .658.535 1.193 1.194 1.193h10.01c.887-.048 1.657.721 1.64 1.607.017.799-.62 1.533-1.419 1.569H23.6a1.194 1.194 0 0 0 0 2.387h25.625a1.194 1.194 0 0 0 0-2.388h-3.824c-.799-.035-1.436-.769-1.42-1.568-.017-.885.752-1.655 1.639-1.607h9.932c.66 0 1.194-.535 1.194-1.194v-28.05ZM41.913 51.612h-11a4.023 4.023 0 0 0-.014-3.175h11.027a4.018 4.018 0 0 0-.013 3.175ZM54.36 46.05H18.386V20.387h35.971V46.05Z"/>
   </svg>
-)173 0 0 0-2.346 0 3.531 3.531 0 0 0 3.527 3.527 3.531 3.531 0 0 0 3.527-3.527c0-.648-.525-1.173-1.172-1.173ZM31.412 38.544a4.804 4.804 0 0 0-2.897.867 4.807 4.807 0 0 0-2.899-.867c-2.513.068-4.56 2.072-4.66 4.562a4.678 4.678 0 0 0-.003.158c-.01 1.302.574 2.546 1.596 3.407l5.205 4.43a1.17 1.17 0 0 0 1.52.001l5.2-4.42c1.022-.862 1.607-2.1 1.602-3.4 0-.054-.001-.11-.003-.164-.094-2.497-2.142-4.506-4.661-4.574Zm1.546 6.347-4.443 3.778-4.45-3.787c-.491-.415-.77-.998-.766-1.602l.001-.08c.05-1.261 1.096-2.276 2.38-2.311l.069-.001c.725 0 1.405.31 1.875.858a1.172 1.172 0 0 0 1.78 0 2.46 2.46 0 0 1 1.945-.857c1.287.034 2.332 1.052 2.38 2.317l.001.084c.003.602-.277 1.185-.772 1.601Z"/>
-  </svg>
-)
-
-// Компонент кастомной SVG иконки для контекстной рекламы
-const ContextualIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 72 72">
-    <path fill="currentColor" d="M14.673 57.432c2.304 2.372 6.385 2.195 8.475-.363l6.049-7.184a19.698 19.698 0 0 0 10.09 2.752A19.69 19.69 0 0 0 53.3 46.833a19.689 19.689 0 0 0 5.805-14.014A19.69 19.69 0 0 0 53.3 18.805 19.689 19.689 0 0 0 39.286 13a19.69 19.69 0 0 0-14.014 5.805 19.689 19.689 0 0 0-5.804 14.014c0 3.607.957 7.066 2.752 10.089l-7.184 6.049c-2.56 2.09-2.734 6.173-.363 8.475Zm7.496-24.613c0-9.439 7.679-17.117 17.117-17.117 9.439 0 17.117 7.678 17.117 17.117 0 9.438-7.678 17.117-17.117 17.117-9.438 0-17.117-7.679-17.117-17.117Zm1.593 12.322a20.153 20.153 0 0 0 3.202 3.202l-3.473 4.125-3.854-3.854 4.125-3.473Zm-8.07 8.09a3.023 3.023 0 0 1 1.084-2.208l.787-.662 4.181 4.181-.663.787a3.022 3.022 0 0 1-2.206 1.085c-1.738.116-3.3-1.446-3.184-3.184Z"/>
-    <path fill="currentColor" d="M36.1 38.436h3.609a1.216 1.216 0 1 0 0-2.431h-2.393v-1.851h2.127a1.216 1.216 0 0 0 0-2.432h-2.127v-1.85h2.393a1.216 1.216 0 1 0 0-2.431H36.1c-.671 0-1.215.544-1.215 1.215v8.564c0 .672.544 1.216 1.215 1.216ZM32.757 35.6c.225-1.259-.34-2.9-2.599-3.734l-1.953-.779c-.53-.225-.5-.995.05-1.165l.018-.005c1.157-.349 2.247.52 2.247.52.52.425 1.293.403 1.734-.105a1.218 1.218 0 0 0-.17-1.757c-.084-.07-2.082-1.719-4.512-.986-2.589.722-3.221 4.182-.844 5.508.05.023 1.244.554 2.589 1.05.27.1 1.146.469 1.047 1.026-.065.362-.535.87-1.377.87-.807 0-1.582-.317-2.083-.851-.461-.49-1.23-.57-1.733-.125a1.216 1.216 0 0 0-.097 1.728c.968 1.068 2.394 1.68 3.913 1.68 1.887 0 3.473-1.209 3.77-2.875ZM48.276 38.475a5.543 5.543 0 0 0 5.537-5.537 5.543 5.543 0 0 0-5.537-5.537 5.543 5.543 0 0 0-5.537 5.537 5.543 5.543 0 0 0 5.537 5.537Zm0-8.642a3.109 3.109 0 0 1 3.105 3.105 3.11 3.11 0 0 1-3.105 3.106 3.11 3.11 0 0 1-3.106-3.106 3.109 3.109 0 0 1 3.106-3.105Z"/>
-  </svg>
-)
-
-const AIIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 72 72">
-    <path fill="currentColor" d="M43.604 40.672c.212.008.416-.026.603-.094a1.63 1.63 0 0 0 1.06-1.517l.206-12.316c.016-.925-.704-1.703-1.606-1.739-.902-.035-1.647.686-1.662 1.611l-.207 12.316c-.016.925.703 1.703 1.606 1.739ZM30.984 26.236 26.841 38.74c-.284.846.198 1.769 1.028 2.05a1.586 1.586 0 0 0 2.036-.99l.684-2.066 5.35-.153.864 2.017c.925 1.944 3.73.785 2.962-1.223l-2.62-6.117-2.621-6.118a1.93 1.93 0 0 0-1.828-1.167 1.85 1.85 0 0 0-1.699 1.227l-.013.037Zm3.59 8.16-2.906.082 1.283-3.872 1.623 3.79Z"/>
-    <path fill="currentColor" d="M56.746 19.194c0-.66-.535-1.194-1.194-1.194H17.194c-.66 0-1.194.535-1.194 1.194v28.05c0 .658.535 1.193 1.194 1.193h10.01c.887-.048 1.657.721 1.64 1.607.017.799-.62 1.533-1.419 1.569H23.6a1.194 1.194 0 0 0 0 2.387h25.625a1.194 1.194 0 0 0 0-2.388h-3.824c-.799-.035-1.436-.769-1.42-1.568-.017-.885.752-1.655 1.639-1.607h9.932c.66 0 1.194-.535 1.194-1.194v-28.05ZM41.913 51.612h-11a4.023 4.023 0 0 0-.014-3.175h11.027a4.018 4.018 0 0 0-.013 3.175ZM54.36 46.05H18.386V20.387h35.971V46.05Z"/>
-  </svg>
 )
 
 export default function ServicesSection() {
@@ -224,69 +207,93 @@ export default function ServicesSection() {
           </div>
 
           {/* Услуга 4: Контекстная реклама */}
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-400">
-            <div className="flex items-center mb-6">
-              <div className="w-8 h-8 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mr-3">
-                <ContextualIcon />
+          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-400">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <div className="text-indigo-400 mr-4">
+                  <ContextualIcon />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-semibold font-fixedsys text-shadow">Контекстная реклама</h3>
               </div>
-              <h3 className="text-xl font-semibold font-fixedsys text-shadow">Контекстная реклама</h3>
+              <div className="md:hidden">
+                <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
-            <ul className="space-y-3 flex-grow">
+            <ul className="space-y-4 flex-grow">
               <li>
-                <Link href={serviceUrls.contextual} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.contextual} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Контекстная реклама медицинских услуг
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.contextual} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.contextual} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Реклама в Яндекс.Директ для клиник
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.contextual} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.contextual} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Идеальный подбор медицинских ключевых слов
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.contextual} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.contextual} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Оптимизация скликиваний
+                </Link>
+              </li>
+              <li>
+                <Link href={serviceUrls.contextual} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block italic">
+                  еще...
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Услуга 5: ИИ-Решения */}
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-500 md:col-span-2 lg:col-span-1">
-            <div className="flex items-center mb-6">
-              <div className="w-8 h-8 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mr-3">
-                <AIIcon />
+          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-500 md:col-span-2 lg:col-span-1">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <div className="text-teal-400 mr-4">
+                  <AIIcon />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-semibold font-fixedsys text-shadow">ИИ-Решения</h3>
               </div>
-              <h3 className="text-xl font-semibold font-fixedsys text-shadow">ИИ-Решения</h3>
+              <div className="md:hidden">
+                <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
-            <ul className="space-y-3 flex-grow">
+            <ul className="space-y-4 flex-grow">
               <li>
-                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.ai} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   ИИ Ассистент для оптимизации записей в клинику
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.ai} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   ИИ-чат-боты для медицинских клиник
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.ai} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Автоматизация записи пациентов через ИИ
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.ai} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Ассистент для сбора отзывов
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.ai} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   ИИ ассистент для повторных записей в клинику
+                </Link>
+              </li>
+              <li>
+                <Link href={serviceUrls.ai} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block italic">
+                  еще...
                 </Link>
               </li>
             </ul>
