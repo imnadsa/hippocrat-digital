@@ -68,7 +68,7 @@ export default function ServicesSection() {
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent animate-gradient font-fixedsys text-shadow-lg">
             Комплексные решения для роста вашей клиники
           </h2>
-          <p className="text-slate-400 text-center max-w-2xl text-shadow">
+          <p className="text-slate-400 text-center max-w-3xl text-shadow">
             Мы предлагаем полный спектр услуг по цифровому маркетингу, адаптированных специально для медицинских учреждений
           </p>
         </div>
