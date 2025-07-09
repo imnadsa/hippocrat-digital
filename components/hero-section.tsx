@@ -23,7 +23,7 @@ export default function HeroSection() {
         <div className="flex items-center gap-2 mb-4 animate-fadeInLeft">
           <div className="px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-xs flex items-center gap-1 hover-glow hover:border-teal-500/50 transition-all duration-300">
             <Sparkles size={12} className="animate-iconRotate" />
-            <span>Приводим пациентов более 4 лет</span>
+            <span>Приводим пациентов клиникам более 4 лет</span>
           </div>
         </div>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight font-fixedsys animate-fadeInUp">
