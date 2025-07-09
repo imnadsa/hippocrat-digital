@@ -70,101 +70,137 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Услуга 1: Таргетированная реклама */}
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-100">
-            <div className="flex items-center mb-6">
-              <div className="w-8 h-8 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mr-3">
-                <TargetingIcon />
+          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-100">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <div className="text-teal-400 mr-4">
+                  <TargetingIcon />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-semibold font-fixedsys text-shadow">Таргетированная реклама</h3>
               </div>
-              <h3 className="text-xl font-semibold font-fixedsys text-shadow">Таргетированная реклама</h3>
+              <div className="md:hidden">
+                <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
-            <ul className="space-y-3 flex-grow">
+            <ul className="space-y-4 flex-grow">
               <li>
-                <Link href={serviceUrls.targeting} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.targeting} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Таргетированная реклама для медицинских центров
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.targeting} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.targeting} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Реклама стоматологических услуг в ВК
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.targeting} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.targeting} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Таргетинг пациентов для частных клиник
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.targeting} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.targeting} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Реклама медицинских услуг в tg ads
+                </Link>
+              </li>
+              <li>
+                <Link href={serviceUrls.targeting} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block italic">
+                  еще...
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Услуга 2: Создание сайтов */}
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-200">
-            <div className="flex items-center mb-6">
-              <div className="w-8 h-8 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mr-3">
-                <WebsiteIcon />
+          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-200">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <div className="text-indigo-400 mr-4">
+                  <WebsiteIcon />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-semibold font-fixedsys text-shadow">Создание сайтов</h3>
               </div>
-              <h3 className="text-xl font-semibold font-fixedsys text-shadow">Создание сайтов</h3>
+              <div className="md:hidden">
+                <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
-            <ul className="space-y-3 flex-grow">
+            <ul className="space-y-4 flex-grow">
               <li>
-                <Link href={serviceUrls.websites} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.websites} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Создание медицинского сайта для медицинского центра
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.websites} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.websites} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Разработка сайта стоматологической клиники
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.websites} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.websites} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Создание медицинского сайта на конструкторах
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.websites} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.websites} className="text-slate-300 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block">
                   Адаптивный дизайн медицинского сайта
+                </Link>
+              </li>
+              <li>
+                <Link href={serviceUrls.websites} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 text-base md:text-lg block italic">
+                  еще...
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Услуга 3: SMM */}
-          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-300">
-            <div className="flex items-center mb-6">
-              <div className="w-8 h-8 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mr-3">
-                <SMMIcon />
+          <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 flex flex-col hover-lift blur-backdrop animate-slideInStagger delay-300">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center">
+                <div className="text-teal-400 mr-4">
+                  <SMMIcon />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-semibold font-fixedsys text-shadow">SMM</h3>
               </div>
-              <h3 className="text-xl font-semibold font-fixedsys text-shadow">SMM</h3>
+              <div className="md:hidden">
+                <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </div>
-            <ul className="space-y-3 flex-grow">
+            <ul className="space-y-4 flex-grow">
               <li>
-                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.smm} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   SMM для медицинских клиник
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.smm} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Продвижение стоматологии в социальных сетях
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.smm} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   SMM для косметологических центров
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.smm} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Ведение соц сетей для врачей
                 </Link>
               </li>
               <li>
-                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-sm block">
+                <Link href={serviceUrls.smm} className="text-slate-300 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block">
                   Контент-маркетинг для медицинских услуг
+                </Link>
+              </li>
+              <li>
+                <Link href={serviceUrls.smm} className="text-slate-400 hover:text-teal-400 transition-colors duration-300 text-base md:text-lg block italic">
+                  еще...
                 </Link>
               </li>
             </ul>
