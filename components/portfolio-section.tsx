@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight, Target, Brain, Eye, ChartBar, Users, TrendUp } from "phosphor-react"
+import { casesData } from '@/lib/cases'
 
 export default function PortfolioSection() {
   // Функция для открытия кейса (переход на страницу)
