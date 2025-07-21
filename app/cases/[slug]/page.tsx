@@ -4,7 +4,7 @@ import { notFound, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { X, ArrowLeft, ArrowRight } from 'phosphor-react'
 import { Button } from '@/components/ui/button'
-import { casesData } from '@/lib/cases-data'
+import { getCaseBySlug, getAdjacentCases } from '@/lib/cases'
 import Image from 'next/image'
 
 interface CasePageProps {
@@ -13,9 +13,39 @@ interface CasePageProps {
   }
 }
 
+// Генерация метаданных для SEO
+export async function generateMetadata({ params }: CasePageProps) {
+  const caseData = getCaseBySlug(params.slug)
+  
+  if (!caseData) {
+    return {
+      title: 'Кейс не найден | Hippocrat Digital',
+      description: 'Запрашиваемый кейс не найден'
+    }
+  }
+
+  return {
+    title: caseData.seo.title,
+    description: caseData.seo.description,
+    keywords: caseData.seo.keywords.join(', '),
+    openGraph: {
+      title: caseData.title,
+      description: caseData.shortDescription,
+      images: [caseData.images[0]],
+      type: 'article'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: caseData.title,
+      description: caseData.shortDescription,
+      images: [caseData.images[0]]
+    }
+  }
+}
+
 export default function CasePage({ params }: CasePageProps) {
   const router = useRouter()
-  const caseData = casesData[params.slug]
+  const caseData = getCaseBySlug(params.slug)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
@@ -29,11 +59,8 @@ export default function CasePage({ params }: CasePageProps) {
     notFound()
   }
 
-  // Получаем все кейсы для навигации
-  const allCases = Object.keys(casesData)
-  const currentIndex = allCases.indexOf(params.slug)
-  const prevCase = currentIndex > 0 ? allCases[currentIndex - 1] : null
-  const nextCase = currentIndex < allCases.length - 1 ? allCases[currentIndex + 1] : null
+  // Получаем соседние кейсы для навигации
+  const { prev: prevCase, next: nextCase } = getAdjacentCases(params.slug)
 
   // Навигация между кейсами
   const goToPrevCase = () => {
@@ -44,9 +71,9 @@ export default function CasePage({ params }: CasePageProps) {
     if (nextCase) router.push(`/cases/${nextCase}`)
   }
 
-  // Закрытие (возврат на главную)
+  // Закрытие (возврат на главную с якорем)
   const handleClose = () => {
-    router.push('/')
+    router.push('/#portfolio')
   }
 
   // Обработка формы
@@ -82,6 +109,7 @@ export default function CasePage({ params }: CasePageProps) {
         <button
           onClick={goToPrevCase}
           className="fixed left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate-900/80 hover:bg-slate-900 rounded-full flex items-center justify-center text-white transition-all duration-200 z-10"
+          aria-label="Предыдущий кейс"
         >
           <ArrowLeft size={24} weight="bold" />
         </button>
@@ -91,6 +119,7 @@ export default function CasePage({ params }: CasePageProps) {
         <button
           onClick={goToNextCase}
           className="fixed right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate-900/80 hover:bg-slate-900 rounded-full flex items-center justify-center text-white transition-all duration-200 z-10"
+          aria-label="Следующий кейс"
         >
           <ArrowRight size={24} weight="bold" />
         </button>
@@ -112,6 +141,7 @@ export default function CasePage({ params }: CasePageProps) {
               size="icon"
               onClick={handleClose}
               className="text-slate-400 hover:text-white hover:bg-slate-800"
+              aria-label="Закрыть кейс"
             >
               <X size={24} weight="bold" />
             </Button>
@@ -142,12 +172,14 @@ export default function CasePage({ params }: CasePageProps) {
                     <button
                       onClick={prevImage}
                       className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-slate-900/80 hover:bg-slate-900 rounded-full flex items-center justify-center text-white transition-all duration-200"
+                      aria-label="Предыдущее изображение"
                     >
                       <ArrowLeft size={20} weight="bold" />
                     </button>
                     <button
                       onClick={nextImage}
                       className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-slate-900/80 hover:bg-slate-900 rounded-full flex items-center justify-center text-white transition-all duration-200"
+                      aria-label="Следующее изображение"
                     >
                       <ArrowRight size={20} weight="bold" />
                     </button>
@@ -167,6 +199,7 @@ export default function CasePage({ params }: CasePageProps) {
                           ? 'bg-teal-400 w-6' 
                           : 'bg-slate-600 hover:bg-slate-500'
                       }`}
+                      aria-label={`Показать изображение ${index + 1}`}
                     />
                   ))}
                 </div>
@@ -177,9 +210,7 @@ export default function CasePage({ params }: CasePageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {caseData.metrics.map((metric, index) => (
                 <div key={index} className="bg-slate-800/50 rounded-xl p-4 text-center">
-                  <div className="text-slate-400 text-sm mb-2">
-                    {index === 0 ? 'Стоимость лида' : index === 1 ? 'Количество лидов' : 'ROI'}
-                  </div>
+                  <div className="text-slate-400 text-sm mb-2">{metric.label}</div>
                   <div className="text-red-400 text-lg font-bold mb-1">{metric.before}</div>
                   <div className="text-xs text-slate-500 mb-2">↓</div>
                   <div className="text-teal-400 text-lg font-bold mb-1">{metric.after}</div>
@@ -191,13 +222,13 @@ export default function CasePage({ params }: CasePageProps) {
             {/* Content Sections */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-bold text-white mb-3 font-fixedsys">Задача</h3>
-                <p className="text-slate-300 leading-relaxed">{caseData.content.challenge}</p>
+                <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Задача</h2>
+                <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.challenge}</div>
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-white mb-3 font-fixedsys">Решение</h3>
-                <p className="text-slate-300 leading-relaxed mb-4">{caseData.content.solution}</p>
+                <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Решение</h2>
+                <div className="text-slate-300 leading-relaxed whitespace-pre-line mb-4">{caseData.content.solution}</div>
                 <ul className="space-y-2">
                   {caseData.content.details.map((detail, index) => (
                     <li key={index} className="flex items-start space-x-3">
@@ -209,8 +240,8 @@ export default function CasePage({ params }: CasePageProps) {
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-white mb-3 font-fixedsys">Результаты</h3>
-                <p className="text-slate-300 leading-relaxed">{caseData.content.results}</p>
+                <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Результаты</h2>
+                <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.results}</div>
               </div>
             </div>
 
