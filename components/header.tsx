@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "phosphor-react"
+import { List, X, CaretDown } from "phosphor-react"
 import Logo from "@/components/logo"
 import Link from "next/link"
 
@@ -102,7 +102,7 @@ export default function Header({ scrolled }: HeaderProps) {
               className="text-slate-300 hover:text-teal-400 hover:bg-transparent flex items-center gap-1 transition-colors duration-200"
             >
               Услуги
-              <ChevronDown 
+              <CaretDown 
                 size={16} 
                 weight="bold"
                 className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
@@ -183,7 +183,7 @@ export default function Header({ scrolled }: HeaderProps) {
             className="text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
           >
             <div className="relative w-6 h-6">
-              <Menu 
+              <List 
                 size={24} 
                 weight="bold"
                 className={`absolute inset-0 transition-all duration-200 ${
@@ -232,7 +232,7 @@ export default function Header({ scrolled }: HeaderProps) {
                 onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
               >
                 Услуги
-                <ChevronDown 
+                <CaretDown 
                   size={16} 
                   weight="bold"
                   className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
