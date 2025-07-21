@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown } from "phosphor-react"
 import Logo from "@/components/logo"
 import Link from "next/link"
 
@@ -81,26 +81,16 @@ export default function Header({ scrolled }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-4 items-center">
-          <Link href="/about">
-            <Button 
-              variant="ghost" 
-              className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-            >
-              О нас
-            </Button>
-          </Link>
+          {/* 1. Кейсы */}
+          <Button 
+            variant="ghost" 
+            className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+            onClick={() => scrollToSection("portfolio")}
+          >
+            Кейсы
+          </Button>
           
-          {/* Кнопка Блог */}
-          <Link href="/blog">
-            <Button 
-              variant="ghost" 
-              className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-            >
-              Блог
-            </Button>
-          </Link>
-          
-          {/* Services Dropdown with improved UX */}
+          {/* 2. Services Dropdown */}
           <div 
             ref={dropdownRef}
             className="relative"
@@ -114,6 +104,7 @@ export default function Header({ scrolled }: HeaderProps) {
               Услуги
               <ChevronDown 
                 size={16} 
+                weight="bold"
                 className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
               />
             </Button>
@@ -155,13 +146,26 @@ export default function Header({ scrolled }: HeaderProps) {
             </div>
           </div>
           
-          <Button 
-            variant="ghost" 
-            className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-            onClick={() => scrollToSection("portfolio")}
-          >
-            Кейсы
-          </Button>
+          {/* 3. Блог */}
+          <Link href="/blog">
+            <Button 
+              variant="ghost" 
+              className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+            >
+              Блог
+            </Button>
+          </Link>
+          
+          {/* 4. О нас */}
+          <Link href="/about">
+            <Button 
+              variant="ghost" 
+              className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+            >
+              О нас
+            </Button>
+          </Link>
+          
           <Button
             className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 transition-all duration-200 hover:scale-105 active:scale-95"
             onClick={() => scrollToSection("contact")}
@@ -181,12 +185,14 @@ export default function Header({ scrolled }: HeaderProps) {
             <div className="relative w-6 h-6">
               <Menu 
                 size={24} 
+                weight="bold"
                 className={`absolute inset-0 transition-all duration-200 ${
                   isMenuOpen ? 'opacity-0 rotate-45 scale-75' : 'opacity-100 rotate-0 scale-100'
                 }`} 
               />
               <X 
                 size={24} 
+                weight="bold"
                 className={`absolute inset-0 transition-all duration-200 ${
                   isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-45 scale-75'
                 }`} 
@@ -208,24 +214,18 @@ export default function Header({ scrolled }: HeaderProps) {
           </div>
           
           <div className="flex flex-col gap-2">
-            {[
-              { label: "О нас", href: "/about" },
-              { label: "Блог", href: "/blog" }
-            ].map((item, index) => (
-              <Link key={item.href} href={item.href}>
-                <Button 
-                  variant="ghost" 
-                  className={`w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger`}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Button>
-              </Link>
-            ))}
+            {/* Mobile menu с новым порядком */}
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+              style={{ animationDelay: '0ms' }}
+              onClick={() => scrollToSection("portfolio")}
+            >
+              Кейсы
+            </Button>
             
             {/* Mobile Services Dropdown with improved UX */}
-            <div className="animate-slideInStagger" style={{ animationDelay: '100ms' }}>
+            <div className="animate-slideInStagger" style={{ animationDelay: '50ms' }}>
               <Button 
                 variant="ghost" 
                 className="w-full justify-between text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
@@ -234,6 +234,7 @@ export default function Header({ scrolled }: HeaderProps) {
                 Услуги
                 <ChevronDown 
                   size={16} 
+                  weight="bold"
                   className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
                 />
               </Button>
@@ -265,25 +266,32 @@ export default function Header({ scrolled }: HeaderProps) {
                 </div>
               </div>
             </div>
-            
-            {[
-              { label: "Кейсы", action: () => scrollToSection("portfolio") },
-              { label: "Команда", action: () => scrollToSection("team") }
-            ].map((item, index) => (
+
+            <Link href="/blog">
               <Button 
-                key={item.label}
                 variant="ghost" 
-                className={`w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger`}
-                style={{ animationDelay: `${(index + 3) * 50}ms` }}
-                onClick={item.action}
+                className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                style={{ animationDelay: '100ms' }}
+                onClick={() => setIsMenuOpen(false)}
               >
-                {item.label}
+                Блог
               </Button>
-            ))}
+            </Link>
+
+            <Link href="/about">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                style={{ animationDelay: '150ms' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                О нас
+              </Button>
+            </Link>
             
             <Button
               className={`w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-4 transition-all duration-200 hover:scale-105 active:scale-95 animate-slideInStagger`}
-              style={{ animationDelay: '250ms' }}
+              style={{ animationDelay: '200ms' }}
               onClick={() => scrollToSection("contact")}
             >
               Связаться
