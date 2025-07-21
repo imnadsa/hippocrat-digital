@@ -1,24 +1,24 @@
 import React from 'react';
-import { Stethoscope, Zap, TrendingUp, MapPin } from 'lucide-react';
+import { Heart, Lightning, TrendUp, MapPin } from "phosphor-react";
 
 export default function WhyUsSection() {
   const advantages = [
     {
-      icon: Stethoscope,
+      icon: Heart,
       title: 'Медицинский бэкграунд',
       description: 'Понимаем специфику healthcare изнутри. Знаем терминологию, этические нормы и особенности работы с пациентами.',
       color: 'from-blue-500 to-cyan-500',
       bgGradient: 'from-blue-500/10 to-cyan-500/10'
     },
     {
-      icon: Zap,
+      icon: Lightning,
       title: 'Быстрые решения',
       description: 'Работаем без бюрократии и лишних процедур. Конкретные результаты в сжатые сроки.',
       color: 'from-yellow-500 to-orange-500',
       bgGradient: 'from-yellow-500/10 to-orange-500/10'
     },
     {
-      icon: TrendingUp,
+      icon: TrendUp,
       title: 'Фокус на ROI',
       description: 'Каждое решение должно приносить измеримую прибыль. Отслеживаем конверсии и оптимизируем затраты.',
       color: 'from-green-500 to-emerald-500',
