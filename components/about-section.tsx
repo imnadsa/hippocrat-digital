@@ -1,4 +1,4 @@
-ч"use client"
+"use client"
 
 import { Brain, Flask, Stethoscope, TrendUp } from "phosphor-react"
 
