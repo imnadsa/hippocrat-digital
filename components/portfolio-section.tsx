@@ -227,12 +227,30 @@ export default function PortfolioSection() {
           </div>
         </div>
 
-        {/* Статистика портфолио */
+        {/* Статистика портфолио */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-400 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">50+</div>
+            <p className="text-slate-400 text-sm">Успешных проектов</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-500 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">25+</div>
+            <p className="text-slate-400 text-sm">Довольных клиентов</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-600 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">280%</div>
+            <p className="text-slate-400 text-sm">Средний рост ROI</p>
+          </div>
+          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-700 hover-lift">
+            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">₽50М+</div>
+            <p className="text-slate-400 text-sm">Дополнительный доход клиентов</p>
+          </div>
+        </div>
 
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
           <h3 className="text-xl font-semibold text-white mb-4 font-fixedsys text-shadow">
-            Мы хотим поработать с Вами, а Вы?
+            Хотите стать следующим успешным кейсом?
           </h3>
           <Button
             className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-3 hover-lift hover-glow transition-all duration-300"
