@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { CheckCircle2, Send } from "lucide-react"
+import { CheckCircle, PaperPlaneTilt } from "phosphor-react"
 
 export default function CtaSection() {
   const [formData, setFormData] = useState({
@@ -66,7 +66,7 @@ export default function CtaSection() {
           {formStatus === "success" ? (
             <div className="text-center py-10 animate-scaleUp">
               <div className="w-16 h-16 rounded-full bg-teal-900/30 flex items-center justify-center mx-auto mb-6 animate-iconBounce">
-                <CheckCircle2 size={32} className="text-teal-400" />
+                <CheckCircle size={32} className="text-teal-400" weight="duotone" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2 font-fixedsys text-shadow animate-fadeInUp delay-100">Спасибо за заявку!</h3>
               <p className="text-slate-300 mb-6 animate-fadeInUp delay-200">
@@ -179,7 +179,7 @@ export default function CtaSection() {
                   ) : (
                     <>
                       <span>Отправить заявку</span>
-                      <Send size={18} className="animate-iconBounce delay-700" />
+                      <PaperPlaneTilt size={18} className="animate-iconBounce delay-700" weight="duotone" />
                     </>
                   )}
                 </Button>
