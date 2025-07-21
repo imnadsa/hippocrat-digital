@@ -48,7 +48,7 @@ export default function HeroSection() {
             className="w-full sm:w-auto border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 hover-lift transition-all duration-300"
             onClick={() => scrollToSection("services")}
           >
-            Узнать больше
+            Получить КП
           </Button>
         </div>
       </div>
