@@ -12,7 +12,7 @@ export default function ValuesSection() {
       metrics: ['ROI +200%', 'Конверсия +150%']
     },
     {
-      icon: Award,
+      icon: Trophy,
       title: 'Экспертность',
       description: 'Глубокие знания медицины и маркетинга. Команда профессионалов с медицинским образованием и цифровыми навыками.',
       color: 'from-blue-500 to-indigo-600',
