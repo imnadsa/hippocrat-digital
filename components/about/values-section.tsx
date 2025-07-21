@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Award, Eye, Lightbulb } from 'lucide-react';
+import { Target, Trophy, Eye, Lightbulb } from "phosphor-react";
 
 export default function ValuesSection() {
   const values = [
