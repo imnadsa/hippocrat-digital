@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Sparkles } from "phosphor-react"
+import { Sparkle } from "phosphor-react"
 import MarketingAnimation from "@/components/marketing-animation"
 
 export default function HeroSection() {
@@ -22,7 +22,7 @@ export default function HeroSection() {
       <div className="md:w-1/2 space-y-6 mb-10 md:mb-0 relative z-10">
         <div className="flex items-center gap-2 mb-4 animate-fadeInLeft">
           <div className="px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-xs flex items-center gap-1 hover-glow hover:border-teal-500/50 transition-all duration-300">
-            <Sparkles size={12} className="animate-iconRotate" weight="duotone" />
+            <Sparkle size={12} className="animate-iconRotate" weight="duotone" />
             <span>Приводим пациентов клиникам более 4 лет</span>
           </div>
         </div>
