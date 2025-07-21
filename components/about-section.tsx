@@ -1,4 +1,4 @@
-"use client"
+ч"use client"
 
 import { Brain, Flask, Stethoscope, TrendUp } from "phosphor-react"
 
@@ -64,3 +64,4 @@ export default function AboutSection() {
       </div>
     </section>
   )
+}
