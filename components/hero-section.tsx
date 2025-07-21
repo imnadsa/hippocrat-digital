@@ -31,9 +31,6 @@ export default function HeroSection() {
             Цифровые решения для медицинских клиник
           </span>
         </h1>
-        <p className="text-base md:text-xl text-slate-300 animate-fadeInUp delay-200 text-shadow">
-          Hippocrat Digital — медицинское digital-агентство, специализирующееся на продвижении клиник и медицинских услуг
-        </p>
         <div className="flex flex-col sm:flex-row gap-4 pt-2 animate-fadeInUp delay-400">
           <Button
             size="lg"
