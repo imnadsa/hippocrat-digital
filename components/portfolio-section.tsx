@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowUpRight, Target, Brain, Eye, BarChart3, Users, TrendingUp } from "lucide-react"
+import { ArrowUpRight, Target, Brain, Eye, ChartBar, Users, TrendUp } from "phosphor-react"
 
 export default function PortfolioSection() {
   // Функция для открытия внешних ссылок (кейсов)
@@ -42,7 +42,7 @@ export default function PortfolioSection() {
             <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
               {/* Иконка вместо изображения */}
               <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-200 group-hover:scale-110 transition-transform duration-300">
-                <Target size={48} className="text-teal-400" />
+                <Target size={48} className="text-teal-400" weight="duotone" />
               </div>
               <div className="absolute top-4 right-4">
                 <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-300">
@@ -61,14 +61,14 @@ export default function PortfolioSection() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-600">
                   <div className="flex items-center justify-center mb-2">
-                    <Users size={20} className="text-teal-400 mr-2" />
+                    <Users size={20} className="text-teal-400 mr-2" weight="duotone" />
                     <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+185%</span>
                   </div>
                   <p className="text-slate-400 text-xs">Новых пациентов</p>
                 </div>
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
                   <div className="flex items-center justify-center mb-2">
-                    <TrendingUp size={20} className="text-teal-400 mr-2" />
+                    <TrendUp size={20} className="text-teal-400 mr-2" weight="duotone" />
                     <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">₽2.1М</span>
                   </div>
                   <p className="text-slate-400 text-xs">Дополнительный доход</p>
@@ -95,7 +95,7 @@ export default function PortfolioSection() {
                 className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1000"
               >
                 <span>Изучить кейс</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
               </Button>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function PortfolioSection() {
             <div className="h-56 bg-gradient-to-br from-indigo-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
               {/* Иконка вместо изображения */}
               <div className="w-24 h-24 rounded-full bg-indigo-500/20 flex items-center justify-center animate-iconBounce delay-300 group-hover:scale-110 transition-transform duration-300">
-                <Brain size={48} className="text-indigo-400" />
+                <Brain size={48} className="text-indigo-400" weight="duotone" />
               </div>
               <div className="absolute top-4 right-4">
                 <div className="inline-block px-3 py-1 rounded-full bg-indigo-900/70 text-indigo-400 text-xs hover:bg-indigo-900/90 transition-all duration-300 animate-fadeIn delay-400">
@@ -124,14 +124,14 @@ export default function PortfolioSection() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
                   <div className="flex items-center justify-center mb-2">
-                    <Users size={20} className="text-indigo-400 mr-2" />
+                    <Users size={20} className="text-indigo-400 mr-2" weight="duotone" />
                     <span className="text-indigo-400 font-bold font-fixedsys text-lg animate-gradient-text">5000+</span>
                   </div>
                   <p className="text-slate-400 text-xs">Активных пользователей</p>
                 </div>
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-800">
                   <div className="flex items-center justify-center mb-2">
-                    <BarChart3 size={20} className="text-indigo-400 mr-2" />
+                    <ChartBar size={20} className="text-indigo-400 mr-2" weight="duotone" />
                     <span className="text-indigo-400 font-bold font-fixedsys text-lg animate-gradient-text">4.9★</span>
                   </div>
                   <p className="text-slate-400 text-xs">Средняя оценка</p>
@@ -158,7 +158,7 @@ export default function PortfolioSection() {
                 className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1100"
               >
                 <span>Изучить кейс</span>
-                <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
               </Button>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function PortfolioSection() {
             <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
               {/* Иконка вместо изображения */}
               <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-400 group-hover:scale-110 transition-transform duration-300">
-                <Eye size={48} className="text-teal-400" />
+                <Eye size={48} className="text-teal-400" weight="duotone" />
               </div>
               <div className="absolute top-4 right-4">
                 <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-500">
@@ -187,14 +187,14 @@ export default function PortfolioSection() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-800">
                   <div className="flex items-center justify-center mb-2">
-                    <TrendingUp size={20} className="text-teal-400 mr-2" />
+                    <TrendUp size={20} className="text-teal-400 mr-2" weight="duotone" />
                     <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">×5</span>
                   </div>
                   <p className="text-slate-400 text-xs">Рост охватов</p>
                 </div>
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-900">
                   <div className="flex items-center justify-center mb-2">
-                    <Users size={20} className="text-teal-400 mr-2" />
+                    <Users size={20} className="text-teal-400 mr-2" weight="duotone" />
                     <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+320%</span>
                   </div>
                   <p className="text-slate-400 text-xs">Записей на прием</p>
@@ -221,36 +221,18 @@ export default function PortfolioSection() {
                 className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1200"
               >
                 <span>Изучить кейс</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Статистика портфолио */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-400 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">50+</div>
-            <p className="text-slate-400 text-sm">Успешных проектов</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-500 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">25+</div>
-            <p className="text-slate-400 text-sm">Довольных клиентов</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-600 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">280%</div>
-            <p className="text-slate-400 text-sm">Средний рост ROI</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-700 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">₽50М+</div>
-            <p className="text-slate-400 text-sm">Дополнительный доход клиентов</p>
-          </div>
-        </div>
+        {/* Статистика портфолио */
 
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
           <h3 className="text-xl font-semibold text-white mb-4 font-fixedsys text-shadow">
-            Хотите стать следующим успешным кейсом?
+            Мы хотим поработать с Вами, а Вы?
           </h3>
           <Button
             className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-3 hover-lift hover-glow transition-all duration-300"
