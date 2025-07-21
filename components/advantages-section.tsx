@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight, Users, Percent, TrendingUp, Scale } from "lucide-react"
+import { CaretRight, Users, Percent, TrendUp, Scales } from "phosphor-react"
 
 export default function AdvantagesSection() {
   return (
@@ -29,7 +29,7 @@ export default function AdvantagesSection() {
             <div className="space-y-4">
               <div className="flex items-start gap-3 animate-slideInStagger delay-300">
                 <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-400 hover:scale-110 transition-transform duration-300">
-                  <ChevronRight size={14} className="text-teal-400" />
+                  <CaretRight size={14} className="text-teal-400" weight="bold" />
                 </div>
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Понимаем специфику медицины</h4>
@@ -39,7 +39,7 @@ export default function AdvantagesSection() {
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-400">
                 <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-500 hover:scale-110 transition-transform duration-300">
-                  <ChevronRight size={14} className="text-teal-400" />
+                  <CaretRight size={14} className="text-teal-400" weight="bold" />
                 </div>
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Комплексный подход</h4>
@@ -49,7 +49,7 @@ export default function AdvantagesSection() {
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-500">
                 <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-600 hover:scale-110 transition-transform duration-300">
-                  <ChevronRight size={14} className="text-teal-400" />
+                  <CaretRight size={14} className="text-teal-400" weight="bold" />
                 </div>
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Фокус на результат</h4>
@@ -59,7 +59,7 @@ export default function AdvantagesSection() {
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-600">
                 <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-700 hover:scale-110 transition-transform duration-300">
-                  <ChevronRight size={14} className="text-teal-400" />
+                  <CaretRight size={14} className="text-teal-400" weight="bold" />
                 </div>
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Соблюдение медицинской этики</h4>
@@ -72,7 +72,7 @@ export default function AdvantagesSection() {
           <div className="w-full md:w-3/5 grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fadeInRight">
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-200">
               <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-5 animate-iconBounce delay-300">
-                <Users size={28} />
+                <Users size={28} weight="duotone" />
               </div>
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Больше пациентов</h3>
               <p className="text-slate-400">
@@ -82,7 +82,7 @@ export default function AdvantagesSection() {
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-300">
               <div className="w-14 h-14 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-5 animate-iconBounce delay-400">
-                <Percent size={28} />
+                <Percent size={28} weight="duotone" />
               </div>
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Высокая конверсия</h3>
               <p className="text-slate-400">
@@ -92,7 +92,7 @@ export default function AdvantagesSection() {
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-400">
               <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-5 animate-iconBounce delay-500">
-                <TrendingUp size={28} />
+                <TrendUp size={28} weight="duotone" />
               </div>
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Рост прибыли</h3>
               <p className="text-slate-400">
@@ -102,7 +102,7 @@ export default function AdvantagesSection() {
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-500">
               <div className="w-14 h-14 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-5 animate-iconBounce delay-600">
-                <Scale size={28} />
+                <Scales size={28} weight="duotone" />
               </div>
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Соблюдение законов</h3>
               <p className="text-slate-400">
