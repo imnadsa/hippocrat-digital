@@ -1,6 +1,6 @@
 "use client"
 
-import { Brain, Flask, Stethoscope, TrendUp } from "phosphor-react"
+import { Brain, Flask, Heart, TrendUp } from "phosphor-react"
 
 export default function AboutSection() {
   return (
@@ -48,7 +48,7 @@ export default function AboutSection() {
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-300 blur-backdrop">
                 <div className="w-12 h-12 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-3 animate-iconBounce delay-400">
-                  <Stethoscope size={24} weight="duotone" />
+                  <Heart size={24} weight="duotone" />
                 </div>
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Медицинская этика</h3>
               </div>
