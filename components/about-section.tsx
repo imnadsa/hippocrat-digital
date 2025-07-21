@@ -1,6 +1,6 @@
 "use client"
 
-import { Brain, Beaker, Stethoscope, Activity } from "lucide-react"
+import { Brain, Flask, Stethoscope, TrendUp } from "phosphor-react"
 
 export default function AboutSection() {
   return (
@@ -36,25 +36,25 @@ export default function AboutSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-100 blur-backdrop">
                 <div className="w-12 h-12 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-3 animate-iconBounce delay-200">
-                  <Brain size={24} />
+                  <Brain size={24} weight="duotone" />
                 </div>
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Медицинская экспертиза</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-200 blur-backdrop">
                 <div className="w-12 h-12 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-3 animate-iconBounce delay-300">
-                  <Beaker size={24} />
+                  <Flask size={24} weight="duotone" />
                 </div>
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Инновационные подходы</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-300 blur-backdrop">
                 <div className="w-12 h-12 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-3 animate-iconBounce delay-400">
-                  <Stethoscope size={24} />
+                  <Stethoscope size={24} weight="duotone" />
                 </div>
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Медицинская этика</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-400 blur-backdrop">
                 <div className="w-12 h-12 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-3 animate-iconBounce delay-500">
-                  <Activity size={24} />
+                  <TrendUp size={24} weight="duotone" />
                 </div>
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Рост показателей</h3>
               </div>
@@ -64,4 +64,3 @@ export default function AboutSection() {
       </div>
     </section>
   )
-}
