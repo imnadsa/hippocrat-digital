@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { getCaseBySlug } from '@/lib/cases'
 import { Metadata } from 'next'
 import CasePageClient from './case-page-client'
+import ScrollToPortfolio from '@/components/scroll-to-portfolio'
 
 // Импортируем компоненты главной страницы
 import Header from '@/components/header'
@@ -57,9 +58,12 @@ export default function CasePage({ params }: CasePageProps) {
 
   return (
     <div className="relative">
+      {/* Компонент для автоматической прокрутки к портфолио */}
+      <ScrollToPortfolio />
+
       {/* Фон - полная главная страница */}
       <div className="min-h-screen bg-[#0b101b]">
-        <Header scrolled={false} />
+        <Header scrolled={true} />
         <HeroSection />
         <AboutSection />
         <PortfolioSection />
