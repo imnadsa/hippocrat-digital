@@ -49,7 +49,7 @@ export default function HeroSection() {
           </Button>
         </div>
       </div>
-      <div className="w-full md:w-1/2 h-[250px] md:h-[400px] relative animate-fadeInRight">
+      <div className="w-full md:w-1/2 h-[250px] md:h-[400px] relative animate-fadeInRight bg-gradient-to-br from-[#0b101b] to-[#0f1419]">
         <MarketingAnimation />
       </div>
     </section>
