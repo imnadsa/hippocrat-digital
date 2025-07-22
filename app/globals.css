@@ -267,72 +267,25 @@ body {
   animation: marketingDraw 15s linear infinite;
 }
 
-/* ===== НОВЫЕ АНИМАЦИИ ДЛЯ SMM СТРАНИЦЫ ===== */
+/* ===== ИСПРАВЛЕННЫЕ АНИМАЦИИ (ВАРИАНТ 1 - ПРОФЕССИОНАЛЬНЫЙ) ===== */
 
-/* Fade in анимации для секций */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ОТКЛЮЧАЕМ все раздражающие анимации появления */
+.animate-fadeInUp,
+.animate-fadeInLeft, 
+.animate-fadeInRight,
+.animate-slideInStagger,
+.animate-scaleUp,
+.animate-fadeIn,
+.animate-iconBounce,
+.animate-buttonClick {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Анимации для карточек */
-@keyframes scaleUp {
-  from {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInStagger {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ОСТАВЛЯЕМ фоновые анимации (они не мешают) */
+.animate-floatBackground {
+  animation: floatBackground 12s ease-in-out infinite;
 }
 
 /* Parallax для background элементов */
@@ -348,83 +301,24 @@ body {
   }
 }
 
-/* Клики анимации для кнопок */
-@keyframes buttonClick {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.95);
-  }
-  100% {
-    transform: scale(1);
-  }
+/* УЛУЧШЕННЫЕ hover эффекты (более subtle) */
+.hover-lift {
+  transition: transform 0.2s ease; /* Было 0.3s */
 }
 
-/* Анимации для иконок */
-@keyframes iconRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(10deg);
-  }
+.hover-lift:hover {
+  transform: translateY(-3px); /* Было -8px */
 }
 
-@keyframes iconBounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-5px);
-  }
-  60% {
-    transform: translateY(-3px);
-  }
+.hover-glow {
+  transition: box-shadow 0.2s ease; /* Было 0.3s */
 }
 
-/* Новые utility классы */
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
+.hover-glow:hover {
+  box-shadow: 0 8px 25px rgba(45, 212, 191, 0.1); /* Было 0.15 */
 }
 
-.animate-fadeInLeft {
-  animation: fadeInLeft 0.8s ease-out;
-}
-
-.animate-fadeInRight {
-  animation: fadeInRight 0.8s ease-out;
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-scaleUp {
-  animation: scaleUp 0.4s ease-out;
-}
-
-.animate-slideInStagger {
-  animation: slideInStagger 0.7s ease-out;
-}
-
-.animate-floatBackground {
-  animation: floatBackground 12s ease-in-out infinite;
-}
-
-.animate-buttonClick {
-  animation: buttonClick 0.1s ease-in-out;
-}
-
-.animate-iconRotate {
-  animation: iconRotate 0.3s ease-in-out;
-}
-
-.animate-iconBounce {
-  animation: iconBounce 0.6s ease-in-out;
-}
-
-/* Задержки для stagger эффекта */
+/* ОСТАВЛЯЕМ задержки (они могут использоваться для других целей) */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
@@ -436,20 +330,3 @@ body {
 .delay-900 { animation-delay: 0.9s; }
 .delay-1000 { animation-delay: 1.0s; }
 .delay-1200 { animation-delay: 1.2s; }
-
-/* Hover анимации */
-.hover-lift {
-  transition: transform 0.3s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-8px);
-}
-
-.hover-glow {
-  transition: box-shadow 0.3s ease;
-}
-
-.hover-glow:hover {
-  box-shadow: 0 20px 40px rgba(45, 212, 191, 0.15);
-}
