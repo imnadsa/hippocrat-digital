@@ -33,66 +33,101 @@ export default function PortfolioSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Кейс 1 - Онлайн Око (реальный кейс) */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-100">
-            <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
-              {/* Иконка вместо изображения */}
-              <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-200 group-hover:scale-110 transition-transform duration-300">
-                <Eye size={48} className="text-teal-400" weight="duotone" />
-              </div>
-              <div className="absolute top-4 right-4">
-                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-300">
-                  Таргетированная реклама
+              <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden">
+                {/* Основное изображение кейса */}
+                <img 
+                  src="/cases/online-oko/cardOnlineOko.jpg" 
+                  alt="Сайт детской офтальмологии Онлайн-Око" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                
+                {/* Градиентный оверлей для читаемости */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+                
+                {/* Цветной оверлей при ховере */}
+                <div className="absolute inset-0 bg-teal-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Hover саммари как у Belberry */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                  <div className="bg-slate-900/95 backdrop-blur-md rounded-2xl p-6 mx-4 border border-teal-500/30 shadow-2xl">
+                    <div className="text-center mb-4">
+                      <h4 className="text-white font-bold text-lg font-fixedsys mb-2">Результат</h4>
+                    </div>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">135</div>
+                        <div className="text-slate-300 text-sm">лидов получено</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">-67%</div>
+                        <div className="text-slate-300 text-sm">стоимость лида</div>
+                      </div>
+                    </div>
+                    <div className="mt-4 text-center">
+                      <div className="text-xs text-slate-400">ROI кампании: <span className="text-teal-400 font-semibold">340%</span></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Бейдж категории */}
+                <div className="absolute top-4 right-4 z-10 group-hover:opacity-0 transition-opacity duration-300">
+                  <div className="inline-block px-3 py-1 rounded-full bg-teal-900/80 backdrop-blur-sm text-teal-400 text-xs border border-teal-500/30 hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-300">
+                    Таргетированная реклама
+                  </div>
+                </div>
+                
+                {/* Заголовок поверх изображения */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent z-10 group-hover:opacity-0 transition-opacity duration-300">
+                  <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-400 group-hover:text-teal-300 transition-colors duration-300">
+                    Онлайн-Око
+                  </h3>
+                  <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-500">Детская офтальмология</p>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent">
-                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-400 group-hover:text-teal-300 transition-colors duration-300">
-                  Онлайн-Око
-                </h3>
-                <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-500">Детская офтальмология</p>
+              
+              {/* Нижний контент карточки остается без изменений */}
+              <div className="p-6 flex-grow flex flex-col">
+                {/* Метрики */}
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-600">
+                    <div className="flex items-center justify-center mb-2">
+                      <TrendUp size={20} className="text-teal-400 mr-2" weight="duotone" />
+                      <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">-67%</span>
+                    </div>
+                    <p className="text-slate-400 text-xs">Стоимость лида</p>
+                  </div>
+                  <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
+                    <div className="flex items-center justify-center mb-2">
+                      <Users size={20} className="text-teal-400 mr-2" weight="duotone" />
+                      <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+393%</span>
+                    </div>
+                    <p className="text-slate-400 text-xs">Количество лидов</p>
+                  </div>
+                </div>
+                
+                <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-800 leading-relaxed">
+                  Снизили стоимость лида с 1200₽ до 400₽ в нише детской офтальмологии через оптимизацию таргетинга ВКонтакте.
+                </p>
+                
+                <div className="mb-4 animate-fadeInUp delay-900">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-slate-400">ROI кампании</span>
+                    <span className="text-teal-400 font-medium">340%</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full animate-gradient" style={{ width: "85%" }}></div>
+                  </div>
+                </div>
+                
+                <Button
+                  onClick={() => openCase('online-oko')}
+                  className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1000"
+                >
+                  <span>Изучить кейс</span>
+                  <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
+                </Button>
               </div>
             </div>
-            <div className="p-6 flex-grow flex flex-col">
-              {/* Метрики */}
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-600">
-                  <div className="flex items-center justify-center mb-2">
-                    <TrendUp size={20} className="text-teal-400 mr-2" weight="duotone" />
-                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">-67%</span>
-                  </div>
-                  <p className="text-slate-400 text-xs">Стоимость лида</p>
-                </div>
-                <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-700">
-                  <div className="flex items-center justify-center mb-2">
-                    <Users size={20} className="text-teal-400 mr-2" weight="duotone" />
-                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+393%</span>
-                  </div>
-                  <p className="text-slate-400 text-xs">Количество лидов</p>
-                </div>
-              </div>
-              
-              <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-800 leading-relaxed">
-                Снизили стоимость лида с 1200₽ до 400₽ в нише детской офтальмологии через оптимизацию таргетинга ВКонтакте.
-              </p>
-              
-              <div className="mb-4 animate-fadeInUp delay-900">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-slate-400">ROI кампании</span>
-                  <span className="text-teal-400 font-medium">340%</span>
-                </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full animate-gradient" style={{ width: "85%" }}></div>
-                </div>
-              </div>
-              
-              <Button
-                onClick={() => openCase('online-oko')}
-                className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1000"
-              >
-                <span>Изучить кейс</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
-              </Button>
-            </div>
-          </div>
-
           {/* Кейс 2 - AI (плейсхолдер) */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-indigo-500/30 hover:shadow-xl hover:shadow-indigo-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="h-56 bg-gradient-to-br from-indigo-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
