@@ -26,7 +26,7 @@ export default function PortfolioSection() {
             Кейсы с реальными результатами
           </h2>
           <p className="text-slate-400 text-center max-w-2xl text-shadow">
-            Конкретные примеры того, как мы помогаем медицинским учреждениям увеличивать поток пациентов и прибыль
+            Конкретные примеры того, как мы улучшаем процессы медицинских учреждений. 
           </p>
         </div>
 
@@ -55,16 +55,13 @@ export default function PortfolioSection() {
                     </div>
                     <div className="grid grid-cols-2 gap-6">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">135</div>
+                        <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">40</div>
                         <div className="text-slate-300 text-sm">лидов получено</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">-67%</div>
                         <div className="text-slate-300 text-sm">стоимость лида</div>
                       </div>
-                    </div>
-                    <div className="mt-4 text-center">
-                      <div className="text-xs text-slate-400">ROI кампании: <span className="text-teal-400 font-semibold">340%</span></div>
                     </div>
                   </div>
                 </div>
@@ -249,36 +246,16 @@ export default function PortfolioSection() {
           </div>
         </div>
 
-        {/* Статистика портфолио */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-400 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">50+</div>
-            <p className="text-slate-400 text-sm">Успешных проектов</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-500 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">25+</div>
-            <p className="text-slate-400 text-sm">Довольных клиентов</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-teal-500/30 transition-all duration-300 animate-slideInStagger delay-600 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-teal-400 font-fixedsys mb-2 animate-gradient-text">280%</div>
-            <p className="text-slate-400 text-sm">Средний рост ROI</p>
-          </div>
-          <div className="text-center p-6 bg-slate-900/30 rounded-xl border border-slate-800/50 hover:border-indigo-500/30 transition-all duration-300 animate-slideInStagger delay-700 hover-lift">
-            <div className="text-2xl md:text-3xl font-bold text-indigo-400 font-fixedsys mb-2 animate-gradient-text">₽50М+</div>
-            <p className="text-slate-400 text-sm">Дополнительный доход клиентов</p>
-          </div>
-        </div>
-
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
           <h3 className="text-xl font-semibold text-white mb-4 font-fixedsys text-shadow">
-            Хотите стать следующим успешным кейсом?
+            Хотите посмотреть больше кейсов?
           </h3>
           <Button
             className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-3 hover-lift hover-glow transition-all duration-300"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Обсудить ваш проект
+            Все кейсы
           </Button>
         </div>
       </div>
