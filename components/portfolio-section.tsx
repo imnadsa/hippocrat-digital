@@ -120,7 +120,7 @@ export default function PortfolioSection() {
               <div className="h-56 bg-gradient-to-br from-indigo-900/50 to-slate-900 relative overflow-hidden">
                 {/* Основное изображение кейса */}
                 <img 
-                  src="/cases/Hippcrat-AI/cardHippocratAI.jpg" 
+                  src="/cases/Hippocrat-AI/cardHippocratAI.jpg" 
                   alt="Hippocrat AI - ИИ-ассистент для медицинского образования" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
