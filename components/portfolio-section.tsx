@@ -241,16 +241,6 @@ export default function PortfolioSection() {
                 Запустили комплексную рекламную кампанию для привлечения пациентов на имплантацию и эстетическую стоматологию.
               </p>
               
-              <div className="mb-4 animate-fadeInUp delay-1100">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-slate-400">ROI кампании</span>
-                  <span className="text-teal-400 font-medium">340%</span>
-                </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full animate-gradient" style={{ width: "85%" }}></div>
-                </div>
-              </div>
-              
               <Button
                 onClick={() => alert('Кейс скоро будет доступен!')}
                 className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1200"
