@@ -82,13 +82,14 @@ export default function Header({ scrolled }: HeaderProps) {
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-4 items-center">
           {/* 1. Кейсы */}
-          <Button 
-            variant="ghost" 
-            className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-            onClick={() => scrollToSection("portfolio")}
-          >
-            Кейсы
-          </Button>
+            <Link href="/cases">
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+              >
+                Кейсы
+              </Button>
+            </Link>
           
           {/* 2. Services Dropdown */}
           <div 
@@ -215,14 +216,16 @@ export default function Header({ scrolled }: HeaderProps) {
           
           <div className="flex flex-col gap-2">
             {/* Mobile menu с новым порядком */}
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
-              style={{ animationDelay: '0ms' }}
-              onClick={() => scrollToSection("portfolio")}
-            >
-              Кейсы
-            </Button>
+            <Link href="/cases">
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                style={{ animationDelay: '0ms' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Кейсы
+              </Button>
+            </Link>
             
             {/* Mobile Services Dropdown with improved UX */}
             <div className="animate-slideInStagger" style={{ animationDelay: '50ms' }}>
