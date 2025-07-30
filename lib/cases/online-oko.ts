@@ -22,6 +22,7 @@ export const onlineOkoCase: CaseData = {
     {
       before: '0 лидов',
       after: '40 лида',
+      improvement: '+40',
       label: 'Количество лидов'
     },
     {
