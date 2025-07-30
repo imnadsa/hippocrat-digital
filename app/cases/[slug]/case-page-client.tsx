@@ -225,6 +225,22 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.challenge}</div>
               </div>
 
+              {/* Дополнительная задача */}
+              {caseData.content.challenge2 && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Дополнительные вызовы</h2>
+                  <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.challenge2}</div>
+                </div>
+              )}
+
+              {/* Технические сложности */}
+              {caseData.content.technicalChallenges && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Технические сложности</h2>
+                  <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.technicalChallenges}</div>
+                </div>
+              )}
+
               <div>
                 <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Решение</h2>
                 <div className="text-slate-300 leading-relaxed whitespace-pre-line mb-4">{caseData.content.solution}</div>
@@ -242,6 +258,204 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Результаты</h2>
                 <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.results}</div>
               </div>
+
+              {/* Дополнительные результаты */}
+              {caseData.content.additionalResults && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Дополнительные результаты</h2>
+                  <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.additionalResults}</div>
+                </div>
+              )}
+
+              {/* Бизнес-результаты */}
+              {caseData.content.businessResults && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Бизнес-результаты</h2>
+                  <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.businessResults}</div>
+                </div>
+              )}
+
+              {/* Применение в клиниках */}
+              {caseData.content.clinicApplications && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">🏥 Применение в медицинских клиниках</h2>
+                  <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.clinicApplications}</div>
+                </div>
+              )}
+
+              {/* Проектная информация */}
+              {(caseData.content.timeline || caseData.content.teamSize || caseData.content.budget) && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Информация о проекте</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {caseData.content.timeline && (
+                      <div className="bg-slate-800/30 rounded-lg p-4">
+                        <div className="text-teal-400 font-medium mb-2">Временные рамки</div>
+                        <div className="text-slate-300">{caseData.content.timeline}</div>
+                      </div>
+                    )}
+                    {caseData.content.teamSize && (
+                      <div className="bg-slate-800/30 rounded-lg p-4">
+                        <div className="text-teal-400 font-medium mb-2">Команда</div>
+                        <div className="text-slate-300">{caseData.content.teamSize}</div>
+                      </div>
+                    )}
+                    {caseData.content.budget && (
+                      <div className="bg-slate-800/30 rounded-lg p-4">
+                        <div className="text-teal-400 font-medium mb-2">Бюджет</div>
+                        <div className="text-slate-300">{caseData.content.budget}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Технологии */}
+              {caseData.content.technologies && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Технологии</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {caseData.content.technologies.map((tech, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-teal-400 rounded-full flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">{tech}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Инструменты */}
+              {caseData.content.tools && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Инструменты разработки</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {caseData.content.tools.map((tool, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-indigo-400 rounded-full flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">{tool}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Процесс разработки */}
+              {(caseData.content.methodology || caseData.content.testingApproach || caseData.content.qualityAssurance) && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Процесс разработки</h2>
+                  <div className="space-y-4">
+                    {caseData.content.methodology && (
+                      <div>
+                        <h3 className="text-teal-400 font-medium mb-2">Методология</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed">{caseData.content.methodology}</div>
+                      </div>
+                    )}
+                    {caseData.content.testingApproach && (
+                      <div>
+                        <h3 className="text-teal-400 font-medium mb-2">Тестирование</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed">{caseData.content.testingApproach}</div>
+                      </div>
+                    )}
+                    {caseData.content.qualityAssurance && (
+                      <div>
+                        <h3 className="text-teal-400 font-medium mb-2">Контроль качества</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed">{caseData.content.qualityAssurance}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Отзывы */}
+              {(caseData.content.clientFeedback || caseData.content.userFeedback) && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Отзывы</h2>
+                  <div className="space-y-4">
+                    {caseData.content.clientFeedback && (
+                      <div className="bg-slate-800/30 rounded-lg p-4 border-l-4 border-teal-400">
+                        <h3 className="text-teal-400 font-medium mb-2">Клиенты</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed italic">{caseData.content.clientFeedback}</div>
+                      </div>
+                    )}
+                    {caseData.content.userFeedback && (
+                      <div className="bg-slate-800/30 rounded-lg p-4 border-l-4 border-indigo-400">
+                        <h3 className="text-indigo-400 font-medium mb-2">Пользователи</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed italic">{caseData.content.userFeedback}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Ключевые особенности */}
+              {caseData.content.keyFeatures && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Ключевые особенности</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {caseData.content.keyFeatures.map((feature, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <div className="w-2 h-2 bg-teal-400 rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Достижения */}
+              {caseData.content.achievements && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">🏆 Достижения</h2>
+                  <div className="space-y-3">
+                    {caseData.content.achievements.map((achievement, index) => (
+                      <div key={index} className="flex items-start space-x-3 bg-gradient-to-r from-teal-900/20 to-indigo-900/20 rounded-lg p-3">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-slate-300 text-sm">{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Бизнес-эффект */}
+              {(caseData.content.businessImpact || caseData.content.roi) && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Бизнес-эффект</h2>
+                  <div className="space-y-4">
+                    {caseData.content.businessImpact && (
+                      <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.businessImpact}</div>
+                    )}
+                    {caseData.content.roi && (
+                      <div className="bg-gradient-to-r from-teal-900/30 to-indigo-900/30 rounded-lg p-4">
+                        <h3 className="text-teal-400 font-medium mb-2">💰 ROI</h3>
+                        <div className="text-slate-300">{caseData.content.roi}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Выводы и планы */}
+              {(caseData.content.lessonsLearned || caseData.content.futureImprovements) && (
+                <div>
+                  <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Выводы и планы</h2>
+                  <div className="space-y-4">
+                    {caseData.content.lessonsLearned && (
+                      <div>
+                        <h3 className="text-teal-400 font-medium mb-2">💡 Выученные уроки</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed">{caseData.content.lessonsLearned}</div>
+                      </div>
+                    )}
+                    {caseData.content.futureImprovements && (
+                      <div>
+                        <h3 className="text-indigo-400 font-medium mb-2">🚀 Планы развития</h3>
+                        <div className="text-slate-300 text-sm leading-relaxed">{caseData.content.futureImprovements}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Tags */}
