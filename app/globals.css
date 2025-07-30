@@ -126,6 +126,13 @@ html {
   animation: gradient-shift 8s ease infinite;
 }
 
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 /* Mobile optimization */
 @media (max-width: 640px) {
   .animate-gradient {
