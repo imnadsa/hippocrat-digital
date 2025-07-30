@@ -192,10 +192,10 @@ export default function PortfolioSection() {
                 </p>
                 
                 <Button
-                  onClick={() => alert('Кейс скоро будет доступен!')}
+                  onClick={() => openCase('hippocrat-ai')}
                   className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1100"
                 >
-                  <span>Скоро</span>
+                  <span>Изучить кейс</span>
                   <ArrowUpRight size={16} className="text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
                 </Button>
               </div>
