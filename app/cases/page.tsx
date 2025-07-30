@@ -37,18 +37,18 @@ export default function CasesPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="bg-gradient-to-r from-slate-900/50 to-slate-800/50 rounded-2xl p-8 md:p-12 border border-slate-700/30">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 font-fixedsys">
-              Понравились кейсы? Давайте поработаем вместе?
+              Хотите стать следующим успешным кейсом?
             </h2>
             <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
               Мы поможем вашей клинике привлечь больше пациентов и увеличить прибыль. 
               Оставьте заявку на бесплатную консультацию.
             </p>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-4 rounded-lg text-white font-medium transition-all duration-300 hover:scale-105"
+            <a 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-4 rounded-lg text-white font-medium transition-all duration-300 hover:scale-105"
             >
               Получить консультацию
-            </button>
+            </a>
           </div>
         </div>
       </section>
