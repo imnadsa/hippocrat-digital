@@ -62,6 +62,9 @@ export interface CaseData {
     improvements?: string         // Возможные улучшения
     futureImprovements?: string   // Планы на будущее
     
+    // Применение в клиниках
+    clinicApplications?: string   // Применение технологий в медицинских клиниках
+    
     // Бизнес-impact
     businessImpact?: string       // Влияние на бизнес клиента
     roi?: string                  // Возврат инвестиций
