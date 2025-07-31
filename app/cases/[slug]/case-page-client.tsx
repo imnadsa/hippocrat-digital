@@ -57,16 +57,7 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
 
   // Закрытие (возврат на главную с якорем)
   const handleClose = () => {
-    // Сначала переходим на главную
-    router.push('/')
-    
-    // Затем прокручиваем к портфолио
-    setTimeout(() => {
-      const portfolioSection = document.getElementById('portfolio')
-      if (portfolioSection) {
-        portfolioSection.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
+    router.push('/cases')
   }
 
   // Обработка формы
