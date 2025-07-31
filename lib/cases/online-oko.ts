@@ -7,7 +7,7 @@ export const onlineOkoCase: CaseData = {
   category: 'Таргетированная реклама',
   shortDescription: 'Как мы снизили стоимость лида с 1200₽ до 400₽ в нише детской офтальмологии через оптимизацию таргетинга ВКонтакте',
   images: [
-    '/cases/online-oko/cardOnlineOko1.jpg',
+    '/cases/online-oko/oko.jpg',
     '/cases/online-oko/image1.jpg',
     '/cases/online-oko/image2.jpg',
     '/cases/online-oko/image3.jpg',
