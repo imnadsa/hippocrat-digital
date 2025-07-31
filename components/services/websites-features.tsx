@@ -198,12 +198,6 @@ export default function WebsitesFeatures() {
             >
               Заказать разработку
             </button>
-            <button 
-              className="px-6 py-3 border border-teal-700 text-teal-400 hover:bg-teal-950/50 rounded-lg font-fixedsys transition-all hover-lift"
-              onClick={() => document.getElementById("websites-portfolio")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Посмотреть примеры
-            </button>
           </div>
         </div>
       </div>
