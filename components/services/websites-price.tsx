@@ -53,6 +53,11 @@ export default function MedicalPricing() {
         "Интеграция с телефонией",
         "Базовая SEO-оптимизация"
       ],
+      notIncluded: [
+        "CRM интеграция",
+        "Личный кабинет пациентов",
+        "Онлайн-консультации"
+      ]
     },
     {
       name: "Стандарт",
@@ -63,12 +68,19 @@ export default function MedicalPricing() {
       features: [
         "Все возможности тарифа 'Старт'",
         "Интеграция с CRM системой",
+        "Автоматические SMS-уведомления",
         "Система управления отзывами",
         "Личный кабинет для пациентов",
         "История болезни и результаты анализов",
+        "Онлайн-оплата консультаций",
+        "Многоязычность (2 языка)",
         "Расширенная аналитика посещений",
         "Чат-бот для первичной консультации"
       ],
+      notIncluded: [
+        "Телемедицина",
+        "Мобильное приложение"
+      ]
     },
     {
       name: "Престиж",
@@ -78,6 +90,8 @@ export default function MedicalPricing() {
       popular: false,
       features: [
         "Все возможности тарифа 'Стандарт'",
+        "Платформа телемедицины",
+        "Мобильное приложение для пациентов",
         "Система электронной медкарты",
         "Интеграция с медицинским оборудованием",
         "Собственная система видеосвязи",
@@ -193,6 +207,12 @@ export default function MedicalPricing() {
 
         {/* Дополнительная информация */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
+            <Shield className="w-8 h-8 text-teal-400 mx-auto mb-3" />
+            <h4 className="font-semibold font-fixedsys text-white mb-2">Гарантия качества</h4>
+            <p className="text-slate-400 text-sm">6 месяцев гарантии на все работы</p>
+          </div>
+          
           <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
             <Clock className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
             <h4 className="font-semibold font-fixedsys text-white mb-2">Быстрый запуск</h4>
