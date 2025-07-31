@@ -2,6 +2,9 @@ import { Metadata } from 'next'
 import { allCases } from '@/lib/cases'
 import CasesGrid from '@/components/cases/cases-grid'
 import Header from '@/components/header'
+import BlogSection from '@/components/blog-section'
+import CtaSection from '@/components/cta-section'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'Наши кейсы - реальные результаты | Hippocrat Digital',
@@ -52,6 +55,11 @@ export default function CasesPage() {
           </div>
         </div>
       </section>
+
+      {/* Компоненты с главной страницы */}
+      <BlogSection />
+      <CtaSection />
+      <Footer />
     </div>
   )
 }
