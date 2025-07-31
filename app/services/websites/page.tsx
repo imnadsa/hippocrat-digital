@@ -7,6 +7,7 @@ import WebsitesApproach from "@/components/services/websites-approach"
 import WebsitesTechnologies from "@/components/services/websites-technologies"
 import WebsitesFeatures from "@/components/services/websites-features"
 import WebsitesProcess from "@/components/services/websites-process"
+import WebsitePrice from "@/components/services/website-price"
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
@@ -43,6 +44,7 @@ export default function WebsitesPage() {
         <WebsitesTechnologies />
         <WebsitesFeatures />
         <WebsitesProcess />
+        <WebsitesPrice />
         <CtaSection />
       </main>
 
