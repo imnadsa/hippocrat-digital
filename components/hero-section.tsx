@@ -49,7 +49,7 @@ export default function HeroSection() {
           </Button>
         </div>
       </div>
-      <div
+      <div className="md:w-1/2 flex justify-center items-center relative z-0">
         <MarketingAnimation />
       </div>
     </section>
