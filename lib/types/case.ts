@@ -85,5 +85,6 @@ export interface CaseData {
     achievements?: string[]       // Достижения проекта
     challenges_list?: string[]    // Список сложностей
     solutions_list?: string[]     // Список решений
+    richContent?: string              // Markdown контент с изображениями
   }
 }
