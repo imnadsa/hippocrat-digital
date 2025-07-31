@@ -36,7 +36,7 @@ export default function PortfolioSection() {
               <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden">
                 {/* Основное изображение кейса */}
                 <img 
-                  src="/cases/online-oko/cardOnlineOko.jpg" 
+                  src="/cases/online-oko/oko.jpg" 
                   alt="Сайт детской офтальмологии Онлайн-Око" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
