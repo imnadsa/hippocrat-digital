@@ -12,7 +12,7 @@ export default function CasesGrid({ cases }: CasesGridProps) {
   const router = useRouter()
 
   const openCase = (caseId: string) => {
-    router.push(`/cases/${caseId}`)
+    router.push(`/cases/${caseId}?from=cases`)
   }
 
   return (
