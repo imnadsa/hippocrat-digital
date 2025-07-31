@@ -5,7 +5,6 @@ import Header from "@/components/header"
 import TargetingHero from "@/components/services/targeting-hero"
 import TargetingAdvantages from "@/components/services/targeting-advantages"
 import TargetingProcess from "@/components/services/targeting-process"
-import TargetingResults from "@/components/services/targeting-results"
 import TargetingFeatures from "@/components/services/targeting-features"
 import TargetingPortfolio from "@/components/services/targeting-portfolio"
 import TargetingPricing from "@/components/services/targeting-pricing"
@@ -44,7 +43,6 @@ export default function TargetingPage() {
         <TargetingHero />
         <TargetingAdvantages />
         <TargetingProcess />
-        <TargetingResults />
         <TargetingFeatures />
         <TargetingPortfolio />
         <TargetingPricing />
