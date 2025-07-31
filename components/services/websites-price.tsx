@@ -41,17 +41,14 @@ export default function MedicalPricing() {
       name: "Старт",
       price: "41 000 ₽",
       originalPrice: "55 000 ₽",
-      description: "Функциональный сайт для небольшой клиники",
+      description: "Готовая интернет-площадка для частной практики",
       popular: false,
       features: [
-        "Адаптивный дизайн под все устройства",
-        "Базовая система записи онлайн",
-        "Страницы услуг и врачей", 
-        "Контактная информация и карта",
-        "Соответствие 152-ФЗ",
-        "SSL-сертификат и хостинг на год",
-        "Интеграция с телефонией",
-        "Базовая SEO-оптимизация"
+        "Современный отзывчивый дизайн",
+        "Стандартный функционал",
+        "Административная панель управления",
+        "Хостинг и доменное имя",
+        "Базовая поисковая оптимизация"
       ],
       notIncluded: [
         "CRM интеграция",
@@ -63,19 +60,16 @@ export default function MedicalPricing() {
       name: "Стандарт",
       price: "82 000 ₽", 
       originalPrice: "110 000 ₽",
-      description: "Полнофункциональное решение для активно растущей клиники",
+      description: "Индивидуальная разработка с широким функционалом",
       popular: true,
       features: [
+        "Уникальный креативный дизайн",
+        "Солидный набор функций",
         "Все возможности тарифа 'Старт'",
-        "Интеграция с CRM системой",
-        "Автоматические SMS-уведомления",
-        "Система управления отзывами",
-        "Личный кабинет для пациентов",
-        "История болезни и результаты анализов",
-        "Онлайн-оплата консультаций",
-        "Многоязычность (2 языка)",
-        "Расширенная аналитика посещений",
-        "Чат-бот для первичной консультации"
+        "Логотип и фирменный стиль компании",
+        "Продвижение и подготовка к запуску",
+        "Приоритетная работа по проекту",
+        "Интеграция с внешними системами"
       ],
       notIncluded: [
         "Телемедицина",
@@ -86,21 +80,15 @@ export default function MedicalPricing() {
       name: "Престиж",
       price: "240 000 ₽",
       originalPrice: "320 000 ₽", 
-      description: "Премиальное решение для крупных медицинских центров",
+      description: "Сайт с вашим уникальным дизайном и контентным наполнением",
       popular: false,
       features: [
+        "Доработка готового дизайна по фирменному стилю + расширенный набор функций",
+        "Или уникальный эксклюзивный дизайн + стандартный набор функций",
         "Все возможности тарифа 'Стандарт'",
-        "Платформа телемедицины",
-        "Мобильное приложение для пациентов",
-        "Система электронной медкарты",
-        "Интеграция с медицинским оборудованием",
-        "Собственная система видеосвязи",
-        "Модуль управления персоналом",
-        "Финансовая отчетность и аналитика",
-        "Система лояльности пациентов",
-        "Многоуровневая система доступов",
-        "Интеграция с страховыми компаниями",
-        "Круглосуточная техническая поддержка"
+        "Уникальные тексты",
+        "Заполнение контентом",
+        "Платформа телемедицины"
       ],
       notIncluded: []
     }
@@ -203,33 +191,6 @@ export default function MedicalPricing() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Дополнительная информация */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
-            <Shield className="w-8 h-8 text-teal-400 mx-auto mb-3" />
-            <h4 className="font-semibold font-fixedsys text-white mb-2">Гарантия качества</h4>
-            <p className="text-slate-400 text-sm">6 месяцев гарантии на все работы</p>
-          </div>
-          
-          <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
-            <Clock className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
-            <h4 className="font-semibold font-fixedsys text-white mb-2">Быстрый запуск</h4>
-            <p className="text-slate-400 text-sm">От 14 рабочих дней до готового сайта</p>
-          </div>
-          
-          <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
-            <Stethoscope className="w-8 h-8 text-teal-400 mx-auto mb-3" />
-            <h4 className="font-semibold font-fixedsys text-white mb-2">Медицинская специфика</h4>
-            <p className="text-slate-400 text-sm">Учитываем все требования отрасли</p>
-          </div>
-          
-          <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center">
-            <Users className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
-            <h4 className="font-semibold font-fixedsys text-white mb-2">Поддержка 24/7</h4>
-            <p className="text-slate-400 text-sm">Круглосуточная техподдержка</p>
-          </div>
         </div>
 
         {/* CTA секция */}
