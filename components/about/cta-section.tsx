@@ -104,17 +104,6 @@ export default function CTASection() {
                   </a>
                 </div>
               </div>
-
-              {/* Social Proof */}
-              <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
-                <div className="flex items-center space-x-4">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div key={i} className="w-8 h-8 bg-gradient-to-r from-teal-400 to-indigo-500 rounded-full border-2 border-slate-800"></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Right Form */}
