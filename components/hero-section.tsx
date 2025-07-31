@@ -19,7 +19,8 @@ export default function HeroSection() {
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground delay-500"></div>
       <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
       
-      <div className="md:w-1/2 space-y-6 mb-10 md:mb-0 relative z-10">
+      {/* Блок с текстом */}
+      <div className="w-full md:w-1/2 space-y-6 mb-10 md:mb-0 relative z-10">
         <div className="flex items-center gap-2 mb-4 animate-fadeInLeft">
           <div className="px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-xs flex items-center gap-1 hover-glow hover:border-teal-500/50 transition-all duration-300">
             <Sparkle size={12} className="animate-iconRotate" weight="duotone" />
@@ -49,7 +50,9 @@ export default function HeroSection() {
           </Button>
         </div>
       </div>
-      <div className="md:w-1/2 h-80 md:h-full flex justify-center items-center relative z-0">
+
+      {/* Блок с анимацией */}
+      <div className="w-full h-80 md:w-1/2 md:h-96 flex justify-center items-center relative z-0">
         <MarketingAnimation />
       </div>
     </section>
