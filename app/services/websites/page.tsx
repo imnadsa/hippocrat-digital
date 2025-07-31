@@ -7,7 +7,7 @@ import WebsitesApproach from "@/components/services/websites-approach"
 import WebsitesTechnologies from "@/components/services/websites-technologies"
 import WebsitesFeatures from "@/components/services/websites-features"
 import WebsitesProcess from "@/components/services/websites-process"
-import WebsitePrice from "@/components/services/website-price"
+import WebsitePrice from "@/components/services/websites-price"
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
