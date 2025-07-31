@@ -28,19 +28,19 @@ export default function WebsitesHero() {
 
   const projects = [
     {
-      name: "Стоматологическая клиника",
-      image: "/api/placeholder/800/600",
-      result: "+85% записей онлайн"
+      name: "Сайт для студенто-медиков",
+      image: "/services/website1",
+      result: "+2000 студентов"
     },
     {
-      name: "Медицинский центр",
-      image: "/api/placeholder/800/600",
-      result: "+120% конверсия"
+      name: "MedTech лаборатория",
+      image: "/services/website2",
+      result: "+ к узнаваемости"
     },
     {
-      name: "Частная клиника",
-      image: "/api/placeholder/800/600",
-      result: "+65% пациентов"
+      name: "Подологическая клиника/школа",
+      image: "/services/website3",
+      result: "+65% учеников"
     }
   ]
 
