@@ -29,17 +29,17 @@ export default function WebsitesHero() {
   const projects = [
     {
       name: "Сайт для студенто-медиков",
-      image: "/services/website1",
+      image: "/services/website1.jpg",
       result: "+2000 студентов"
     },
     {
       name: "MedTech лаборатория",
-      image: "/services/website2",
+      image: "/services/website2.jpg",
       result: "+ к узнаваемости"
     },
     {
       name: "Подологическая клиника/школа",
-      image: "/services/website3",
+      image: "/services/website3.jpg",
       result: "+65% учеников"
     }
   ]
