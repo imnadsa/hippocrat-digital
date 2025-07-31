@@ -7,7 +7,7 @@ import { casesData } from '@/lib/cases'
 export default function PortfolioSection() {
   // Функция для открытия кейса (переход на страницу)
   const openCase = (caseId: string) => {
-    window.location.href = `/cases/${caseId}`
+    window.location.href = `/cases/${caseId}?from=home`
   }
 
   return (
