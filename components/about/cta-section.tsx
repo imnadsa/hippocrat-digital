@@ -20,7 +20,8 @@ export default function CTASection() {
     'Веб-разработка медицинских сайтов',
     'Контекстная реклама в healthcare',
     'Комплексный digital-маркетинг',
-    'Консультация по стратегии'
+    'Консультация по стратегии',
+    'другое'
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -111,10 +112,6 @@ export default function CTASection() {
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className="w-8 h-8 bg-gradient-to-r from-teal-400 to-indigo-500 rounded-full border-2 border-slate-800"></div>
                     ))}
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">100+ довольных клиентов</p>
-                    <p className="text-gray-400 text-sm">присоединились к Hippocrat Digital</p>
                   </div>
                 </div>
               </div>
