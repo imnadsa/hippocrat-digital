@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { CaseData } from '@/lib/types/case'
 import { getAdjacentCases } from '@/lib/cases'
 import Image from 'next/image'
+import ReactMarkdown from 'react-markdown'
 
 interface CasePageClientProps {
   caseData: CaseData
@@ -460,6 +461,55 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                       </div>
                     )}
                   </div>
+                </div>
+              )}
+
+              {/* Rich Content с markdown (если есть) */}
+              {caseData.content.richContent && (
+                <div className="mt-8 border-t border-slate-700 pt-8">
+                  <ReactMarkdown 
+                    className="text-slate-300 leading-relaxed prose prose-invert max-w-none"
+                    components={{
+                      img: ({node, ...props}) => (
+                        <div className="my-6">
+                          <img 
+                            {...props} 
+                            className="w-full rounded-lg border border-slate-700/50 shadow-lg" 
+                            loading="lazy"
+                          />
+                        </div>
+                      ),
+                      h1: ({node, ...props}) => (
+                        <h1 {...props} className="text-2xl font-bold text-white mb-6 mt-8 font-fixedsys" />
+                      ),
+                      h2: ({node, ...props}) => (
+                        <h2 {...props} className="text-xl font-bold text-white mb-4 mt-8 font-fixedsys" />
+                      ),
+                      h3: ({node, ...props}) => (
+                        <h3 {...props} className="text-lg font-bold text-teal-400 mb-3 mt-6" />
+                      ),
+                      p: ({node, ...props}) => (
+                        <p {...props} className="mb-4 leading-relaxed" />
+                      ),
+                      ul: ({node, ...props}) => (
+                        <ul {...props} className="mb-4 space-y-2" />
+                      ),
+                      li: ({node, ...props}) => (
+                        <li {...props} className="flex items-start space-x-3">
+                          <div className="w-1.5 h-1.5 bg-teal-400 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-slate-300">{props.children}</span>
+                        </li>
+                      ),
+                      strong: ({node, ...props}) => (
+                        <strong {...props} className="text-teal-400 font-semibold" />
+                      ),
+                      em: ({node, ...props}) => (
+                        <em {...props} className="text-slate-400 italic" />
+                      )
+                    }}
+                  >
+                    {caseData.content.richContent}
+                  </ReactMarkdown>
                 </div>
               )}
             </div>
