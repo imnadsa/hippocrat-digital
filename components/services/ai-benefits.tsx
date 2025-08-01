@@ -6,10 +6,7 @@ import {
   Clock, 
   DollarSign, 
   Users,
-  Brain,
-  Shield,
   Target,
-  Zap
 } from "lucide-react"
 
 export default function AiBenefits() {
@@ -103,7 +100,6 @@ export default function AiBenefits() {
 
   const additionalBenefits = [
     {
-      icon: Brain,
       title: "Интеллектуальная поддержка",
       description: "ИИ помогает врачам принимать более обоснованные решения",
       features: [
@@ -114,7 +110,6 @@ export default function AiBenefits() {
       ]
     },
     {
-      icon: Zap,
       title: "Автоматизация процессов",
       description: "Снижение нагрузки на медицинский персонал",
       features: [
@@ -125,7 +120,6 @@ export default function AiBenefits() {
       ]
     },
     {
-      icon: Shield,
       title: "Снижение рисков",
       description: "Предотвращение медицинских ошибок",
       features: [
@@ -194,25 +188,33 @@ export default function AiBenefits() {
         {/* Дополнительные преимущества */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {additionalBenefits.map((benefit, index) => {
-            const IconComponent = benefit.icon
+            const colorClass = index % 2 === 0 ? 'teal' : 'indigo';
             return (
               <div 
                 key={index}
-                className={`bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all hover-lift hover-glow ${
+                className={`bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-${colorClass}-500/30 transition-all hover-lift hover-glow group ${
                   inView ? 'animate-scaleUp' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 200 + 800}ms` }}
               >
-                <div className={`w-14 h-14 rounded-full bg-${index % 2 === 0 ? 'teal' : 'indigo'}-900/50 flex items-center justify-center mb-5 group-hover:animate-iconBounce`}>
-                  <IconComponent size={28} className={`text-${index % 2 === 0 ? 'teal' : 'indigo'}-400`} />
+                <div className="flex items-center justify-center mb-5">
+                    <div className={`
+                      text-2xl sm:text-3xl font-bold font-fixedsys text-${colorClass}-400
+                      px-4 py-2 rounded-xl bg-${colorClass}-900/50 backdrop-blur-sm
+                      min-w-[3rem] min-h-[3rem] flex items-center justify-center
+                      shadow-lg group-hover:scale-110 transition-all duration-300
+                    `}>
+                      {index + 1}
+                    </div>
                 </div>
+
                 <h3 className="text-xl font-semibold mb-3 font-fixedsys text-white">{benefit.title}</h3>
                 <p className="text-slate-400 mb-4">{benefit.description}</p>
                 
                 <ul className="space-y-2">
                   {benefit.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="text-slate-300 flex items-center text-sm">
-                      <span className={`w-1.5 h-1.5 bg-${index % 2 === 0 ? 'teal' : 'indigo'}-400 rounded-full mr-3`}></span>
+                      <span className={`w-1.5 h-1.5 bg-${colorClass}-400 rounded-full mr-3`}></span>
                       {feature}
                     </li>
                   ))}
