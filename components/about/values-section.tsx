@@ -61,6 +61,7 @@ export default function ValuesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
           {values.map((value, index) => {
             const Icon = value.icon;
+            const fromColor = value.color.split(' ')[0].replace('from-', 'text-');
             
             return (
               <div 
@@ -75,9 +76,7 @@ export default function ValuesSection() {
                   {/* Content */}
                   <div className="relative z-10 h-full flex flex-col">
                     {/* Icon */}
-                    <div className={`w-16 h-16 bg-gradient-to-r ${value.color} rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300 mx-auto`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
+                    <Icon className={`w-12 h-12 ${fromColor} mb-6 mx-auto`} />
 
                     {/* Title */}
                     <h3 className="text-xl font-bold text-white mb-4 text-center group-hover:text-teal-400 transition-colors duration-300">
