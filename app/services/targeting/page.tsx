@@ -9,6 +9,7 @@ import TargetingFeatures from "@/components/services/targeting-features"
 import TargetingPortfolio from "@/components/services/targeting-portfolio"
 import TargetingPricing from "@/components/services/targeting-pricing"
 import TargetingFaq from "@/components/services/targeting-faq"
+import BlogSection from '@/components/blog-section'
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
@@ -47,6 +48,7 @@ export default function TargetingPage() {
         <TargetingPortfolio />
         <TargetingPricing />
         <TargetingFaq />
+        <BlogSection />
         <CtaSection />
       </main>
 
