@@ -40,7 +40,7 @@ export default function CasesPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="bg-gradient-to-r from-slate-900/50 to-slate-800/50 rounded-2xl p-8 md:p-12 border border-slate-700/30">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 font-fixedsys">
-              Хотите стать следующим успешным кейсом?
+              Понравились кейсы? Давайте работать!
             </h2>
             <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
               Мы поможем вашей клинике привлечь больше пациентов и увеличить прибыль. 
