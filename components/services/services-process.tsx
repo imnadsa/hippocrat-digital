@@ -34,7 +34,11 @@ export default function ServicesProcess() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+        if(sectionRef.current) {
+            observer.unobserve(sectionRef.current)
+        }
+    }
   }, [])
 
   const startStepAnimation = () => {
@@ -53,7 +57,6 @@ export default function ServicesProcess() {
     {
       icon: Phone,
       title: "Первичная консультация",
-      duration: "30 минут",
       description: "Обсуждаем ваши цели, изучаем специфику клиники и определяем потребности",
       details: [
         "Анализ текущей ситуации",
@@ -66,7 +69,6 @@ export default function ServicesProcess() {
     {
       icon: Search,
       title: "Аудит и анализ",
-      duration: "3-5 дней",
       description: "Проводим комплексный анализ вашего присутствия в digital-среде",
       details: [
         "Аудит сайта и соцсетей",
@@ -79,7 +81,6 @@ export default function ServicesProcess() {
     {
       icon: Target,
       title: "Стратегия и планирование",
-      duration: "5-7 дней",
       description: "Разрабатываем детальную стратегию для достижения ваших целей",
       details: [
         "Создание digital-стратегии",
@@ -92,7 +93,6 @@ export default function ServicesProcess() {
     {
       icon: Settings,
       title: "Настройка и внедрение",
-      duration: "1-2 недели",
       description: "Настраиваем все системы и запускаем рекламные кампании",
       details: [
         "Настройка рекламных кабинетов",
@@ -105,7 +105,6 @@ export default function ServicesProcess() {
     {
       icon: Rocket,
       title: "Запуск проекта",
-      duration: "1 день",
       description: "Официальный старт всех кампаний и мониторинг первых результатов",
       details: [
         "Полный запуск кампаний",
@@ -118,7 +117,6 @@ export default function ServicesProcess() {
     {
       icon: BarChart3,
       title: "Оптимизация и масштабирование",
-      duration: "Постоянно",
       description: "Непрерывная работа над улучшением результатов и достижением KPI",
       details: [
         "A/B тестирование",
@@ -203,12 +201,12 @@ export default function ServicesProcess() {
                         : 'bg-slate-800 border-slate-700 text-slate-400'
                     }`}>
                       {isPast ? (
-                        <CheckCircle size={24} />
+                        <span className="font-fixedsys font-bold text-2xl">{index + 1}</span>
                       ) : (
                         <IconComponent size={24} />
                       )}
                       
-                      {/* Step number */}
+                      {/* Step number in corner */}
                       <div className={`absolute -top-3 -right-3 w-8 h-8 rounded-full text-xs font-bold font-fixedsys flex items-center justify-center transition-all duration-500 ${
                         isActive 
                           ? `bg-${step.color}-600 text-white`
@@ -231,10 +229,6 @@ export default function ServicesProcess() {
                       }`}>
                         {step.title}
                       </h3>
-                      <div className="flex items-center justify-center gap-2 text-slate-400 text-sm">
-                        <span>⏱️</span>
-                        <span>{step.duration}</span>
-                      </div>
                     </div>
                     
                     <p className="text-slate-300 text-sm mb-4 text-center">
