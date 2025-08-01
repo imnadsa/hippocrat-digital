@@ -7,6 +7,7 @@ import ServicesOverview from "@/components/services/services-overview"
 import ServicesBenefits from "@/components/services/services-benefits"
 import ServicesProcess from "@/components/services/services-process"
 import ServicesComparison from "@/components/services/services-comparison"
+import BlogSection from '@/components/blog-section'
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
@@ -47,6 +48,7 @@ export default function ServicesPage() {
         <ServicesBenefits />
         <ServicesProcess />
         <ServicesComparison />
+        <BlogSection />
         <CtaSection />
       </main>
 
