@@ -1,105 +1,48 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button" // Используем Button из shadcn/ui? Если да, лучше использовать его компоненты. Если нет, можно оставить <button>
-import {
-  ArrowUpRight,
-  Brain,
-  Eye,
-  MessageSquare,
-  Stethoscope,
-  TrendingUp,
-  Users,
-  Clock,
-  DollarSign,
-  CheckCircle,
-  BarChart3,
-  Activity,
-  Heart,
-  LucideIcon // Добавим тип для иконок
-} from "lucide-react"
-
-// Типизируем данные для большей надежности
-interface ResultItem {
-  metric: string;
-  description: string;
-  icon: LucideIcon;
-}
-
-interface Testimonial {
-  author: string;
-  position: string;
-  text: string;
-}
-
-interface CaseItem {
-  title: string;
-  category: string;
-  icon: LucideIcon;
-  aiType: string;
-  challenge: string;
-  solution: string;
-  implementation: string[];
-  results: ResultItem[];
-  testimonial: Testimonial;
-  timeline: string;
-  investment: string;
-  roi: string;
-}
-
+import { Button } from "@/components/ui/button"
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function AiCases() {
   const [inView, setInView] = useState(false)
-  const [activeCase, setActiveCase] = useState(0)
-  const sectionRef = useRef<HTMLDivElement>(null) // Добавляем тип для ref
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-           // observer.unobserve(entry.target); // Раскомментируйте, если анимация нужна только один раз
         }
       },
-      { threshold: 0.15 } // Немного уменьшил порог для более раннего срабатывания
+      { threshold: 0.15 }
     )
 
-    const currentRef = sectionRef.current; // Сохраняем ref в переменную
+    const currentRef = sectionRef.current
     if (currentRef) {
       observer.observe(currentRef)
     }
 
-    // Очистка при размонтировании
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef)
       }
       observer.disconnect()
     }
-  }, []) // Пустой массив зависимостей - эффект выполнится один раз после монтирования
+  }, [])
 
-  const openExternalLink = (url: string) => {
-    // Добавим проверку, чтобы не открывать "#"
-    if (url && url !== "#") {
-        window.open(url, "_blank", "noopener,noreferrer")
-    } else {
-        console.warn("No valid URL provided for detailed case study.");
-        // Можно показать уведомление пользователю, что ссылка неактивна
-    }
+  const openCase = () => {
+    router.push('/cases/hippocrat-ai?from=services')
   }
 
-  // Функция для плавной прокрутки
-  const smoothScrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
   }
-
-  // Определяем стили для градиента иконки активного кейса заранее
-  const activeCaseIconGradient = activeCase % 2 === 0
-    ? 'from-teal-500 to-indigo-600'
-    : 'from-indigo-500 to-purple-600'; // Убедитесь, что цвет purple определен в Tailwind
 
   return (
-    <section ref={sectionRef} id="ai-cases" className="py-16 md:py-20 relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950 to-gray-950">
+    <section ref={sectionRef} id="ai-cases" className="py-16 md:py-20 relative overflow-hidden">
       {/* Анимированные декоративные элементы */}
       <div className="absolute -top-20 -left-20 w-60 h-60 bg-indigo-600/5 rounded-full blur-3xl animate-floatBackground opacity-50"></div>
       <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-teal-600/5 rounded-full blur-3xl animate-floatBackground opacity-50" style={{ animationDelay: '-4s' }}></div>
@@ -107,107 +50,158 @@ export default function AiCases() {
       <div className="container mx-auto px-4 relative z-10">
         <div className={`text-center mb-12 ${inView ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}>
           <div className="inline-block px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6">
-            Кейсы внедрения
+            Кейс внедрения
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-fixedsys">
-            Реальные кейсы{" "}
+            Наш флагманский{" "}
             <span className="bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent">
-              внедрения ИИ
+              ИИ-проект
             </span>
           </h2>
           <p className="text-slate-400 text-center max-w-2xl mx-auto text-lg">
-            Истории успеха медицинских учреждений, которые уже используют ИИ-технологии для повышения эффективности и качества ухода.
+            Первый в России специализированный ИИ-ассистент для медицинского образования с более чем 2000 активных пользователей
           </p>
+        </div>
+
+        {/* Блок кейса Hippocrat AI */}
+        <div className={`max-w-4xl mx-auto mb-16 ${inView ? 'animate-fadeInUp delay-200' : 'opacity-0 translate-y-4'}`}>
+          <div
+            onClick={openCase}
+            className="group cursor-pointer bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-2xl overflow-hidden border border-slate-700/30 hover:border-teal-500/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/25"
+          >
+            {/* Изображение кейса */}
+            <div className="relative h-80 md:h-96 overflow-hidden">
+              <Image
+                src="/cases/Hippocrat-AI/image11.jpg"
+                alt="Hippocrat AI"
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              
+              {/* Градиент поверх изображения */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+              
+              {/* Категория */}
+              <div className="absolute top-6 left-6">
+                <span className="px-4 py-2 bg-teal-500/20 backdrop-blur-sm text-teal-400 text-sm rounded-full border border-teal-500/30 font-medium">
+                  Искусственный интеллект
+                </span>
+              </div>
+              
+              {/* Год */}
+              <div className="absolute top-6 right-6">
+                <span className="px-4 py-2 bg-slate-900/60 backdrop-blur-sm text-slate-300 text-sm rounded-full">
+                  2025
+                </span>
+              </div>
+            </div>
+
+            {/* Контент */}
+            <div className="p-8 md:p-10">
+              {/* Заголовок */}
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 font-fixedsys group-hover:text-teal-300 transition-colors duration-300">
+                Hippocrat AI
+              </h3>
+              
+              {/* Подзаголовок */}
+              <p className="text-teal-400 text-lg md:text-xl mb-8 font-medium">
+                ИИ-ассистент для медицинского образования
+              </p>
+
+              {/* Метрики */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-2 font-fixedsys">
+                    2000+
+                  </div>
+                  <div className="text-slate-400 text-sm md:text-base leading-tight">
+                    Активных студентов
+                  </div>
+                  <div className="text-teal-300 text-sm font-medium mt-1">
+                    +2000
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-indigo-400 mb-2 font-fixedsys">
+                    100%
+                  </div>
+                  <div className="text-slate-400 text-sm md:text-base leading-tight">
+                    Специализация
+                  </div>
+                  <div className="text-indigo-300 text-sm font-medium mt-1">
+                    Медицинские источники
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-2 font-fixedsys">
+                    4.9/5
+                  </div>
+                  <div className="text-slate-400 text-sm md:text-base leading-tight">
+                    Качество ответов
+                  </div>
+                  <div className="text-teal-300 text-sm font-medium mt-1">
+                    С источниками
+                  </div>
+                </div>
+              </div>
+
+              {/* Описание проекта */}
+              <div className="mb-8">
+                <h4 className="text-white font-semibold mb-3 text-lg">О проекте</h4>
+                <p className="text-slate-400 text-base leading-relaxed">
+                  Разработка первого в России специализированного ИИ-ассистента для студентов медицинских вузов с технологией RAG и обучением на медицинской литературе. Система помогает студентам быстро находить точную информацию с указанием источников.
+                </p>
+              </div>
+
+              {/* Теги */}
+              <div className="flex flex-wrap gap-3 mb-6">
+                {['ИИ', 'Образование', 'RAG', 'Медицина', 'ML'].map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="px-3 py-2 bg-slate-800/60 text-slate-300 rounded-lg text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Hover эффект - стрелка */}
+              <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                <div className="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* CTA Section */}
-        <div className={`mt-16 bg-gradient-to-r from-teal-900/30 to-indigo-900/30 rounded-xl border border-teal-500/30 p-8 text-center ${inView ? 'animate-fadeInUp delay-800' : 'opacity-0 translate-y-4'}`}>
+        <div className={`bg-gradient-to-r from-teal-900/30 to-indigo-900/30 rounded-xl border border-teal-500/30 p-8 text-center ${inView ? 'animate-fadeInUp delay-400' : 'opacity-0 translate-y-4'}`}>
           <h3 className="text-2xl md:text-3xl font-bold font-fixedsys text-white mb-4">
-            Хотите такие же результаты?
+            Хотите создать ИИ-решение для вашей клиники?
           </h3>
           <p className="text-slate-400 mb-6 max-w-xl mx-auto text-lg">
-            Начнем с бесплатного аудита ваших процессов и предложим оптимальное ИИ-решение для вашей клиники.
+            На базе технологий Hippocrat AI мы создаем ИИ-ассистентов для врачей, системы автоматизации документооборота и обучения медперсонала.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {/* Основная кнопка CTA */}
-            <button
-              className="px-6 py-3 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white rounded-lg font-fixedsys transition-all hover-lift active:animate-buttonClick shadow-md hover:shadow-lg"
-              onClick={() => smoothScrollTo("contact")} // Используем функцию прокрутки
+            <Button
+              className="px-6 py-3 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white rounded-lg font-fixedsys transition-all hover-lift shadow-md hover:shadow-lg"
+              onClick={scrollToContact}
             >
-              Получить консультацию
-            </button>
+              Обсудить ИИ-проект
+            </Button>
+            <Button
+              variant="outline"
+              className="px-6 py-3 border-teal-700 text-teal-400 hover:bg-teal-950/50 backdrop-blur-sm transition-all duration-300 hover:border-teal-500"
+              onClick={openCase}
+            >
+              Изучить кейс подробно
+            </Button>
           </div>
         </div>
-      </div> {/* Закрываем container */}
-
-      {/* Добавляем определения анимаций и стилей */}
-      <style jsx>{`
-        /* Анимации появления */
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-
-         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
-
-        @keyframes fadeInShort { /* Для плавной смены контента кейса */
-            from { opacity: 0.5; }
-            to { opacity: 1; }
-        }
-        .animate-fadeInShort { animation: fadeInShort 0.3s ease-out forwards; }
-
-        /* Задержки анимаций */
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-600 { animation-delay: 0.6s; }
-        .delay-800 { animation-delay: 0.8s; }
-
-        /* Анимация фона */
-        @keyframes floatBackground {
-          0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-          25% { transform: translateY(-15px) translateX(10px) rotate(5deg); }
-          50% { transform: translateY(0px) translateX(-10px) rotate(0deg); }
-          75% { transform: translateY(15px) translateX(5px) rotate(-5deg); }
-        }
-        .animate-floatBackground {
-          animation: floatBackground 12s ease-in-out infinite;
-        }
-
-        /* Эффекты при наведении */
-        .hover-lift {
-          transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
-        }
-        .hover-lift:hover {
-          transform: translateY(-4px);
-          /* Добавим небольшую тень для объема */
-           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-         .hover-glow-teal:hover {
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); /* Teal glow */
-         }
-         .hover-glow-indigo:hover {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); /* Indigo glow */
-         }
-
-        /* Анимация клика */
-        @keyframes buttonClick {
-           0% { transform: scale(1); }
-           50% { transform: scale(0.97); }
-           100% { transform: scale(1); }
-        }
-        .active\:animate-buttonClick:active {
-           animation: buttonClick 0.15s ease-out;
-        }
-
-        /* Стили для Firefox для плавной прокрутки (если нужен полифилл) */
-        html { scroll-behavior: smooth; }
-      `}</style>
-
-    </section> // Закрываем section
+      </div>
+    </section>
   )
 }
