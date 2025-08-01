@@ -76,7 +76,7 @@ export default function ServicesOverview() {
         reach: "100%",
         time: "30-45 дней"
       },
-      price: "от 150 000 ₽",
+      price: "от 41 000 ₽",
       color: "indigo",
       link: "/services/websites"
     },
@@ -97,7 +97,7 @@ export default function ServicesOverview() {
         reach: "87%",
         time: "1-2 недели"
       },
-      price: "от 35 000 ₽",
+      price: "от 40 000 ₽",
       color: "teal",
       link: "/services/smm"
     },
@@ -107,7 +107,7 @@ export default function ServicesOverview() {
       shortDesc: "Эффективная реклама в поисковых системах",
       fullDesc: "Настраиваем контекстную рекламу в Яндекс.Директ и Google Ads для медицинских услуг с учетом всех ограничений и требований.",
       features: [
-        "Яндекс.Директ и Google Ads",
+        "Яндекс.Директ",
         "Медицинские ограничения",
         "Геотаргетинг",
         "Оптимизация ставок"
@@ -118,7 +118,7 @@ export default function ServicesOverview() {
         reach: "92%",
         time: "3-5 дней"
       },
-      price: "от 20 000 ₽",
+      price: "от 30 000 ₽",
       color: "indigo",
       link: "/services/contextual"
     },
