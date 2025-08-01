@@ -30,7 +30,11 @@ export default function SmmStrategy() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if(sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const contentTypes = [
@@ -111,9 +115,7 @@ export default function SmmStrategy() {
                 }`}
                 style={{ animationDelay: `${index * 100 + 300}ms` }}
               >
-                <div className={`w-14 h-14 rounded-full bg-${type.color}-900/50 flex items-center justify-center text-${type.color}-400 mb-5 transition-all group-hover:animate-iconRotate`}>
-                  <IconComponent size={28} />
-                </div>
+                <IconComponent size={36} className={`text-${type.color}-400 mb-5`} />
                 <h3 className="text-xl font-semibold mb-3 font-fixedsys text-white">{type.title}</h3>
                 <p className="text-slate-400 mb-4">{type.description}</p>
                 
@@ -135,25 +137,19 @@ export default function SmmStrategy() {
           <div className="text-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-teal-900/50 flex items-center justify-center mx-auto mb-3 hover:animate-iconBounce">
-                  <Stethoscope size={24} className="text-teal-400" />
-                </div>
+                <Stethoscope size={36} className="text-teal-400 mx-auto mb-3" />
                 <h4 className="font-semibold text-white mb-2 font-fixedsys">Медицинская этика</h4>
                 <p className="text-slate-400 text-sm">Весь контент соответствует этическим нормам и требованиям ФЗ-38</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-indigo-900/50 flex items-center justify-center mx-auto mb-3 hover:animate-iconBounce">
-                  <Award size={24} className="text-indigo-400" />
-                </div>
+                <Award size={36} className="text-indigo-400 mx-auto mb-3" />
                 <h4 className="font-semibold text-white mb-2 font-fixedsys">Экспертность</h4>
                 <p className="text-slate-400 text-sm">Контент создаётся с участием врачей и проверяется специалистами</p>
               </div>
               
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-teal-900/50 flex items-center justify-center mx-auto mb-3 hover:animate-iconBounce">
-                  <Calendar size={24} className="text-teal-400" />
-                </div>
+                <Calendar size={36} className="text-teal-400 mx-auto mb-3" />
                 <h4 className="font-semibold text-white mb-2 font-fixedsys">Регулярность</h4>
                 <p className="text-slate-400 text-sm">Контент-план на месяц вперёд, постинг по расписанию</p>
               </div>
