@@ -42,7 +42,7 @@ export default function SmmResults() {
   }, [])
 
   const animateCounters = () => {
-    const targets = { followers: 15000, engagement: 87, reach: 250000, appointments: 45 }
+    const targets = { followers: 3000, engagement: 87, reach: 70000, appointments: 45 }
     const duration = 2000
     const intervals: { [key: string]: NodeJS.Timeout } = {}
 
@@ -97,22 +97,21 @@ export default function SmmResults() {
   ]
 
   const caseStudy = {
-    clinic: "Стоматология 'Белые Зубки'",
+    clinic: "Офтальмологическая клиника 'Ясный Взор'",
     duration: "6 месяцев",
     before: {
-      followers: "2,500",
-      engagement: "2.1%",
-      posts: "1-2 в неделю"
+      followers: "4,800",
+      reach: "95K охватов за июль 2025"
     },
     after: {
-      followers: "18,200",
-      engagement: "8.5%",
-      posts: "5-7 в неделю"
+      followers: "5,400",
+      newFollowers: "400+ за 2 месяца"
     },
     results: [
       "+35% пациентов из соцсетей",
-      "+45% узнаваемости бренда",
-      "-25% стоимость привлечения"
+      "+45% узнаваемости бренда", 
+      "-25% стоимость привлечения",
+      "Получена галочка верификации"
     ]
   }
 
@@ -167,7 +166,7 @@ export default function SmmResults() {
           })}
         </div>
 
-        {/* Детальный кейс */}
+        {/* Результаты работы */}
         <div className={`bg-gradient-to-r from-slate-800/40 to-slate-900/40 rounded-xl border border-slate-700/30 overflow-hidden ${inView ? 'animate-fadeIn delay-800' : 'opacity-0'}`}>
           <div className="p-8">
             <div className="text-center mb-8">
@@ -180,48 +179,38 @@ export default function SmmResults() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* До и после */}
-              <div className="space-y-6">
-                <div className="bg-slate-800/30 rounded-lg p-6">
-                  <h4 className="font-bold font-fixedsys text-slate-300 mb-4 text-center">До работы с нами</h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Подписчики:</span>
-                      <span className="text-white font-fixedsys">{caseStudy.before.followers}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Engagement:</span>
-                      <span className="text-white font-fixedsys">{caseStudy.before.engagement}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Посты:</span>
-                      <span className="text-white font-fixedsys">{caseStudy.before.posts}</span>
+              {/* Основные показатели */}
+              <div className="space-y-4">
+                <h4 className="font-bold font-fixedsys text-white mb-4">Итоговые результаты:</h4>
+                
+                <div className="bg-slate-800/30 rounded-lg p-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Подписчики:</span>
+                    <div className="text-right">
+                      <div className="text-teal-400 font-fixedsys text-lg">{caseStudy.after.followers}</div>
+                      <div className="text-slate-500 text-sm">было: {caseStudy.before.followers}</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-teal-900/30 to-indigo-900/30 rounded-lg p-6 border border-teal-500/30">
-                  <h4 className="font-bold font-fixedsys text-teal-400 mb-4 text-center">После 6 месяцев</h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-slate-300">Подписчики:</span>
-                      <span className="text-teal-400 font-fixedsys">{caseStudy.after.followers}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-300">Engagement:</span>
-                      <span className="text-teal-400 font-fixedsys">{caseStudy.after.engagement}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-300">Посты:</span>
-                      <span className="text-teal-400 font-fixedsys">{caseStudy.after.posts}</span>
-                    </div>
+                <div className="bg-slate-800/30 rounded-lg p-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Новые подписчики:</span>
+                    <div className="text-teal-400 font-fixedsys text-lg">{caseStudy.after.newFollowers}</div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-800/30 rounded-lg p-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Охват:</span>
+                    <div className="text-teal-400 font-fixedsys text-lg">{caseStudy.before.reach}</div>
                   </div>
                 </div>
               </div>
 
-              {/* Результаты */}
+              {/* Достижения */}
               <div className="space-y-4">
-                <h4 className="font-bold font-fixedsys text-white mb-4">Итоговые результаты:</h4>
+                <h4 className="font-bold font-fixedsys text-white mb-4">Достижения:</h4>
                 {caseStudy.results.map((result, index) => (
                   <div key={index} className="flex items-center p-4 bg-slate-800/30 rounded-lg hover-lift transition-all">
                     <div className="w-8 h-8 rounded-full bg-teal-900/50 flex items-center justify-center mr-4">
@@ -230,14 +219,14 @@ export default function SmmResults() {
                     <span className="text-slate-300">{result}</span>
                   </div>
                 ))}
-
-                <div className="mt-6 p-4 bg-indigo-900/20 rounded-lg border border-indigo-500/30">
-                  <p className="text-slate-300 text-sm">
-                    <span className="font-semibold text-indigo-400">{caseStudy.clinic}</span> увеличила количество пациентов на 35% за счёт SMM, 
-                    при этом снизив стоимость привлечения на 25%.
-                  </p>
-                </div>
               </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-indigo-900/20 rounded-lg border border-indigo-500/30">
+              <p className="text-slate-300 text-sm">
+                <span className="font-semibold text-indigo-400">{caseStudy.clinic}</span> за счет SMM и рекламы 
+                за 2 месяца работы удалось привлечь более 400 новых подписчиков и получить галочки верификации.
+              </p>
             </div>
           </div>
         </div>
