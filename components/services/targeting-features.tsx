@@ -93,13 +93,11 @@ export default function TargetingFeatures() {
 
   return (
     <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      {/* Улучшенные декоративные элементы */}
       <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
       <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
       <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        {/* Улучшенный заголовок */}
         <div className={`text-center mb-8 sm:mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
             Настройки таргетинга
@@ -115,23 +113,12 @@ export default function TargetingFeatures() {
           </p>
         </div>
 
-        {/* Улучшенная сетка функций */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {features.map((feature, index) => {
             const IconComponent = feature.icon
             const colors = feature.color === 'teal' 
-              ? {
-                  iconBg: 'bg-teal-900/50',
-                  iconColor: 'text-teal-400',
-                  borderColor: 'border-teal-500/30',
-                  shadowColor: 'shadow-teal-500/10'
-                }
-              : {
-                  iconBg: 'bg-indigo-900/50',
-                  iconColor: 'text-indigo-400',
-                  borderColor: 'border-indigo-500/30',
-                  shadowColor: 'shadow-indigo-500/10'
-                }
+              ? { iconColor: 'text-teal-400', borderColor: 'border-teal-500/30', shadowColor: 'shadow-teal-500/10' }
+              : { iconColor: 'text-indigo-400', borderColor: 'border-indigo-500/30', shadowColor: 'shadow-indigo-500/10' }
             
             return (
               <div 
@@ -145,17 +132,8 @@ export default function TargetingFeatures() {
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  {/* Иконка */}
-                  <div className={`
-                    w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${colors.iconBg} ${colors.iconColor}
-                    flex items-center justify-center mb-4 shadow-lg backdrop-blur-sm
-                    group-hover:scale-110 group-hover:rotate-3 
-                    transition-all duration-300 ease-out
-                  `}>
-                    <IconComponent size={20} className="sm:w-6 sm:h-6" />
-                  </div>
+                  <IconComponent size={36} className={`${colors.iconColor} mb-4`} />
                   
-                  {/* Контент */}
                   <h3 className="text-base sm:text-lg font-semibold mb-2 font-fixedsys text-white leading-snug">
                     {feature.title}
                   </h3>
@@ -163,7 +141,6 @@ export default function TargetingFeatures() {
                     {feature.description}
                   </p>
                   
-                  {/* Детали */}
                   <ul className="space-y-1">
                     {feature.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="text-xs text-slate-500 flex items-start leading-relaxed">
@@ -175,7 +152,6 @@ export default function TargetingFeatures() {
                     ))}
                   </ul>
 
-                  {/* Декоративные элементы */}
                   <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gradient-to-r from-teal-400/20 to-indigo-400/20 opacity-60"></div>
                 </div>
               </div>
@@ -183,7 +159,6 @@ export default function TargetingFeatures() {
           })}
         </div>
 
-        {/* Улучшенная секция специфики */}
         <div className={`transition-all duration-700 ${isVisible ? 'animate-fadeIn opacity-100' : 'opacity-0'}`} style={{ animationDelay: '800ms' }}>
           <div className="relative bg-gradient-to-r from-teal-900/20 via-slate-900/50 to-indigo-900/20 rounded-2xl border border-teal-500/20 p-6 sm:p-8 lg:p-10 backdrop-blur-sm shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 to-indigo-500/5 rounded-2xl"></div>
@@ -198,24 +173,12 @@ export default function TargetingFeatures() {
                 {specialties.map((specialty, index) => {
                   const IconComponent = specialty.icon
                   const colors = specialty.color === 'teal' 
-                    ? {
-                        iconBg: 'bg-teal-900/50',
-                        iconColor: 'text-teal-400'
-                      }
-                    : {
-                        iconBg: 'bg-indigo-900/50',
-                        iconColor: 'text-indigo-400'
-                      }
+                    ? { iconColor: 'text-teal-400' }
+                    : { iconColor: 'text-indigo-400' }
                   
                   return (
                     <div key={index} className="text-center group">
-                      <div className={`
-                        w-14 h-14 sm:w-16 sm:h-16 rounded-xl ${colors.iconBg} 
-                        flex items-center justify-center mx-auto mb-4 shadow-lg backdrop-blur-sm
-                        group-hover:scale-110 transition-all duration-300 ease-out
-                      `}>
-                        <IconComponent size={24} className={`${colors.iconColor} sm:w-7 sm:h-7`} />
-                      </div>
+                      <IconComponent size={36} className={`${colors.iconColor} mx-auto mb-4`} />
                       <h4 className="font-semibold text-white mb-2 sm:mb-3 font-fixedsys text-sm sm:text-base">
                         {specialty.title}
                       </h4>
