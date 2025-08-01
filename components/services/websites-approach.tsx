@@ -28,7 +28,11 @@ export default function WebsitesApproach() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if(sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const principles = [
@@ -109,9 +113,7 @@ export default function WebsitesApproach() {
                 }`}
                 style={{ animationDelay: `${index * 150 + 300}ms` }}
               >
-                <div className={`w-14 h-14 rounded-full bg-${principle.color}-900/50 flex items-center justify-center text-${principle.color}-400 mb-5 group-hover:animate-iconBounce transition-all`}>
-                  <IconComponent size={28} />
-                </div>
+                <IconComponent size={36} className={`text-${principle.color}-400 mb-5`} />
                 <h3 className="text-xl font-semibold mb-3 font-fixedsys text-white group-hover:text-teal-400 transition-colors">
                   {principle.title}
                 </h3>
