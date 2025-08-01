@@ -25,11 +25,8 @@ export default function TestimonialsSection() {
           {/* Отзыв 1 */}
           <div className="bg-slate-800/20 border border-slate-700/30 hover:border-teal-500/30 transition-all duration-300 shadow-lg hover:shadow-teal-900/30 rounded-xl p-6 hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="flex items-center gap-4 mb-4 animate-fadeInLeft delay-200">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-500 to-teal-700 flex items-center justify-center text-white animate-scaleUp delay-300 hover:scale-110 transition-transform duration-300">
-                <span className="font-bold">А</span>
-              </div>
               <div>
-                <p className="font-semibold font-fixedsys text-shadow">Клиника "Онлайн Око"</p>
+                <p className="font-semibold font-fixedsys text-shadow">Анна - Клиника "Онлайн Око"</p>
                 <p className="text-sm text-slate-400">Маркетолог клиники</p>
               </div>
             </div>
@@ -58,11 +55,8 @@ export default function TestimonialsSection() {
           {/* Отзыв 2 */}
           <div className="bg-slate-800/20 border border-slate-700/30 hover:border-indigo-500/30 transition-all duration-300 shadow-lg hover:shadow-indigo-900/30 rounded-xl p-6 hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="flex items-center gap-4 mb-4 animate-fadeInLeft delay-300">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-500 to-indigo-700 flex items-center justify-center text-white animate-scaleUp delay-400 hover:scale-110 transition-transform duration-300">
-                <span className="font-bold">Е</span>
-              </div>
               <div>
-                <p className="font-semibold font-fixedsys text-shadow">Стоматология "Полный Порядок"</p>
+                <p className="font-semibold font-fixedsys text-shadow">Екатерина - Стоматология "Полный Порядок"</p>
                 <p className="text-sm text-slate-400">Руководитель</p>
               </div>
             </div>
@@ -91,11 +85,8 @@ export default function TestimonialsSection() {
           {/* Отзыв 3 */}
           <div className="bg-slate-800/20 border border-slate-700/30 hover:border-teal-500/30 transition-all duration-300 shadow-lg hover:shadow-teal-900/30 rounded-xl p-6 hover-lift blur-backdrop animate-slideInStagger delay-300 sm:col-span-2 lg:col-span-1 sm:max-w-md sm:mx-auto lg:max-w-none">
             <div className="flex items-center gap-4 mb-4 animate-fadeInLeft delay-400">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-teal-500 to-teal-700 flex items-center justify-center text-white animate-scaleUp delay-500 hover:scale-110 transition-transform duration-300">
-                <span className="font-bold">В</span>
-              </div>
               <div>
-                <p className="font-semibold font-fixedsys text-shadow">ИИ-решение</p>
+                <p className="font-semibold font-fixedsys text-shadow">Вероника - Hippocrat AI</p>
                 <p className="text-sm text-slate-400">Студент медик</p>
               </div>
             </div>
