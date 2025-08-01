@@ -28,9 +28,7 @@ export default function AdvantagesSection() {
 
             <div className="space-y-4">
               <div className="flex items-start gap-3 animate-slideInStagger delay-300">
-                <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-400 hover:scale-110 transition-transform duration-300">
-                  <CaretRight size={14} className="text-teal-400" weight="bold" />
-                </div>
+                <CaretRight size={20} className="text-teal-400 mt-1 flex-shrink-0" weight="bold" />
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Понимаем специфику медицины</h4>
                   <p className="text-slate-400 text-sm">Создатели агентства — медики, понимающие отрасль изнутри</p>
@@ -38,9 +36,7 @@ export default function AdvantagesSection() {
               </div>
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-400">
-                <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-500 hover:scale-110 transition-transform duration-300">
-                  <CaretRight size={14} className="text-teal-400" weight="bold" />
-                </div>
+                <CaretRight size={20} className="text-teal-400 mt-1 flex-shrink-0" weight="bold" />
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Комплексный подход</h4>
                   <p className="text-slate-400 text-sm">От стратегии до реализации и аналитики — полный цикл работ</p>
@@ -48,9 +44,7 @@ export default function AdvantagesSection() {
               </div>
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-500">
-                <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-600 hover:scale-110 transition-transform duration-300">
-                  <CaretRight size={14} className="text-teal-400" weight="bold" />
-                </div>
+                <CaretRight size={20} className="text-teal-400 mt-1 flex-shrink-0" weight="bold" />
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Фокус на результат</h4>
                   <p className="text-slate-400 text-sm">Увеличиваем количество обращений и рост прибыли клиники</p>
@@ -58,9 +52,7 @@ export default function AdvantagesSection() {
               </div>
 
               <div className="flex items-start gap-3 animate-slideInStagger delay-600">
-                <div className="w-6 h-6 rounded-full bg-teal-900/50 flex items-center justify-center mt-1 flex-shrink-0 animate-scaleUp delay-700 hover:scale-110 transition-transform duration-300">
-                  <CaretRight size={14} className="text-teal-400" weight="bold" />
-                </div>
+                <CaretRight size={20} className="text-teal-400 mt-1 flex-shrink-0" weight="bold" />
                 <div>
                   <h4 className="font-medium text-white font-fixedsys text-shadow">Соблюдение медицинской этики</h4>
                   <p className="text-slate-400 text-sm">Маркетинг с учетом всех ограничений и особенностей медицинской рекламы</p>
@@ -71,9 +63,7 @@ export default function AdvantagesSection() {
 
           <div className="w-full md:w-3/5 grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fadeInRight">
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-200">
-              <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-5 animate-iconBounce delay-300">
-                <Users size={28} weight="duotone" />
-              </div>
+              <Users size={40} weight="duotone" className="text-teal-400 mb-5" />
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Больше пациентов</h3>
               <p className="text-slate-400">
                 Наши клиенты получают стабильный поток новых пациентов благодаря таргетированным рекламным кампаниям и оптимизации сайтов.
@@ -81,9 +71,7 @@ export default function AdvantagesSection() {
             </div>
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-300">
-              <div className="w-14 h-14 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-5 animate-iconBounce delay-400">
-                <Percent size={28} weight="duotone" />
-              </div>
+              <Percent size={40} weight="duotone" className="text-indigo-400 mb-5" />
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Высокая конверсия</h3>
               <p className="text-slate-400">
                 Превращаем интерес в действия: обращения, звонки и запись на приём благодаря оптимизации воронки продаж.
@@ -91,9 +79,7 @@ export default function AdvantagesSection() {
             </div>
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-400">
-              <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-5 animate-iconBounce delay-500">
-                <TrendUp size={28} weight="duotone" />
-              </div>
+              <TrendUp size={40} weight="duotone" className="text-teal-400 mb-5" />
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Рост прибыли</h3>
               <p className="text-slate-400">
                 Наши стратегии направлены не только на привлечение новых пациентов, но и на повышение среднего чека и частоты визитов.
@@ -101,9 +87,7 @@ export default function AdvantagesSection() {
             </div>
 
             <div className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow blur-backdrop animate-scaleUp delay-500">
-              <div className="w-14 h-14 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-5 animate-iconBounce delay-600">
-                <Scales size={28} weight="duotone" />
-              </div>
+              <Scales size={40} weight="duotone" className="text-indigo-400 mb-5" />
               <h3 className="text-xl font-semibold mb-3 font-fixedsys text-shadow">Соблюдение законов</h3>
               <p className="text-slate-400">
                 Все рекламные кампании соответствуют законодательству о рекламе медицинских услуг и требованиям регуляторов.
