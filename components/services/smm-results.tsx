@@ -27,7 +27,6 @@ export default function SmmResults() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          // Анимация счетчиков
           animateCounters()
         }
       },
@@ -38,7 +37,11 @@ export default function SmmResults() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if(sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const animateCounters = () => {
@@ -117,7 +120,6 @@ export default function SmmResults() {
 
   return (
     <section ref={sectionRef} id="smm-results" className="bg-slate-900 py-16 md:py-20 relative overflow-hidden">
-      {/* Анимированные декоративные элементы */}
       <div className="absolute top-0 right-0 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground"></div>
       <div className="absolute bottom-0 left-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '-4s' }}></div>
 
@@ -137,7 +139,6 @@ export default function SmmResults() {
           </p>
         </div>
 
-        {/* Основные метрики */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {results.map((result, index) => {
             const IconComponent = result.icon
@@ -149,9 +150,7 @@ export default function SmmResults() {
                 }`}
                 style={{ animationDelay: `${index * 150 + 300}ms` }}
               >
-                <div className={`w-14 h-14 rounded-full bg-${result.color}-900/50 flex items-center justify-center mx-auto mb-4 group-hover:animate-iconBounce`}>
-                  <IconComponent size={28} className={`text-${result.color}-400`} />
-                </div>
+                <IconComponent size={36} className={`text-${result.color}-400 mx-auto mb-4`} />
                 <div className={`text-3xl md:text-4xl font-bold font-fixedsys text-${result.color}-400 mb-2`}>
                   {result.value}{result.suffix}
                 </div>
@@ -166,7 +165,6 @@ export default function SmmResults() {
           })}
         </div>
 
-        {/* Результаты работы */}
         <div className={`bg-gradient-to-r from-slate-800/40 to-slate-900/40 rounded-xl border border-slate-700/30 overflow-hidden ${inView ? 'animate-fadeIn delay-800' : 'opacity-0'}`}>
           <div className="p-8">
             <div className="text-center mb-8">
@@ -179,10 +177,8 @@ export default function SmmResults() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Основные показатели */}
               <div className="space-y-4">
                 <h4 className="font-bold font-fixedsys text-white mb-4">Итоговые результаты:</h4>
-                
                 <div className="bg-slate-800/30 rounded-lg p-4">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-400">Подписчики:</span>
@@ -192,14 +188,12 @@ export default function SmmResults() {
                     </div>
                   </div>
                 </div>
-
                 <div className="bg-slate-800/30 rounded-lg p-4">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-400">Новые подписчики:</span>
                     <div className="text-teal-400 font-fixedsys text-lg">{caseStudy.after.newFollowers}</div>
                   </div>
                 </div>
-
                 <div className="bg-slate-800/30 rounded-lg p-4">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-400">Охват:</span>
@@ -207,15 +201,11 @@ export default function SmmResults() {
                   </div>
                 </div>
               </div>
-
-              {/* Достижения */}
               <div className="space-y-4">
                 <h4 className="font-bold font-fixedsys text-white mb-4">Достижения:</h4>
                 {caseStudy.results.map((result, index) => (
                   <div key={index} className="flex items-center p-4 bg-slate-800/30 rounded-lg hover-lift transition-all">
-                    <div className="w-8 h-8 rounded-full bg-teal-900/50 flex items-center justify-center mr-4">
-                      <TrendingUp size={16} className="text-teal-400" />
-                    </div>
+                    <TrendingUp size={24} className="text-teal-400 mr-4 flex-shrink-0" />
                     <span className="text-slate-300">{result}</span>
                   </div>
                 ))}
