@@ -37,7 +37,11 @@ export default function ServicesBenefits() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+        if(sectionRef.current) {
+            observer.unobserve(sectionRef.current)
+        }
+    }
   }, [])
 
   const animateCounters = () => {
@@ -215,9 +219,7 @@ export default function ServicesBenefits() {
                 }`}
                 style={{ animationDelay: `${index * 100 + 600}ms` }}
               >
-                <div className={`w-14 h-14 rounded-full bg-${benefit.color}-900/50 flex items-center justify-center text-${benefit.color}-400 mb-5 group-hover:animate-iconBounce transition-all`}>
-                  <IconComponent size={28} />
-                </div>
+                <IconComponent size={36} className={`text-${benefit.color}-400 mb-5`} />
                 <h3 className="text-xl font-semibold mb-3 font-fixedsys text-white group-hover:text-teal-400 transition-colors">
                   {benefit.title}
                 </h3>
@@ -270,27 +272,19 @@ export default function ServicesBenefits() {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-2">
-                  <Award size={24} />
-                </div>
+                <Award size={36} className="text-teal-400 mb-2" />
                 <span className="text-slate-400 text-sm text-center">Сертифицированные специалисты Google Ads</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-2">
-                  <Award size={24} />
-                </div>
+                <Award size={36} className="text-indigo-400 mb-2" />
                 <span className="text-slate-400 text-sm text-center">Яндекс.Директ экспертиза</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-2">
-                  <Award size={24} />
-                </div>
+                <Award size={36} className="text-teal-400 mb-2" />
                 <span className="text-slate-400 text-sm text-center">Facebook Business Partner</span>
               </div>
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-2">
-                  <Award size={24} />
-                </div>
+                <Award size={36} className="text-indigo-400 mb-2" />
                 <span className="text-slate-400 text-sm text-center">Участники РАР</span>
               </div>
             </div>
