@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { MousePointer, Target, TrendingUp, Users, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function TargetingHero() {
@@ -21,28 +21,24 @@ export default function TargetingHero() {
 
   const stats = [
     {
-      icon: Target,
       value: "98%",
       label: "Попадание в целевую аудиторию",
       color: "teal",
       delay: 400
     },
     {
-      icon: TrendingUp,
       value: "-40%",
       label: "Снижение стоимости лида",
       color: "indigo",
       delay: 500
     },
     {
-      icon: Users,
       value: "+200%",
       label: "Увеличение потока пациентов",
       color: "teal",
       delay: 600
     },
     {
-      icon: MousePointer,
       value: "2.5x",
       label: "Рост конверсии в запись",
       color: "indigo",
@@ -60,7 +56,7 @@ export default function TargetingHero() {
       <div className="relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           {/* Левая часть - контент */}
-          <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8 text-center lg:text-left">
+          <div className="w-full lg:w-3/5 space-y-6 sm:space-y-8 text-center lg:text-left">
             <div className={`transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`}>
               <div className="inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
                 Таргетированная реклама
@@ -68,7 +64,7 @@ export default function TargetingHero() {
             </div>
             
             <div className={`transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '200ms' }}>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-fixedsys">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight font-fixedsys">
                 <span className="bg-gradient-to-r from-teal-400 via-indigo-500 to-teal-400 bg-clip-text text-transparent animate-gradient-text">
                   Привлекаем пациентов с помощью точного таргетинга
                 </span>
@@ -76,15 +72,23 @@ export default function TargetingHero() {
             </div>
             
             <div className={`transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '400ms' }}>
-              <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Увеличиваем поток записей в клинику до +200% с соблюдением всех требований законодательства о рекламе медицинских услуг
-              </p>
+              <div className="bg-slate-900/50 rounded-2xl border border-slate-700/30 p-6 sm:p-8 backdrop-blur-sm">
+                <p className="text-lg sm:text-xl md:text-2xl text-slate-200 leading-relaxed">
+                  Увеличиваем поток записей в клинику до <span className="font-bold text-teal-400">+200%</span> с соблюдением всех требований <span className="font-bold text-indigo-400">законодательства о рекламе медицинских услуг</span>
+                </p>
+                
+                <div className="mt-6 p-4 bg-gradient-to-r from-teal-900/20 to-indigo-900/20 rounded-xl border border-teal-500/20">
+                  <p className="text-base sm:text-lg text-slate-300">
+                    <span className="font-bold text-white">Гарантируем:</span> снижение стоимости привлечения пациента на <span className="font-bold text-teal-400">40%</span> уже в первый месяц работы
+                  </p>
+                </div>
+              </div>
             </div>
             
             <div className={`flex flex-col sm:flex-row gap-4 pt-4 sm:pt-6 justify-center lg:justify-start transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`} style={{ animationDelay: '600ms' }}>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-base sm:text-lg font-fixedsys shadow-2xl hover:shadow-teal-500/25 transition-all duration-300 group"
+                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-base sm:text-lg font-fixedsys shadow-2xl hover:shadow-teal-500/25 transition-all duration-300 group px-8 py-4"
                 onClick={() => scrollToSection("contact")}
               >
                 Получить расчет
@@ -93,7 +97,7 @@ export default function TargetingHero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-teal-700 text-teal-400 hover:bg-teal-950/50 backdrop-blur-sm text-base sm:text-lg transition-all duration-300 hover:border-teal-500"
+                className="border-teal-700 text-teal-400 hover:bg-teal-950/50 backdrop-blur-sm text-base sm:text-lg transition-all duration-300 hover:border-teal-500 px-8 py-4"
                 onClick={() => scrollToSection("targeting-portfolio")}
               >
                 Смотреть кейсы
@@ -102,22 +106,19 @@ export default function TargetingHero() {
           </div>
           
           {/* Правая часть - статистики */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-2/5">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-lg mx-auto">
               {stats.map((stat, index) => {
-                const IconComponent = stat.icon
                 const colors = stat.color === 'teal' 
                   ? {
-                      iconBg: 'bg-teal-900/50',
-                      iconColor: 'text-teal-400',
                       valueColor: 'text-teal-400',
+                      bgColor: 'bg-teal-900/20',
                       borderColor: 'border-teal-500/30',
                       shadowColor: 'shadow-teal-500/10'
                     }
                   : {
-                      iconBg: 'bg-indigo-900/50',
-                      iconColor: 'text-indigo-400',
                       valueColor: 'text-indigo-400',
+                      bgColor: 'bg-indigo-900/20',
                       borderColor: 'border-indigo-500/30',
                       shadowColor: 'shadow-indigo-500/10'
                     }
@@ -130,27 +131,17 @@ export default function TargetingHero() {
                   >
                     <div className={`
                       relative bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 
-                      p-4 sm:p-6 h-full transition-all duration-500 ease-out
+                      p-6 sm:p-8 h-full transition-all duration-500 ease-out text-center
                       hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                       hover-lift transform-gpu will-change-transform
                     `}>
-                      {/* Иконка */}
-                      <div className={`
-                        w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${colors.iconBg} ${colors.iconColor}
-                        flex items-center justify-center mb-3 sm:mb-4 shadow-lg backdrop-blur-sm
-                        group-hover:scale-110 group-hover:rotate-3 
-                        transition-all duration-300 ease-out
-                      `}>
-                        <IconComponent size={20} className="sm:w-6 sm:h-6" />
-                      </div>
-                      
                       {/* Значение */}
-                      <div className={`text-xl sm:text-2xl font-bold font-fixedsys ${colors.valueColor} mb-2 group-hover:scale-105 transition-transform duration-300`}>
+                      <div className={`text-3xl sm:text-4xl font-bold font-fixedsys ${colors.valueColor} mb-3 sm:mb-4 group-hover:scale-105 transition-transform duration-300`}>
                         {stat.value}
                       </div>
                       
                       {/* Описание */}
-                      <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                      <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
                         {stat.label}
                       </p>
 
