@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import React from "react"
 import { 
   Instagram, 
-  Facebook, 
   MessageCircle,
   Youtube,
   Users,
@@ -46,17 +45,7 @@ export default function SmmPlatforms() {
       features: ["Stories", "Reels", "IGTV", "Shopping"]
     },
     {
-      name: "Facebook",
-      icon: Facebook,
-      color: "blue",
-      bg: "from-blue-500 to-blue-600",
-      description: "Широкая аудитория всех возрастов",
-      audience: "30-60 лет, равномерно",
-      bestFor: ["Многопрофильные клиники", "Семейная медицина", "Педиатрия"],
-      features: ["События", "Группы", "Реклама", "Мессенджер"]
-    },
-    {
-      name: "ВКонтакте",
+      name: "ВКонтакте и Одноклассники",
       icon: MessageCircle,
       color: "indigo",
       bg: "from-indigo-500 to-purple-600",
@@ -65,15 +54,15 @@ export default function SmmPlatforms() {
       bestFor: ["Все виды медицинских услуг", "Образовательный контент"],
       features: ["Записи", "Клипы", "Подкасты", "События"]
     },
-    {
-      name: "YouTube",
-      icon: Youtube,
-      color: "red",
-      bg: "from-red-500 to-red-600",
-      description: "Длинный видео-контент",
-      audience: "Все возрасты, долгий просмотр",
-      bestFor: ["Образовательные видео", "Интервью с врачами", "Процедуры"],
-      features: ["Видео", "Shorts", "Прямой эфир", "Плейлисты"]
+     {
+      name: "Телеграмм",
+      icon: MessageCircle,
+      color: "indigo",
+      bg: "from-indigo-500 to-purple-600",
+      description: "90% России",
+      audience: "18-45 лет, активные пользователи",
+      bestFor: ["Все виды медицинских услуг", "Образовательный контент"],
+      features: ["Записи", "Клипы", "Подкасты", "События"]
     }
   ]
 
