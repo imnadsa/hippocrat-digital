@@ -29,7 +29,11 @@ export default function WebsitesTechnologies() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if(sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const technologies = [
@@ -131,13 +135,10 @@ export default function WebsitesTechnologies() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
               <div className="flex items-center gap-4 mb-6">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${
-                  technologies[activeTab].color === 'teal' 
-                    ? 'from-teal-500 to-indigo-600' 
-                    : 'from-indigo-500 to-purple-600'
-                } flex items-center justify-center shadow-lg`}>
-                  {React.createElement(technologies[activeTab].icon, { size: 32, className: "text-white" })}
-                </div>
+                {React.createElement(technologies[activeTab].icon, { 
+                    size: 40, 
+                    className: `text-${technologies[activeTab].color}-400`
+                })}
                 <div>
                   <h3 className="text-2xl font-bold font-fixedsys text-white">{technologies[activeTab].category}</h3>
                   <p className="text-slate-400">{technologies[activeTab].description}</p>
