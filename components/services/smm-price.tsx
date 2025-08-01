@@ -55,7 +55,9 @@ export default function SmmPricing() {
         "Создание актуальных хештегов для медицинской тематики"
       ],
       notIncluded: [
-        "Реклама в социальных сетях"
+        "Реклама в социальных сетях",
+        "Расширенная аналитика конкурентов",
+        "Видеоконтент"
       ]
     },
     {
@@ -74,6 +76,10 @@ export default function SmmPricing() {
         "Расширенная аналитика эффективности",
         "A/B тестирование рекламных материалов",
         "Ежедневный мониторинг показателей"
+      ],
+      notIncluded: [
+        "Видеопродакшн",
+        "Инфлюенсер маркетинг"
       ]
     }
   ]
@@ -160,12 +166,12 @@ export default function SmmPricing() {
                   </div>
                 ))}
                 
-                {plan.notIncluded.length > 0 && (
+                {plan.notIncluded && plan.notIncluded.length > 0 && (
                   <>
                     <div className="border-t border-slate-700/50 pt-3 mt-4">
                       <span className="text-slate-500 text-xs uppercase tracking-wide">Не включено:</span>
                     </div>
-                    {plan.notIncluded.map((feature, featureIndex) => (
+                    {plan.notIncluded && plan.notIncluded.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-3">
                         <div className="w-4 h-4 border border-slate-600 rounded-full flex-shrink-0 mt-0.5"></div>
                         <span className="text-slate-500 text-sm">{feature}</span>
@@ -174,6 +180,8 @@ export default function SmmPricing() {
                   </>
                 )}
               </div>
+
+
             </div>
           ))}
         </div>
