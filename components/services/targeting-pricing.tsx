@@ -33,8 +33,8 @@ export default function TargetingPricing() {
 
   const guarantees = [
     {
-      value: "14 дней",
-      label: "Бесплатный тестовый период",
+      value: "Более 5 лет",
+      label: "Опыт настройти медицинского таргетинга",
       color: "teal"
     },
     {
@@ -43,8 +43,8 @@ export default function TargetingPricing() {
       color: "indigo"
     },
     {
-      value: "30 дней",
-      label: "Гарантия возврата средств",
+      value: "100%",
+      label: "Внимания вашему проекту",
       color: "teal"
     }
   ]
