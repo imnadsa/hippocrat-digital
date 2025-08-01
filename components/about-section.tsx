@@ -35,27 +35,19 @@ export default function AboutSection() {
           <div className="w-full md:w-1/3 animate-fadeInRight">
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-100 blur-backdrop">
-                <div className="w-12 h-12 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-3 animate-iconBounce delay-200">
-                  <Brain size={24} weight="duotone" />
-                </div>
+                <Brain size={36} weight="duotone" className="text-teal-400 mb-3" />
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Медицинская экспертиза</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-200 blur-backdrop">
-                <div className="w-12 h-12 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-3 animate-iconBounce delay-300">
-                  <Flask size={24} weight="duotone" />
-                </div>
+                <Flask size={36} weight="duotone" className="text-indigo-400 mb-3" />
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Инновационные подходы</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-teal-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-300 blur-backdrop">
-                <div className="w-12 h-12 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 mb-3 animate-iconBounce delay-400">
-                  <Heart size={24} weight="duotone" />
-                </div>
+                <Heart size={36} weight="duotone" className="text-teal-400 mb-3" />
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Медицинская этика</h3>
               </div>
               <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-indigo-500/30 transition-all duration-300 hover-lift hover-glow animate-scaleUp delay-400 blur-backdrop">
-                <div className="w-12 h-12 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mb-3 animate-iconBounce delay-500">
-                  <TrendUp size={24} weight="duotone" />
-                </div>
+                <TrendUp size={36} weight="duotone" className="text-indigo-400 mb-3" />
                 <h3 className="text-lg font-semibold font-fixedsys text-shadow">Рост показателей</h3>
               </div>
             </div>
