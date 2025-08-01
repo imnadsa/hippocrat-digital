@@ -85,12 +85,7 @@ export default function AiCases() {
               {/* Градиент поверх изображения */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
               
-              {/* Категория */}
-              <div className="absolute top-6 left-6">
-                <span className="px-4 py-2 bg-teal-500/20 backdrop-blur-sm text-teal-400 text-sm rounded-full border border-teal-500/30 font-medium">
-                  Искусственный интеллект
-                </span>
-              </div>
+             
               
               {/* Год */}
               <div className="absolute top-6 right-6">
