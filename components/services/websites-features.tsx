@@ -5,16 +5,11 @@ import {
   FileText, 
   Shield, 
   Calendar, 
-  Phone,
-  Clock,
-  MapPin,
-  Star,
-  Users
+  Phone
 } from "lucide-react"
 
 export default function WebsitesFeatures() {
   const [inView, setInView] = useState(false)
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null)
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -31,7 +26,11 @@ export default function WebsitesFeatures() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const mainFeatures = [
@@ -39,50 +38,46 @@ export default function WebsitesFeatures() {
       icon: Calendar,
       title: "Система записи онлайн",
       description: "Интеграция с CRM клиники",
-      details: "Автоматическая синхронизация с расписанием врачей, SMS-уведомления, календарь свободных слотов",
+      details: "Автоматическая синхронизация с расписанием врачей, SMS-уведомления, календарь свободных слотов.",
       percentage: 95
     },
     {
       icon: Shield,
       title: "Соответствие 152-ФЗ",
       description: "Защита персональных данных",
-      details: "Согласие на обработку данных, SSL-шифрование, защищённые формы, политика конфиденциальности",
+      details: "Согласие на обработку данных, SSL-шифрование, защищённые формы, политика конфиденциальности.",
       percentage: 100
     },
     {
       icon: FileText,
       title: "Медицинская документация",
       description: "Лицензии и сертификаты",
-      details: "Размещение лицензий, дипломов врачей, сертификатов качества с возможностью проверки подлинности",
+      details: "Размещение лицензий, дипломов врачей, сертификатов качества с возможностью проверки подлинности.",
       percentage: 98
     },
     {
       icon: Phone,
       title: "Мгновенная связь",
       description: "Множественные каналы связи",
-      details: "Click-to-call, онлайн-чат, WhatsApp, Telegram, обратный звонок за 30 секунд",
+      details: "Click-to-call, онлайн-чат, WhatsApp, Telegram, обратный звонок за 30 секунд.",
       percentage: 92
     }
   ]
 
   const additionalFeatures = [
     {
-      icon: MapPin,
       title: "Интерактивная карта",
       description: "Удобная навигация к клинике"
     },
     {
-      icon: Clock,
       title: "Онлайн консультации",
       description: "Телемедицина и видеосвязь"
     },
     {
-      icon: Star,
       title: "Система отзывов",
       description: "Управление репутацией"
     },
     {
-      icon: Users,
       title: "Личный кабинет",
       description: "История визитов и результаты"
     }
@@ -117,41 +112,35 @@ export default function WebsitesFeatures() {
             return (
               <div 
                 key={index} 
-                className={`bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all hover-lift hover-glow cursor-pointer ${
+                className={`bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover:border-teal-500/30 transition-all hover-lift hover-glow ${
                   inView ? 'animate-scaleUp' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 200 + 300}ms` }}
-                onMouseEnter={() => setHoveredFeature(index)}
-                onMouseLeave={() => setHoveredFeature(null)}
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-full bg-teal-900/50 flex items-center justify-center text-teal-400 group-hover:animate-iconBounce transition-all">
-                    <IconComponent size={28} />
-                  </div>
+                <div className="flex items-start gap-5">
+                  <IconComponent size={32} className="text-teal-400 flex-shrink-0 mt-1" />
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2 font-fixedsys text-white group-hover:text-teal-400 transition-colors">
+                    <h3 className="text-xl font-semibold mb-2 font-fixedsys text-white">
                       {feature.title}
                     </h3>
                     <p className="text-slate-400 text-sm mb-4">
                       {feature.description}
                     </p>
                     
-                    {hoveredFeature === index && (
-                      <div className="animate-fadeIn">
-                        <p className="text-slate-300 text-xs mb-4">
-                          {feature.details}
-                        </p>
-                        <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
-                          <div 
-                            className="h-full bg-gradient-to-r from-teal-500 to-indigo-600 rounded-full transition-all duration-1000"
-                            style={{ width: `${feature.percentage}%` }}
-                          ></div>
-                        </div>
-                        <div className="text-right mt-1">
-                          <span className="text-teal-400 text-xs font-fixedsys">{feature.percentage}% клиентов используют</span>
-                        </div>
+                    <div className="animate-fadeIn">
+                      <p className="text-slate-300 text-xs mb-4">
+                        {feature.details}
+                      </p>
+                      <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-teal-500 to-indigo-600 rounded-full transition-all duration-1000 ease-out"
+                          style={{ width: inView ? `${feature.percentage}%` : '0%' }}
+                        ></div>
                       </div>
-                    )}
+                      <div className="text-right mt-1">
+                        <span className="text-teal-400 text-xs font-fixedsys">{feature.percentage}% клиентов используют</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -166,14 +155,20 @@ export default function WebsitesFeatures() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {additionalFeatures.map((feature, index) => {
-              const IconComponent = feature.icon
               return (
                 <div 
                   key={index} 
-                  className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center hover:border-indigo-500/30 transition-all hover-lift"
+                  className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 text-center hover:border-indigo-500/30 transition-all hover-lift group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-indigo-900/50 flex items-center justify-center text-indigo-400 mx-auto mb-4 hover:animate-iconBounce">
-                    <IconComponent size={24} />
+                  <div className="flex items-center justify-center mb-4 sm:mb-6">
+                    <div className={`
+                      text-2xl sm:text-3xl font-bold font-fixedsys text-indigo-400
+                      px-4 py-2 rounded-xl bg-indigo-900/50 backdrop-blur-sm
+                      min-w-[3rem] min-h-[3rem] flex items-center justify-center
+                      shadow-lg group-hover:scale-110 transition-all duration-300
+                    `}>
+                      {index + 1}
+                    </div>
                   </div>
                   <h4 className="font-semibold font-fixedsys text-white mb-2">{feature.title}</h4>
                   <p className="text-slate-400 text-sm">{feature.description}</p>
