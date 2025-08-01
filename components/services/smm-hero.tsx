@@ -49,14 +49,6 @@ export default function SmmHero() {
               >
                 Обсудить SMM-стратегию
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-teal-700 text-teal-400 hover:bg-teal-950/50 animate-fadeInUp delay-300 hover-lift"
-                onClick={() => scrollToSection("smm-portfolio")}
-              >
-                Примеры работ
-              </Button>
             </div>
           </div>
           
