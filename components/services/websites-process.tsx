@@ -160,7 +160,6 @@ export default function WebsitesProcess() {
   const getStepColors = (color: string, isActive: boolean, isPassed: boolean) => {
     if (color === "teal") {
       return {
-        iconBg: isActive ? 'bg-teal-500' : isPassed ? 'bg-teal-600' : 'bg-teal-900/50',
         iconColor: isActive ? 'text-white' : isPassed ? 'text-white' : 'text-teal-400',
         borderColor: isActive ? 'border-teal-500' : isPassed ? 'border-teal-600' : 'border-teal-500/30',
         shadowColor: isActive ? 'shadow-teal-500/20' : '',
@@ -168,7 +167,6 @@ export default function WebsitesProcess() {
       }
     } else {
       return {
-        iconBg: isActive ? 'bg-indigo-500' : isPassed ? 'bg-indigo-600' : 'bg-indigo-900/50',
         iconColor: isActive ? 'text-white' : isPassed ? 'text-white' : 'text-indigo-400',
         borderColor: isActive ? 'border-indigo-500' : isPassed ? 'border-indigo-600' : 'border-indigo-500/30',
         shadowColor: isActive ? 'shadow-indigo-500/20' : '',
@@ -231,8 +229,8 @@ export default function WebsitesProcess() {
                 >
                   {/* Номер этапа - центрированный для мобильных */}
                   <div className={`absolute left-3 sm:left-1/2 transform sm:-translate-x-1/2 w-12 h-12 rounded-xl border-2 flex items-center justify-center font-fixedsys font-bold transition-all duration-500 hover-lift backdrop-blur-sm ${
-                    isActive ? `${colors.iconBg} ${colors.borderColor} text-white shadow-lg ${colors.shadowColor} scale-110` 
-                    : isPassed ? `${colors.iconBg} ${colors.borderColor} text-white shadow-md`
+                    isActive ? `bg-${step.color}-500 border-${step.color}-500 text-white shadow-lg shadow-${step.color}-500/20 scale-110` 
+                    : isPassed ? `bg-${step.color}-600 border-${step.color}-600 text-white shadow-md`
                     : `bg-slate-800/80 border-slate-700/60 text-slate-400 group-hover:border-slate-600`
                   }`}>
                     {isPassed && !isActive ? <CheckCircle size={20} /> : index + 1}
@@ -248,15 +246,8 @@ export default function WebsitesProcess() {
                       ${isActive ? `shadow-2xl ${colors.shadowColor} scale-105` : 'hover:scale-105'}
                     `}>
                       {/* Заголовок с иконкой */}
-                      <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                        <div className={`
-                          w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${colors.iconBg} ${colors.iconColor}
-                          flex items-center justify-center shadow-lg backdrop-blur-sm
-                          group-hover:scale-110 group-hover:rotate-3 
-                          transition-all duration-300 ease-out
-                        `}>
-                          <IconComponent size={20} className="sm:w-6 sm:h-6" />
-                        </div>
+                      <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <IconComponent size={36} className={`${step.color === 'teal' ? 'text-teal-400' : 'text-indigo-400'} flex-shrink-0`} />
                         <div className="flex-grow">
                           <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-fixedsys text-white leading-tight">
                             {step.title}
