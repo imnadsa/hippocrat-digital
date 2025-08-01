@@ -8,11 +8,7 @@ import {
   MessageSquare, 
   Search, 
   Brain,
-  ArrowRight,
-  Clock,
-  TrendingUp,
-  Users,
-  DollarSign
+  ArrowRight
 } from "lucide-react"
 
 export default function ServicesOverview() {
@@ -34,7 +30,11 @@ export default function ServicesOverview() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+        if(sectionRef.current) {
+            observer.unobserve(sectionRef.current)
+        }
+    }
   }, [])
 
   const services = [
@@ -195,16 +195,8 @@ export default function ServicesOverview() {
                 `}>
                   
                   {/* Header */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`
-                      w-14 h-14 rounded-xl bg-${service.color}-900/50 
-                      flex items-center justify-center text-${service.color}-400 
-                      shadow-lg backdrop-blur-sm
-                      group-hover:scale-110 group-hover:rotate-3 
-                      transition-all duration-300 ease-out
-                    `}>
-                      <IconComponent size={28} />
-                    </div>
+                  <div className="flex items-start gap-4 mb-6">
+                    <IconComponent size={36} className={`text-${service.color}-400 flex-shrink-0 mt-1`} />
                     <div className="flex-grow">
                       <h3 className="text-xl font-bold font-fixedsys text-white group-hover:text-teal-400 transition-colors duration-300">
                         {service.title}
