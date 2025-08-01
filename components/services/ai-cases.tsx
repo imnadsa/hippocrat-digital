@@ -34,7 +34,11 @@ export default function AiCases() {
   }, [])
 
   const openCase = () => {
-    router.push('/cases/hippocrat-ai?from=services')
+    router.push('/cases/hippocrat-ai?from=cases')
+  }
+
+  const openCaseDetailed = () => {
+    router.push('/cases/hippocrat-ai?from=cases')
   }
 
   const scrollToContact = () => {
@@ -195,7 +199,7 @@ export default function AiCases() {
             <Button
               variant="outline"
               className="px-6 py-3 border-teal-700 text-teal-400 hover:bg-teal-950/50 backdrop-blur-sm transition-all duration-300 hover:border-teal-500"
-              onClick={openCase}
+              onClick={openCaseDetailed}
             >
               Изучить кейс подробно
             </Button>
