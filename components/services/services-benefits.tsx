@@ -15,10 +15,10 @@ import {
 export default function ServicesBenefits() {
   const [inView, setInView] = useState(false)
   const [counters, setCounters] = useState({
-    clients: 0,
-    experience: 0,
     retention: 0,
-    projects: 0
+    recommendation: 0,
+    products: 0,
+    experience: 0
   })
   const sectionRef = useRef(null)
 
@@ -45,21 +45,22 @@ export default function ServicesBenefits() {
   }, [])
 
   const animateCounters = () => {
-    const targets = { clients: 150, experience: 5, retention: 98, projects: 500 }
+    const targets = { retention: 98, recommendation: 100, products: 1, experience: 5 }
     const duration = 2000
     const intervals: { [key: string]: NodeJS.Timeout } = {}
 
     Object.keys(targets).forEach(key => {
       let startValue = 0
-      const increment = targets[key as keyof typeof targets] / (duration / 16)
+      const typedKey = key as keyof typeof targets;
+      const increment = targets[typedKey] / (duration / 16)
       
       intervals[key] = setInterval(() => {
         startValue += increment
-        if (startValue >= targets[key as keyof typeof targets]) {
-          startValue = targets[key as keyof typeof targets]
+        if (startValue >= targets[typedKey]) {
+          startValue = targets[typedKey]
           clearInterval(intervals[key])
         }
-        setCounters(prev => ({ ...prev, [key]: Math.round(startValue) }))
+        setCounters(prev => ({ ...prev, [typedKey]: Math.round(startValue) }))
       }, 16)
     })
   }
@@ -111,53 +112,32 @@ export default function ServicesBenefits() {
 
   const stats = [
     {
-      value: counters.clients,
-      suffix: "+",
-      label: "Медицинских клиентов",
-      description: "Доверяют нам свой маркетинг",
+      value: counters.retention,
+      suffix: "%",
+      label: "Клиентов остаются",
+      description: "Продлевают сотрудничество с нами",
+      color: "teal"
+    },
+    {
+      value: counters.recommendation,
+      suffix: "%",
+      label: "Клиентов по рекомендации",
+      description: "Приходят по совету коллег и партнеров",
+      color: "indigo"
+    },
+    {
+      value: counters.products,
+      suffix: "",
+      label: "Собственный продукт",
+      description: "Разработали AI-решение для клиник",
       color: "teal"
     },
     {
       value: counters.experience,
       suffix: " лет",
       label: "Опыта в медицине",
-      description: "Специализации на health-маркетинге",
+      description: "Специализация на health-маркетинге",
       color: "indigo"
-    },
-    {
-      value: counters.retention,
-      suffix: "%",
-      label: "Клиентов остаются",
-      description: "Продлевают сотрудничество",
-      color: "teal"
-    },
-    {
-      value: counters.projects,
-      suffix: "+",
-      label: "Реализованных проектов",
-      description: "Успешно завершенных кампаний",
-      color: "indigo"
-    }
-  ]
-
-  const testimonials = [
-    {
-      text: "Работаем с командой уже 3 года. Количество пациентов выросло в 2.5 раза, а средний чек увеличился на 40%.",
-      author: "Иванова М.А.",
-      position: "Главный врач стоматологии «Белая улыбка»",
-      avatar: "👩‍⚕️"
-    },
-    {
-      text: "Благодаря внедрению ИИ-решений мы автоматизировали 60% рутинных процессов и улучшили качество диагностики.",
-      author: "Петров С.В.",
-      position: "Директор медицинского центра «Здоровье+»",
-      avatar: "👨‍⚕️"
-    },
-    {
-      text: "SMM-стратегия помогла нам стать узнаваемым брендом в косметологии. Записи через Instagram выросли на 300%.",
-      author: "Сидорова А.И.",
-      position: "Владелица клиники эстетической медицины",
-      avatar: "👩‍💼"
     }
   ]
 
@@ -234,62 +214,6 @@ export default function ServicesBenefits() {
           })}
         </div>
 
-        {/* Отзывы */}
-        <div className={`${inView ? 'animate-fadeInUp delay-1000' : 'opacity-0'}`}>
-          <h3 className="text-2xl font-bold font-fixedsys text-white text-center mb-8">
-            Что говорят наши клиенты
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="bg-slate-800/20 rounded-xl border border-slate-700/30 p-6 hover-lift transition-all"
-              >
-                <blockquote className="text-slate-300 mb-4 italic">
-                  "{testimonial.text}"
-                </blockquote>
-                <div className="flex items-center gap-3">
-                  <div className="text-2xl">{testimonial.avatar}</div>
-                  <div>
-                    <div className="font-semibold text-white font-fixedsys">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-slate-400 text-xs">
-                      {testimonial.position}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Сертификаты и партнеры */}
-        <div className={`mt-16 bg-gradient-to-r from-teal-900/20 to-indigo-900/20 rounded-xl border border-teal-500/30 p-8 ${inView ? 'animate-fadeIn delay-1200' : 'opacity-0'}`}>
-          <div className="text-center">
-            <h3 className="text-xl font-bold font-fixedsys text-white mb-6">
-              Наши партнеры и сертификации
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="flex flex-col items-center">
-                <Award size={36} className="text-teal-400 mb-2" />
-                <span className="text-slate-400 text-sm text-center">Сертифицированные специалисты Google Ads</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <Award size={36} className="text-indigo-400 mb-2" />
-                <span className="text-slate-400 text-sm text-center">Яндекс.Директ экспертиза</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <Award size={36} className="text-teal-400 mb-2" />
-                <span className="text-slate-400 text-sm text-center">Facebook Business Partner</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <Award size={36} className="text-indigo-400 mb-2" />
-                <span className="text-slate-400 text-sm text-center">Участники РАР</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
