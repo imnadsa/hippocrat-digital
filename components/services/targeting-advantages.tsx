@@ -58,13 +58,11 @@ export default function TargetingAdvantages() {
 
   return (
     <section id="targeting-advantages" className="bg-slate-900 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      {/* Улучшенные декоративные элементы */}
       <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
       <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '4s' }}></div>
       <div className="absolute top-1/3 left-1/3 w-20 h-20 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        {/* Улучшенный заголовок */}
         <div className={`text-center mb-8 sm:mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
             Преимущества
@@ -80,23 +78,12 @@ export default function TargetingAdvantages() {
           </p>
         </div>
 
-        {/* Улучшенная сетка преимуществ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {advantages.map((advantage, index) => {
             const IconComponent = advantage.icon
             const colors = advantage.color === 'teal' 
-              ? {
-                  iconBg: 'bg-teal-900/50',
-                  iconColor: 'text-teal-400',
-                  borderColor: 'border-teal-500/30',
-                  shadowColor: 'shadow-teal-500/10'
-                }
-              : {
-                  iconBg: 'bg-indigo-900/50',
-                  iconColor: 'text-indigo-400',
-                  borderColor: 'border-indigo-500/30',
-                  shadowColor: 'shadow-indigo-500/10'
-                }
+              ? { iconColor: 'text-teal-400', borderColor: 'border-teal-500/30', shadowColor: 'shadow-teal-500/10' }
+              : { iconColor: 'text-indigo-400', borderColor: 'border-indigo-500/30', shadowColor: 'shadow-indigo-500/10' }
             
             return (
               <div 
@@ -110,18 +97,8 @@ export default function TargetingAdvantages() {
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  {/* Иконка */}
-                  <div className={`
-                    w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${colors.iconBg} ${colors.iconColor}
-                    flex items-center justify-center mb-4 sm:mb-6 shadow-lg backdrop-blur-sm
-                    group-hover:scale-110 group-hover:rotate-3 
-                    transition-all duration-300 ease-out
-                  `}>
-                    <IconComponent size={24} className="sm:w-7 sm:h-7" />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
+                  <IconComponent size={36} className={`${colors.iconColor} mb-4 sm:mb-6`} />
                   
-                  {/* Контент */}
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 font-fixedsys text-white leading-snug">
                     {advantage.title}
                   </h3>
@@ -129,11 +106,9 @@ export default function TargetingAdvantages() {
                     {advantage.description}
                   </p>
 
-                  {/* Декоративные элементы */}
                   <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-gradient-to-r from-teal-400/20 to-indigo-400/20 opacity-60"></div>
                   <div className="absolute bottom-3 left-3 w-1 h-1 rounded-full bg-gradient-to-r from-indigo-400/30 to-teal-400/30"></div>
                   
-                  {/* Hover gradient overlay */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </div>
               </div>
