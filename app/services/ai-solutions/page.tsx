@@ -5,7 +5,6 @@ import Header from "@/components/header"
 import AiHero from "@/components/services/ai-hero"
 import AiSolutions from "@/components/services/ai-solutions"
 import AiIntegration from "@/components/services/ai-integration"
-import AiBenefits from "@/components/services/ai-benefits"
 import AiCases from "@/components/services/ai-cases"
 import BlogSection from '@/components/blog-section'
 import AiPackages from "@/components/services/ai-packages"
@@ -56,7 +55,6 @@ export default function AiSolutionsPage() {
         <AiHero />
         <AiSolutions />
         <AiIntegration />
-        <AiBenefits />
         <AiCases />
         <AiPackages />
         <BlogSection />
