@@ -7,6 +7,7 @@ import AiSolutions from "@/components/services/ai-solutions"
 import AiIntegration from "@/components/services/ai-integration"
 import AiBenefits from "@/components/services/ai-benefits"
 import AiCases from "@/components/services/ai-cases"
+import BlogSection from '@/components/blog-section'
 import AiPackages from "@/components/services/ai-packages"
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
@@ -58,6 +59,7 @@ export default function AiSolutionsPage() {
         <AiBenefits />
         <AiCases />
         <AiPackages />
+        <BlogSection />
         <CtaSection />
       </main>
 
