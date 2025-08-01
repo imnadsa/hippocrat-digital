@@ -1,6 +1,5 @@
 "use client"
 
-import { Search, Users, Palette, Settings, BarChart, TrendingUp, Repeat } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function TargetingProcess() {
@@ -13,43 +12,36 @@ export default function TargetingProcess() {
 
   const steps = [
     {
-      icon: Search,
       title: "Анализ и аудит",
       description: "Изучаем специфику клиники, целевую аудиторию, конкурентов и текущие рекламные кампании",
       color: "teal"
     },
     {
-      icon: Users,
       title: "Определение ЦА",
       description: "Создаем портреты идеальных пациентов на основе данных и составляем стратегию таргетинга",
       color: "indigo"
     },
     {
-      icon: Palette,
       title: "Креативы и тексты",
       description: "Разрабатываем объявления с учетом медицинской этики, создаем Landing Pages под каждую услугу",
       color: "teal"
     },
     {
-      icon: Settings,
       title: "Настройка кампаний",
       description: "Запускаем кампании в Facebook, Instagram, ВКонтакте, настраиваем автоматические правила",
       color: "indigo"
     },
     {
-      icon: BarChart,
       title: "Тестирование",
       description: "A/B тестируем объявления, аудитории, креативы. Находим самые эффективные комбинации",
       color: "teal"
     },
     {
-      icon: TrendingUp,
       title: "Оптимизация",
       description: "Анализируем результаты, отключаем неэффективные объявления, масштабируем успешные",
       color: "indigo"
     },
     {
-      icon: Repeat,
       title: "Ретаргетинг",
       description: "Возвращаем посетителей с помощью умного ретаргетинга, увеличиваем конверсию",
       color: "teal"
@@ -59,19 +51,17 @@ export default function TargetingProcess() {
   const getStepColors = (color: string) => {
     if (color === 'teal') {
       return {
-        iconBg: 'bg-teal-900/50',
-        iconColor: 'text-teal-400',
         titleColor: 'text-teal-400',
-        numberBg: 'bg-teal-900/30',
+        numberBg: 'bg-teal-900/50',
+        numberColor: 'text-teal-400',
         borderColor: 'border-teal-500/30',
         shadowColor: 'shadow-teal-500/10'
       }
     } else {
       return {
-        iconBg: 'bg-indigo-900/50',
-        iconColor: 'text-indigo-400',
         titleColor: 'text-indigo-400',
-        numberBg: 'bg-indigo-900/30',
+        numberBg: 'bg-indigo-900/50',
+        numberColor: 'text-indigo-400',
         borderColor: 'border-indigo-500/30',
         shadowColor: 'shadow-indigo-500/10'
       }
@@ -105,7 +95,6 @@ export default function TargetingProcess() {
         {/* Сетка карточек */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
           {steps.map((step, index) => {
-            const IconComponent = step.icon
             const colors = getStepColors(step.color)
             const delay = index * 150
             
@@ -122,31 +111,21 @@ export default function TargetingProcess() {
                   transition-all duration-500 ease-out
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  {/* Header карточки */}
-                  <div className="flex items-center mb-4 sm:mb-6">
+                  {/* Header карточки с только цифрой */}
+                  <div className="flex items-center justify-center mb-4 sm:mb-6">
                     <div className={`
-                      relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${colors.iconBg} 
-                      flex items-center justify-center ${colors.iconColor} 
-                      mr-3 sm:mr-4 shadow-lg backdrop-blur-sm
-                      group-hover:scale-110 group-hover:rotate-3 
-                      transition-all duration-300 ease-out
-                    `}>
-                      <IconComponent size={20} className="sm:w-6 sm:h-6" />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className={`
-                      text-lg sm:text-xl font-bold font-fixedsys ${colors.titleColor}
-                      px-2 py-1 rounded-lg ${colors.numberBg} backdrop-blur-sm
-                      min-w-[2rem] flex items-center justify-center
-                      shadow-sm
+                      text-2xl sm:text-3xl font-bold font-fixedsys ${colors.numberColor}
+                      px-4 py-2 rounded-xl ${colors.numberBg} backdrop-blur-sm
+                      min-w-[3rem] min-h-[3rem] flex items-center justify-center
+                      shadow-lg group-hover:scale-110 transition-all duration-300
                     `}>
                       {index + 1}
                     </div>
                   </div>
 
                   {/* Контент */}
-                  <div className="flex-grow">
-                    <h3 className="text-lg sm:text-xl font-semibold mb-3 font-fixedsys text-white leading-snug">
+                  <div className="flex-grow text-center">
+                    <h3 className={`text-lg sm:text-xl font-semibold mb-3 font-fixedsys ${colors.titleColor} leading-snug`}>
                       {step.title}
                     </h3>
                     <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
