@@ -18,7 +18,7 @@ export default function CasesPage() {
       <Header scrolled={true} />
       
       {/* Hero секция */}
-      <section className="pt-24 pb-16 px-4">
+      <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 font-fixedsys">
