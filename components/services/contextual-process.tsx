@@ -93,12 +93,10 @@ export default function ContextualProcess() {
             const colors = step.color === 'teal' 
               ? {
                   iconColor: 'text-teal-400',
-                  numberBg: 'bg-teal-500',
                   accentColor: 'text-teal-400'
                 }
               : {
                   iconColor: 'text-indigo-400',
-                  numberBg: 'bg-indigo-500',
                   accentColor: 'text-indigo-400'
                 }
             
@@ -109,16 +107,11 @@ export default function ContextualProcess() {
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="flex flex-col lg:flex-row items-start gap-6 sm:gap-8 mb-8 sm:mb-12 group">
-                  {/* Icon and Number */}
+                  {/* Icon */}
                   <div className="flex-shrink-0">
-                    <div className="relative">
-                      {/* 👇 ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ */}
-                      <div className={`w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent size={48} className={colors.iconColor} />
-                      </div>
-                      <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full ${colors.numberBg} flex items-center justify-center text-white text-sm font-bold font-fixedsys`}>
-                        {step.number}
-                      </div>
+                    {/* 👇 ВСЕ ИЗМЕНЕНИЯ ЗДЕСЬ: УБРАЛ ФОН, УБРАЛ ЦИФРЫ, УВЕЛИЧИЛ ИКОНКУ */}
+                    <div className="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent size={48} className={colors.iconColor} />
                     </div>
                   </div>
 
