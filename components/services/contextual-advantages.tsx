@@ -82,13 +82,11 @@ export default function ContextualAdvantages() {
             const IconComponent = advantage.icon
             const colors = advantage.color === 'teal' 
               ? { 
-                  iconBg: 'bg-teal-900/50', 
                   iconColor: 'text-teal-400', 
                   borderColor: 'border-teal-500/30',
                   shadowColor: 'shadow-teal-500/10'
                 }
               : { 
-                  iconBg: 'bg-indigo-900/50', 
                   iconColor: 'text-indigo-400',
                   borderColor: 'border-indigo-500/30',
                   shadowColor: 'shadow-indigo-500/10'
@@ -106,9 +104,7 @@ export default function ContextualAdvantages() {
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  <div className={`w-12 h-12 rounded-xl ${colors.iconBg} flex items-center justify-center mb-6 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent size={24} className={colors.iconColor} />
-                  </div>
+                  <IconComponent size={32} className={`${colors.iconColor} mb-6 group-hover:scale-110 transition-transform duration-300`} />
                   
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 font-fixedsys text-white leading-snug">
                     {advantage.title}
