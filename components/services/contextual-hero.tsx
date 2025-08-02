@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Target, TrendingUp, Clock } from "phosphor-react"
+import { ArrowRight, Target, TrendUp, Clock } from "phosphor-react"
 import { useEffect, useState } from "react"
 
 export default function ContextualHero() {
@@ -24,7 +24,7 @@ export default function ContextualHero() {
       color: "teal"
     },
     {
-      icon: TrendingUp,
+      icon: TrendUp,
       value: "3x",
       label: "рост конверсий",
       color: "indigo"
