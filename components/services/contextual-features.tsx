@@ -103,8 +103,8 @@ export default function ContextualFeatures() {
           {features.map((feature, index) => {
             const IconComponent = feature.icon
             const colors = feature.color === 'teal' 
-              ? { iconColor: 'text-teal-400', borderColor: 'border-teal-500/30', shadowColor: 'shadow-teal-500/10' }
-              : { iconColor: 'text-indigo-400', borderColor: 'border-indigo-500/30', shadowColor: 'shadow-indigo-500/10' }
+              ? { iconColor: 'text-teal-400' }
+              : { iconColor: 'text-indigo-400' }
             
             return (
               <div 
@@ -112,14 +112,12 @@ export default function ContextualFeatures() {
                 className={`relative group transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
+                {/* 👇 ВОТ ИЗМЕНЕНИЯ. УБРАЛ ФОН И ГРАНИЦЫ С КАРТОЧКИ */}
                 <div className={`
-                  relative bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 
-                  p-4 sm:p-6 h-full transition-all duration-500 ease-out
-                  hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
-                  hover-lift transform-gpu will-change-transform
+                  relative rounded-2xl p-4 sm:p-6 h-full transition-all duration-500 ease-out
+                  hover-lift transform-gpu will-change-transform text-center
                 `}>
-                  {/* 👇 ИЗМЕНЕН РАЗМЕР ИКОНКИ */}
-                  <IconComponent size={48} className={`${colors.iconColor} mb-4`} />
+                  <IconComponent size={48} className={`${colors.iconColor} mb-4 mx-auto`} />
                   
                   <h3 className="text-base sm:text-lg font-semibold mb-2 font-fixedsys text-white leading-snug">
                     {feature.title}
@@ -128,7 +126,8 @@ export default function ContextualFeatures() {
                     {feature.description}
                   </p>
                   
-                  <ul className="space-y-1">
+                  {/* Выравнивание списка по левому краю для читаемости */}
+                  <ul className="space-y-1 text-left">
                     {feature.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="text-xs text-slate-500 flex items-start leading-relaxed">
                         <span className={`w-1.5 h-1.5 rounded-full mr-2 mt-1.5 flex-shrink-0 ${
