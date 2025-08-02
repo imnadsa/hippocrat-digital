@@ -118,7 +118,8 @@ export default function ContextualFeatures() {
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  <IconComponent size={36} className={`${colors.iconColor} mb-4`} />
+                  {/* 👇 ИЗМЕНЕН РАЗМЕР ИКОНКИ */}
+                  <IconComponent size={48} className={`${colors.iconColor} mb-4`} />
                   
                   <h3 className="text-base sm:text-lg font-semibold mb-2 font-fixedsys text-white leading-snug">
                     {feature.title}
@@ -164,7 +165,8 @@ export default function ContextualFeatures() {
                   
                   return (
                     <div key={index} className="text-center group">
-                      <IconComponent size={36} className={`${colors.iconColor} mx-auto mb-4`} />
+                      {/* 👇 ИЗМЕНЕН РАЗМЕР ИКОНКИ */}
+                      <IconComponent size={48} className={`${colors.iconColor} mx-auto mb-4`} />
                       <h4 className="font-semibold text-white mb-2 sm:mb-3 font-fixedsys text-sm sm:text-base">
                         {specialty.title}
                       </h4>
