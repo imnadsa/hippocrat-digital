@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Target, TrendUp, Clock } from "phosphor-react"
+import { ArrowRight } from "phosphor-react"
 import { useEffect, useState } from "react"
 
 export default function ContextualHero() {
@@ -11,6 +11,12 @@ export default function ContextualHero() {
     const timer = setTimeout(() => setIsVisible(true), 100)
     return () => clearTimeout(timer)
   }, [])
+
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b101b]">
@@ -59,6 +65,7 @@ export default function ContextualHero() {
               Узнать подробнее
             </Button>
           </div>
+        </div>
       </div>
     </section>
   )
