@@ -14,46 +14,14 @@ export default function ContextualPricing() {
 
   const plans = [
     {
-      name: "Базовый",
-      price: "25 000",
-      description: "Для небольших клиник",
-      features: [
-        "1-2 услуги в рекламе",
-        "До 500 ключевых слов",
-        "Настройка 2-3 кампаний",
-        "Еженедельные отчеты",
-        "Техническая поддержка",
-        "Соблюдение ФЗ-38"
-      ],
-      recommended: false,
-      color: "slate"
-    },
-    {
-      name: "Стандарт",
+      name: "Контекстная реклама",
       price: "45 000",
-      description: "Для средних клиник",
-      features: [
-        "3-5 услуг в рекламе",
-        "До 1000 ключевых слов",
-        "Настройка 5-7 кампаний",
-        "Еженедельные отчеты",
-        "Приоритетная поддержка",
-        "A/B тестирование объявлений",
-        "Корректировки ставок",
-        "Соблюдение ФЗ-38"
-      ],
-      recommended: true,
-      color: "teal"
-    },
-    {
-      name: "Премиум",
-      price: "75 000",
-      description: "Для крупных центров",
+      description: "Полный цикл настройки и ведения",
       features: [
         "Без ограничений по услугам",
         "Безлимитные ключевые слова",
-        "Комплексная настройка",
-        "Ежедневные отчеты",
+        "Комплексная настройка кампаний",
+        "Еженедельные отчеты",
         "Персональный менеджер",
         "Продвинутая аналитика",
         "Интеграция с CRM",
@@ -61,7 +29,7 @@ export default function ContextualPricing() {
         "Соблюдение ФЗ-38"
       ],
       recommended: false,
-      color: "indigo"
+      color: "teal"
     }
   ]
 
@@ -86,11 +54,11 @@ export default function ContextualPricing() {
             </span>
           </h2>
           <p className="text-slate-400 text-center max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
-            Выберите подходящий тариф для вашей клиники. Рекламный бюджет оплачивается отдельно
+            Фиксированная стоимость ведения контекстной рекламы. Рекламный бюджет оплачивается отдельно
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="max-w-md mx-auto">
           {plans.map((plan, index) => {
             const isRecommended = plan.recommended
             const colors = plan.color === 'teal' 
