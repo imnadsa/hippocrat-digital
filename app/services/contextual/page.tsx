@@ -2,6 +2,14 @@
 
 import { useState, useEffect } from "react"
 import Header from "@/components/header"
+import ContextualHero from "@/components/services/contextual-hero"
+import ContextualAdvantages from "@/components/services/contextual-advantages"
+import ContextualProcess from "@/components/services/contextual-process"
+import ContextualFeatures from "@/components/services/contextual-features"
+import ContextualPricing from "@/components/services/contextual-pricing"
+import ContextualFaq from "@/components/services/contextual-faq"
+import BlogSection from '@/components/blog-section'
+import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
 export default function ContextualPage() {
@@ -32,11 +40,14 @@ export default function ContextualPage() {
       <Header scrolled={scrolled} />
       
       <main>
-        {/* Placeholder для будущих компонентов */}
-        <div className="pt-24 text-center">
-          <h1 className="text-4xl font-bold font-fixedsys">Контекстная реклама</h1>
-          <p className="text-slate-400 mt-4">Страница в разработке</p>
-        </div>
+        <ContextualHero />
+        <ContextualAdvantages />
+        <ContextualProcess />
+        <ContextualFeatures />
+        <ContextualPricing />
+        <ContextualFaq />
+        <BlogSection />
+        <CtaSection />
       </main>
 
       <Footer />
