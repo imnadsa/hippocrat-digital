@@ -1,6 +1,6 @@
 "use client"
 
-import { Key, Prohibit, MapPin, Clock, DeviceTablet, TrendingUp, Shield, List } from "phosphor-react"
+import { Key, Prohibit, MapPin, Clock, DeviceTablet, TrendUp, Shield, List } from "phosphor-react"
 import { useEffect, useState } from "react"
 
 export default function ContextualFeatures() {
@@ -48,7 +48,7 @@ export default function ContextualFeatures() {
       color: "teal"
     },
     {
-      icon: TrendingUp,
+      icon: TrendUp,
       title: "Ставки",
       description: "Управление бюджетом",
       details: ["Автоматические стратегии", "Ручные корректировки", "CPA оптимизация"],
