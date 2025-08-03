@@ -1,3 +1,5 @@
+// lib/types/case.ts
+
 export interface CaseData {
   // ========== ОБЯЗАТЕЛЬНЫЕ ПОЛЯ ==========
   id: string
@@ -19,6 +21,7 @@ export interface CaseData {
     keywords: string[]
   }
   createdAt: string
+  showOnHome?: boolean  // 👈 ДОБАВЛЯЕМ ЭТО ПОЛЕ!
 
   // ========== ОСНОВНОЙ КОНТЕНТ ==========
   content: {
@@ -60,7 +63,7 @@ export interface CaseData {
     lessonsLearned?: string       // Выученные уроки
     challenges?: string           // Встреченные сложности
     improvements?: string         // Возможные улучшения
-    futureImprovements?: string   // Планы на будущее
+    futureImprovements?: string   // Планы на будуще
     
     // Применение в клиниках
     clinicApplications?: string   // Применение технологий в медицинских клиниках
@@ -85,6 +88,6 @@ export interface CaseData {
     achievements?: string[]       // Достижения проекта
     challenges_list?: string[]    // Список сложностей
     solutions_list?: string[]     // Список решений
-    richContent?: string              // Markdown контент с изображениями
+    richContent?: string          // Markdown контент с изображениями
   }
 }
