@@ -44,7 +44,7 @@ export default function TeamSection() {
               </div>
             </div>
             <p className="text-slate-300 text-sm mb-4 animate-fadeInUp delay-300">
-              Студент 1 курса медицинского университета. Отвечает за стратегию и развитие компании. 
+              Студент 2 курса медицинского университета. Отвечает за стратегию и развитие компании. 
               Маркетолог, разработка ИИ-решений.
             </p>
             <div className="flex gap-2 animate-fadeInUp delay-400">
