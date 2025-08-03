@@ -201,56 +201,91 @@ export default function PortfolioSection() {
               </div>
           </div>
 
-          {/* Кейс 3 - SMM (плейсхолдер) */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
-            <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden flex items-center justify-center">
-              <div className="w-24 h-24 rounded-full bg-teal-500/20 flex items-center justify-center animate-iconBounce delay-400 group-hover:scale-110 transition-transform duration-300">
-                <Target size={48} className="text-teal-400" weight="duotone" />
-              </div>
-              <div className="absolute top-4 right-4">
-                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/70 text-teal-400 text-xs hover:bg-teal-900/90 transition-all duration-300 animate-fadeIn delay-500">
-                  SMM & Контент-маркетинг
+          {/* Кейс 3 - Полный Порядок (реальный кейс) */}
+          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
+            <div className="h-56 bg-gradient-to-br from-emerald-900/50 to-slate-900 relative overflow-hidden">
+              {/* Основное изображение кейса */}
+              <img 
+                src="/cases/polniy-poryadok/cover.jpg" 
+                alt="Стоматологическая клиника Полный Порядок" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              
+              {/* Градиентный оверлей для читаемости */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+              
+              {/* Цветной оверлей при ховере */}
+              <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Hover саммари как у Belberry */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                <div className="bg-slate-900/95 backdrop-blur-md rounded-2xl p-6 mx-4 border border-emerald-500/30 shadow-2xl">
+                  <div className="text-center mb-4">
+                    <h4 className="text-white font-bold text-lg font-fixedsys mb-2">Результат</h4>
+                  </div>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-emerald-400 font-fixedsys mb-1">4000+</div>
+                      <div className="text-slate-300 text-sm">кликов по рекламе</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-emerald-400 font-fixedsys mb-1">50+</div>
+                      <div className="text-slate-300 text-sm">Целевых действийг</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <div className="text-xs text-slate-400">Бюджет: <span className="text-emerald-400 font-semibold">500,000₽</span></div>
+                  </div>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent">
-                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-600 group-hover:text-teal-300 transition-colors duration-300">
+              
+              {/* Бейдж категории */}
+              <div className="absolute top-4 right-4 z-10 group-hover:opacity-0 transition-opacity duration-300">
+                <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/80 backdrop-blur-sm text-emerald-400 text-xs border border-emerald-500/30 hover:bg-emerald-900/90 transition-all duration-300 animate-fadeIn delay-500">
+                  Долгосрочный таргетинг
+                </div>
+              </div>
+              
+              {/* Заголовок поверх изображения */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent z-10 group-hover:opacity-0 transition-opacity duration-300">
+                <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-600 group-hover:text-emerald-300 transition-colors duration-300">
                   Стоматология "Полный Порядок"
                 </h3>
                 <p className="text-slate-300 text-sm mt-1 animate-fadeInUp delay-700">Премиальная стоматологическая клиника</p>
               </div>
             </div>
+            
             <div className="p-6 flex-grow flex flex-col">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-800">
                   <div className="flex items-center justify-center mb-2">
-                    <TrendUp size={20} className="text-teal-400 mr-2" weight="duotone" />
-                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">+185%</span>
+                    <TrendUp size={20} className="text-emerald-400 mr-2" weight="duotone" />
+                    <span className="text-emerald-400 font-bold font-fixedsys text-lg animate-gradient-text">4000+</span>
                   </div>
-                  <p className="text-slate-400 text-xs">Новых пациентов</p>
+                  <p className="text-slate-400 text-xs">Кликов по рекламе</p>
                 </div>
                 <div className="text-center p-3 bg-slate-800/30 rounded-lg animate-scaleUp delay-900">
                   <div className="flex items-center justify-center mb-2">
-                    <Users size={20} className="text-teal-400 mr-2" weight="duotone" />
-                    <span className="text-teal-400 font-bold font-fixedsys text-lg animate-gradient-text">₽2.1М</span>
+                    <Users size={20} className="text-emerald-400 mr-2" weight="duotone" />
+                    <span className="text-emerald-400 font-bold font-fixedsys text-lg animate-gradient-text">500+</span>
                   </div>
-                  <p className="text-slate-400 text-xs">Дополнительный доход</p>
+                  <p className="text-slate-400 text-xs">Целевых действий</p>
                 </div>
               </div>
               
               <p className="text-slate-400 text-sm mb-6 flex-grow animate-fadeInUp delay-1000 leading-relaxed">
-                Запустили комплексную рекламную кампанию для привлечения пациентов на имплантацию и эстетическую стоматологию.
+                7 месяцев работы с премиальной стоматологической клиникой. Бюджет более 500,000₽, стратегия долгосрочной лояльности пациентов.
               </p>
               
               <Button
-                onClick={() => alert('Кейс скоро будет доступен!')}
+                onClick={() => openCase('polniy-poryadok')}
                 className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300 animate-fadeInUp delay-1200"
               >
-                <span>Скоро</span>
-                <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
+                <span>Изучить кейс</span>
+                <ArrowUpRight size={16} className="text-emerald-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
               </Button>
             </div>
           </div>
-        </div>
 
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
