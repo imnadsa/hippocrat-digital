@@ -45,7 +45,7 @@ export const yasnyVzorCase: CaseData = {
     keywords: ['таргетинг для медицины', 'реклама клиники', 'вконтакте медицина', 'привлечение пациентов', 'экспертная медицина']
   },
   
-  createdAt: '2024-12-15',
+  createdAt: '2025-08-02',
 
   showOnHome: false,
 
