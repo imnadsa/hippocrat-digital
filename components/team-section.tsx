@@ -118,7 +118,7 @@ export default function TeamSection() {
               </div>
             </div>
             <p className="text-slate-300 text-sm mb-4 animate-fadeInUp delay-500">
-              Более 4 лет разрабатывает продающие решения по увеличению прибыли медицинских клиники
+              Более 4 лет разрабатывает продающие решения по увеличению прибыли медицинских клиник
               с помощью контентной части бизнеса.
             </p>
             <div className="flex gap-2 animate-fadeInUp delay-600">
@@ -137,6 +137,52 @@ export default function TeamSection() {
                 onClick={() => openExternalLink("mailto:example@hippocrat.digital")}
               >
                 Email
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Дополнительная информация о команде */}
+        <div className="mt-16 text-center animate-fadeInUp delay-700">
+          <div className="bg-slate-900/30 rounded-2xl border border-slate-800/50 p-8 max-w-4xl mx-auto backdrop-blur-sm">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">+4</span>
+                </div>
+                <div className="text-left">
+                  <p className="text-slate-200 font-semibold">Менеджера</p>
+                  <p className="text-slate-400 text-sm">работают удаленно над вашим проектом</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">+3</span>
+                </div>
+                <div className="text-left">
+                  <p className="text-slate-200 font-semibold">Side специалиста</p>
+                  <p className="text-slate-400 text-sm">обеспечивают экспертную поддержку</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-8"></div>
+            
+            {/* Блок приглашения */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent font-fixedsys">
+                Хотите стать частью нашей команды?
+              </h3>
+              <p className="text-slate-300 text-lg mb-6 max-w-2xl mx-auto">
+                Если Вы также как и мы горите медицинским маркетингом - мы ждём Вас в дружелюбной команде Hippocrat Digital
+              </p>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-teal-600 to-indigo-600 hover:from-teal-500 hover:to-indigo-500 text-white font-medium px-8 py-3 rounded-xl hover-lift transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={() => openExternalLink("https://t.me/imnadsa")}
+              >
+                Присоединиться к команде
               </Button>
             </div>
           </div>
