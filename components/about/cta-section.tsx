@@ -93,14 +93,7 @@ export default function CTASection() {
                     className="flex items-center space-x-3 text-gray-300 hover:text-teal-400 transition-colors duration-300"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>hello@hippocrat.digital</span>
-                  </a>
-                  <a 
-                    href="tel:+79991234567"
-                    className="flex items-center space-x-3 text-gray-300 hover:text-teal-400 transition-colors duration-300"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>+7 (999) 123-45-67</span>
+                    <span>hippocratai@mail.ru</span>
                   </a>
                 </div>
               </div>
