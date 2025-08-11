@@ -89,7 +89,7 @@ export default function CTASection() {
                 <h3 className="text-lg font-semibold text-white">Или свяжитесь напрямую:</h3>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
-                    href="mailto:hello@hippocrat.digital"
+                    href="mailto:hippocratai@mail.ru"
                     className="flex items-center space-x-3 text-gray-300 hover:text-teal-400 transition-colors duration-300"
                   >
                     <Mail className="w-5 h-5" />
