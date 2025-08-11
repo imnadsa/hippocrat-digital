@@ -7,7 +7,7 @@ export default function ProductsSection() {
       name: 'Hippocrat AI',
       subtitle: 'Первая ИИ модель для студентов-медиков',
       description: 'Революционное решение, которое помогает студентам-медикам решать 99% задач медицинского образования. Умный помощник для изучения анатомии, патологии, фармакологии и клинических случаев.',
-      stats: '1200+ студентов',
+      stats: '2000+ студентов',
       iconImage: '/blog/images/hippocrat-logo.jpg',
       color: 'from-purple-500 to-pink-500',
       bgGradient: 'from-purple-500/10 to-pink-500/10',
