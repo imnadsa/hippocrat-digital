@@ -71,7 +71,11 @@ export default function TeamSection() {
           <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-500 to-indigo-700 flex items-center justify-center text-white text-xl font-bold animate-scaleUp delay-300 hover:scale-110 transition-transform duration-300">
-                А
+                <img 
+                  src="/blog/images/alexk.jpg" 
+                  alt="Александр Кухто"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="animate-fadeInLeft delay-300">
                 <h3 className="text-xl font-semibold font-fixedsys text-shadow">Александр Кухто</h3>
