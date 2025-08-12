@@ -86,16 +86,12 @@ export default function BlogList({ posts }: BlogListProps) {
                 </div>
                 <div className="grid grid-cols-3 gap-4 pt-4 border-t border-slate-700">
                   <div className="text-center animate-fadeInUp delay-1000">
-                    <div className="text-lg font-bold text-teal-400 font-fixedsys animate-gradient-text">50+</div>
+                    <div className="text-lg font-bold text-teal-400 font-fixedsys animate-gradient-text">5+</div>
                     <div className="text-xs text-slate-500">Статей</div>
                   </div>
                   <div className="text-center animate-fadeInUp delay-1100">
                     <div className="text-lg font-bold text-indigo-400 font-fixedsys animate-gradient-text">5+</div>
                     <div className="text-xs text-slate-500">Лет опыта</div>
-                  </div>
-                  <div className="text-center animate-fadeInUp delay-1200">
-                    <div className="text-lg font-bold text-white font-fixedsys">100+</div>
-                    <div className="text-xs text-slate-500">Клиентов</div>
                   </div>
                 </div>
               </div>
