@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
               </div>
             </div>
             <p className="text-slate-300 animate-fadeInUp delay-400">
-              "Благодаря Hippocrat Digital наша клиника получила отличную конверсию с сайта и увеличила поток пациентов. 
+              "Благодаря Hippocrat Digital удалось привлечь более 40 корректных заявок по нашему профилю. 
               Особенно ценно, что команда понимает специфику медицинской сферы и все законодательные ограничения."
             </p>
             <div className="flex mt-4 animate-fadeInUp delay-500">
@@ -41,36 +41,6 @@ export default function TestimonialsSection() {
                     key={star}
                     className="w-4 h-4 text-teal-400 animate-iconBounce hover:scale-125 transition-transform duration-300"
                     style={{ animationDelay: `${600 + star * 100}ms` }}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                  </svg>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Отзыв 2 */}
-          <div className="bg-slate-800/20 border border-slate-700/30 hover:border-indigo-500/30 transition-all duration-300 shadow-lg hover:shadow-indigo-900/30 rounded-xl p-6 hover-lift blur-backdrop animate-slideInStagger delay-200">
-            <div className="flex items-center gap-4 mb-4 animate-fadeInLeft delay-300">
-              <div>
-                <p className="font-semibold font-fixedsys text-shadow">Екатерина - Стоматология "Полный Порядок"</p>
-                <p className="text-sm text-slate-400">Руководитель</p>
-              </div>
-            </div>
-            <p className="text-slate-300 animate-fadeInUp delay-500">
-              "Команда профессионалов, которые действительно понимают специфику медицинской рекламы. 
-              За полгода работы количество новых пациентов увеличилось в 2 раза, а средний чек вырос на 15%."
-            </p>
-            <div className="flex mt-4 animate-fadeInUp delay-600">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg
-                    key={star}
-                    className="w-4 h-4 text-indigo-400 animate-iconBounce hover:scale-125 transition-transform duration-300"
-                    style={{ animationDelay: `${700 + star * 100}ms` }}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
