@@ -36,7 +36,7 @@ export default function TeamSection() {
       role: 'CTO & Технический директор',
       education: 'Лечебное дело, МГМУ',
       expertise: 'AI, машинное обучение, разработка',
-      image: '/about/team/alexk.jpg',
+      image: '/blog/images/alexk.jpg',
       description: 'Основатель Hippocrat AI. Разработал 2 AI-решений для медицинской отрасли.',
       achievements: ['Основатель Hippocrat AI'],
       contacts: {
