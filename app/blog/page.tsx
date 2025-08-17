@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Metadata } from 'next'
+import type { BlogMeta } from '@/lib/blog-types'
 import { getAllPosts, getAllCategories } from '@/lib/blog'
 import BlogList from '@/components/blog/blog-list'
 import CategoryFilter from '@/components/blog/category-filter'
