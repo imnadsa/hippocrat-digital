@@ -1,4 +1,15 @@
 User-agent: *
-Disallow:
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Allow: /
 
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://hippocrat-digital.ru/sitemap.xml
+
+# Additional sitemaps if needed
+# Sitemap: https://hippocrat-digital.ru/blog-sitemap.xml
+# Sitemap: https://hippocrat-digital.ru/cases-sitemap.xml
