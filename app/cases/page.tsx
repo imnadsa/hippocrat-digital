@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function CasesPage() {
   return (
     <div className="min-h-screen bg-[#0b101b]">
-      <Header scrolled={true} />
+      <Header />
       
       {/* Hero секция */}
       <section className="pt-32 pb-16 px-4">
