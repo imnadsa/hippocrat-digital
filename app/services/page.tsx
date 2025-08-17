@@ -39,7 +39,7 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-[#0b101b] text-white flex flex-col">
-      <Header scrolled={scrolled} />
+      <Header />
       
       <main className="flex-grow">
         <ServicesHero />
