@@ -37,7 +37,7 @@ export default function WebsitesPage() {
 
   return (
     <div className="min-h-screen bg-[#0b101b] text-white">
-      <Header scrolled={scrolled} />
+      <Header />
       
       <main>
         <WebsitesHero />
