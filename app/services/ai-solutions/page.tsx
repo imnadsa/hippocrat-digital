@@ -49,7 +49,7 @@ export default function AiSolutionsPage() {
   // Основная разметка страницы, рендерится только на клиенте или после гидратации
   return (
     <div className="min-h-screen bg-[#0b101b] text-white flex flex-col"> {/* Добавлен flex flex-col для прижатия футера */}
-      <Header scrolled={scrolled} />
+      <Header />
 
       <main className="flex-grow"> {/* Добавлен flex-grow, чтобы main занимал доступное пространство */}
         <AiHero />
