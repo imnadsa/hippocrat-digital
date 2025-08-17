@@ -36,7 +36,7 @@ export default function SmmPage() {
 
   return (
     <div className="min-h-screen bg-[#0b101b] text-white">
-      <Header scrolled={scrolled} />
+      <Header />
       
       <main>
         <SmmHero />
