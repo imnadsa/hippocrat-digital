@@ -6,15 +6,26 @@ import { List, X, CaretDown } from "phosphor-react"
 import Logo from "@/components/logo"
 import Link from "next/link"
 
-interface HeaderProps {
-  scrolled: boolean
-}
-
-export default function Header({ scrolled }: HeaderProps) {
+// Убираем интерфейс HeaderProps - больше не нужен
+export default function Header() {  // ← Убрали ({ scrolled }: HeaderProps)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)  // ← ДОБАВИЛИ это состояние
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // ← ДОБАВИЛИ логику отслеживания скролла
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+
+    // Установка начального состояния
+    setScrolled(window.scrollY > 20)
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Function to handle external links
   const openExternalLink = (url: string) => {
