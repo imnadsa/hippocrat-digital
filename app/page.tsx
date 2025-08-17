@@ -1,6 +1,3 @@
-"use client"
-
-import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
 import AboutSection from "@/components/about-section"
@@ -13,50 +10,99 @@ import BlogSection from "@/components/blog-section"
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
-export default function Home() {
-  const [scrolled, setScrolled] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
-
-  // Fix for hydration errors - only run after client-side mount
-  useEffect(() => {
-    setIsMounted(true)
-
-    // Set initial scroll state
-    if (typeof window !== 'undefined') {
-      setScrolled(window.scrollY > 20)
-    }
-
-    // Add scroll event listener
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Don't render anything until client-side mount to prevent hydration errors
-  if (!isMounted) {
-    return <div className="min-h-screen bg-[#0b101b]"></div>
+// JSON-LD для главной страницы
+const homePageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Digital-маркетинг для медицинских клиник | Hippocrat Digital',
+  description: 'Продвижение медицинских клиник в интернете ✓ Таргетированная реклама ✓ SEO для медицины ✓ Увеличение потока пациентов',
+  url: 'https://hippocrat-digital.ru',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Hippocrat Digital',
+    offers: [
+      {
+        '@type': 'Service',
+        name: 'Таргетированная реклама для медицинских клиник',
+        description: 'Настройка и ведение таргетированной рекламы в социальных сетях для привлечения пациентов',
+        provider: {
+          '@type': 'Organization',
+          name: 'Hippocrat Digital'
+        }
+      },
+      {
+        '@type': 'Service',
+        name: 'SEO продвижение медицинских сайтов',
+        description: 'Поисковое продвижение сайтов медицинских клиник и частных практик',
+        provider: {
+          '@type': 'Organization',
+          name: 'Hippocrat Digital'
+        }
+      },
+      {
+        '@type': 'Service',
+        name: 'Разработка сайтов для клиник',
+        description: 'Создание современных сайтов для медицинских учреждений с фокусом на конверсию',
+        provider: {
+          '@type': 'Organization',
+          name: 'Hippocrat Digital'
+        }
+      }
+    ]
   }
+}
 
+export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0b101b] text-white">
-      <Header scrolled={scrolled} />
+    <>
+      {/* JSON-LD для главной страницы */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
+      />
       
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <AdvantagesSection />
-        <PortfolioSection />
-        <TestimonialsSection />
-        <TeamSection />
-        <BlogSection />
-        <CtaSection />
-      </main>
+      <div className="min-h-screen bg-[#0b101b] text-white">
+        <Header />
+        
+        <main>
+          {/* Основной контент с правильной HTML5 семантикой */}
+          <HeroSection />
+          
+          <section id="about">
+            <AboutSection />
+          </section>
+          
+          <section id="services">
+            <ServicesSection />
+          </section>
+          
+          <section id="advantages">
+            <AdvantagesSection />
+          </section>
+          
+          <section id="portfolio">
+            <PortfolioSection />
+          </section>
+          
+          <section id="testimonials">
+            <TestimonialsSection />
+          </section>
+          
+          <section id="team">
+            <TeamSection />
+          </section>
+          
+          <section id="blog">
+            <BlogSection />
+          </section>
+          
+          <section id="contact">
+            <CtaSection />
+          </section>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   )
 }
