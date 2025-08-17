@@ -27,7 +27,7 @@ const nextConfig = {
 
   // SEO оптимизации
   experimental: {
-    optimizeCss: true, // Оптимизация CSS
+    // optimizeCss: true, // Отключено - требует дополнительные зависимости
     scrollRestoration: true, // Восстановление позиции скролла
   },
 
