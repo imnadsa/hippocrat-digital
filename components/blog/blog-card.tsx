@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { BlogMeta, formatDate } from '@/lib/blog'
+import { BlogMeta, formatDate } from '@/lib/blog-types'  // ← ИЗМЕНИЛИ ИМПОРТ
 
 interface BlogCardProps {
   post: BlogMeta
