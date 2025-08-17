@@ -65,7 +65,7 @@ const jsonLd = {
   logo: 'https://hippocrat-digital.ru/logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+7-XXX-XXX-XX-XX', // Замените на реальный номер
+    telephone: '+7-977-100-44-19', // Замените на реальный номер
     contactType: 'customer service',
     availableLanguage: 'Russian'
   },
