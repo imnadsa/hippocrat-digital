@@ -63,7 +63,7 @@ export default function CasePage({ params }: CasePageProps) {
 
       {/* Фон - полная главная страница */}
       <div className="min-h-screen bg-[#0b101b]">
-        <Header scrolled={true} />
+        <Header />
         <HeroSection />
         <AboutSection />
         <PortfolioSection />
