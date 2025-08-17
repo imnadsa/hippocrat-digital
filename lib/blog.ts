@@ -1,31 +1,11 @@
-// lib/blog.ts - Правильная серверная версия
+// lib/blog.ts - Серверная версия с fs
 
-// Типы для блога
-export interface BlogPost {
-  slug: string
-  title: string
-  description: string
-  date: string
-  category: string
-  tags?: string[]
-  image?: string
-  content: string
-  readTime?: number
-}
-
-export interface BlogMeta {
-  slug: string
-  title: string
-  description: string
-  date: string
-  category: string
-  tags?: string[]
-  image?: string
-  readTime?: number
-}
+// Импортируем типы и утилиты из безопасного файла
+export type { BlogPost, BlogMeta } from './blog-types'
+export { formatDate, createExcerpt } from './blog-types'
 
 // Метаданные статей
-const blogData: BlogMeta[] = [
+const blogData: import('./blog-types').BlogMeta[] = [
   {
     slug: "digital-marketing-2024",
     title: "Цифровой маркетинг в медицине: тренды 2025 года",
@@ -139,11 +119,11 @@ export function getAllTags(): string[] {
   return Array.from(new Set(tags)).sort()
 }
 
-export function getAllPosts(): BlogMeta[] {
+export function getAllPosts(): import('./blog-types').BlogMeta[] {
   return blogData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
+export function getPostBySlug(slug: string): import('./blog-types').BlogPost | null {
   const post = blogData.find(p => p.slug === slug)
   if (!post) {
     console.log(`Post metadata not found for slug: ${slug}`)
@@ -159,13 +139,13 @@ export function getPostBySlug(slug: string): BlogPost | null {
   }
 }
 
-export function getPostsByCategory(category: string): BlogMeta[] {
+export function getPostsByCategory(category: string): import('./blog-types').BlogMeta[] {
   return blogData.filter(post => 
     post.category.toLowerCase() === category.toLowerCase()
   )
 }
 
-export function getPostsByTag(tag: string): BlogMeta[] {
+export function getPostsByTag(tag: string): import('./blog-types').BlogMeta[] {
   return blogData.filter(post => 
     post.tags?.some(postTag => 
       postTag.toLowerCase() === tag.toLowerCase()
@@ -173,7 +153,7 @@ export function getPostsByTag(tag: string): BlogMeta[] {
   )
 }
 
-export function searchPosts(query: string): BlogMeta[] {
+export function searchPosts(query: string): import('./blog-types').BlogMeta[] {
   const searchTerm = query.toLowerCase()
   
   return blogData.filter(post => 
@@ -184,7 +164,7 @@ export function searchPosts(query: string): BlogMeta[] {
   )
 }
 
-export function getSimilarPosts(currentSlug: string, limit: number = 3): BlogMeta[] {
+export function getSimilarPosts(currentSlug: string, limit: number = 3): import('./blog-types').BlogMeta[] {
   const currentPost = blogData.find(p => p.slug === currentSlug)
   if (!currentPost) return []
 
@@ -212,32 +192,4 @@ export function getSimilarPosts(currentSlug: string, limit: number = 3): BlogMet
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map(item => item.post)
-}
-
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ru-RU', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
-
-export function createExcerpt(content: string, maxLength: number = 150): string {
-  // Убираем markdown разметку
-  const plainText = content
-    .replace(/#{1,6}\s+/g, '') // заголовки
-    .replace(/\*\*(.*?)\*\*/g, '$1') // жирный текст
-    .replace(/\*(.*?)\*/g, '$1') // курсив
-    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // ссылки
-    .replace(/`(.*?)`/g, '$1') // инлайн код
-    .replace(/```[\s\S]*?```/g, '') // блоки кода
-    .replace(/>\s+/g, '') // цитаты
-    .trim()
-
-  if (plainText.length <= maxLength) {
-    return plainText
-  }
-
-  return plainText.substring(0, maxLength).trim() + '...'
 }
