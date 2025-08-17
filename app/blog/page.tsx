@@ -46,7 +46,7 @@ export default function BlogPage({
   return (
     <div className="min-h-screen bg-slate-950">
       {/* Header */}
-      <Header scrolled={scrolled} />
+      <Header />
       
       {/* Hero секция - упрощенная */}
       <section className="relative pt-32 pb-16 overflow-hidden">
