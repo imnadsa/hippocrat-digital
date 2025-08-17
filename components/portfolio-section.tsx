@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight, Target, Brain, Eye, ChartBar, Users, TrendUp } from "phosphor-react"
 import { allCases } from '@/lib/cases'
+import { useRouter } from 'next/navigation'
 
 export default function PortfolioSection() {
+  const router = useRouter()
   // Функция для открытия кейса (переход на страницу)
   const openCase = (caseId: string) => {
     window.location.href = `/cases/${caseId}?from=home`
@@ -295,7 +297,7 @@ export default function PortfolioSection() {
           </h3>
           <Button
             className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 px-8 py-3 hover-lift hover-glow transition-all duration-300"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => router.push('/cases')}
           >
             Все кейсы
           </Button>
