@@ -38,7 +38,7 @@ export default function TargetingPage() {
 
   return (
     <div className="min-h-screen bg-[#0b101b] text-white">
-      <Header scrolled={scrolled} />
+      <Header />
       
       <main>
         <TargetingHero />
