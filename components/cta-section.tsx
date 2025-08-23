@@ -14,22 +14,36 @@ export default function CtaSection() {
   })
   
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [error, setError] = useState("")
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setFormStatus("submitting")
-    
-    // Имитация отправки данных формы
-    setTimeout(() => {
-      // В реальном приложении здесь будет отправка на сервер
-      console.log("Form data:", formData)
+    setError("")
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Произошла ошибка при отправке')
+      }
+
       setFormStatus("success")
-      // Очистка формы после успешной отправки
+      
+      // Очистка формы
       setFormData({
         name: "",
         email: "",
@@ -37,7 +51,18 @@ export default function CtaSection() {
         clinic: "",
         message: ""
       })
-    }, 1500)
+
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setError(error instanceof Error ? error.message : 'Произошла ошибка при отправке. Попробуйте позже или свяжитесь с нами напрямую.')
+      setFormStatus("error")
+      
+      // Сбросить ошибку через 5 секунд
+      setTimeout(() => {
+        setFormStatus("idle")
+        setError("")
+      }, 5000)
+    }
   }
 
   return (
@@ -81,6 +106,14 @@ export default function CtaSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Отображение ошибки */}
+              {error && (
+                <div className="md:col-span-2 p-4 bg-red-900/20 border border-red-700/30 rounded-xl animate-slideInStagger">
+                  <p className="text-red-400 text-sm text-center">{error}</p>
+                </div>
+              )}
+              
               {/* Имя */}
               <div className="animate-slideInStagger delay-100">
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
@@ -169,8 +202,7 @@ export default function CtaSection() {
                 <Button
                   type="submit"
                   disabled={formStatus === "submitting"}
-                  className="w-full sm:w-auto bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-lg py-3 px-8 font-fixedsys flex items-center justify-center gap-2 hover-lift hover-glow transition-all duration-300"
-                >
+                  className="w-full sm:w-auto bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-lg py-3 px-8 font-fixedsys flex items-center justify-center gap-2 hover-lift hover-glow transition-all duration-300">
                   {formStatus === "submitting" ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
