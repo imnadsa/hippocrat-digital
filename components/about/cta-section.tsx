@@ -12,6 +12,8 @@ export default function CTASection() {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const services = [
     'Hippocrat AI (для студентов)',
@@ -31,11 +33,45 @@ export default function CTASection() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Здесь будет логика отправки формы
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Произошла ошибка при отправке');
+      }
+
+      setIsSubmitted(true);
+      
+      // Сброс формы через 5 секунд
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          contact: '',
+          service: '',
+          message: ''
+        });
+      }, 5000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setError(error instanceof Error ? error.message : 'Произошла ошибка при отправке. Попробуйте позже или свяжитесь с нами напрямую.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -114,6 +150,13 @@ export default function CTASection() {
                         <p className="text-gray-400">Заполните форму и мы свяжемся с вами в течение часа</p>
                       </div>
 
+                      {/* Отображение ошибки */}
+                      {error && (
+                        <div className="p-4 bg-red-900/20 border border-red-700/30 rounded-xl">
+                          <p className="text-red-400 text-sm">{error}</p>
+                        </div>
+                      )}
+
                       {/* Name Input */}
                       <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -183,10 +226,11 @@ export default function CTASection() {
                       <Button 
                         type="submit"
                         size="lg"
+                        disabled={isSubmitting}
                         className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-semibold py-4 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-teal-500/25"
                       >
-                        Получить КП
-                        <ArrowRight className="ml-2 w-5 h-5" />
+                        {isSubmitting ? 'Отправка...' : 'Получить КП'}
+                        {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5" />}
                       </Button>
 
                       {/* Privacy Notice */}
