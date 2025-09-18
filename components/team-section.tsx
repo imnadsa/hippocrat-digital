@@ -27,11 +27,11 @@ export default function TeamSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Член команды 1 - Антошкин */}
-          <div className="group bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-100">
+          <div className="group bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-100">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full overflow-hidden animate-scaleUp delay-200 group-hover:scale-110 transition-transform duration-300 mb-6">
+              <div className="w-32 h-32 rounded-full overflow-hidden animate-scaleUp delay-200 group-hover:scale-110 transition-transform duration-300 mb-6">
                 <img 
                   src="/blog/images/alexa.jpg" 
                   alt="Александр Антошкин"
@@ -39,11 +39,11 @@ export default function TeamSection() {
                 />
               </div>
               <div className="animate-fadeInLeft delay-200">
-                <h3 className="text-xl font-semibold font-fixedsys text-shadow mb-2">Александр Антошкин</h3>
-                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-4">
+                <h3 className="text-2xl font-semibold font-fixedsys text-shadow mb-3">Александр Антошкин</h3>
+                <div className="inline-block px-4 py-2 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6">
                   CEO, Основатель
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed animate-fadeInUp delay-300">
+                <p className="text-slate-300 text-base leading-relaxed animate-fadeInUp delay-300">
                   Студент 2 курса медицинского университета. Отвечает за стратегию и развитие компании. 
                   Маркетолог, разработка ИИ-решений.
                 </p>
@@ -52,9 +52,9 @@ export default function TeamSection() {
           </div>
 
           {/* Член команды 2 - Кухто */}
-          <div className="group bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-200">
+          <div className="group bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-200">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full overflow-hidden animate-scaleUp delay-300 group-hover:scale-110 transition-transform duration-300 mb-6">
+              <div className="w-32 h-32 rounded-full overflow-hidden animate-scaleUp delay-300 group-hover:scale-110 transition-transform duration-300 mb-6">
                 <img 
                   src="/blog/images/alexk.jpg" 
                   alt="Александр Кухто"
@@ -62,11 +62,11 @@ export default function TeamSection() {
                 />
               </div>
               <div className="animate-fadeInLeft delay-300">
-                <h3 className="text-xl font-semibold font-fixedsys text-shadow mb-2">Александр Кухто</h3>
-                <div className="inline-block px-3 py-1 rounded-full bg-indigo-900/30 border border-indigo-700/30 text-indigo-400 text-sm mb-4">
+                <h3 className="text-2xl font-semibold font-fixedsys text-shadow mb-3">Александр Кухто</h3>
+                <div className="inline-block px-4 py-2 rounded-full bg-indigo-900/30 border border-indigo-700/30 text-indigo-400 text-sm mb-6">
                   Технический специалист
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed animate-fadeInUp delay-400">
+                <p className="text-slate-300 text-base leading-relaxed animate-fadeInUp delay-400">
                   Студент-Медик, с большим опытом в разработке технологических решений в 
                   медицинской сфере, эксперт по внедрению ИИ в медицинские клиники.
                 </p>
@@ -75,9 +75,9 @@ export default function TeamSection() {
           </div>
 
           {/* Член команды 3 - Пермяков */}
-          <div className="group bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-300">
+          <div className="group bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-300">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full overflow-hidden animate-scaleUp delay-400 group-hover:scale-110 transition-transform duration-300 mb-6">
+              <div className="w-32 h-32 rounded-full overflow-hidden animate-scaleUp delay-400 group-hover:scale-110 transition-transform duration-300 mb-6">
                 <img 
                   src="/blog/images/alexp.jpg" 
                   alt="Александр Пермяков"
@@ -85,11 +85,11 @@ export default function TeamSection() {
                 />
               </div>
               <div className="animate-fadeInLeft delay-400">
-                <h3 className="text-xl font-semibold font-fixedsys text-shadow mb-2">Александр Пермяков</h3>
-                <div className="inline-block px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-4">
+                <h3 className="text-2xl font-semibold font-fixedsys text-shadow mb-3">Александр Пермяков</h3>
+                <div className="inline-block px-4 py-2 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6">
                   Директор по маркетингу
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed animate-fadeInUp delay-500">
+                <p className="text-slate-300 text-base leading-relaxed animate-fadeInUp delay-500">
                   Более 4 лет разрабатывает продающие решения по увеличению прибыли медицинских клиник
                   с помощью контентной части бизнеса.
                 </p>
@@ -98,9 +98,9 @@ export default function TeamSection() {
           </div>
 
           {/* Член команды 4 - Дмитрий Таргет */}
-          <div className="group bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-400">
+          <div className="group bg-slate-900/50 rounded-2xl border border-slate-800 p-8 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-400">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full overflow-hidden animate-scaleUp delay-500 group-hover:scale-110 transition-transform duration-300 mb-6">
+              <div className="w-32 h-32 rounded-full overflow-hidden animate-scaleUp delay-500 group-hover:scale-110 transition-transform duration-300 mb-6">
                 <img 
                   src="/blog/images/dmitriy.jpg" 
                   alt="Дмитрий Таргет"
@@ -108,11 +108,11 @@ export default function TeamSection() {
                 />
               </div>
               <div className="animate-fadeInLeft delay-500">
-                <h3 className="text-xl font-semibold font-fixedsys text-shadow mb-2">Дмитрий Таргет</h3>
-                <div className="inline-block px-3 py-1 rounded-full bg-purple-900/30 border border-purple-700/30 text-purple-400 text-sm mb-4">
+                <h3 className="text-2xl font-semibold font-fixedsys text-shadow mb-3">Дмитрий Таргет</h3>
+                <div className="inline-block px-4 py-2 rounded-full bg-purple-900/30 border border-purple-700/30 text-purple-400 text-sm mb-6">
                   Таргетолог
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed animate-fadeInUp delay-600">
+                <p className="text-slate-300 text-base leading-relaxed animate-fadeInUp delay-600">
                   Более 6 лет в таргете. Специализация в таргете VK и Telegram Ads для медицинских клиник.
                 </p>
               </div>
