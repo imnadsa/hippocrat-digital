@@ -3,18 +3,6 @@ const nextConfig = {
   // Включаем режим строгого соответствия
   reactStrictMode: true,
   
-  // Оптимизация для импорта иконок
-  modularizeImports: {
-    'lucide-react': {
-      transform: 'lucide-react/dist/esm/icons/{{kebabCase member}}',
-    },
-  },
-  
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Включаем режим строгого соответствия
-  reactStrictMode: true,
-  
   // РЕШЕНИЕ ПРОБЛЕМЫ С ИЗОБРАЖЕНИЯМИ НА IIS
   images: {
     unoptimized: true, // Отключает Next.js Image API
