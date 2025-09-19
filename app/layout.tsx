@@ -90,7 +90,8 @@ const jsonLd = {
     'Digital-маркетинг для медицины',
     'Таргетированная реклама медицинских клиник',
     'SEO для медицинских услуг',
-    'Разработка сайтов для клиник'
+    'Разработка сайтов для клиник',
+    'ИИ решения для клиник'
   ]
 }
 
@@ -106,25 +107,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.cdnfonts.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* ОПТИМИЗИРОВАННАЯ загрузка шрифтов - асинхронно */}
-        <link 
-          rel="preload" 
-          href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" 
-          as="style" 
-          onLoad={() => {}}
-        />
-        <noscript>
-          <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
-        </noscript>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.querySelector('link[rel="preload"][as="style"]').addEventListener('load', function() {
-                this.rel = 'stylesheet';
-              });
-            `,
-          }}
-        />
+        {/* Загрузка шрифтов - простой вариант без ошибок */}
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
         
         {/* Preload критических изображений для команды */}
         <link rel="preload" href="/blog/images/alexa.jpg" as="image" type="image/jpeg" />
