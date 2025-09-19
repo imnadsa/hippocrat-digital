@@ -71,7 +71,7 @@ const jsonLd = {
   },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Москва', // Замените на ваш город
+    addressLocality: 'Москва',
     addressCountry: 'RU'
   },
   sameAs: [
@@ -102,8 +102,26 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <head>
-        {/* Добавляем шрифт Fixedsys для заголовков */}
-        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
+        {/* Preconnect для улучшения производительности */}
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* ОПТИМИЗИРОВАННАЯ загрузка шрифтов - асинхронно */}
+        <link 
+          rel="preload" 
+          href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" 
+          as="style" 
+          onLoad="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
+        </noscript>
+        
+        {/* Preload критических изображений для команды */}
+        <link rel="preload" href="/blog/images/alexa.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/blog/images/alexk.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/blog/images/alexp.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/blog/images/dmitriy.jpg" as="image" type="image/jpeg" />
         
         {/* JSON-LD структурированные данные */}
         <script
@@ -111,7 +129,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
-        {/* Дополнительные метатеги */}
+        {/* Дополнительные метатеги для производительности */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#0b101b" />
@@ -119,10 +137,6 @@ export default function RootLayout({
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        
-        {/* Preconnect для улучшения производительности */}
-        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} font-sans bg-slate-950 text-white`}>
         {children}
