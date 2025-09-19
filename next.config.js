@@ -10,7 +10,7 @@ const nextConfig = {
     },
   },
   
-  // Настройки для изображений
+  // Настройки для изображений - ОПТИМИЗИРОВАНО ДЛЯ ПРОИЗВОДИТЕЛЬНОСТИ
   images: {
     domains: [
       'fonts.cdnfonts.com',
@@ -18,17 +18,22 @@ const nextConfig = {
       'via.placeholder.com', // Для заглушек
       'picsum.photos', // Для тестовых изображений
     ],
-    // Форматы изображений
+    // Современные форматы изображений для лучшего сжатия
     formats: ['image/webp', 'image/avif'],
-    // Размеры для оптимизации
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    // Кеширование изображений на год
+    minimumCacheTTL: 60 * 60 * 24 * 365,
+    // Оптимизированные размеры устройств
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Поддержка SVG с безопасностью
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // SEO оптимизации
+  // SEO и производительность
   experimental: {
-    // optimizeCss: true, // Отключено - требует дополнительные зависимости
     scrollRestoration: true, // Восстановление позиции скролла
+    optimizePackageImports: ['lucide-react'], // Оптимизация импортов
   },
 
   // Компрессия
@@ -39,12 +44,6 @@ const nextConfig = {
 
   // Генерация статических файлов для лучшего SEO
   output: 'standalone',
-
-  // Настройки для i18n (если планируете многоязычность)
-  // i18n: {
-  //   locales: ['ru', 'en'],
-  //   defaultLocale: 'ru',
-  // },
 
   // Перенаправления для SEO
   async redirects() {
@@ -58,16 +57,18 @@ const nextConfig = {
     ]
   },
 
-  // Заголовки для безопасности и SEO
+  // Заголовки для безопасности, SEO и производительности
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
+          // DNS prefetch для улучшения загрузки
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
           },
+          // Безопасность
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block'
@@ -83,6 +84,21 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
+          },
+          // Кеширование статических ресурсов
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ],
+      },
+      // Специальные заголовки для изображений
+      {
+        source: '/blog/images/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
