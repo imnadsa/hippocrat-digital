@@ -10,8 +10,14 @@ const nextConfig = {
     },
   },
   
-  // Настройки для изображений - ОПТИМИЗИРОВАНО ДЛЯ ПРОИЗВОДИТЕЛЬНОСТИ
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Включаем режим строгого соответствия
+  reactStrictMode: true,
+  
+  // РЕШЕНИЕ ПРОБЛЕМЫ С ИЗОБРАЖЕНИЯМИ НА IIS
   images: {
+    unoptimized: true, // Отключает Next.js Image API
     domains: [
       'fonts.cdnfonts.com',
       'images.unsplash.com', // Для изображений статей
