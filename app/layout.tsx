@@ -71,7 +71,7 @@ const jsonLd = {
   },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Москва',
+    addressLocality: 'Москва', // Замените на ваш город
     addressCountry: 'RU'
   },
   sameAs: [
@@ -111,11 +111,20 @@ export default function RootLayout({
           rel="preload" 
           href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" 
           as="style" 
-          onLoad="this.onload=null;this.rel='stylesheet'"
+          onLoad={() => {}}
         />
         <noscript>
           <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/fixedsys-excelsior" />
         </noscript>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.querySelector('link[rel="preload"][as="style"]').addEventListener('load', function() {
+                this.rel = 'stylesheet';
+              });
+            `,
+          }}
+        />
         
         {/* Preload критических изображений для команды */}
         <link rel="preload" href="/blog/images/alexa.jpg" as="image" type="image/jpeg" />
