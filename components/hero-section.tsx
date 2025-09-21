@@ -11,6 +11,16 @@ export default function HeroSection() {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
+
+  // Функция для скачивания КП
+  const downloadKP = () => {
+    const link = document.createElement('a');
+    link.href = '/documents/kp.pdf';
+    link.download = 'Коммерческое_предложение.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
   
   return (
     <section className="container mx-auto px-4 pt-24 pb-12 md:pt-28 md:pb-20 flex flex-col md:flex-row items-center bg-[#0b101b] relative overflow-hidden">
@@ -44,7 +54,7 @@ export default function HeroSection() {
             size="lg"
             variant="outline"
             className="w-full sm:w-auto border-teal-700 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500 hover-lift transition-all duration-300"
-            onClick={() => scrollToSection("services")}
+            onClick={downloadKP}
           >
             Получить КП
           </Button>
