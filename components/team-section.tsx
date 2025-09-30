@@ -118,7 +118,32 @@ export default function TeamSection() {
               </div>
             </div>
           </div>
+
+          {/* Член команды 5 - Полина */}
+          <div className="group bg-slate-900/50 rounded-xl border border-slate-800 p-8 hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-900/20 transition-all duration-300 hover-lift blur-backdrop animate-slideInStagger delay-500">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full overflow-hidden animate-scaleUp delay-600 group-hover:scale-110 transition-transform duration-300 mb-6">
+                <img 
+                  src="/blog/images/polina.jpg" 
+                  alt="Полина"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="animate-fadeInLeft delay-600">
+                <h3 className="text-xl font-semibold font-fixedsys text-shadow mb-2">Полина</h3>
+                <div className="inline-block px-3 py-1 rounded-full bg-pink-900/30 border border-pink-700/30 text-pink-400 text-sm mb-4">
+                  SMM-специалист
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed animate-fadeInUp delay-700">
+                  Ведение социальных сетей для медицинских клиник, создание вовлекающего контента, 
+                  мобильная и предметная съёмка, производство reels и клипов.
+                </p>
+              </div>
+            </div>
+          </div>     
         </div>
+
+        
 
         {/* Дополнительная информация о команде */}
         <div className="mt-16 text-center animate-fadeInUp delay-700">
