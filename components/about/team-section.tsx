@@ -12,7 +12,9 @@ export default function TeamSection() {
       expertise: 'Стратегия, медицинский маркетинг',
       image: '/blog/images/alexa.jpg',
       description: '5 лет опыта в digital, автор 2 успешных медицинских проектов.',
-      achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital']
+      achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital'],
+      // FIX: Добавлено свойство contacts для устранения Type error
+      contacts: { email: 'alexa@hippocrat.ai', telegram: 'https://t.me/alexa_hippocrat' }
     },
     {
       name: 'Александр Пермяков',
@@ -21,7 +23,9 @@ export default function TeamSection() {
       expertise: 'Контент маркетинг, стратегическое планирование',
       image: '/blog/images/alexp.jpg',
       description: 'Эксперт в медицинском маркетинге и стратегии для увеличения присутствия в социальных сетях через вирусные короткие видео.',
-      achievements: ['Рост охватов +200%']
+      achievements: ['Рост охватов +200%'],
+      // FIX: Добавлено свойство contacts для устранения Type error
+      contacts: { email: 'alexp@hippocrat.ai', telegram: 'https://t.me/alexp_hippocrat' }
     },
     {
       name: 'Александр Кухто',
@@ -30,7 +34,9 @@ export default function TeamSection() {
       expertise: 'AI, тех решения для клиник',
       image: '/blog/images/alexk.jpg',
       description: 'Основатель Hippocrat AI.',
-      achievements: ['Основатель Hippocrat AI']
+      achievements: ['Основатель Hippocrat AI'],
+      // FIX: Добавлено свойство contacts для устранения Type error
+      contacts: { email: 'alexk@hippocrat.ai', telegram: 'https://t.me/alexk_hippocrat' }
     },
     {
       name: 'Полина',
@@ -39,7 +45,9 @@ export default function TeamSection() {
       expertise: 'Медицинский SMM, постинг',
       image: '/blog/images/polina.jpg',
       description: 'SMM-специалист Hippocrat Digital. Ведение социальных сетей для медицинских клиник, создание вовлекающего контента, мобильная и предметная съёмка, производство reels и клипов.',
-      achievements: []
+      achievements: [],
+      // FIX: Добавлено свойство contacts для устранения Type error
+      contacts: { email: 'polina@hippocrat.ai', telegram: 'https://t.me/polina_hippocrat' }
     },
     {
       name: 'Дмитрий',
@@ -48,7 +56,9 @@ export default function TeamSection() {
       expertise: 'TG Ads, VK Ads',
       image: '/blog/images/dmitriy.jpg',
       description: 'Таргетолог, TG Ads и VK Ads для медицинских клиник с четким ROI.',
-      achievements: []
+      achievements: [],
+      // FIX: Добавлено свойство contacts для устранения Type error
+      contacts: { email: 'dmitriy@hippocrat.ai', telegram: 'https://t.me/dmitriy_hippocrat' }
     }
   ];
 
