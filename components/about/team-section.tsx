@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Mail, Award, BookOpen, Code } from 'lucide-react';
+import { Award, BookOpen, Code } from 'lucide-react';
 
 export default function TeamSection() {
   const teamMembers = [
@@ -102,7 +102,9 @@ export default function TeamSection() {
                     {member.name}
                   </h3>
                   <p className="text-sm text-teal-400 font-medium mb-2">{member.role}</p>
-                  <p className="text-xs text-gray-500">{member.education}</p>
+                  {member.education && (
+                    <p className="text-xs text-gray-500">{member.education}</p>
+                  )}
                 </div>
 
                 {/* Expertise */}
@@ -119,22 +121,22 @@ export default function TeamSection() {
                   {member.description}
                 </p>
 
-                {/* Achievements */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-center mb-2">
-                    <BookOpen className="w-4 h-4 text-green-400 mr-2" />
-                    <span className="text-xs text-gray-400">Достижения</span>
+                {/* Achievements - только если есть */}
+                {member.achievements.length > 0 && (
+                  <div className="mb-6">
+                    <div className="flex items-center justify-center mb-2">
+                      <BookOpen className="w-4 h-4 text-green-400 mr-2" />
+                      <span className="text-xs text-gray-400">Достижения</span>
+                    </div>
+                    <ul className="space-y-1">
+                      {member.achievements.map((achievement, idx) => (
+                        <li key={idx} className="text-xs text-gray-300 text-center">
+                          • {achievement}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-1">
-                    {member.achievements.map((achievement, idx) => (
-                      <li key={idx} className="text-xs text-gray-300 text-center">
-                        • {achievement}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* БЛОК С КНОПКАМИ КОНТАКТОВ БЫЛ УДАЛЕН ОТСЮДА */}
+                )}
 
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-500/5 to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
