@@ -8,42 +8,48 @@ export default function TeamSection() {
     {
       name: 'Александр Антошкин',
       role: 'CEO & Основатель',
-      education: 'Лечебное дело, МГМУ',
+      education: 'МГМУ им. И.М. Сеченова',
       expertise: 'Стратегия, медицинский маркетинг',
       image: '/blog/images/alexa.jpg',
-      description: '5 лет опыта в digital, автор 2+ успешных медицинских проектов.',
-      achievements: ['Основатель Hippocrat AI'],
-      contacts: {
-        email: 'antpshkin.infp@bk.ru',
-        telegram: 'https://t.me/imnadsa'
-      }
+      description: '5 лет опыта в digital, автор 2 успешных медицинских проектов.',
+      achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital']
     },
     {
       name: 'Александр Пермяков',
       role: 'CMO & Директор по маркетингу',
-      education: 'Лечебное дело, РНИМУ',
-      expertise: 'SMM, контент-стратегия',
+      education: 'РНИМУ им. Н.И. Пирогова',
+      expertise: 'Контент маркетинг, стратегическое планирование',
       image: '/blog/images/alexp.jpg',
-      description: 'Глава отдела маркетинга, ставший экспертом по медицинскому SMM. Создал 2 вирусных кампаний для клиник.',
-      achievements: ['Рост охватов +200%'],
-      contacts: {
-        email: 'alexp@hippocrat.digital',
-        telegram: 'https://t.me/permyakovalex'
-      }
+      description: 'Эксперт в медицинском маркетинге и стратегии для увеличения присутствия в социальных сетях через вирусные короткие видео.',
+      achievements: ['Рост охватов +200%']
     },
     {
       name: 'Александр Кухто',
       role: 'CTO & Технический директор',
-      education: 'Лечебное дело, МГМУ',
-      expertise: 'AI, машинное обучение, разработка',
+      education: 'МГМУ им. И.М. Сеченова',
+      expertise: 'AI, тех решения для клиник',
       image: '/blog/images/alexk.jpg',
-      description: 'Основатель Hippocrat AI. Разработал 2 AI-решений для медицинской отрасли.',
-      achievements: ['Основатель Hippocrat AI'],
-      contacts: {
-        email: 'alexk@hippocrat.digital',
-        telegram: 'https://t.me/crazyponchik'
-      }
+      description: 'Основатель Hippocrat AI.',
+      achievements: ['Основатель Hippocrat AI']
     },
+    {
+      name: 'Полина',
+      role: 'SMM-специалист',
+      education: 'МГМУ им. И.М. Сеченова',
+      expertise: 'Медицинский SMM, постинг',
+      image: '/blog/images/polina.jpg',
+      description: 'SMM-специалист Hippocrat Digital. Ведение социальных сетей для медицинских клиник, создание вовлекающего контента, мобильная и предметная съёмка, производство reels и клипов.',
+      achievements: []
+    },
+    {
+      name: 'Дмитрий',
+      role: 'Таргетолог',
+      education: '',
+      expertise: 'TG Ads, VK Ads',
+      image: '/blog/images/dmitriy.jpg',
+      description: 'Таргетолог, TG Ads и VK Ads для медицинских клиник с четким ROI.',
+      achievements: []
+    }
   ];
 
   return (
