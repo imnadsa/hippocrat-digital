@@ -12,9 +12,8 @@ export default function TeamSection() {
       expertise: 'Стратегия, медицинский маркетинг',
       image: '/blog/images/alexa.jpg',
       description: '5 лет опыта в digital, автор 2 успешных медицинских проектов.',
-      achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital'],
-      // FIX: Добавлено свойство contacts для устранения Type error
-      contacts: { email: 'alexa@hippocrat.ai', telegram: 'https://t.me/alexa_hippocrat' }
+      achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital']
+      // contacts были удалены
     },
     {
       name: 'Александр Пермяков',
@@ -23,9 +22,8 @@ export default function TeamSection() {
       expertise: 'Контент маркетинг, стратегическое планирование',
       image: '/blog/images/alexp.jpg',
       description: 'Эксперт в медицинском маркетинге и стратегии для увеличения присутствия в социальных сетях через вирусные короткие видео.',
-      achievements: ['Рост охватов +200%'],
-      // FIX: Добавлено свойство contacts для устранения Type error
-      contacts: { email: 'alexp@hippocrat.ai', telegram: 'https://t.me/alexp_hippocrat' }
+      achievements: ['Рост охватов +200%']
+      // contacts были удалены
     },
     {
       name: 'Александр Кухто',
@@ -34,9 +32,8 @@ export default function TeamSection() {
       expertise: 'AI, тех решения для клиник',
       image: '/blog/images/alexk.jpg',
       description: 'Основатель Hippocrat AI.',
-      achievements: ['Основатель Hippocrat AI'],
-      // FIX: Добавлено свойство contacts для устранения Type error
-      contacts: { email: 'alexk@hippocrat.ai', telegram: 'https://t.me/alexk_hippocrat' }
+      achievements: ['Основатель Hippocrat AI']
+      // contacts были удалены
     },
     {
       name: 'Полина',
@@ -45,9 +42,8 @@ export default function TeamSection() {
       expertise: 'Медицинский SMM, постинг',
       image: '/blog/images/polina.jpg',
       description: 'SMM-специалист Hippocrat Digital. Ведение социальных сетей для медицинских клиник, создание вовлекающего контента, мобильная и предметная съёмка, производство reels и клипов.',
-      achievements: [],
-      // FIX: Добавлено свойство contacts для устранения Type error
-      contacts: { email: 'polina@hippocrat.ai', telegram: 'https://t.me/polina_hippocrat' }
+      achievements: [] // Достижения удалены
+      // contacts были удалены
     },
     {
       name: 'Дмитрий',
@@ -56,9 +52,8 @@ export default function TeamSection() {
       expertise: 'TG Ads, VK Ads',
       image: '/blog/images/dmitriy.jpg',
       description: 'Таргетолог, TG Ads и VK Ads для медицинских клиник с четким ROI.',
-      achievements: [],
-      // FIX: Добавлено свойство contacts для устранения Type error
-      contacts: { email: 'dmitriy@hippocrat.ai', telegram: 'https://t.me/dmitriy_hippocrat' }
+      achievements: [] // Достижения удалены
+      // contacts были удалены
     }
   ];
 
@@ -144,23 +139,7 @@ export default function TeamSection() {
                   </ul>
                 </div>
 
-                {/* Contact Buttons - Telegram only */}
-                <div className="flex justify-center space-x-3">
-                  <a 
-                    href={`mailto:${member.contacts.email}`}
-                    className="w-8 h-8 bg-slate-700 hover:bg-teal-500 rounded-full flex items-center justify-center transition-colors duration-300 group/btn"
-                  >
-                    <Mail className="w-4 h-4 text-gray-400 group-hover/btn:text-white" />
-                  </a>
-                  <a 
-                    href={member.contacts.telegram}
-                    className="w-8 h-8 bg-slate-700 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors duration-300 group/btn"
-                  >
-                    <svg className="w-4 h-4 text-gray-400 group-hover/btn:text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.57-4.46c.538-.196 1.006.128.832.941z"/>
-                    </svg>
-                  </a>
-                </div>
+                {/* Contact Buttons - БЛОК С КОНТАКТАМИ УДАЛЕН */}
 
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-500/5 to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
