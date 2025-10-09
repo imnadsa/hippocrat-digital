@@ -13,7 +13,6 @@ export default function TeamSection() {
       image: '/blog/images/alexa.jpg',
       description: '5 лет опыта в digital, автор 2 успешных медицинских проектов.',
       achievements: ['Основатель Hippocrat AI', 'Основатель Hippocrat Digital']
-      // contacts были удалены
     },
     {
       name: 'Александр Пермяков',
@@ -23,7 +22,6 @@ export default function TeamSection() {
       image: '/blog/images/alexp.jpg',
       description: 'Эксперт в медицинском маркетинге и стратегии для увеличения присутствия в социальных сетях через вирусные короткие видео.',
       achievements: ['Рост охватов +200%']
-      // contacts были удалены
     },
     {
       name: 'Александр Кухто',
@@ -33,7 +31,6 @@ export default function TeamSection() {
       image: '/blog/images/alexk.jpg',
       description: 'Основатель Hippocrat AI.',
       achievements: ['Основатель Hippocrat AI']
-      // contacts были удалены
     },
     {
       name: 'Полина',
@@ -42,8 +39,7 @@ export default function TeamSection() {
       expertise: 'Медицинский SMM, постинг',
       image: '/blog/images/polina.jpg',
       description: 'SMM-специалист Hippocrat Digital. Ведение социальных сетей для медицинских клиник, создание вовлекающего контента, мобильная и предметная съёмка, производство reels и клипов.',
-      achievements: [] // Достижения удалены
-      // contacts были удалены
+      achievements: []
     },
     {
       name: 'Дмитрий',
@@ -52,8 +48,7 @@ export default function TeamSection() {
       expertise: 'TG Ads, VK Ads',
       image: '/blog/images/dmitriy.jpg',
       description: 'Таргетолог, TG Ads и VK Ads для медицинских клиник с четким ROI.',
-      achievements: [] // Достижения удалены
-      // contacts были удалены
+      achievements: []
     }
   ];
 
@@ -139,7 +134,7 @@ export default function TeamSection() {
                   </ul>
                 </div>
 
-                {/* Contact Buttons - БЛОК С КОНТАКТАМИ УДАЛЕН */}
+                {/* БЛОК С КНОПКАМИ КОНТАКТОВ БЫЛ УДАЛЕН ОТСЮДА */}
 
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-500/5 to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
