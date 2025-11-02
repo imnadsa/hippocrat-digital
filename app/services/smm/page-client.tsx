@@ -6,6 +6,7 @@ import SmmPlatforms from "@/components/services/smm-platforms"
 import SmmResults from "@/components/services/smm-results"
 import SmmPrice from "@/components/services/smm-price"
 import BlogSection from '@/components/blog-section'
+import RelatedBlogPosts from '@/components/blog/related-blog-posts'  // ← НОВЫЙ ИМПОРТ
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
@@ -19,6 +20,13 @@ export default function SmmPageClient() {
       <SmmPrice />
       <BlogSection />
       <CtaSection />
+      
+      <RelatedBlogPosts 
+        tags={["маркетинг", "контент-маркетинг"]}
+        limit={3}
+        title="Углубите знания о маркетинге в медицине"
+      />
+      
       <Footer />
     </>
   )
