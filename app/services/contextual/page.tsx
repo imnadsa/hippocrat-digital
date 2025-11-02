@@ -1,14 +1,6 @@
 import { Metadata } from "next"
 import Header from "@/components/header"
-import ContextualHero from "@/components/services/contextual-hero"
-import ContextualAdvantages from "@/components/services/contextual-advantages"
-import ContextualProcess from "@/components/services/contextual-process"
-import ContextualFeatures from "@/components/services/contextual-features"
-import ContextualPricing from "@/components/services/contextual-pricing"
-import ContextualFaq from "@/components/services/contextual-faq"
-import BlogSection from '@/components/blog-section'
-import CtaSection from "@/components/cta-section"
-import Footer from "@/components/footer"
+import ContextualPageClient from "./page-client"
 
 // ✅ SEO METADATA
 export const metadata: Metadata = {
@@ -60,13 +52,7 @@ const contextualSchema = {
     '@type': 'Country',
     name: 'Russia'
   },
-  priceRange: 'от 45000 ₽ в месяц',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'RUB',
-    price: '45000',
-    priceValidUntil: '2025-12-31'
-  }
+  priceRange: 'от 45000 ₽ в месяц'
 }
 
 // ✅ BREADCRUMB SCHEMA
@@ -107,22 +93,10 @@ export default function ContextualPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="min-h-screen bg-[#0b101b] text-white">
-        <Header />
-        
-        <main>
-          <ContextualHero />
-          <ContextualAdvantages />
-          <ContextualProcess />
-          <ContextualFeatures />
-          <ContextualPricing />
-          <ContextualFaq />
-          <BlogSection />
-          <CtaSection />
-        </main>
-
-        <Footer />
-      </div>
+      <Header />
+      <main>
+        <ContextualPageClient />
+      </main>
     </>
   )
 }
