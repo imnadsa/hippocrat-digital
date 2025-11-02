@@ -1,20 +1,12 @@
 import { Metadata } from "next"
 import Header from "@/components/header"
-import WebsitesHero from "@/components/services/websites-hero"
-import WebsitesApproach from "@/components/services/websites-approach"
-import WebsitesTechnologies from "@/components/services/websites-technologies"
-import WebsitesFeatures from "@/components/services/websites-features"
-import WebsitesProcess from "@/components/services/websites-process"
-import WebsitesPrice from "@/components/services/websites-price"
-import BlogSection from '@/components/blog-section'
-import CtaSection from "@/components/cta-section"
-import Footer from "@/components/footer"
+import WebsitesPageClient from "./page-client"
 
 // ✅ SEO METADATA
 export const metadata: Metadata = {
   title: "Разработка сайтов для медицинских клиник | Hippocrat Digital",
   description: "Создание профессиональных сайтов для клиник на Next.js, TypeScript, Tailwind CSS. SEO оптимизация, высокий органический трафик, CMS, 24/7 поддержка. От 60 000 ₽. Разработка от 21 дня.",
-  keywords: "разработка сайта для клиники, сайт для медицинского центра, создание медицинского сайта, веб-дизайн клиники, SEO для медицины, сайт для стоматологии, сайт для клиники",
+  keywords: "разработка сайта для клиники, сайт для медицинского центра, создание сайта медиц, веб-дизайн клиники, SEO для медицины, сайт стоматологии",
   authors: [{ name: "Hippocrat Digital" }],
   
   openGraph: {
@@ -60,13 +52,7 @@ const websitesSchema = {
     '@type': 'Country',
     name: 'Russia'
   },
-  priceRange: 'от 60000 ₽',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'RUB',
-    price: '60000',
-    priceValidUntil: '2025-12-31'
-  }
+  priceRange: 'от 60000 ₽'
 }
 
 // ✅ BREADCRUMB SCHEMA
@@ -107,22 +93,10 @@ export default function WebsitesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="min-h-screen bg-[#0b101b] text-white flex flex-col">
-        <Header />
-        
-        <main className="flex-grow">
-          <WebsitesHero />
-          <WebsitesApproach />
-          <WebsitesTechnologies />
-          <WebsitesFeatures />
-          <WebsitesProcess />
-          <WebsitesPrice />
-          <BlogSection />
-          <CtaSection />
-        </main>
-
-        <Footer />
-      </div>
+      <Header />
+      <main className="flex-grow">
+        <WebsitesPageClient />
+      </main>
     </>
   )
 }
