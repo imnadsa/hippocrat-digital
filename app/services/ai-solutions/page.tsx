@@ -1,19 +1,12 @@
 import { Metadata } from "next"
 import Header from "@/components/header"
-import AiHero from "@/components/services/ai-hero"
-import AiSolutions from "@/components/services/ai-solutions"
-import AiIntegration from "@/components/services/ai-integration"
-import AiCases from "@/components/services/ai-cases"
-import BlogSection from '@/components/blog-section'
-import AiPackages from "@/components/services/ai-packages"
-import CtaSection from "@/components/cta-section"
-import Footer from "@/components/footer"
+import AiPageClient from "./page-client"
 
 // ✅ SEO METADATA
 export const metadata: Metadata = {
   title: "AI решения для медицинских клиник | ИИ чат-боты для записи | Hippocrat Digital",
   description: "Автоматизированные AI чат-боты для медицинских клиник. Система записи пациентов на приём. Кейс: Hippocrat AI - 2000+ пользователей. Интеграция под конкретную клинику.",
-  keywords: "ИИ для клиник, чат-боты для медицины, автоматизация медицинской клиники, ИИ система записи, Hippocrat AI, искусственный интеллект в медицине",
+  keywords: "AI для клиник, чат-боты для медицины, автоматизация медицинской клиники, ИИ система записи, Hippocrat AI, искусственный интеллект в медицине",
   authors: [{ name: "Hippocrat Digital" }],
   
   openGraph: {
@@ -100,21 +93,10 @@ export default function AiSolutionsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="min-h-screen bg-[#0b101b] text-white flex flex-col">
-        <Header />
-
-        <main className="flex-grow">
-          <AiHero />
-          <AiSolutions />
-          <AiIntegration />
-          <AiCases />
-          <AiPackages />
-          <BlogSection />
-          <CtaSection />
-        </main>
-
-        <Footer />
-      </div>
+      <Header />
+      <main className="flex-grow">
+        <AiPageClient />
+      </main>
     </>
   )
 }
