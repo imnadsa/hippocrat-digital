@@ -18,8 +18,6 @@ export default function AiPageClient() {
       <AiIntegration />
       <AiCases />
       <AiPackages />
-      <BlogSection />
-      <CtaSection />
       
       {/* ← НОВОЕ: Внутренняя перелинковка */}
       <RelatedBlogPosts 
@@ -28,7 +26,7 @@ export default function AiPageClient() {
         limit={3}
         title="Статьи об ИИ и автоматизации для клиник"
       />
-      
+      <CtaSection />
       <Footer />
     </>
   )
