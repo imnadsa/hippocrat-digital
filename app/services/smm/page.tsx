@@ -1,13 +1,6 @@
 import { Metadata } from "next"
 import Header from "@/components/header"
-import SmmHero from "@/components/services/smm-hero"
-import SmmStrategy from "@/components/services/smm-strategy"
-import SmmPlatforms from "@/components/services/smm-platforms"
-import SmmResults from "@/components/services/smm-results"
-import SmmPrice from "@/components/services/smm-price"
-import BlogSection from '@/components/blog-section'
-import CtaSection from "@/components/cta-section"
-import Footer from "@/components/footer"
+import SmmPageClient from "./page-client"
 
 // ✅ SEO METADATA
 export const metadata: Metadata = {
@@ -18,7 +11,7 @@ export const metadata: Metadata = {
   
   openGraph: {
     title: "SMM для медицинских клиник | Управление соцсетями",
-    description: "Профессиональное управление VK, Telegram, Instagram, TikTok, YouTube для медицинских клиник. От 40 000 ₽/месяц.",
+    description: "Профессиональное управление Instagram, VK, Telegram, TikTok, YouTube для медицинских клиник. От 40 000 ₽/месяц.",
     type: "website",
     url: "https://hippocrat-digital.ru/services/smm",
     images: [
@@ -42,7 +35,7 @@ const smmSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'SMM для медицинских клиник',
-  description: 'Профессиональное управление аккаунтами в социальных сетях (VK, Telegram, TikTok, Instagram, YouTube) для медицинских клиник с глубокой экспертизой в медицинском законодательстве',
+  description: 'Профессиональное управление аккаунтами в социальных сетях (VK, Instagram, Telegram, TikTok, YouTube) для медицинских клиник с глубокой экспертизой в медицинском законодательстве',
   provider: {
     '@type': 'Organization',
     name: 'Hippocrat Digital',
@@ -59,13 +52,7 @@ const smmSchema = {
     '@type': 'Country',
     name: 'Russia'
   },
-  priceRange: 'от 40000 ₽ в месяц',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'RUB',
-    price: '40000',
-    priceValidUntil: '2025-12-31'
-  }
+  priceRange: 'от 40000 ₽ в месяц'
 }
 
 // ✅ BREADCRUMB SCHEMA
@@ -106,21 +93,10 @@ export default function SmmPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="min-h-screen bg-[#0b101b] text-white">
-        <Header />
-        
-        <main>
-          <SmmHero />
-          <SmmStrategy />
-          <SmmPlatforms />
-          <SmmResults />
-          <SmmPrice />
-          <BlogSection />
-          <CtaSection />
-        </main>
-
-        <Footer />
-      </div>
+      <Header />
+      <main>
+        <SmmPageClient />
+      </main>
     </>
   )
 }
