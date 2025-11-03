@@ -7,6 +7,7 @@ import HeroSection from '@/components/about/hero-section';
 import StorySection from '@/components/about/story-section';
 import WhyUsSection from '@/components/about/why-us-section';
 import TeamSection from '@/components/about/team-section';
+import FounderCard from '@/components/founder-card';
 import ProductsSection from '@/components/about/products-section';
 import ValuesSection from '@/components/about/values-section';
 import CTASection from '@/components/about/cta-section';
@@ -34,6 +35,8 @@ export default function AboutPage() {
       
       {/* Story Section */}
       <StorySection />
+
+      <FounderCard />
       
       {/* Why Us Section */}
       <WhyUsSection />
