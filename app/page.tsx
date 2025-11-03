@@ -7,6 +7,7 @@ import PortfolioSection from "@/components/portfolio-section"
 import TestimonialsSection from "@/components/testimonials-section"
 import TeamSection from "@/components/team-section"
 import BlogSection from "@/components/blog-section"
+import FounderCard from '@/components/founder-card'
 import CtaSection from "@/components/cta-section"
 import Footer from "@/components/footer"
 
@@ -15,7 +16,7 @@ const homePageJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Digital-маркетинг для медицинских клиник | Hippocrat Digital',
-  description: 'Продвижение медицинских клиник в интернете ✓ Таргетированная реклама ✓ SEO для медицины ✓ Увеличение потока пациентов',
+  description: 'Продвижение медицинских клиник в интернете | Увеличение потока пациентов от специалистов из вашей области',
   url: 'https://hippocrat-digital.ru',
   mainEntity: {
     '@type': 'Organization',
@@ -79,6 +80,10 @@ export default function Home() {
           <section id="advantages">
             <AdvantagesSection />
           </section>
+
+          <section id="founder">
+             <FounderCard />
+          </section> 
           
           <section id="portfolio">
             <PortfolioSection />
