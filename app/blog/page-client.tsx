@@ -5,6 +5,9 @@ import type { BlogMeta } from '@/lib/blog-types'
 import { getAllPosts, getAllCategories } from '@/lib/blog'
 import BlogList from '@/components/blog/blog-list'
 import CategoryFilter from '@/components/blog/category-filter'
+import Footer from '@/components/footer'
+import FounderCard from '@/components/founder-card'
+
 
 export default function BlogPageClient({
   searchParams,
@@ -257,6 +260,9 @@ export default function BlogPageClient({
           </aside>
         </div>
       </div>
+      
+      <FounderCard />
+      <Footer />
     </div>
   )
 }
