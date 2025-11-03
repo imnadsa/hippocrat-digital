@@ -48,18 +48,6 @@ export default function FounderCard() {
                 Медицинский digital-маркетинг с <span className="text-teal-400 font-semibold">2022 года</span>. Помогаю клиникам привлекать пациентов через таргетированную рекламу, SEO и AI решения.
               </p>
 
-              {/* Статистика */}
-              <div className="flex flex-col sm:flex-row gap-12 mb-12">
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-2">100+</div>
-                  <div className="text-sm text-slate-400 uppercase tracking-wider">Клиентов помощь</div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold text-indigo-400 mb-2">3 года</div>
-                  <div className="text-sm text-slate-400 uppercase tracking-wider">Опыта в healthcare</div>
-                </div>
-              </div>
-
               {/* Кнопки */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
