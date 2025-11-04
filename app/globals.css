@@ -281,13 +281,28 @@ body {
 .animate-fadeInLeft, 
 .animate-fadeInRight,
 .animate-slideInStagger,
-.animate-scaleUp,
 .animate-fadeIn,
 .animate-iconBounce,
 .animate-buttonClick {
   animation: none !important;
   opacity: 1 !important;
   transform: none !important;
+}
+
+/* ОСТАВЛЯЕМ анимацию для модального окна */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.2s ease-out forwards;
 }
 
 /* ОСТАВЛЯЕМ фоновые анимации (они не мешают) */
