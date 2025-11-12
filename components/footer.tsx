@@ -17,15 +17,15 @@ export default function Footer() {
       <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl animate-pulse-slow delay-400"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3 mb-6 md:mb-0 animate-fadeInLeft hover-lift transition-all duration-300">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div className="flex items-center gap-3 mb-6 md:mb-0 animate-fadeInLeft hover-lift transition-all duration-300 w-full md:w-auto justify-center md:justify-start">
             <Logo size="sm" />
           </div>
 
-          <div className="flex flex-wrap justify-center md:flex-row gap-8 md:gap-16 mb-6 md:mb-0">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-8 md:gap-16 mb-6 md:mb-0 w-full md:w-auto">
             <div className="w-full sm:w-auto animate-fadeInUp delay-100">
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Контакты</h3>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
+              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2">
                 info@hippocrat.digital
               </p>
               <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
@@ -37,19 +37,19 @@ export default function Footer() {
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Навигация</h3>
               <Link 
                 href="/about"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-1"
+                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
               >
                 О нас
               </Link>
               <Link 
                 href="/services"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-1"
+                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
               >
                 Услуги
               </Link>
               <Link 
                 href="/cases"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-1"
+                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
               >
                 Кейсы
               </Link>
@@ -71,31 +71,33 @@ export default function Footer() {
               <p className="text-slate-400 text-sm text-center sm:text-left mb-3">
                 ОГРНИП 325774600768729
               </p>
-              <Link 
-                href="/requisites"
-                className="inline-flex items-center gap-2 text-teal-400 text-sm font-medium hover:text-teal-300 transition-colors duration-300 group"
-              >
-                <span>Реквизиты</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="group-hover:translate-x-1 transition-transform duration-300"
+              <div className="flex justify-center sm:justify-start">
+                <Link 
+                  href="/requisites"
+                  className="inline-flex items-center gap-2 text-teal-400 text-sm font-medium hover:text-teal-300 transition-colors duration-300 group"
                 >
-                  <path d="M5 12h14"/>
-                  <path d="m12 5 7 7-7 7"/>
-                </svg>
-              </Link>
+                  <span>Реквизиты</span>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="group-hover:translate-x-1 transition-transform duration-300"
+                  >
+                    <path d="M5 12h14"/>
+                    <path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-4 animate-fadeInRight delay-400">
+          <div className="flex gap-4 animate-fadeInRight delay-400 w-full md:w-auto justify-center md:justify-end">
             {/* Telegram кнопка */}
             <Button
               variant="outline"
