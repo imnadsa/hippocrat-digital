@@ -7,53 +7,34 @@ import Logo from "@/components/logo"
 import Link from "next/link"
 import ContactModal from "@/components/contact-modal"
 
-// Убираем интерфейс HeaderProps - больше не нужен
-export default function Header() {  // ← Убрали ({ scrolled }: HeaderProps)
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)  // ← ДОБАВИЛИ это состояние
-  const [isModalOpen, setIsModalOpen] = useState(false)  // ← ДОБАВИЛИ состояние для модалки
+  const [scrolled, setScrolled] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // ← ДОБАВИЛИ логику отслеживания скролла
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
 
-    // Установка начального состояния
     setScrolled(window.scrollY > 20)
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Function to handle external links
-  const openExternalLink = (url: string) => {
-    window.open(url, "_blank")
-  }
-
-  // Scroll to section function
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setIsMenuOpen(false)
-  }
-
-  // Modal handlers
   const openModal = () => {
     setIsModalOpen(true)
-    setIsMenuOpen(false) // Закрываем мобильное меню при открытии модалки
+    setIsMenuOpen(false)
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
   }
 
-  // Improved dropdown handlers with delay
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
@@ -64,10 +45,9 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsServicesDropdownOpen(false)
-    }, 300) // 300ms delay before closing
+    }, 300)
   }
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -76,7 +56,6 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
     }
   }, [])
 
-  // Services menu items
   const servicesItems = [
     { name: "Таргетированная реклама", href: "/services/targeting" },
     { name: "SMM", href: "/services/smm" },
@@ -98,22 +77,17 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
             <Logo size="lg" />
           </Link>
 
-          {/* Tagline - hidden on mobile */}
-          <div className="hidden md:block text-center text-sm md:text-base truncate max-w-[200px] lg:max-w-none text-teal-300">
-            «Digital решения в медицине»
-          </div>
-
           {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-4 items-center">
+          <div className="hidden md:flex gap-6 items-center">
             {/* 1. Кейсы */}
-              <Link href="/cases">
-                <Button 
-                  variant="ghost" 
-                  className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-                >
-                  Кейсы
-                </Button>
-              </Link>
+            <Link href="/cases">
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+              >
+                Кейсы
+              </Button>
+            </Link>
             
             {/* 2. Services Dropdown */}
             <div 
@@ -190,6 +164,16 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
                 О нас
               </Button>
             </Link>
+
+            {/* 5. Контакты */}
+            <Link href="/requisites">
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+              >
+                Контакты
+              </Button>
+            </Link>
             
             <Button
               className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 transition-all duration-200 hover:scale-105 active:scale-95"
@@ -234,25 +218,19 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
             : 'opacity-0 -translate-y-4 pointer-events-none'
         }`}>
           <div className="container mx-auto px-4 py-4">
-            <div className="text-center text-sm mb-4 text-teal-300 animate-fadeIn">
-              «Digital решения в медицине»
-            </div>
-            
             <div className="flex flex-col gap-2">
-              {/* Mobile menu с новым порядком */}
+              {/* Mobile menu */}
               <Link href="/cases">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
-                  style={{ animationDelay: '0ms' }}
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Кейсы
                 </Button>
               </Link>
               
-              {/* Mobile Services Dropdown with improved UX */}
-              <div className="animate-slideInStagger" style={{ animationDelay: '50ms' }}>
+              <div>
                 <Button 
                   variant="ghost" 
                   className="w-full justify-between text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
@@ -297,8 +275,7 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
               <Link href="/blog">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
-                  style={{ animationDelay: '100ms' }}
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Блог
@@ -308,17 +285,25 @@ export default function Header() {  // ← Убрали ({ scrolled }: HeaderPro
               <Link href="/about">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
-                  style={{ animationDelay: '150ms' }}
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   О нас
                 </Button>
               </Link>
+
+              <Link href="/requisites">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Контакты
+                </Button>
+              </Link>
               
               <Button
-                className={`w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-4 transition-all duration-200 hover:scale-105 active:scale-95 animate-slideInStagger`}
-                style={{ animationDelay: '200ms' }}
+                className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-4 transition-all duration-200 hover:scale-105 active:scale-95"
                 onClick={openModal}
               >
                 Связаться
