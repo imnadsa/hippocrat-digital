@@ -2,39 +2,58 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { List, X, CaretDown, Phone, EnvelopeSimple, MapPin } from "phosphor-react"
+import { List, X, CaretDown } from "phosphor-react"
 import Logo from "@/components/logo"
 import Link from "next/link"
 import ContactModal from "@/components/contact-modal"
 
-export default function Header() {
+// Убираем интерфейс HeaderProps - больше не нужен
+export default function Header() {  // ← Убрали ({ scrolled }: HeaderProps)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)  // ← ДОБАВИЛИ это состояние
+  const [isModalOpen, setIsModalOpen] = useState(false)  // ← ДОБАВИЛИ состояние для модалки
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+  // ← ДОБАВИЛИ логику отслеживания скролла
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
 
+    // Установка начального состояния
     setScrolled(window.scrollY > 20)
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Function to handle external links
+  const openExternalLink = (url: string) => {
+    window.open(url, "_blank")
+  }
+
+  // Scroll to section function
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+    setIsMenuOpen(false)
+  }
+
+  // Modal handlers
   const openModal = () => {
     setIsModalOpen(true)
-    setIsMenuOpen(false)
+    setIsMenuOpen(false) // Закрываем мобильное меню при открытии модалки
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
   }
 
+  // Improved dropdown handlers with delay
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
@@ -45,9 +64,10 @@ export default function Header() {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsServicesDropdownOpen(false)
-    }, 300)
+    }, 300) // 300ms delay before closing
   }
 
+  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -56,6 +76,7 @@ export default function Header() {
     }
   }, [])
 
+  // Services menu items
   const servicesItems = [
     { name: "Таргетированная реклама", href: "/services/targeting" },
     { name: "SMM", href: "/services/smm" },
@@ -66,18 +87,110 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-slate-950/90 backdrop-blur-sm shadow-md" : "bg-transparent"
-      }`}>
-        {/* ВЕРХНИЙ ЭТАЖ - Логотип и Связаться */}
-        <div className="hidden md:block border-b border-slate-800/30">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            {/* Левая часть - Логотип */}
-            <Link href="/">
-              <Logo size="lg" />
-            </Link>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-slate-950/90 backdrop-blur-sm shadow-md py-3" : "bg-transparent py-6"
+        }`}
+      >
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <Logo size="lg" />
+          </Link>
 
-            {/* Правая часть - Кнопка Связаться */}
+          {/* Tagline - hidden on mobile */}
+          <div className="hidden md:block text-center text-sm md:text-base truncate max-w-[200px] lg:max-w-none text-teal-300">
+            «Digital решения в медицине»
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-4 items-center">
+            {/* 1. Кейсы */}
+              <Link href="/cases">
+                <Button 
+                  variant="ghost" 
+                  className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+                >
+                  Кейсы
+                </Button>
+              </Link>
+            
+            {/* 2. Services Dropdown */}
+            <div 
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent flex items-center gap-1 transition-colors duration-200"
+              >
+                Услуги
+                <CaretDown 
+                  size={16} 
+                  weight="bold"
+                  className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
+                />
+              </Button>
+              
+              {/* Invisible bridge area to prevent dropdown from closing */}
+              <div className={`absolute top-full left-0 w-full h-2 ${isServicesDropdownOpen ? 'block' : 'hidden'}`}></div>
+              
+              {/* Dropdown Menu with improved animations */}
+              <div className={`absolute top-full left-0 mt-2 w-64 transition-all duration-200 ease-out ${
+                isServicesDropdownOpen 
+                  ? 'opacity-100 translate-y-0 pointer-events-auto' 
+                  : 'opacity-0 -translate-y-2 pointer-events-none'
+              }`}>
+                <div className="bg-slate-900/95 backdrop-blur-md border border-slate-800 rounded-xl shadow-xl overflow-hidden">
+                  <div className="py-2">
+                    <Link 
+                      href="/services" 
+                      className="block px-4 py-3 text-sm text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-150 border-b border-slate-800/50"
+                    >
+                      <div className="font-medium">Все услуги</div>
+                      <div className="text-xs text-slate-500 mt-1">Полный обзор направлений</div>
+                    </Link>
+                    {servicesItems.map((item, index) => (
+                      <Link 
+                        key={item.href} 
+                        href={item.href} 
+                        className="block px-4 py-3 text-sm text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-150 group"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="group-hover:translate-x-1 transition-transform duration-150">
+                            {item.name}
+                          </span>
+                          <div className="w-1.5 h-1.5 rounded-full bg-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-150"></div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* 3. Блог */}
+            <Link href="/blog">
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+              >
+                Блог
+              </Button>
+            </Link>
+            
+            {/* 4. О нас */}
+            <Link href="/about">
+              <Button 
+                variant="ghost" 
+                className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
+              >
+                О нас
+              </Button>
+            </Link>
+            
             <Button
               className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 transition-all duration-200 hover:scale-105 active:scale-95"
               onClick={openModal}
@@ -85,126 +198,9 @@ export default function Header() {
               Связаться
             </Button>
           </div>
-        </div>
 
-        {/* НИЖНИЙ ЭТАЖ - От медиков для медиков + Навигация */}
-        <div className={`hidden md:block transition-all duration-300 ${scrolled ? "py-3" : "py-4"}`}>
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between gap-8">
-              {/* Левая часть - "От медиков для медиков" */}
-              <div className="text-teal-300 font-medium text-sm whitespace-nowrap">
-                «От медиков для медиков»
-              </div>
-
-              {/* Центр - Основная навигация */}
-              <div className="flex gap-6 items-center flex-1 justify-center">
-                <Link href="/cases">
-                  <Button 
-                    variant="ghost" 
-                    className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-                  >
-                    Кейсы
-                  </Button>
-                </Link>
-                
-                <div 
-                  ref={dropdownRef}
-                  className="relative"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Button 
-                    variant="ghost" 
-                    className="text-slate-300 hover:text-teal-400 hover:bg-transparent flex items-center gap-1 transition-colors duration-200"
-                  >
-                    Услуги
-                    <CaretDown 
-                      size={16} 
-                      weight="bold"
-                      className={`transition-transform duration-200 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
-                    />
-                  </Button>
-                  
-                  <div className={`absolute top-full left-0 w-full h-2 ${isServicesDropdownOpen ? 'block' : 'hidden'}`}></div>
-                  
-                  <div className={`absolute top-full left-0 mt-2 w-64 transition-all duration-200 ease-out ${
-                    isServicesDropdownOpen 
-                      ? 'opacity-100 translate-y-0 pointer-events-auto' 
-                      : 'opacity-0 -translate-y-2 pointer-events-none'
-                  }`}>
-                    <div className="bg-slate-900/95 backdrop-blur-md border border-slate-800 rounded-xl shadow-xl overflow-hidden">
-                      <div className="py-2">
-                        <Link 
-                          href="/services" 
-                          className="block px-4 py-3 text-sm text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-150 border-b border-slate-800/50"
-                        >
-                          <div className="font-medium">Все услуги</div>
-                          <div className="text-xs text-slate-500 mt-1">Полный обзор направлений</div>
-                        </Link>
-                        {servicesItems.map((item) => (
-                          <Link 
-                            key={item.href} 
-                            href={item.href} 
-                            className="block px-4 py-3 text-sm text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-150 group"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="group-hover:translate-x-1 transition-transform duration-150">
-                                {item.name}
-                              </span>
-                              <div className="w-1.5 h-1.5 rounded-full bg-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-150"></div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <Link href="/blog">
-                  <Button 
-                    variant="ghost" 
-                    className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-                  >
-                    Блог
-                  </Button>
-                </Link>
-                
-                <Link href="/about">
-                  <Button 
-                    variant="ghost" 
-                    className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-                  >
-                    О нас
-                  </Button>
-                </Link>
-
-                <Link href="/requisites">
-                  <Button 
-                    variant="ghost" 
-                    className="text-slate-300 hover:text-teal-400 hover:bg-transparent transition-colors duration-200"
-                  >
-                    Реквизиты
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Правая часть - Контакты */}
-              <div className="flex items-center gap-4 whitespace-nowrap">
-                <a href="tel:+79771004419" className="flex items-center gap-2 text-slate-300 hover:text-teal-400 transition-colors text-sm">
-                  <Phone size={16} weight="duotone" />
-                  +7 (977) 100-44-19
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <div className="container mx-auto px-4 py-6 flex items-center justify-between">
-            <Link href="/">
-              <Logo size="lg" />
-            </Link>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
             <Button 
               variant="ghost" 
               size="icon" 
@@ -231,7 +227,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu with improved animations */}
         <div className={`md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md shadow-lg transition-all duration-300 ease-out ${
           isMenuOpen 
             ? 'opacity-100 translate-y-0 pointer-events-auto' 
@@ -239,21 +235,24 @@ export default function Header() {
         }`}>
           <div className="container mx-auto px-4 py-4">
             <div className="text-center text-sm mb-4 text-teal-300 animate-fadeIn">
-              «От медиков для медиков»
+              «Digital решения в медицине»
             </div>
             
             <div className="flex flex-col gap-2">
+              {/* Mobile menu с новым порядком */}
               <Link href="/cases">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                  style={{ animationDelay: '0ms' }}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Кейсы
                 </Button>
               </Link>
               
-              <div>
+              {/* Mobile Services Dropdown with improved UX */}
+              <div className="animate-slideInStagger" style={{ animationDelay: '50ms' }}>
                 <Button 
                   variant="ghost" 
                   className="w-full justify-between text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
@@ -280,7 +279,7 @@ export default function Header() {
                         Все услуги
                       </Button>
                     </Link>
-                    {servicesItems.map((item) => (
+                    {servicesItems.map((item, index) => (
                       <Link key={item.href} href={item.href} className="block">
                         <Button 
                           variant="ghost" 
@@ -298,7 +297,8 @@ export default function Header() {
               <Link href="/blog">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                  style={{ animationDelay: '100ms' }}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Блог
@@ -308,25 +308,17 @@ export default function Header() {
               <Link href="/about">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
+                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200 animate-slideInStagger"
+                  style={{ animationDelay: '150ms' }}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   О нас
                 </Button>
               </Link>
-
-              <Link href="/requisites">
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-start text-slate-300 hover:text-teal-400 hover:bg-slate-800/50 transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Реквизиты
-                </Button>
-              </Link>
               
               <Button
-                className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-4 transition-all duration-200 hover:scale-105 active:scale-95"
+                className={`w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 mt-4 transition-all duration-200 hover:scale-105 active:scale-95 animate-slideInStagger`}
+                style={{ animationDelay: '200ms' }}
                 onClick={openModal}
               >
                 Связаться
@@ -335,18 +327,36 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Custom CSS for smooth animations */}
         <style jsx>{`
           @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
           }
           
+          @keyframes slideInStagger {
+            from { 
+              opacity: 0; 
+              transform: translateX(-20px); 
+            }
+            to { 
+              opacity: 1; 
+              transform: translateX(0); 
+            }
+          }
+          
           .animate-fadeIn {
             animation: fadeIn 0.3s ease-out forwards;
+          }
+          
+          .animate-slideInStagger {
+            animation: slideInStagger 0.4s ease-out forwards;
+            opacity: 0;
           }
         `}</style>
       </header>
 
+      {/* Модальное окно */}
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   )
