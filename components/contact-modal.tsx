@@ -50,7 +50,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors duration-200"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full hover:bg-slate-800/50 transition-colors duration-200"
           aria-label="Закрыть"
         >
           <X size={24} className="text-slate-400 hover:text-white" />
