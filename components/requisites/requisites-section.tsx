@@ -188,7 +188,7 @@ export default function RequisitesSection() {
             Реквизиты
           </div>
           <h1 className="text-4xl md:text-5xl font-bold font-fixedsys mb-4">
-            Реквизиты компании
+            Реквизиты Hippocrat Digital
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl">
             Все данные для оформления счёта и проведения платежа. Наведите на реквизит и нажмите на иконку для копирования.
