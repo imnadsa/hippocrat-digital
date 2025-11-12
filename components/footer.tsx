@@ -25,53 +25,59 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-8 md:gap-16 mb-6 md:mb-0 w-full md:w-auto">
             <div className="w-full sm:w-auto animate-fadeInUp delay-100">
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Контакты</h3>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2">
-                info@hippocrat.digital
-              </p>
-              <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
-                +7 (977) 100-44-19
-              </p>
+              <div className="flex flex-col space-y-2">
+                <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
+                  info@hippocrat.digital
+                </p>
+                <p className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift">
+                  +7 (977) 100-44-19
+                </p>
+              </div>
             </div>
 
             <div className="w-full sm:w-auto animate-fadeInUp delay-200">
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Навигация</h3>
-              <Link 
-                href="/about"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
-              >
-                О нас
-              </Link>
-              <Link 
-                href="/services"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
-              >
-                Услуги
-              </Link>
-              <Link 
-                href="/cases"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift mb-2"
-              >
-                Кейсы
-              </Link>
-              <Link 
-                href="/blog"
-                className="block text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
-              >
-                Блог
-              </Link>
+              <nav className="flex flex-col space-y-2">
+                <Link 
+                  href="/about"
+                  className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
+                >
+                  О нас
+                </Link>
+                <Link 
+                  href="/services"
+                  className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
+                >
+                  Услуги
+                </Link>
+                <Link 
+                  href="/cases"
+                  className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
+                >
+                  Кейсы
+                </Link>
+                <Link 
+                  href="/blog"
+                  className="text-slate-400 text-sm text-center sm:text-left hover:text-teal-400 transition-colors duration-300 cursor-pointer hover-lift"
+                >
+                  Блог
+                </Link>
+              </nav>
             </div>
 
             <div className="w-full sm:w-auto animate-fadeInUp delay-300">
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">
                 ИП Антошкин А.Г.
               </h3>
-              <p className="text-slate-400 text-sm text-center sm:text-left mb-1">
-                ИНН 772799039046
-              </p>
-              <p className="text-slate-400 text-sm text-center sm:text-left mb-3">
-                ОГРНИП 325774600768729
-              </p>
-              <div className="flex justify-center sm:justify-start">
+              <div className="flex flex-col space-y-1">
+                <p className="text-slate-400 text-sm text-center sm:text-left">
+                  ИНН 772799039046
+                </p>
+                <p className="text-slate-400 text-sm text-center sm:text-left mb-3">
+                  ОГРНИП 325774600768729
+                </p>
+              </div>
+              <div className="flex justify-center sm:justify-start mt-3">
                 <Link 
                   href="/requisites"
                   className="inline-flex items-center gap-2 text-teal-400 text-sm font-medium hover:text-teal-300 transition-colors duration-300 group"
