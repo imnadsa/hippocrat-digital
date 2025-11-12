@@ -1,6 +1,6 @@
 "use client"
 
-import { Copy, Phone, MapPin, Mail, Globe } from "phosphor-react"
+import { Copy, Phone, MapPin, EnvelopeSimple, Globe } from "phosphor-react"
 import { useState } from "react"
 
 interface RequisiteItem {
@@ -66,7 +66,7 @@ const requisitesData = {
         label: "Email",
         value: "antoshkin.info@bk.ru",
         copyable: true,
-        icon: <Mail size={18} className="text-teal-400" weight="duotone" />
+        icon: <EnvelopeSimple size={18} className="text-teal-400" weight="duotone" />
       },
       {
         label: "Сайт",
