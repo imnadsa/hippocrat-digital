@@ -177,8 +177,6 @@ export default function RequisitesSection() {
         <div className="mb-8 text-sm text-slate-500 animate-fadeInUp">
           <a href="/" className="hover:text-teal-400 transition-colors">Главная</a>
           <span className="mx-2">›</span>
-          <a href="/contacts" className="hover:text-teal-400 transition-colors">Контакты</a>
-          <span className="mx-2">›</span>
           <span className="text-slate-400">Реквизиты</span>
         </div>
 
@@ -188,7 +186,7 @@ export default function RequisitesSection() {
             Реквизиты
           </div>
           <h1 className="text-4xl md:text-5xl font-bold font-fixedsys mb-4">
-            Реквизиты Hippocrat Digital
+            Реквизиты компании
           </h1>
           <p className="text-lg text-slate-400 max-w-2xl">
             Все данные для оформления счёта и проведения платежа. Наведите на реквизит и нажмите на иконку для копирования.
