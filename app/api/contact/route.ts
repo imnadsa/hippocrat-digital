@@ -17,6 +17,11 @@ interface ContactFormData {
   message?: string
 }
 
+interface ModalFormData {
+  name: string
+  phone: string
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -75,6 +80,26 @@ ${message || 'Не указано'}
 
 💬 <b>Сообщение:</b>
 ${message || 'Не указано'}
+
+📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
+        timeZone: 'Europe/Moscow',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })} (МСК)
+      `.trim()
+    }
+    // Если это модальное окно (только name и phone, БЕЗ email)
+    else if (body.phone && body.name && !body.email) {
+      const { name, phone }: ModalFormData = body
+      
+      telegramMessage = `
+🔔 <b>Новая заявка из попапа "Обсудить проект"</b>
+
+👤 <b>Имя:</b> ${name}
+📞 <b>Телефон:</b> ${phone}
 
 📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
         timeZone: 'Europe/Moscow',
