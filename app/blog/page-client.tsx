@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation' // ← ДОБАВИЛИ
 import type { BlogMeta } from '@/lib/blog-types'
 import { getAllPosts, getAllCategories } from '@/lib/blog'
 import BlogList from '@/components/blog/blog-list'
@@ -8,27 +9,29 @@ import CategoryFilter from '@/components/blog/category-filter'
 import Footer from '@/components/footer'
 import FounderCard from '@/components/founder-card'
 
-
-export default function BlogPageClient({
-  searchParams,
-}: {
-  searchParams: { category?: string; search?: string }
-}) {
+// ✅ УБРАЛИ searchParams из пропсов
+export default function BlogPageClient() {
   const [scrolled, setScrolled] = useState(false)
+  
+  // ✅ ДОБАВИЛИ useSearchParams для клиента
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category') || undefined
+  const search = searchParams.get('search') || undefined
+  
   const allPosts = getAllPosts()
   const categories = getAllCategories()
   
   // Фильтрация постов
   let filteredPosts = allPosts
   
-  if (searchParams.category && searchParams.category !== 'all') {
+  if (category && category !== 'all') {
     filteredPosts = allPosts.filter(
-      post => post.category.toLowerCase() === searchParams.category?.toLowerCase()
+      post => post.category.toLowerCase() === category.toLowerCase()
     )
   }
   
-  if (searchParams.search) {
-    const searchTerm = searchParams.search.toLowerCase()
+  if (search) {
+    const searchTerm = search.toLowerCase()
     filteredPosts = filteredPosts.filter(
       post =>
         post.title.toLowerCase().includes(searchTerm) ||
@@ -105,7 +108,7 @@ export default function BlogPageClient({
 
             {/* CTA кнопки */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
+              
                 href="#blog-content"
                 className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white font-medium rounded-xl hover:from-teal-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-500/25"
               >
@@ -115,7 +118,7 @@ export default function BlogPageClient({
                 </svg>
               </a>
               
-              <a
+              
                 href="/"
                 className="group inline-flex items-center px-8 py-4 bg-slate-800/50 text-white font-medium rounded-xl border border-slate-700 hover:bg-slate-700/50 hover:border-slate-600 transition-all duration-300"
               >
@@ -138,17 +141,17 @@ export default function BlogPageClient({
             <div className="mb-8">
               <CategoryFilter 
                 categories={categories}
-                currentCategory={searchParams.category}
+                currentCategory={category}
                 totalPosts={allPosts.length}
                 filteredCount={filteredPosts.length}
               />
             </div>
 
             {/* Результаты поиска */}
-            {searchParams.search && (
+            {search && (
               <div className="mb-6 p-4 bg-slate-900/50 rounded-lg border border-slate-800">
                 <p className="text-slate-300">
-                  Результаты поиска по запросу: <span className="text-teal-400 font-medium">"{searchParams.search}"</span>
+                  Результаты поиска по запросу: <span className="text-teal-400 font-medium">"{search}"</span>
                 </p>
                 <p className="text-sm text-slate-400 mt-1">
                   Найдено статей: {filteredPosts.length}
@@ -171,13 +174,13 @@ export default function BlogPageClient({
                   Статьи не найдены
                 </h3>
                 <p className="text-slate-400 mb-6">
-                  {searchParams.search 
+                  {search 
                     ? 'Попробуйте изменить поисковый запрос'
                     : 'В данной категории пока нет статей'
                   }
                 </p>
-                {(searchParams.category || searchParams.search) && (
-                  <a
+                {(category || search) && (
+                  
                     href="/blog"
                     className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white font-medium rounded-lg hover:from-teal-600 hover:to-indigo-600 transition-all duration-300"
                   >
@@ -202,7 +205,7 @@ export default function BlogPageClient({
                       type="text"
                       name="search"
                       placeholder="Поиск статей..."
-                      defaultValue={searchParams.search}
+                      defaultValue={search}
                       className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                     <button
@@ -214,8 +217,8 @@ export default function BlogPageClient({
                       </svg>
                     </button>
                   </div>
-                  {searchParams.category && (
-                    <input type="hidden" name="category" value={searchParams.category} />
+                  {category && (
+                    <input type="hidden" name="category" value={category} />
                   )}
                 </form>
               </div>
