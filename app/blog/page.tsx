@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 import Header from "@/components/header"
 import BlogPageClient from "./page-client"
-import { getAllPosts, getAllCategories } from "@/lib/blog"
 
 // ✅ SEO METADATA
 export const metadata: Metadata = {
@@ -66,11 +65,8 @@ const breadcrumbSchema = {
   ]
 }
 
-export default function BlogPage({
-  searchParams,
-}: {
-  searchParams: { category?: string; search?: string }
-}) {
+// ✅ УБРАЛИ searchParams - теперь это чистый серверный компонент
+export default function BlogPage() {
   return (
     <>
       <script
@@ -84,7 +80,7 @@ export default function BlogPage({
 
       <Header />
       <main>
-        <BlogPageClient searchParams={searchParams} />
+        <BlogPageClient />
       </main>
     </>
   )
