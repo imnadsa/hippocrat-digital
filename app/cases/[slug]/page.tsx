@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getCaseBySlug } from '@/lib/cases'
+import { getCaseBySlug, getAllCases } from '@/lib/cases' // добавьте getAllCases
 import { Metadata } from 'next'
 import CasePageClient from './case-page-client'
 import ScrollToPortfolio from '@/components/scroll-to-portfolio'
@@ -15,6 +15,19 @@ import CtaSection from '@/components/cta-section'
 interface CasePageProps {
   params: {
     slug: string
+  }
+}
+
+// ✅ ДОБАВЬТЕ ЭТУ ФУНКЦИЮ:
+export function generateStaticParams() {
+  try {
+    const cases = getAllCases() // получаем все кейсы
+    return cases.map((caseItem) => ({
+      slug: caseItem.id, // или caseItem.slug, в зависимости от структуры
+    }))
+  } catch (error) {
+    console.error('Error generating case params:', error)
+    return [] // если кейсов нет или ошибка - возвращаем пустой массив
   }
 }
 
