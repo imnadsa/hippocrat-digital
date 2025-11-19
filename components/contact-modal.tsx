@@ -23,36 +23,58 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setSubmitStatus('idle')
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-        }),
-      })
+      // Формируем сообщение для Telegram
+      const telegramMessage = `
+🔔 <b>Новая заявка из попапа "Обсудить проект"</b>
 
-      const data = await response.json()
+👤 <b>Имя:</b> ${formData.name}
+📞 <b>Телефон:</b> ${formData.phone}
 
-      if (response.ok && data.success) {
-        setSubmitStatus('success')
-        // Очищаем форму
-        setFormData({
-          name: "",
-          phone: "",
-          agreement: false,
-        })
-        // Закрываем модалку через 2 секунды после успешной отправки
-        setTimeout(() => {
-          onClose()
-          setSubmitStatus('idle')
-        }, 2000)
-      } else {
-        setSubmitStatus('error')
-        console.error('Error:', data.message)
+📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
+        timeZone: 'Europe/Moscow',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })} (МСК)
+      `.trim()
+
+      // Отправка в Telegram
+      const response = await fetch(
+        `https://api.telegram.org/bot8421391298:AAH8mgMZo5FfN1X8KMspISZYuVadBdtoHJM/sendMessage`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: '1053481829',
+            text: telegramMessage,
+            parse_mode: 'HTML',
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Ошибка отправки')
       }
+
+      setSubmitStatus('success')
+      
+      // Очищаем форму
+      setFormData({
+        name: "",
+        phone: "",
+        agreement: false,
+      })
+      
+      // Закрываем модалку через 2 секунды после успешной отправки
+      setTimeout(() => {
+        onClose()
+        setSubmitStatus('idle')
+      }, 2000)
+
     } catch (error) {
       setSubmitStatus('error')
       console.error('Error submitting form:', error)
@@ -197,7 +219,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <label htmlFor="agreement" className="leading-relaxed">
                 Нажимая на кнопку «Отправить заявку» вы даете свое согласие на
                 обработку своих персональных данных и соглашаетесь с{" "}
-                <a
+                
                   href="#"
                   className="text-teal-400 hover:text-teal-300 underline"
                 >
