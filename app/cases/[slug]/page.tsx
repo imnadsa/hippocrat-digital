@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getCaseBySlug, getAllCases } from '@/lib/cases' // добавьте getAllCases
+import { getCaseBySlug, allCases } from '@/lib/cases' // ← используй allCases
 import { Metadata } from 'next'
 import CasePageClient from './case-page-client'
 import ScrollToPortfolio from '@/components/scroll-to-portfolio'
@@ -18,20 +18,14 @@ interface CasePageProps {
   }
 }
 
-// ✅ ДОБАВЬТЕ ЭТУ ФУНКЦИЮ:
+// ✅ Используй allCases напрямую
 export function generateStaticParams() {
-  try {
-    const cases = getAllCases() // получаем все кейсы
-    return cases.map((caseItem) => ({
-      slug: caseItem.id, // или caseItem.slug, в зависимости от структуры
-    }))
-  } catch (error) {
-    console.error('Error generating case params:', error)
-    return [] // если кейсов нет или ошибка - возвращаем пустой массив
-  }
+  return allCases.map((caseItem) => ({
+    slug: caseItem.id, // или caseItem.slug
+  }))
 }
 
-// Генерация метаданных для SEO
+// Остальной код без изменений...
 export async function generateMetadata({ params }: CasePageProps): Promise<Metadata> {
   const caseData = getCaseBySlug(params.slug)
   
@@ -64,17 +58,13 @@ export async function generateMetadata({ params }: CasePageProps): Promise<Metad
 export default function CasePage({ params }: CasePageProps) {
   const caseData = getCaseBySlug(params.slug)
 
-  // Если кейс не найден
   if (!caseData) {
     notFound()
   }
 
   return (
     <div className="relative">
-      {/* Компонент для автоматической прокрутки к портфолио */}
       <ScrollToPortfolio />
-
-      {/* Фон - полная главная страница */}
       <div className="min-h-screen bg-[#0b101b]">
         <Header />
         <HeroSection />
@@ -83,8 +73,6 @@ export default function CasePage({ params }: CasePageProps) {
         <AdvantagesSection />
         <CtaSection />
       </div>
-
-      {/* Попап поверх главной страницы */}
       <CasePageClient caseData={caseData} />
     </div>
   )
