@@ -1,268 +1,291 @@
-"use client";
+"use client"
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Phone, MessageCircle, CheckCircle } from 'lucide-react';
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, PaperPlaneTilt } from "phosphor-react"
 
-export default function CTASection() {
+export default function CtaSection() {
   const [formData, setFormData] = useState({
-    name: '',
-    contact: '',
-    service: '',
-    message: ''
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-
-  const services = [
-    'Hippocrat AI (для студентов)',
-    'Hippocrat MedCall AI (для клиник)',
-    'SMM для медицинских организаций',
-    'Веб-разработка медицинских сайтов',
-    'Контекстная реклама в healthcare',
-    'Комплексный digital-маркетинг',
-    'Консультация по стратегии',
-    'другое'
-  ];
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
+    name: "",
+    email: "",
+    phone: "",
+    clinic: "",
+    message: ""
+  })
+  
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [error, setError] = useState("")
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
+    e.preventDefault()
+    setFormStatus("submitting")
+    setError("")
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Формируем сообщение для Telegram
+      const telegramMessage = `
+🔔 <b>Новая заявка с формы контактов Hippocrat Digital</b>
 
-      const result = await response.json();
+👤 <b>Имя:</b> ${formData.name}
+📧 <b>Email:</b> ${formData.email}
+📞 <b>Телефон:</b> ${formData.phone}
+🏥 <b>Клиника:</b> ${formData.clinic || 'Не указана'}
+
+💬 <b>Сообщение:</b>
+${formData.message || 'Не указано'}
+
+📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
+        timeZone: 'Europe/Moscow',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })} (МСК)
+      `.trim()
+
+      // Отправка в Telegram
+      const response = await fetch(
+        `https://api.telegram.org/bot8421391298:AAH8mgMZo5FfN1X8KMspISZYuVadBdtoHJM/sendMessage`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: '1053481829',
+            text: telegramMessage,
+            parse_mode: 'HTML',
+          }),
+        }
+      )
 
       if (!response.ok) {
-        throw new Error(result.message || 'Произошла ошибка при отправке');
+        throw new Error('Ошибка отправки')
       }
 
-      setIsSubmitted(true);
+      setFormStatus("success")
       
-      // Сброс формы через 5 секунд
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          contact: '',
-          service: '',
-          message: ''
-        });
-      }, 5000);
+      // Очистка формы
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        clinic: "",
+        message: ""
+      })
 
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setError(error instanceof Error ? error.message : 'Произошла ошибка при отправке. Попробуйте позже или свяжитесь с нами напрямую.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('Error submitting form:', error)
+      setError('Произошла ошибка при отправке. Попробуйте позже или свяжитесь с нами напрямую.')
+      setFormStatus("error")
+      
+      // Сбросить ошибку через 5 секунд
+      setTimeout(() => {
+        setFormStatus("idle")
+        setError("")
+      }, 5000)
     }
-  };
+  }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-400/10 to-indigo-400/10 rounded-full blur-3xl animate-gradient"></div>
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-3xl animate-gradient delay-1000"></div>
-      </div>
+    <section id="contact" className="py-16 md:py-24 bg-gradient-to-b from-slate-900 to-slate-950 relative overflow-hidden">
+      {/* Улучшенные декоративные элементы */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground delay-600"></div>
+      <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow delay-400"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8 animate-fadeInLeft">
-              {/* Main Heading */}
-              <div className="space-y-6">
-                <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                  Готовы внедрить{' '}
-                  <span className="bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent animate-gradient-text">
-                    AI
-                  </span>{' '}
-                  в вашу медицинскую сферу?
-                </h2>
-                
-                <p className="text-xl text-gray-400 leading-relaxed">
-                  Получите персональное коммерческое предложение и узнайте, как наши решения могут революционизировать вашу работу
-                </p>
-              </div>
-
-              {/* Benefits */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-white">Что вы получите:</h3>
-                <div className="space-y-3">
-                  {[
-                    'Персональное КП с расчетом ROI',
-                    'Демонстрацию наших AI-продуктов',
-                    'Консультацию по digital-стратегии',
-                    'Анализ текущих маркетинговых активностей'
-                  ].map((benefit, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-teal-400 flex-shrink-0" />
-                      <span className="text-gray-300">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact Options */}
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-white">Или свяжитесь напрямую:</h3>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a 
-                    href="mailto:hippocratai@mail.ru"
-                    className="flex items-center space-x-3 text-gray-300 hover:text-teal-400 transition-colors duration-300"
-                  >
-                    <Mail className="w-5 h-5" />
-                    <span>hippocratai@mail.ru</span>
-                  </a>
-                </div>
-              </div>
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto bg-slate-900/50 rounded-xl border border-slate-800/80 p-8 md:p-10 backdrop-blur-sm hover:border-slate-700/50 transition-all duration-300 animate-scaleUp blur-backdrop">
+          <div className="flex flex-col items-center mb-10 text-center animate-fadeInUp">
+            <div className="inline-block px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm mb-6 hover:border-teal-500/50 transition-all duration-300">
+              Связаться с нами
             </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-fixedsys animate-fadeInUp delay-100">
+              <span className="bg-gradient-to-r from-teal-400 to-indigo-500 bg-clip-text text-transparent animate-gradient-text text-shadow-lg">
+                Готовы увеличить поток пациентов?
+              </span>
+            </h2>
+            <p className="text-slate-300 max-w-2xl animate-fadeInUp delay-200 text-shadow">
+              Оставьте заявку, и мы свяжемся с вами для обсуждения возможностей продвижения вашей клиники
+            </p>
+          </div>
 
-            {/* Right Form */}
-            <div className="animate-fadeInRight">
-              <div className="relative">
-                {/* Form Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800/50 to-slate-700/50 backdrop-blur-sm rounded-2xl border border-slate-600"></div>
-                
-                {/* Form Content */}
-                <div className="relative p-8">
-                  {!isSubmitted ? (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-white mb-2">Получить КП</h3>
-                        <p className="text-gray-400">Заполните форму и мы свяжемся с вами в течение часа</p>
-                      </div>
+          {formStatus === "success" ? (
+            <div className="text-center py-10 animate-scaleUp">
+              <div className="w-16 h-16 rounded-full bg-teal-900/30 flex items-center justify-center mx-auto mb-6 animate-iconBounce">
+                <CheckCircle size={32} className="text-teal-400" weight="duotone" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 font-fixedsys text-shadow animate-fadeInUp delay-100">Спасибо за заявку!</h3>
+              <p className="text-slate-300 mb-6 animate-fadeInUp delay-200">
+                Мы получили ваше сообщение и свяжемся с вами в ближайшее время.
+              </p>
+              <Button 
+                onClick={() => setFormStatus("idle")}
+                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 hover-lift transition-all duration-300 animate-fadeInUp delay-300"
+              >
+                Отправить еще одну заявку
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Отображение ошибки */}
+              {error && (
+                <div className="md:col-span-2 p-4 bg-red-900/20 border border-red-700/30 rounded-xl animate-slideInStagger">
+                  <p className="text-red-400 text-sm text-center">{error}</p>
+                </div>
+              )}
+              
+              {/* Имя */}
+              <div className="animate-slideInStagger delay-100">
+                <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
+                  Ваше имя *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-slate-800/70 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white transition-all duration-300 hover:border-slate-600"
+                  placeholder="Введите ваше имя"
+                />
+              </div>
 
-                      {/* Отображение ошибки */}
-                      {error && (
-                        <div className="p-4 bg-red-900/20 border border-red-700/30 rounded-xl">
-                          <p className="text-red-400 text-sm">{error}</p>
-                        </div>
-                      )}
+              {/* Email */}
+              <div className="animate-slideInStagger delay-200">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-slate-800/70 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white transition-all duration-300 hover:border-slate-600"
+                  placeholder="your@email.com"
+                />
+              </div>
 
-                      {/* Name Input */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Ваше имя *
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition-all duration-300"
-                          placeholder="Александр Иванов"
-                        />
-                      </div>
+              {/* Телефон */}
+              <div className="animate-slideInStagger delay-300">
+                <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
+                  Телефон *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-slate-800/70 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white transition-all duration-300 hover:border-slate-600"
+                  placeholder="+7 (___) ___-__-__"
+                />
+              </div>
 
-                      {/* Contact Input */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Телефон или Email *
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          value={formData.contact}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition-all duration-300"
-                          placeholder="+7 (999) 123-45-67 или email@example.com"
-                        />
-                      </div>
+              {/* Название клиники */}
+              <div className="animate-slideInStagger delay-400">
+                <label htmlFor="clinic" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
+                  Название клиники
+                </label>
+                <input
+                  type="text"
+                  id="clinic"
+                  name="clinic"
+                  value={formData.clinic}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-slate-800/70 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white transition-all duration-300 hover:border-slate-600"
+                  placeholder="Название вашей клиники"
+                />
+              </div>
 
-                      {/* Service Select */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Интересующая услуга
-                        </label>
-                        <select
-                          name="service"
-                          value={formData.service}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition-all duration-300"
-                        >
-                          <option value="">Выберите услугу</option>
-                          {services.map((service) => (
-                            <option key={service} value={service}>{service}</option>
-                          ))}
-                        </select>
-                      </div>
+              {/* Сообщение */}
+              <div className="md:col-span-2 animate-slideInStagger delay-500">
+                <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2 font-fixedsys">
+                  Сообщение
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-slate-800/70 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white resize-none transition-all duration-300 hover:border-slate-600"
+                  placeholder="Расскажите нам о вашей клинике и задачах"
+                ></textarea>
+              </div>
 
-                      {/* Message Textarea */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Дополнительная информация
-                        </label>
-                        <textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          rows={4}
-                          className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20 transition-all duration-300 resize-none"
-                          placeholder="Расскажите о вашем проекте, целях и задачах..."
-                        />
-                      </div>
-
-                      {/* Submit Button */}
-                      <Button 
-                        type="submit"
-                        size="lg"
-                        disabled={isSubmitting}
-                        className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-semibold py-4 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-teal-500/25"
-                      >
-                        {isSubmitting ? 'Отправка...' : 'Получить КП'}
-                        {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5" />}
-                      </Button>
-
-                      {/* Privacy Notice */}
-                      <p className="text-xs text-gray-500 text-center">
-                        Нажимая кнопку, вы соглашаетесь с{' '}
-                        <a href="/privacy" className="text-teal-400 hover:underline">
-                          политикой конфиденциальности
-                        </a>
-                      </p>
-                    </form>
+              {/* Кнопка отправки */}
+              <div className="md:col-span-2 mt-4 animate-slideInStagger delay-600">
+                <Button
+                  type="submit"
+                  disabled={formStatus === "submitting"}
+                  className="w-full sm:w-auto bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-lg py-3 px-8 font-fixedsys flex items-center justify-center gap-2 hover-lift hover-glow transition-all duration-300">
+                  {formStatus === "submitting" ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Отправка...</span>
+                    </>
                   ) : (
-                    /* Success State */
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <CheckCircle className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Спасибо за заявку!</h3>
-                      <p className="text-gray-400 mb-6">
-                        Мы получили вашу заявку и свяжемся с вами в течение часа для обсуждения деталей.
-                      </p>
-                      <div className="flex items-center justify-center space-x-2 text-teal-400">
-                        <MessageCircle className="w-5 h-5" />
-                        <span className="text-sm">Ожидайте звонка или сообщения</span>
-                      </div>
-                    </div>
+                    <>
+                      <span>Отправить заявку</span>
+                      <PaperPlaneTilt size={18} className="animate-iconBounce delay-700" weight="duotone" />
+                    </>
                   )}
-                </div>
+                </Button>
               </div>
+            </form>
+          )}
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="text-center animate-slideInStagger delay-700 hover-lift transition-all duration-300">
+            <div className="w-12 h-12 rounded-full bg-teal-900/30 flex items-center justify-center mx-auto mb-4 animate-iconBounce delay-800 hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
             </div>
+            <h3 className="text-lg font-semibold mb-2 text-white font-fixedsys text-shadow">Email</h3>
+            <a href="mailto:info@hippocrat.digital" className="text-teal-400 hover:underline hover:text-teal-300 transition-colors duration-300">
+              info@hippocrat.digital
+            </a>
+          </div>
+
+          <div className="text-center animate-slideInStagger delay-800 hover-lift transition-all duration-300">
+            <div className="w-12 h-12 rounded-full bg-indigo-900/30 flex items-center justify-center mx-auto mb-4 animate-iconBounce delay-900 hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold mb-2 text-white font-fixedsys text-shadow">Телефон</h3>
+            <a href="tel:+79771004419" className="text-indigo-400 hover:underline hover:text-indigo-300 transition-colors duration-300">
+              +7 (977) 100-44-19
+            </a>
+          </div>
+
+          <div className="text-center animate-slideInStagger delay-900 hover-lift transition-all duration-300">
+            <div className="w-12 h-12 rounded-full bg-teal-900/30 flex items-center justify-center mx-auto mb-4 animate-iconBounce delay-1000 hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold mb-2 text-white font-fixedsys text-shadow">Телеграм</h3>
+            <a href="https://t.me/imnadsa" target="_blank" rel="noopener noreferrer" className="text-teal-400 hover:underline hover:text-teal-300 transition-colors duration-300">
+              @imnadsa
+            </a>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
