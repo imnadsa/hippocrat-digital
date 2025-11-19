@@ -23,24 +23,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setSubmitStatus('idle')
 
     try {
-      // Формируем сообщение для Telegram
-      const telegramMessage = `
-🔔 <b>Новая заявка из попапа "Обсудить проект"</b>
+      const telegramMessage = `🔔 Новая заявка из попапа
 
-👤 <b>Имя:</b> ${formData.name}
-📞 <b>Телефон:</b> ${formData.phone}
+👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
 
-📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
-        timeZone: 'Europe/Moscow',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      })} (МСК)
-      `.trim()
+📅 Дата: ${new Date().toLocaleString('ru-RU')}`
 
-      // Отправка в Telegram
       const response = await fetch(
         `https://api.telegram.org/bot8421391298:AAH8mgMZo5FfN1X8KMspISZYuVadBdtoHJM/sendMessage`,
         {
@@ -51,7 +40,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           body: JSON.stringify({
             chat_id: '1053481829',
             text: telegramMessage,
-            parse_mode: 'HTML',
           }),
         }
       )
@@ -61,15 +49,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       }
 
       setSubmitStatus('success')
-      
-      // Очищаем форму
       setFormData({
         name: "",
         phone: "",
         agreement: false,
       })
       
-      // Закрываем модалку через 2 секунды после успешной отправки
       setTimeout(() => {
         onClose()
         setSubmitStatus('idle')
@@ -94,48 +79,34 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      ></div>
-
-      {/* Modal */}
-      <div className="relative w-full max-w-md bg-slate-900/95 border border-teal-700/30 rounded-2xl shadow-2xl shadow-teal-500/10 overflow-hidden animate-scaleUp">
-        {/* Декоративные элементы */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative w-full max-w-md bg-slate-900 border border-teal-700/30 rounded-2xl shadow-2xl overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
-
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors duration-200"
-          aria-label="Закрыть"
-        >
+        
+        <button onClick={onClose} className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors">
           <X size={24} className="text-slate-400 hover:text-white" />
         </button>
 
-        {/* Content */}
         <div className="relative z-10 p-8">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 font-fixedsys bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
             Обсудим ваш проект?
           </h2>
 
           {submitStatus === 'success' && (
             <div className="mb-4 p-3 bg-teal-900/30 border border-teal-700/50 rounded-lg text-teal-400 text-sm">
-              ✅ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+              ✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.
             </div>
           )}
 
           {submitStatus === 'error' && (
             <div className="mb-4 p-3 bg-red-900/30 border border-red-700/50 rounded-lg text-red-400 text-sm">
-              ❌ Произошла ошибка. Попробуйте еще раз или свяжитесь с нами напрямую.
+              ❌ Произошла ошибка. Попробуйте еще раз.
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-6">
-            {/* Имя */}
             <div>
               <input
                 type="text"
@@ -145,11 +116,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 onChange={handleChange}
                 required
                 disabled={isSubmitting}
-                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 transition-all duration-200 disabled:opacity-50"
+                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 transition-all disabled:opacity-50"
               />
             </div>
 
-            {/* Телефон */}
             <div>
               <input
                 type="tel"
@@ -159,15 +129,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 onChange={handleChange}
                 required
                 disabled={isSubmitting}
-                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 transition-all duration-200 disabled:opacity-50"
+                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 transition-all disabled:opacity-50"
               />
             </div>
 
-            {/* Кнопка отправки */}
             <Button
               type="submit"
               disabled={isSubmitting || submitStatus === 'success'}
-              className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-medium py-3 rounded-lg transition-all duration-300 hover-lift hover-glow flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-medium py-3 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
@@ -178,33 +147,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <span>Отправка...</span>
                 </>
               ) : submitStatus === 'success' ? (
-                <>
-                  <span>✓ Отправлено</span>
-                </>
+                <span>✓ Отправлено</span>
               ) : (
-                <>
-                  <span>Оставить заявку</span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  >
-                    <path
-                      d="M4.16669 10H15.8334M15.8334 10L10 4.16669M15.8334 10L10 15.8334"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </>
+                <span>Оставить заявку</span>
               )}
             </Button>
 
-            {/* Соглашение */}
             <div className="flex items-start gap-2 text-xs text-slate-400">
               <input
                 type="checkbox"
@@ -214,17 +162,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 onChange={handleChange}
                 required
                 disabled={isSubmitting}
-                className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500/20 focus:ring-2 disabled:opacity-50"
+                className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500"
               />
-              <label htmlFor="agreement" className="leading-relaxed">
-                Нажимая на кнопку «Отправить заявку» вы даете свое согласие на
-                обработку своих персональных данных и соглашаетесь с{" "}
-                
-                  href="#"
-                  className="text-teal-400 hover:text-teal-300 underline"
-                >
-                  Политикой конфиденциальности
-                </a>
+              <label htmlFor="agreement">
+                Нажимая на кнопку вы даете согласие на обработку персональных данных
               </label>
             </div>
           </form>
