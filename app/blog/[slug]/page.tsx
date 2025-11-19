@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPostBySlug, getAllPosts, getSimilarPosts, formatDate } from '@/lib/blog'
+import { getPostBySlug, getSimilarPosts } from '@/lib/blog-server' // ← ИЗМЕНИЛИ
+import { getAllPosts, formatDate } from '@/lib/blog' // ← обычные функции
 import ArticleContent from '@/components/blog/article-content'
 import BlogCard from '@/components/blog/blog-card'
 
