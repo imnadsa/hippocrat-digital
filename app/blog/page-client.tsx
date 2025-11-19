@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation' // ← ДОБАВИЛИ
+import { useSearchParams } from 'next/navigation'
 import type { BlogMeta } from '@/lib/blog-types'
 import { getAllPosts, getAllCategories } from '@/lib/blog'
 import BlogList from '@/components/blog/blog-list'
@@ -9,11 +9,9 @@ import CategoryFilter from '@/components/blog/category-filter'
 import Footer from '@/components/footer'
 import FounderCard from '@/components/founder-card'
 
-// ✅ УБРАЛИ searchParams из пропсов
 export default function BlogPageClient() {
   const [scrolled, setScrolled] = useState(false)
   
-  // ✅ ДОБАВИЛИ useSearchParams для клиента
   const searchParams = useSearchParams()
   const category = searchParams.get('category') || undefined
   const search = searchParams.get('search') || undefined
@@ -21,7 +19,6 @@ export default function BlogPageClient() {
   const allPosts = getAllPosts()
   const categories = getAllCategories()
   
-  // Фильтрация постов
   let filteredPosts = allPosts
   
   if (category && category !== 'all') {
@@ -50,19 +47,14 @@ export default function BlogPageClient() {
 
   return (
     <div className="min-h-screen bg-slate-950">
-      
-      {/* Hero секция */}
       <section className="relative pt-32 pb-16 overflow-hidden">
-        {/* Простой фон без лишних элементов */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
           <div className="absolute top-20 left-20 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
         </div>
 
-        {/* Содержимое */}
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            {/* Бейдж */}
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-teal-500/20 to-indigo-500/20 rounded-full border border-teal-500/30 mb-8">
               <svg className="w-4 h-4 text-teal-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -70,7 +62,6 @@ export default function BlogPageClient() {
               <span className="text-sm font-medium text-slate-300">Экспертный блог</span>
             </div>
 
-            {/* Заголовок */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                 Блог
@@ -81,14 +72,12 @@ export default function BlogPageClient() {
               </span>
             </h1>
 
-            {/* Описание */}
             <p className="text-xl md:text-2xl text-slate-400 mb-8 leading-relaxed">
               Профессиональные статьи о медицинском маркетинге, 
               <br className="hidden md:block" />
               цифровых решениях для клиник и трендах в healthcare
             </p>
 
-            {/* Статистика */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-12">
               <div className="text-center">
                 <div className="text-3xl font-bold text-teal-400 mb-1">{allPosts.length}+</div>
@@ -106,7 +95,6 @@ export default function BlogPageClient() {
               </div>
             </div>
 
-            {/* CTA кнопки */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               
                 href="#blog-content"
@@ -132,12 +120,9 @@ export default function BlogPageClient() {
         </div>
       </section>
       
-      {/* Основной контент */}
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Основной контент */}
           <main className="flex-1">
-            {/* Фильтры */}
             <div className="mb-8">
               <CategoryFilter 
                 categories={categories}
@@ -147,11 +132,10 @@ export default function BlogPageClient() {
               />
             </div>
 
-            {/* Результаты поиска */}
             {search && (
               <div className="mb-6 p-4 bg-slate-900/50 rounded-lg border border-slate-800">
                 <p className="text-slate-300">
-                  Результаты поиска по запросу: <span className="text-teal-400 font-medium">"{search}"</span>
+                  Результаты поиска по запросу: <span className="text-teal-400 font-medium">&quot;{search}&quot;</span>
                 </p>
                 <p className="text-sm text-slate-400 mt-1">
                   Найдено статей: {filteredPosts.length}
@@ -159,10 +143,8 @@ export default function BlogPageClient() {
               </div>
             )}
 
-            {/* Список статей */}
             <BlogList posts={filteredPosts} />
 
-            {/* Если статей нет */}
             {filteredPosts.length === 0 && (
               <div className="text-center py-16">
                 <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-900 flex items-center justify-center">
@@ -191,10 +173,8 @@ export default function BlogPageClient() {
             )}
           </main>
 
-          {/* Сайдбар */}
           <aside className="hidden lg:block w-80">
             <div className="sticky top-24 space-y-8">
-              {/* Поиск */}
               <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-800">
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Поиск по блогу
@@ -223,7 +203,6 @@ export default function BlogPageClient() {
                 </form>
               </div>
 
-              {/* Статистика */}
               <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-800">
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Статистика блога
@@ -249,7 +228,6 @@ export default function BlogPageClient() {
                 </div>
               </div>
 
-              {/* О блоге */}
               <div className="bg-gradient-to-br from-teal-500/10 to-indigo-500/10 rounded-xl p-6 border border-teal-500/20">
                 <h3 className="text-lg font-semibold text-white mb-3">
                   О нашем блоге
