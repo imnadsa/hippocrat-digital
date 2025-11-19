@@ -1,6 +1,9 @@
-// lib/blog.ts - Серверная версия с fs
+// lib/blog.ts - Работа с файлами из content/blog/
 
-// Импортируем типы и утилиты из безопасного файла
+import fs from 'fs'
+import path from 'path'
+
+// Импортируем типы и утилиты
 export type { BlogPost, BlogMeta } from './blog-types'
 export { formatDate, createExcerpt } from './blog-types'
 
@@ -19,7 +22,7 @@ const blogData: import('./blog-types').BlogMeta[] = [
   {
     slug: "gamification-guide",
     title: "Геймификация в здравоохранении: как мотивировать пациентов следить за здоровьем и приходить в вашу клинику еще раз",
-    description: "Исследуем, как игровые механики (награды, челленджи, трекеры прогресса) используются в приложениях для здоровья. Делимся идеями, как создать приложение, которое мотивирует пациентов придерживаться лечения или вести здоровый образ жизни.",
+    description: "Исследуем, как игровые механики используются в приложениях для здоровья.",
     date: "2025-05-15",
     category: "AI",
     tags: ["AI", "ИИ в медицине", "Медицинский маркетинг"],
@@ -29,7 +32,7 @@ const blogData: import('./blog-types').BlogMeta[] = [
   {
     slug: "ai-inmed",
     title: "Чат-боты и ИИ-ассистенты: автоматизация коммуникации с пациентами",
-    description: "Анализируем, как чат-боты на базе ИИ помогают клиникам отвечать на вопросы пациентов, записывать на приём и напоминать о приёме лекарств. Делимся примерами успешных чат-ботов и советами по их разработке для медицинских учреждений.",
+    description: "Анализируем, как чат-боты на базе ИИ помогают клиникам отвечать на вопросы пациентов.",
     date: "2025-05-25",
     category: "AI автоматизации",
     tags: ["AI автоматизация", "диагностика", "ЭКГ", "эхокардиография", "современные технологии"],
@@ -39,7 +42,7 @@ const blogData: import('./blog-types').BlogMeta[] = [
   {
     slug: "seo-website",
     title: "SEO-диагностика сайта клиники: 7 симптомов, что пациенты вас не находят",
-    description: "Отсутствие на первых позициях в поисковых системах — это не просто упущенная выгода. Это критический диагноз, который говорит о том, что ваш главный цифровой актив «болен». И как в медицине, чем раньше вы заметите симптомы и начнете лечение тем быстрее и эффективнее будет выздоровление.",
+    description: "Отсутствие на первых позициях в поисковых системах — это не просто упущенная выгода.",
     date: "2025-06-25",
     category: "Сайты",
     tags: ["seo", "seo решения", "создание сайтов", "метаданные"],
@@ -47,19 +50,19 @@ const blogData: import('./blog-types').BlogMeta[] = [
     readTime: 5
   },
   {
-  slug: "targetirovannaya-reklama-vk-medicina",
-  title: "Таргетированная реклама в ВК для медицинских клиник",
-  description: "Как привлечь качественных пациентов через ВКонтакте: стратегия контента и таргетинга",
-  date: "2025-11-01",
-  category: "Маркетинг",
-  tags: ["реклама", "ВК", "маркетинг", "таргетинг"],
-  image: "/blog/images/targetirovannaya-reklama-vk.jpg",
-  readTime: 8
+    slug: "targetirovannaya-reklama-vk-medicina",
+    title: "Таргетированная реклама в ВК для медицинских клиник",
+    description: "Как привлечь качественных пациентов через ВКонтакте",
+    date: "2025-11-01",
+    category: "Маркетинг",
+    tags: ["реклама", "ВК", "маркетинг", "таргетинг"],
+    image: "/blog/images/targetirovannaya-reklama-vk.jpg",
+    readTime: 8
   },
   {
     slug: "target-blog",
-    title: "Хирургическая точность в рекламе клиники: как не слить бюджет и привлечь «своего» пациента",
-    description: "Конкретика по контекстной и таргетированной рекламе. Как таргетироваться на жителей определенного района для клиники у дома. Как рекламировать высокомаржинальные услуги (имплантация, ЭКО, лазерная коррекция) на правильную аудиторию. Как проходить модерацию с чувствительными темами (косметология, гинекология) и писать объявления, которые вызывают доверие, а не отторжение.",
+    title: "Хирургическая точность в рекламе клиники",
+    description: "Конкретика по контекстной и таргетированной рекламе.",
     date: "2025-05-26",
     category: "Реклама",
     tags: ["реклама", "частные клиники", "привлечение пациентов", "маркетинг"],
@@ -69,52 +72,34 @@ const blogData: import('./blog-types').BlogMeta[] = [
   {
     slug: "anatomy-trust",
     title: "Анатомия доверия: как сайт, врачи и отзывы убеждают пациента записаться на прием",
-    description: "Представьте себе цифровое рукопожатие. Это тот самый невидимый, но абсолютно реальный контакт, который происходит в первые секунды, когда потенциальный пациент открывает сайт вашей клиники. Будет ли это рукопожатие крепким, уверенным и теплым, вызывающим мгновенное расположение? Или оно окажется вялым, холодным и неуверенным, заставляя инстинктивно отдернуть руку и закрыть вкладку?",
+    description: "Цифровое рукопожатие с пациентом.",
     date: "2025-06-30",
     category: "Технологии",
-    tags: ["Лояльность паицента", "маркетинг", "привлечение пациентов", "репутация"],
+    tags: ["Лояльность пациента", "маркетинг", "привлечение пациентов", "репутация"],
     image: "/blog/images/anatomy-trust.jpg",
     readTime: 10
   }
 ]
 
-// Функция для чтения контента статьи из файла - ТОЛЬКО на сервере
+// Функция чтения контента из файла
 function getArticleContent(slug: string): string {
-  // Проверяем, что мы на сервере
-  if (typeof window !== 'undefined') {
-    console.log('Running in browser - returning fallback content')
-    return `# ${slug}\n\nЗагружается...`
-  }
-
   try {
-    // Динамический импорт fs только на сервере
-    const fs = require('fs')
-    const path = require('path')
+    // Путь к файлу в папке content/blog
+    const contentDirectory = path.join(process.cwd(), 'content', 'blog')
+    const filePath = path.join(contentDirectory, `${slug}.md`)
     
-    // Читаем из public/content/blog/
-    const filePath = path.join(process.cwd(), 'public', 'content', 'blog', `${slug}.md`)
-    
+    // Проверяем существование файла
     if (!fs.existsSync(filePath)) {
-      console.log(`File not found: ${filePath}`)
-      throw new Error(`Article ${slug} not found`)
+      console.warn(`Article file not found: ${filePath}`)
+      return `# Статья "${slug}" не найдена\n\nСодержимое временно недоступно.`
     }
     
-    const content = fs.readFileSync(filePath, 'utf8')
-    console.log(`Successfully loaded article ${slug} from ${filePath}`)
-    return content
+    // Читаем файл
+    const fileContents = fs.readFileSync(filePath, 'utf8')
+    return fileContents
   } catch (error) {
-    console.error(`Error loading article ${slug}:`, error)
-    // Возвращаем заглушку с информацией об ошибке
-    return `# ${slug}
-
-К сожалению, содержимое этой статьи временно недоступно.
-
-Возможные причины:
-- Файл \`${slug}.md\` не найден в папке \`public/content/blog/\`
-- Проблема с загрузкой файла
-
-Путь к файлу: \`public/content/blog/${slug}.md\`
-    `
+    console.error(`Error reading article ${slug}:`, error)
+    return `# Ошибка загрузки статьи\n\nНе удалось загрузить содержимое статьи "${slug}".`
   }
 }
 
@@ -134,17 +119,16 @@ export function getAllPosts(): import('./blog-types').BlogMeta[] {
 }
 
 export function getPostBySlug(slug: string): import('./blog-types').BlogPost | null {
-  const post = blogData.find(p => p.slug === slug)
-  if (!post) {
-    console.log(`Post metadata not found for slug: ${slug}`)
+  const postMeta = blogData.find(p => p.slug === slug)
+  if (!postMeta) {
     return null
   }
 
-  console.log(`Loading content for post: ${slug}`)
+  // Читаем контент из файла
   const content = getArticleContent(slug)
 
   return {
-    ...post,
+    ...postMeta,
     content
   }
 }
@@ -180,16 +164,13 @@ export function getSimilarPosts(currentSlug: string, limit: number = 3): import(
 
   const otherPosts = blogData.filter(post => post.slug !== currentSlug)
 
-  // Сортируем по релевантности (категория + теги)
   const scoredPosts = otherPosts.map(post => {
     let score = 0
     
-    // Бонус за ту же категорию
     if (post.category === currentPost.category) {
       score += 10
     }
     
-    // Бонус за общие теги
     const commonTags = post.tags?.filter(tag => 
       currentPost.tags?.includes(tag)
     ) || []
