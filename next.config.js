@@ -20,9 +20,10 @@ const nextConfig = {
   // Компрессия
   compress: true,
 
-  // Оптимизация импортов
+  // Оптимизация импортов и исправление useSearchParams
   experimental: {
     optimizePackageImports: ['lucide-react', 'phosphor-react'],
+    missingSuspenseWithCSRBailout: false, // ✅ Отключает ошибку с useSearchParams при static export
   },
 }
 
