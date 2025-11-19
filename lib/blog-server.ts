@@ -4,8 +4,8 @@ import fs from 'fs'
 import path from 'path'
 import type { BlogPost, BlogMeta } from './blog-types'
 
-// Метаданные статей
-export const blogData: BlogMeta[] = [
+// ✅ Дублируем метаданные (да, это дублирование, но по-другому не работает)
+const blogData: BlogMeta[] = [
   {
     slug: "digital-marketing-2024",
     title: "Цифровой маркетинг в медицине: тренды 2025 года",
@@ -97,11 +97,38 @@ function getArticleContent(slug: string): string {
   }
 }
 
-// СЕРВЕРНЫЕ функции (используют fs)
+// СЕРВЕРНЫЕ функции
 export function getPostBySlug(slug: string): BlogPost | null {
   const postMeta = blogData.find(p => p.slug === slug)
   if (!postMeta) return null
 
   const content = getArticleContent(slug)
   return { ...postMeta, content }
+}
+
+export function getSimilarPosts(currentSlug: string, limit: number = 3): BlogMeta[] {
+  const currentPost = blogData.find(p => p.slug === currentSlug)
+  if (!currentPost) return []
+
+  const otherPosts = blogData.filter(post => post.slug !== currentSlug)
+
+  const scoredPosts = otherPosts.map(post => {
+    let score = 0
+    
+    if (post.category === currentPost.category) {
+      score += 10
+    }
+    
+    const commonTags = post.tags?.filter(tag => 
+      currentPost.tags?.includes(tag)
+    ) || []
+    score += commonTags.length * 5
+
+    return { post, score }
+  })
+
+  return scoredPosts
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(item => item.post)
 }
