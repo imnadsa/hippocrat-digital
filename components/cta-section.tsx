@@ -27,40 +27,16 @@ export default function CtaSection() {
     setError("")
 
     try {
-      // Формируем сообщение для Telegram
-      const telegramMessage = `
-🔔 <b>Новая заявка с формы контактов Hippocrat Digital</b>
-
-👤 <b>Имя:</b> ${formData.name}
-📧 <b>Email:</b> ${formData.email}
-📞 <b>Телефон:</b> ${formData.phone}
-🏥 <b>Клиника:</b> ${formData.clinic || 'Не указана'}
-
-💬 <b>Сообщение:</b>
-${formData.message || 'Не указано'}
-
-📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU', {
-        timeZone: 'Europe/Moscow',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      })} (МСК)
-      `.trim()
-
-      // Отправка в Telegram
       const response = await fetch(
-        `https://api.telegram.org/bot8421391298:AAH8mgMZo5FfN1X8KMspISZYuVadBdtoHJM/sendMessage`,
+        `https://telegram-bot-proxy-ashy.vercel.app/api/send-telegram`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            chat_id: '1053481829',
-            text: telegramMessage,
-            parse_mode: 'HTML',
+            name: formData.name,
+            phone: formData.phone,
           }),
         }
       )
@@ -71,7 +47,6 @@ ${formData.message || 'Не указано'}
 
       setFormStatus("success")
       
-      // Очистка формы
       setFormData({
         name: "",
         email: "",
@@ -85,7 +60,6 @@ ${formData.message || 'Не указано'}
       setError('Произошла ошибка при отправке. Попробуйте позже или свяжитесь с нами напрямую.')
       setFormStatus("error")
       
-      // Сбросить ошибку через 5 секунд
       setTimeout(() => {
         setFormStatus("idle")
         setError("")
