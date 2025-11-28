@@ -31,8 +31,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name: formData.name,
-            phone: formData.phone,
+            name: formData.name || 'Не указано',
+            phone: formData.phone || 'Не указано',
           }),
         }
       )
@@ -81,10 +81,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <button 
           onClick={onClose} 
           type="button"
-          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors hover:text-white focus:outline-none"
+          className="absolute top-3 right-3 z-20 p-3 rounded-full hover:bg-slate-700/80 transition-all duration-200 hover:text-white focus:outline-none active:scale-95"
           aria-label="Закрыть"
         >
-          <X size={24} className="text-slate-400 hover:text-white" />
+          <X size={28} className="text-slate-400 hover:text-white transition-colors" weight="bold" />
         </button>
 
         <div className="relative z-10 p-8">
