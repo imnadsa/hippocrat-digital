@@ -23,23 +23,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setSubmitStatus('idle')
 
     try {
-      const telegramMessage = `🔔 Новая заявка из попапа
-
-👤 Имя: ${formData.name}
-📞 Телефон: ${formData.phone}
-
-📅 Дата: ${new Date().toLocaleString('ru-RU')}`
-
       const response = await fetch(
-        `https://api.telegram.org/bot8421391298:AAH8mgMZo5FfN1X8KMspISZYuVadBdtoHJM/sendMessage`,
+        `https://telegram-bot-proxy-ashy.vercel.app/api/send-telegram`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            chat_id: '1053481829',
-            text: telegramMessage,
+            name: formData.name,
+            phone: formData.phone,
           }),
         }
       )
@@ -85,7 +78,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
         
-        <button onClick={onClose} className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors">
+        <button 
+          onClick={onClose} 
+          type="button"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-slate-800/50 transition-colors hover:text-white focus:outline-none"
+          aria-label="Закрыть"
+        >
           <X size={24} className="text-slate-400 hover:text-white" />
         </button>
 
