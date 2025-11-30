@@ -17,12 +17,14 @@ export default function Footer() {
       <div className="absolute bottom-0 right-1/4 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl animate-pulse-slow delay-400"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-          <div className="flex items-center gap-3 mb-6 md:mb-0 animate-fadeInLeft hover-lift transition-all duration-300 w-full md:w-auto justify-center md:justify-start">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+          {/* Логотип Hippocrat - слева */}
+          <div className="flex items-center gap-3 mb-6 lg:mb-0 animate-fadeInLeft hover-lift transition-all duration-300 w-full lg:w-auto justify-center lg:justify-start">
             <Logo size="sm" />
           </div>
 
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-8 md:gap-16 mb-6 md:mb-0 w-full md:w-auto">
+          {/* Центральный блок с контактами, навигацией и реквизитами */}
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-6 md:gap-10 lg:gap-12 mb-6 lg:mb-0 w-full lg:w-auto">
             <div className="w-full sm:w-auto animate-fadeInUp delay-100">
               <h3 className="font-semibold mb-3 text-center sm:text-left text-white font-fixedsys text-shadow">Контакты</h3>
               <div className="flex flex-col space-y-2">
@@ -103,13 +105,60 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex gap-4 animate-fadeInRight delay-400 w-full md:w-auto justify-center md:justify-end">
+          {/* Правый блок с логотипом Arda и Telegram */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 animate-fadeInRight delay-400 w-full lg:w-auto justify-center lg:justify-end">
+            {/* Логотип Arda */}
+            
+              href="https://arda.digital"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative hover-lift hover:scale-105 transition-all duration-300 animate-scaleUp delay-450"
+              aria-label="Перейти на сайт Arda Digital"
+            >
+              <svg 
+                className="w-32 h-12 sm:w-36 sm:h-14 filter brightness-90 group-hover:brightness-110 transition-all duration-300"
+                viewBox="0 0 1920 1080" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_1_2)">
+                  <rect width="1920" height="1080" fill="white"/>
+                  <path d="M586.7 492.3L607.4 544H566L586.7 492.3Z" fill="black"/>
+                  <path d="M629.9 597.7L607.4 544L650.6 544L673.1 597.7H629.9Z" fill="black"/>
+                  <path d="M586.7 597.7L566 544H607.4L629.9 597.7H586.7Z" fill="black"/>
+                  <path d="M522.7 597.7L501.9 544H543.3L566 597.7H522.7Z" fill="black"/>
+                  <path d="M543.3 544L522.6 492.3L543.3 440.6L565.9 492.3L586.7 544H543.3Z" fill="black"/>
+                  <path d="M650.6 544L629.9 492.3L650.6 440.6L673.2 492.3L694 544H650.6Z" fill="black"/>
+                  <path d="M522.6 597.8L479.4 597.8L458.6 544L479.4 492.3L522.6 492.3L543.3 544L522.6 597.8Z" fill="black"/>
+                  <path d="M543.3 440.6L522.6 388.9L543.3 337.2L565.9 388.9L586.7 440.6H543.3Z" fill="black"/>
+                  <path d="M694 544L673.2 492.3L694 440.6L716.6 492.3L737.3 544H694Z" fill="black"/>
+                  <path d="M650.6 440.6L629.9 388.9L650.6 337.2L673.2 388.9L694 440.6H650.6Z" fill="black"/>
+                  <path d="M586.7 597.7L565.9 544L586.7 492.3L629.9 492.3L650.6 544L629.9 597.7H586.7Z" fill="black"/>
+                  <path d="M458.6 544L437.9 492.3L458.6 440.6L481.2 492.3L501.9 544H458.6Z" fill="black"/>
+                  <path d="M693.9 597.7L673.1 544L716.6 544L737.3 597.7H693.9Z" fill="black"/>
+                  <path d="M802 508.6C809.9 511.6 815.5 518.3 815.5 527.6C815.5 541.7 803.7 551.9 784 551.9H748.6V483.1H782.1C800.6 483.1 812.4 493.9 812.4 506.3C812.4 512 809.8 516.8 805.2 519.8C810.2 519.8 814.8 522 818.2 525.7C817.6 517.6 811.7 510.7 802 508.6ZM769.5 514.4H780.6C787.5 514.4 791.6 510.1 791.6 505.2C791.6 500.3 787.5 496 780.6 496H769.5V514.4ZM769.5 527.8V538.7H782.2C790.2 538.7 794.7 533.8 794.7 527.8C794.7 521.8 790.2 516.9 782.2 516.9H769.5V527.8Z" fill="black"/>
+                  <path d="M916.1 526.8C916.1 544.1 901.8 552.5 886.6 552.5C871.4 552.5 857.1 544.1 857.1 526.8V483.2H877.8V525C877.8 534.1 882.3 539 886.6 539C890.9 539 895.4 534.1 895.4 525V483.2H916.1V526.8Z" fill="black"/>
+                  <path d="M942.5 483.1H963.2V551.8H942.5V483.1Z" fill="black"/>
+                  <path d="M987.8 483.1H1008.5V538.9H1043.3V551.8H987.8V483.1Z" fill="black"/>
+                  <path d="M1058.9 483.1H1107.9C1128.3 483.1 1142.6 497.8 1142.6 517.5C1142.6 537.2 1128.3 551.8 1107.9 551.8H1058.9V483.1ZM1079.6 496.3V538.9H1106.6C1113.8 538.9 1121.8 534 1121.8 517.5C1121.8 501.5 1113.8 496.3 1106.6 496.3H1079.6Z" fill="black"/>
+                  <path d="M1165.6 483.1H1232.6V496.3H1186.3V510.5H1231.8V523.7H1186.3V538.9H1232.6V552.1H1165.6V483.1Z" fill="black"/>
+                  <path d="M1256.7 483.1H1292.8C1313.5 483.1 1324.8 494.2 1324.8 508.9C1324.8 520.8 1318.2 530.1 1305 533.5L1327.1 552.1H1301.8L1281.7 535H1277.4V552.1H1256.7V483.1ZM1277.4 496.3V522.2H1290.9C1299 522.2 1304 517.9 1304 509.2C1304 500.5 1299 496.3 1290.9 496.3H1277.4Z" fill="black"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_1_2">
+                    <rect width="1920" height="1080" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            </a>
+
             {/* Telegram кнопка */}
             <Button
               variant="outline"
               size="icon"
               className="rounded-full border-slate-700 text-slate-400 hover:text-teal-400 hover:border-teal-500 hover:bg-teal-950/20 hover-lift hover:scale-110 transition-all duration-300 animate-scaleUp delay-500"
               onClick={() => openExternalLink("https://t.me/imnadsa")}
+              aria-label="Написать в Telegram"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path
