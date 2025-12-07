@@ -9,7 +9,6 @@ export default function WebsitesHero() {
   const [isVisible, setIsVisible] = useState(false)
   const [phone, setPhone] = useState("")
   const [agreeToPrivacy, setAgreeToPrivacy] = useState(false)
-  const [agreeToMarketing, setAgreeToMarketing] = useState(false)
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -64,7 +63,6 @@ export default function WebsitesHero() {
     setIsSubmitting(true)
 
     try {
-      // Отправка на твой API endpoint
       const response = await fetch('https://telegram-bot-proxy.vercel.app/api/send-telegram', {
         method: 'POST',
         headers: {
@@ -73,8 +71,7 @@ export default function WebsitesHero() {
         body: JSON.stringify({
           name: 'Заявка с сайта (Создание сайтов)',
           phone: phone,
-          source: 'Форма на странице создания сайтов',
-          agreeToMarketing: agreeToMarketing
+          source: 'Форма на странице создания сайтов'
         }),
       })
 
@@ -82,7 +79,6 @@ export default function WebsitesHero() {
         alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.')
         setPhone('')
         setAgreeToPrivacy(false)
-        setAgreeToMarketing(false)
       } else {
         alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте снова.')
       }
@@ -165,26 +161,14 @@ export default function WebsitesHero() {
       {/* CTA Form Section */}
       <section className="py-16 md:py-24 relative overflow-hidden bg-[#0b101b]">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-8 bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 p-8 md:p-12">
-              {/* Left side - Text */}
-              <div className="lg:w-1/2">
-                <h2 className="text-3xl md:text-4xl font-bold font-fixedsys text-white mb-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Left side - Form */}
+              <div className="bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 p-8 md:p-12">
+                <h2 className="text-3xl md:text-4xl font-bold font-fixedsys text-white mb-6">
                   Оставьте заявку и получите стратегию для роста бизнеса
                 </h2>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  SEO-продвижение клиники улучшает видимость сайта в поисковиках, что способствует привлечению целевых посетителей и увеличению потока новых пациентов.
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed mt-4">
-                  Мы помогаем клиникам стать лидерами в поисковой выдаче, используя комплексный подход к SEO-продвижению стоматологии.
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed mt-4">
-                  Наши специалисты проводят детальный аудит сайта, выявляют слабые места и разрабатывают стратегию для увеличения органического трафика.
-                </p>
-              </div>
-
-              {/* Right side - Form */}
-              <div className="lg:w-1/2">
+                
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <input
@@ -204,39 +188,45 @@ export default function WebsitesHero() {
                     {isSubmitting ? 'Отправка...' : 'Получить стратегию для роста бизнеса за 0 ₽'}
                   </Button>
 
-                  <div className="space-y-3">
-                    <label className="flex items-start gap-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        checked={agreeToPrivacy}
-                        onChange={(e) => setAgreeToPrivacy(e.target.checked)}
-                        className="mt-1 w-4 h-4 rounded border-slate-600 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900"
-                      />
-                      <span className="text-sm text-slate-400 leading-relaxed">
-                        Я согласен(-на) на{" "}
-                        <button
-                          type="button"
-                          onClick={() => setIsPrivacyModalOpen(true)}
-                          className="text-teal-400 hover:text-teal-300 underline transition-colors"
-                        >
-                          обработку персональных данных
-                        </button>
-                      </span>
-                    </label>
-
-                    <label className="flex items-start gap-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        checked={agreeToMarketing}
-                        onChange={(e) => setAgreeToMarketing(e.target.checked)}
-                        className="mt-1 w-4 h-4 rounded border-slate-600 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900"
-                      />
-                      <span className="text-sm text-slate-400 leading-relaxed">
-                        Согласие на получение рекламных рассылок
-                      </span>
-                    </label>
-                  </div>
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={agreeToPrivacy}
+                      onChange={(e) => setAgreeToPrivacy(e.target.checked)}
+                      className="mt-1 w-4 h-4 rounded border-slate-600 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900"
+                    />
+                    <span className="text-sm text-slate-400 leading-relaxed">
+                      Я согласен(-на) на{" "}
+                      <button
+                        type="button"
+                        onClick={() => setIsPrivacyModalOpen(true)}
+                        className="text-teal-400 hover:text-teal-300 underline transition-colors"
+                      >
+                        обработку персональных данных
+                      </button>
+                    </span>
+                  </label>
                 </form>
+              </div>
+
+              {/* Right side - Text */}
+              <div className="flex flex-col justify-center space-y-6">
+                <p className="text-slate-300 text-lg leading-relaxed">
+                  Современный медицинский сайт — это не просто визитная карточка вашей клиники в интернете. 
+                  Это мощный инструмент привлечения новых пациентов, который работает 24/7.
+                </p>
+                <p className="text-slate-300 text-lg leading-relaxed">
+                  Мы создаем сайты, которые вызывают доверие с первых секунд, понятно объясняют преимущества 
+                  вашей клиники и делают запись на прием максимально простой и удобной.
+                </p>
+                <p className="text-slate-300 text-lg leading-relaxed">
+                  Каждый элемент продуман с учетом особенностей медицинской сферы: от соответствия ФЗ-323 
+                  и защиты персональных данных до оптимизации для записи через мобильные устройства.
+                </p>
+                <p className="text-slate-300 text-lg leading-relaxed">
+                  Получите бесплатную консультацию и узнайте, как правильно построенный сайт может увеличить 
+                  поток пациентов в вашу клинику на 40-60% уже в первые месяцы работы.
+                </p>
               </div>
             </div>
           </div>
