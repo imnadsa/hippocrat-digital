@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Calendar, Heart, Shield, Eye, Target, Clock, Smartphone } from "lucide-react"
+import { MapPin, Calendar, Heart, Eye, Target, Clock, Smartphone } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function TargetingFeatures() {
@@ -65,13 +65,13 @@ export default function TargetingFeatures() {
 
   const specialties = [
     {
-      icon: Shield,
+      icon: Target,
       title: "Соблюдение ФЗ-38",
       description: "Все объявления проходят проверку на соответствие закону о рекламе",
       color: "teal"
     },
     {
-      icon: Target,
+      icon: Heart,
       title: "Медицинские интересы",
       description: "Таргетинг по симптомам, заболеваниям и медицинским потребностям",
       color: "indigo"
@@ -86,11 +86,13 @@ export default function TargetingFeatures() {
 
   return (
     <section id="targeting-features" className="bg-slate-900 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+      {/* Декоративные элементы */}
       <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
       <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
       <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* Заголовок */}
         <div className={`text-center mb-8 sm:mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
             Настройки таргетинга
@@ -106,15 +108,16 @@ export default function TargetingFeatures() {
           </p>
         </div>
 
+        {/* Сетка карточек */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {features.map((feature, index) => {
             const IconComponent = feature.icon
-            const colors = feature.color === 'teal' 
-              ? { iconColor: 'text-teal-400', borderColor: 'border-teal-500/30', shadowColor: 'shadow-teal-500/10' }
-              : { iconColor: 'text-indigo-400', borderColor: 'border-indigo-500/30', shadowColor: 'shadow-indigo-500/10' }
-            
+            const colors = feature.color === 'teal'
+              ? { iconColor: 'text-teal-400', borderColor: 'border-teal-500/30', shadowColor: 'shadow-teal-500/10', dotColor: 'bg-teal-400' }
+              : { iconColor: 'text-indigo-400', borderColor: 'border-indigo-500/30', shadowColor: 'shadow-indigo-500/10', dotColor: 'bg-indigo-400' }
+
             return (
-              <div 
+              <div
                 key={index}
                 className={`relative group transition-all duration-700 ${isVisible ? 'animate-slideInStagger opacity-100' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 100}ms` }}
@@ -126,20 +129,18 @@ export default function TargetingFeatures() {
                   hover-lift transform-gpu will-change-transform
                 `}>
                   <IconComponent size={36} className={`${colors.iconColor} mb-4`} />
-                  
+
                   <h3 className="text-base sm:text-lg font-semibold mb-2 font-fixedsys text-white leading-snug">
                     {feature.title}
                   </h3>
                   <p className="text-slate-400 text-xs sm:text-sm mb-3 leading-relaxed">
                     {feature.description}
                   </p>
-                  
+
                   <ul className="space-y-1">
                     {feature.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="text-xs text-slate-500 flex items-start leading-relaxed">
-                        <span className={`w-1.5 h-1.5 rounded-full mr-2 mt-1.5 flex-shrink-0 ${
-                          feature.color === 'teal' ? 'bg-teal-400' : 'bg-indigo-400'
-                        }`}></span>
+                        <span className={`w-1.5 h-1.5 rounded-full mr-2 mt-1.5 flex-shrink-0 ${colors.dotColor}`}></span>
                         {detail}
                       </li>
                     ))}
@@ -152,6 +153,7 @@ export default function TargetingFeatures() {
           })}
         </div>
 
+        {/* Блок специфики для медицинских клиник */}
         <div className={`transition-all duration-700 ${isVisible ? 'animate-fadeIn opacity-100' : 'opacity-0'}`} style={{ animationDelay: '800ms' }}>
           <div className="relative bg-gradient-to-r from-teal-900/20 via-slate-900/50 to-indigo-900/20 rounded-2xl border border-teal-500/20 p-6 sm:p-8 lg:p-10 backdrop-blur-sm shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 to-indigo-500/5 rounded-2xl"></div>
@@ -161,14 +163,14 @@ export default function TargetingFeatures() {
                   Специфика для медицинских клиник
                 </h3>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {specialties.map((specialty, index) => {
                   const IconComponent = specialty.icon
-                  const colors = specialty.color === 'teal' 
+                  const colors = specialty.color === 'teal'
                     ? { iconColor: 'text-teal-400' }
                     : { iconColor: 'text-indigo-400' }
-                  
+
                   return (
                     <div key={index} className="text-center group">
                       <IconComponent size={36} className={`${colors.iconColor} mx-auto mb-4`} />
