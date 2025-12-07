@@ -1,6 +1,6 @@
 "use client"
 
-import { Shield, MapPin, Brain, Activity, DollarSign, Zap } from "lucide-react"
+import { MapPin, Brain, Activity, DollarSign } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function TargetingAdvantages() {
@@ -27,32 +27,18 @@ export default function TargetingAdvantages() {
       delay: 100
     },
     {
-      icon: Shield,
-      title: "Соблюдение законов",
-      description: "Все объявления проходят модерацию по ФЗ-38 о рекламе. Избегаем проблем с Роспотребнадзором и Росздравнадзором.",
-      color: "teal",
-      delay: 200
-    },
-    {
       icon: DollarSign,
       title: "Контроль бюджета",
       description: "Ежедневный мониторинг расходов, оптимизация ставок, отключение неэффективных объявлений. Каждый рубль работает.",
-      color: "indigo",
-      delay: 300
-    },
-    {
-      icon: Zap,
-      title: "Быстрый старт",
-      description: "В отличие от SEO, результаты видны уже через 2-3 дня. Первые записи начинают поступать с первой недели.",
       color: "teal",
-      delay: 400
+      delay: 200
     },
     {
       icon: Activity,
       title: "Ретаргетинг",
       description: "Возвращаем посетителей сайта, которые не записались. Напоминаем о клинике тем, кто уже проявил интерес.",
       color: "indigo",
-      delay: 500
+      delay: 300
     }
   ]
 
@@ -78,7 +64,7 @@ export default function TargetingAdvantages() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {advantages.map((advantage, index) => {
             const IconComponent = advantage.icon
             const colors = advantage.color === 'teal' 
