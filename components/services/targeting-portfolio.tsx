@@ -22,32 +22,22 @@ export default function TargetingPortfolio() {
         { label: "Новых пациентов", value: "+43%", icon: Users, color: "teal" },
         { label: "Снижение CPA", value: "-35%", icon: DollarSign, color: "teal" }
       ],
-      details: "Настроили таргетинг на взрослую аудиторию 35-55 лет в радиусе 15 км. Использовали behavio ральные сегменты «интерес к стоматологии» и lookalike на базе существующих пациентов.",
-      duration: "3 месяца"
-    },
-    {
-      title: "Клиника эстетической медицины",
-      category: "Косметология",
-      description: "Продвижение процедур лазерной эпиляции и омоложения",
-      results: [
-        { label: "ROI", value: "400%", icon: TrendingUp, color: "indigo" },
-        { label: "Записей в день", value: "+15", icon: Users, color: "indigo" },
-        { label: "CTR", value: "8.2%", icon: DollarSign, color: "indigo" }
-      ],
-      details: "Сегментировали аудиторию по полу и возрасту: женщины 25-45 для эпиляции, 35-55 для омоложения. Использовали ретаргетинг посетителей сайта.",
-      duration: "6 месяцев"
+      details: "Настроили таргетинг на взрослую аудиторию 35-55 лет в радиусе 15 км. Использовали поведенческие сегменты «интерес к стоматологии» и lookalike на базе существующих пациентов.",
+      duration: "3 месяца",
+      link: "https://hippocrat-digital.ru/cases/polniy-poryadok/?from=cases"
     },
     {
       title: "Офтальмологический центр",
       category: "Офтальмология",
       description: "Привлечение пациентов на коррекцию зрения и лечение катаракты",
       results: [
-        { label: "Конверсия", value: "12.5%", icon: TrendingUp, color: "teal" },
-        { label: "Средний чек", value: "+25%", icon: DollarSign, color: "teal" },
-        { label: "Стоимость лида", value: "450₽", icon: Users, color: "teal" }
+        { label: "Конверсия", value: "12.5%", icon: TrendingUp, color: "indigo" },
+        { label: "Средний чек", value: "+25%", icon: DollarSign, color: "indigo" },
+        { label: "Стоимость лида", value: "450₽", icon: Users, color: "indigo" }
       ],
       details: "Запустили отдельные кампании для молодёжи (коррекция зрения) и пожилых (катаракта). Добавили геотаргетинг с учётом транспортной доступности.",
-      duration: "4 месяца"
+      duration: "4 месяца",
+      link: "https://hippocrat-digital.ru/cases/yasny-vzor/?from=cases"
     }
   ]
 
@@ -80,7 +70,7 @@ export default function TargetingPortfolio() {
         </div>
 
         {/* Кейсы */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 max-w-5xl mx-auto">
           {cases.map((caseItem, index) => (
             <div 
               key={index}
@@ -148,7 +138,7 @@ export default function TargetingPortfolio() {
                   <Button
                     variant="outline"
                     className="w-full border-slate-700 text-slate-300 hover:bg-slate-800/50 hover:border-teal-500/50 group-hover:border-teal-500/50 transition-all duration-300 backdrop-blur-sm"
-                    onClick={() => openExternalLink("#")}
+                    onClick={() => openExternalLink(caseItem.link)}
                   >
                     <span>Подробнее о кейсе</span>
                     <ArrowUpRight size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
