@@ -93,21 +93,25 @@ export default function TargetingFeatures() {
   ]
 
   return (
-    <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-slate-50">
+    <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-[#0b101b]">
       {/* Декоративные элементы */}
-      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-400/5 rounded-full blur-3xl animate-floatBackground"></div>
-      <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-400/5 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
+      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
+      <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
+      <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Заголовок */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-slate-900">
+          <div className="inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm shadow-lg">
+            Настройки таргетинга
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 font-fixedsys leading-tight">
             Как мы{" "}
-            <span className="text-teal-400">
+            <span className="bg-gradient-to-r from-teal-400 via-indigo-400 to-teal-400 bg-clip-text text-transparent animate-gradient-text">
               настраиваем таргетинг
             </span>
           </h2>
-          <p className="text-slate-600 text-center max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-400 text-center max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Детальная настройка каждого параметра для максимальной эффективности рекламы
           </p>
         </div>
@@ -165,7 +169,7 @@ export default function TargetingFeatures() {
         <div>
           <div className="bg-gradient-to-br from-teal-900/10 via-slate-900/5 to-indigo-900/10 rounded-2xl sm:rounded-3xl border border-teal-400/20 p-8 sm:p-10 lg:p-12 backdrop-blur-sm">
             <div className="text-center mb-8 sm:mb-10">
-              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 font-fixedsys">
                 Специфика для медицинских клиник
               </h3>
             </div>
@@ -177,10 +181,10 @@ export default function TargetingFeatures() {
                 return (
                   <div key={index} className="text-center group">
                     <IconComponent size={48} className="text-teal-400 mx-auto mb-4 transition-transform duration-300 group-hover:scale-110" />
-                    <h4 className="font-bold text-slate-900 mb-3 text-lg sm:text-xl">
+                    <h4 className="font-bold text-white mb-3 text-lg sm:text-xl font-fixedsys">
                       {specialty.title}
                     </h4>
-                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
                       {specialty.description}
                     </p>
                   </div>
