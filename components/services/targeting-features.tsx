@@ -38,39 +38,23 @@ export default function TargetingFeatures() {
       title: "Поведение",
       description: "Прошлая активность",
       details: ["Искали клиники", "Читали о заболеваниях", "Посещали сайты конкурентов"],
-      progress: 1
+      progress: 3
     },
     {
       icon: Shield,
       title: "Исключения",
       description: "Фильтрация трафика",
       details: ["Медики и конкуренты", "Нецелевые регионы", "Низкий доход"],
-      progress: 2
+      progress: 3
     }
   ]
 
   const getCardStyles = (progress: number) => {
-    if (progress === 1) {
-      return {
-        bgColor: 'bg-white',
-        textColor: 'text-slate-900',
-        descColor: 'text-slate-600',
-        detailColor: 'text-slate-500'
-      }
-    } else if (progress === 2) {
-      return {
-        bgColor: 'bg-slate-100',
-        textColor: 'text-slate-900',
-        descColor: 'text-slate-600',
-        detailColor: 'text-slate-500'
-      }
-    } else {
-      return {
-        bgColor: 'bg-slate-800',
-        textColor: 'text-white',
-        descColor: 'text-slate-300',
-        detailColor: 'text-slate-400'
-      }
+    return {
+      bgColor: 'bg-slate-800',
+      textColor: 'text-white',
+      descColor: 'text-slate-300',
+      detailColor: 'text-slate-400'
     }
   }
 
@@ -130,11 +114,7 @@ export default function TargetingFeatures() {
                     {[1, 2, 3].map((dot) => (
                       <div 
                         key={dot}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          dot <= feature.progress 
-                            ? 'bg-teal-400' 
-                            : 'border-2 border-teal-400/30'
-                        }`}
+                        className="w-3 h-3 rounded-full bg-teal-400"
                       />
                     ))}
                   </div>
