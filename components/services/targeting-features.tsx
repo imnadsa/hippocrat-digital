@@ -52,14 +52,14 @@ export default function TargetingFeatures() {
   const getCardStyles = (progress: number) => {
     if (progress === 1) {
       return {
-        bgColor: 'bg-slate-100',
+        bgColor: 'bg-white',
         textColor: 'text-slate-900',
         descColor: 'text-slate-600',
         detailColor: 'text-slate-500'
       }
     } else if (progress === 2) {
       return {
-        bgColor: 'bg-slate-200/80',
+        bgColor: 'bg-slate-100',
         textColor: 'text-slate-900',
         descColor: 'text-slate-600',
         detailColor: 'text-slate-500'
@@ -68,7 +68,7 @@ export default function TargetingFeatures() {
       return {
         bgColor: 'bg-slate-800',
         textColor: 'text-white',
-        descColor: 'text-slate-400',
+        descColor: 'text-slate-300',
         detailColor: 'text-slate-400'
       }
     }
@@ -93,17 +93,17 @@ export default function TargetingFeatures() {
   ]
 
   return (
-    <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-white">
+    <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden bg-slate-50">
       {/* Декоративные элементы */}
-      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-lime-500/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-lime-500/8 rounded-full blur-3xl"></div>
+      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-400/5 rounded-full blur-3xl animate-floatBackground"></div>
+      <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-400/5 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Заголовок */}
-        <div className={`text-center mb-8 sm:mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-slate-900">
             Как мы{" "}
-            <span className="text-lime-500">
+            <span className="text-teal-400">
               настраиваем таргетинг
             </span>
           </h2>
@@ -117,45 +117,40 @@ export default function TargetingFeatures() {
           {features.map((feature, index) => {
             const IconComponent = feature.icon
             const styles = getCardStyles(feature.progress)
-            const delay = index * 150
             
             return (
-              <div 
-                key={index}
-                className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: `${delay}ms` }}
-              >
-                <div className={`${styles.bgColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 h-full`}>
+              <div key={index} className="group">
+                <div className={`${styles.bgColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1`}>
                   {/* Индикаторы прогресса */}
                   <div className="flex gap-2 mb-6">
                     {[1, 2, 3].map((dot) => (
                       <div 
                         key={dot}
-                        className={`w-3 h-3 rounded-full ${
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
                           dot <= feature.progress 
-                            ? 'bg-lime-500' 
-                            : 'border-2 border-lime-500/30'
+                            ? 'bg-teal-400' 
+                            : 'border-2 border-teal-400/30'
                         }`}
                       />
                     ))}
                   </div>
 
                   {/* Иконка */}
-                  <IconComponent size={36} className="text-lime-500 mb-4" />
+                  <IconComponent size={40} className="text-teal-400 mb-4 transition-transform duration-300 group-hover:scale-110" />
                   
                   {/* Контент */}
                   <h3 className={`text-xl sm:text-2xl font-bold mb-3 ${styles.textColor}`}>
                     {feature.title}
                   </h3>
-                  <p className={`text-sm sm:text-base mb-4 ${styles.descColor}`}>
+                  <p className={`text-sm sm:text-base mb-4 leading-relaxed ${styles.descColor}`}>
                     {feature.description}
                   </p>
                   
                   {/* Детали */}
                   <ul className="space-y-2">
                     {feature.details.map((detail, detailIndex) => (
-                      <li key={detailIndex} className={`text-xs sm:text-sm flex items-start ${styles.detailColor}`}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-lime-500 mr-2 mt-1.5 flex-shrink-0"></span>
+                      <li key={detailIndex} className={`text-xs sm:text-sm flex items-start leading-relaxed ${styles.detailColor}`}>
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mr-2 mt-1.5 flex-shrink-0"></span>
                         {detail}
                       </li>
                     ))}
@@ -167,8 +162,8 @@ export default function TargetingFeatures() {
         </div>
 
         {/* Блок специфики для медицинских клиник */}
-        <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '800ms' }}>
-          <div className="bg-slate-100 rounded-2xl sm:rounded-3xl border border-lime-500/20 p-8 sm:p-10 lg:p-12">
+        <div>
+          <div className="bg-gradient-to-br from-teal-900/10 via-slate-900/5 to-indigo-900/10 rounded-2xl sm:rounded-3xl border border-teal-400/20 p-8 sm:p-10 lg:p-12 backdrop-blur-sm">
             <div className="text-center mb-8 sm:mb-10">
               <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
                 Специфика для медицинских клиник
@@ -180,8 +175,8 @@ export default function TargetingFeatures() {
                 const IconComponent = specialty.icon
                 
                 return (
-                  <div key={index} className="text-center">
-                    <IconComponent size={40} className="text-lime-500 mx-auto mb-4" />
+                  <div key={index} className="text-center group">
+                    <IconComponent size={48} className="text-teal-400 mx-auto mb-4 transition-transform duration-300 group-hover:scale-110" />
                     <h4 className="font-bold text-slate-900 mb-3 text-lg sm:text-xl">
                       {specialty.title}
                     </h4>
