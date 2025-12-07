@@ -1,166 +1,252 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Globe, Monitor, Smartphone, TrendingUp } from "lucide-react"
-import { useState, useEffect } from "react"
+import { ArrowRight } from "phosphor-react"
+import { useEffect, useState } from "react"
+import PrivacyPolicyModal from "@/components/privacy-policy-modal"
 
 export default function WebsitesHero() {
   const [isVisible, setIsVisible] = useState(false)
-  const [currentProject, setCurrentProject] = useState(0)
+  const [phone, setPhone] = useState("")
+  const [agreeToPrivacy, setAgreeToPrivacy] = useState(false)
+  const [agreeToMarketing, setAgreeToMarketing] = useState(false)
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
-    
-    // Автопереключение проектов
-    const interval = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % 3)
-    }, 4000)
-    
-    return () => clearInterval(interval)
+    const timer = setTimeout(() => setIsVisible(true), 100)
+    return () => clearTimeout(timer)
   }, [])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const formatPhoneNumber = (value: string) => {
+    const cleaned = value.replace(/\D/g, '')
+    
+    if (cleaned.length === 0) return ''
+    
+    let formatted = '+7'
+    if (cleaned.length > 1) {
+      formatted += ' (' + cleaned.substring(1, 4)
+    }
+    if (cleaned.length >= 4) {
+      formatted += ') ' + cleaned.substring(4, 7)
+    }
+    if (cleaned.length >= 7) {
+      formatted += ' - ' + cleaned.substring(7, 9)
+    }
+    if (cleaned.length >= 9) {
+      formatted += ' - ' + cleaned.substring(9, 11)
+    }
+    
+    return formatted
+  }
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    const cleaned = value.replace(/\D/g, '')
+    
+    if (cleaned.length <= 11) {
+      setPhone(formatPhoneNumber(cleaned))
     }
   }
 
-  const projects = [
-    {
-      name: "Сайт для студенто-медиков",
-      image: "/services/website1.jpg",
-      result: "+2000 студентов"
-    },
-    {
-      name: "MedTech лаборатория",
-      image: "/services/website2.jpg",
-      result: "+ к узнаваемости"
-    },
-    {
-      name: "Подологическая клиника/школа",
-      image: "/services/website3.jpg",
-      result: "+65% учеников"
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!phone || !agreeToPrivacy) {
+      alert('Пожалуйста, заполните номер телефона и согласитесь с обработкой персональных данных')
+      return
     }
-  ]
+
+    setIsSubmitting(true)
+
+    try {
+      // Отправка на твой API endpoint
+      const response = await fetch('https://telegram-bot-proxy.vercel.app/api/send-telegram', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Заявка с сайта (Создание сайтов)',
+          phone: phone,
+          source: 'Форма на странице создания сайтов',
+          agreeToMarketing: agreeToMarketing
+        }),
+      })
+
+      if (response.ok) {
+        alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.')
+        setPhone('')
+        setAgreeToPrivacy(false)
+        setAgreeToMarketing(false)
+      } else {
+        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте снова.')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте снова.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
-    <section className="container mx-auto px-4 pt-32 pb-16 relative overflow-hidden">
-      {/* Анимированные декоративные элементы */}
-      <div className="absolute top-0 left-0 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground"></div>
-      <div className="absolute bottom-0 right-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '-5s' }}></div>
-      
-      <div className="relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className={`lg:w-1/2 space-y-6 ${isVisible ? 'animate-fadeInLeft' : 'opacity-0'}`}>
-            <div className="inline-block px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm animate-fadeIn">
+    <>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b101b]">
+        {/* Background Elements */}
+        <div className="absolute top-20 right-20 w-40 h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
+        <div className="absolute bottom-20 left-20 w-60 h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
+
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge */}
+            <div className={`inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-6 backdrop-blur-sm shadow-lg transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
               Создание медицинских сайтов
             </div>
-            
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight font-fixedsys">
+
+            {/* Main Heading */}
+            <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold font-fixedsys mb-6 leading-tight transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
               Сайты, которые{" "}
-              <span className="bg-gradient-to-r from-teal-400 via-indigo-500 to-teal-400 bg-clip-text text-transparent animate-gradient">
+              <span className="bg-gradient-to-r from-teal-400 via-indigo-400 to-teal-400 bg-clip-text text-transparent animate-gradient-text">
                 превращают посетителей в пациентов
               </span>
             </h1>
-            
-            <p className="text-lg md:text-xl text-slate-300 animate-fadeInUp delay-100">
-              Разрабатываем современные сайты для медицинских клиник с акцентом на конверсию. 
-              Каждый сайт — это инструмент привлечения пациентов
+
+            {/* Subtitle */}
+            <p className={`text-xl sm:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+              Разрабатываем современные сайты для медицинских клиник с акцентом на конверсию. Каждый сайт — это инструмент привлечения пациентов
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+
+            {/* CTA Buttons */}
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-lg font-fixedsys animate-fadeInUp delay-200 active:animate-buttonClick hover-lift"
-                onClick={() => scrollToSection("contact")}
+                onClick={scrollToContact}
+                className="bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-lg font-fixedsys shadow-2xl hover:shadow-teal-500/25 transition-all duration-300 group px-8 py-4"
               >
                 Заказать сайт
+                <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
+              
               <Button
-                size="lg"
                 variant="outline"
-                className="border-teal-700 text-teal-400 hover:bg-teal-950/50 animate-fadeInUp delay-300 hover-lift"
-                onClick={() => scrollToSection("contact")}
+                size="lg"
+                onClick={() => document.getElementById("websites-advantages")?.scrollIntoView({ behavior: "smooth" })}
+                className="border-slate-700 text-slate-300 hover:bg-slate-800/50 hover:border-teal-500/50 backdrop-blur-sm text-lg px-8 py-4"
               >
-                Пример Вашего сайта
+                Узнать подробнее
               </Button>
             </div>
 
             {/* Статистика */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-6 animate-fadeInUp delay-400">
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '600ms' }}>
               <div className="text-center">
-                <div className="text-2xl font-bold font-fixedsys text-teal-400">85%</div>
+                <div className="text-3xl font-bold font-fixedsys text-teal-400 mb-2">85%</div>
                 <div className="text-slate-400 text-sm">Конверсия в запись</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold font-fixedsys text-indigo-400">3.2s</div>
+                <div className="text-3xl font-bold font-fixedsys text-indigo-400 mb-2">3.2s</div>
                 <div className="text-slate-400 text-sm">Время загрузки</div>
               </div>
-              <div className="text-center md:col-span-1 col-span-2">
-                <div className="text-2xl font-bold font-fixedsys text-teal-400">100%</div>
+              <div className="text-center">
+                <div className="text-3xl font-bold font-fixedsys text-teal-400 mb-2">100%</div>
                 <div className="text-slate-400 text-sm">Соответствие 152-ФЗ</div>
               </div>
             </div>
           </div>
-          
-          <div className={`lg:w-1/2 ${isVisible ? 'animate-fadeInRight delay-500' : 'opacity-0'}`}>
-            {/* Интерактивный preview сайтов */}
-            <div className="relative">
-              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6 hover-lift transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="flex-1 bg-slate-800 rounded-full px-3 py-1 text-xs text-slate-400 text-center">
-                    {projects[currentProject].name}
-                  </div>
-                </div>
-                
-                <div className="relative h-64 md:h-80 rounded-lg overflow-hidden bg-slate-800/50">
-                  <img
-                    src={projects[currentProject].image}
-                    alt={projects[currentProject].name}
-                    className="w-full h-full object-cover transition-all duration-1000"
-                    style={{ filter: "grayscale(20%)" }}
-                  />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-slate-900/90 backdrop-blur-sm rounded-lg p-3">
-                      <div className="text-teal-400 font-fixedsys text-sm">
-                        {projects[currentProject].result}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Индикаторы проектов */}
-                <div className="flex justify-center gap-2 mt-4">
-                  {projects.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentProject(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === currentProject ? 'bg-teal-400 w-8' : 'bg-slate-600'
-                      }`}
-                    />
-                  ))}
-                </div>
+        </div>
+      </section>
+
+      {/* CTA Form Section */}
+      <section className="py-16 md:py-24 relative overflow-hidden bg-[#0b101b]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col lg:flex-row gap-8 bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 p-8 md:p-12">
+              {/* Left side - Text */}
+              <div className="lg:w-1/2">
+                <h2 className="text-3xl md:text-4xl font-bold font-fixedsys text-white mb-4">
+                  Оставьте заявку и получите стратегию для роста бизнеса
+                </h2>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  SEO-продвижение клиники улучшает видимость сайта в поисковиках, что способствует привлечению целевых посетителей и увеличению потока новых пациентов.
+                </p>
+                <p className="text-slate-400 text-lg leading-relaxed mt-4">
+                  Мы помогаем клиникам стать лидерами в поисковой выдаче, используя комплексный подход к SEO-продвижению стоматологии.
+                </p>
+                <p className="text-slate-400 text-lg leading-relaxed mt-4">
+                  Наши специалисты проводят детальный аудит сайта, выявляют слабые места и разрабатывают стратегию для увеличения органического трафика.
+                </p>
               </div>
 
-              {/* Responsive preview */}
-              <div className="absolute -bottom-6 -right-6 bg-slate-900/50 rounded-lg border border-slate-800 p-3 animate-float">
-                <div className="flex items-center gap-3">
-                  <Monitor size={16} className="text-teal-400" />
-                  <Smartphone size={16} className="text-indigo-400" />
-                  <div className="text-xs text-slate-400">Responsive</div>
-                </div>
+              {/* Right side - Form */}
+              <div className="lg:w-1/2">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={handlePhoneChange}
+                      placeholder="+7 (___) ___ - __ - __"
+                      className="w-full px-6 py-4 bg-slate-800/50 border border-slate-700 rounded-full text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 transition-all duration-300"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700 text-slate-900 font-bold text-lg py-6 rounded-full transition-all duration-300 disabled:opacity-50"
+                  >
+                    {isSubmitting ? 'Отправка...' : 'Получить стратегию для роста бизнеса за 0 ₽'}
+                  </Button>
+
+                  <div className="space-y-3">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={agreeToPrivacy}
+                        onChange={(e) => setAgreeToPrivacy(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-slate-600 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900"
+                      />
+                      <span className="text-sm text-slate-400 leading-relaxed">
+                        Я согласен(-на) на{" "}
+                        <button
+                          type="button"
+                          onClick={() => setIsPrivacyModalOpen(true)}
+                          className="text-teal-400 hover:text-teal-300 underline transition-colors"
+                        >
+                          обработку персональных данных
+                        </button>
+                      </span>
+                    </label>
+
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={agreeToMarketing}
+                        onChange={(e) => setAgreeToMarketing(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-slate-600 text-teal-500 focus:ring-teal-500 focus:ring-offset-slate-900"
+                      />
+                      <span className="text-sm text-slate-400 leading-relaxed">
+                        Согласие на получение рекламных рассылок
+                      </span>
+                    </label>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <PrivacyPolicyModal 
+        isOpen={isPrivacyModalOpen} 
+        onClose={() => setIsPrivacyModalOpen(false)} 
+      />
+    </>
   )
 }
