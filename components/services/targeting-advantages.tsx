@@ -161,12 +161,9 @@ export default function TargetingAdvantages() {
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
                 `}>
-                  {/* Иконка с эффектами */}
-                  <div className="relative mb-6">
-                    <div className={`absolute inset-0 ${colors.glowColor} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                    <div className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${colors.bgGradient} p-3 sm:p-4 backdrop-blur-sm border ${colors.borderColor} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
-                      <IconComponent className="w-full h-full" />
-                    </div>
+                  {/* Иконка */}
+                  <div className="mb-6">
+                    <IconComponent className="w-32 h-32 sm:w-40 sm:h-40 transition-transform duration-500 group-hover:scale-110" />
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 font-fixedsys text-white leading-snug">
