@@ -15,7 +15,7 @@ export default function TargetingPricing() {
   const plan = {
     name: "Таргетированная реклама",
     icon: Crown,
-    price: "25 000 - 30 000",
+    price: "от 45 000",
     description: "Полное ведение таргетированной рекламы",
     features: [
       "Безлимит кампаний",
