@@ -48,25 +48,18 @@ export default function TargetingFeatures() {
       color: "teal"
     },
     {
-      icon: Shield,
-      title: "Исключения",
-      description: "Фильтрация трафика",
-      details: ["Медики и конкуренты", "Нецелевые регионы", "Низкий доход"],
-      color: "indigo"
-    },
-    {
       icon: Clock,
       title: "Время показов",
       description: "Оптимальное время",
       details: ["Рабочие часы", "Вечер для записи", "Выходные для неотложки"],
-      color: "teal"
+      color: "indigo"
     },
     {
       icon: Smartphone,
       title: "Устройства",
       description: "Под платформы",
       details: ["100% мобильный трафик", "Адаптация под экраны", "Приложения соцсетей"],
-      color: "indigo"
+      color: "teal"
     }
   ]
 
@@ -92,7 +85,7 @@ export default function TargetingFeatures() {
   ]
 
   return (
-    <section id="targeting-features" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+    <section id="targeting-features" className="bg-slate-900 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
       <div className="absolute bottom-10 left-10 w-40 h-40 sm:w-60 sm:h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '5s' }}></div>
       <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-teal-400/5 rounded-full blur-2xl animate-pulse-slow"></div>
@@ -127,7 +120,7 @@ export default function TargetingFeatures() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`
-                  relative bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 
+                  relative bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-slate-700/60
                   p-4 sm:p-6 h-full transition-all duration-500 ease-out
                   hover:${colors.borderColor} hover:${colors.shadowColor} hover:shadow-2xl
                   hover-lift transform-gpu will-change-transform
