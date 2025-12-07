@@ -163,7 +163,7 @@ export default function TargetingAdvantages() {
                 `}>
                   {/* Иконка */}
                   <div className="mb-6">
-                    <IconComponent className="w-32 h-32 sm:w-40 sm:h-40 transition-transform duration-500 group-hover:scale-110" />
+                    <IconComponent className="w-24 h-24 sm:w-28 sm:h-28 transition-transform duration-500 group-hover:scale-110" />
                   </div>
 
                   <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 font-fixedsys text-white leading-snug">
