@@ -197,9 +197,9 @@ export default function WebsitesHero() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700 text-slate-900 font-bold text-lg py-6 rounded-full transition-all duration-300 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-semibold py-4 px-8 rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Отправка...' : 'Получить стратегию для роста бизнеса за 0 ₽'}
+                    {isSubmitting ? "Отправка..." : "Получить стратегию"}
                   </Button>
 
                   {/* Success Message */}
