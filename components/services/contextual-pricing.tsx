@@ -15,7 +15,7 @@ export default function ContextualPricing() {
   const plans = [
     {
       name: "Контекстная реклама",
-      price: "45 000",
+      price: "от 45 000",
       description: "Полный цикл настройки и ведения",
       features: [
         "Без ограничений по услугам",
