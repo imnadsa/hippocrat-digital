@@ -255,7 +255,7 @@ export default function WebsitesHero() {
                       Мы проектируем интерфейсы, которые <span className="text-white font-bold">интуитивно понятны</span> любому пациенту — от записи к врачу до поиска цен. 
                       <br className="mb-3 block" />
                       <span className="text-sm text-teal-400/80 font-mono mt-2 block">
-                        ✓ Адаптация под мобильные устройства и SEO
+                        ✓ Адаптация под все устройства, поставим на CSM и настроим SEO
                       </span>
                     </p>
                   </div>
@@ -268,7 +268,7 @@ export default function WebsitesHero() {
                         "Продуманная структура и UX для высокой конверсии",
                         "Интеграция с МИС и онлайн-записью",
                         "Полное соответствие 152-ФЗ и требованиям Минздрава",
-                        "Высокая скорость загрузки (Google PageSpeed Green Zone)"
+                        "Высокая скорость загрузки"
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-slate-300">
                           <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
