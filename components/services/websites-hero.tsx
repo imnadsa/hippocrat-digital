@@ -107,7 +107,7 @@ export default function WebsitesHero() {
 
   return (
     <>
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0b101b]">
+      <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-[#0b101b]">
         {/* Background Elements */}
         <div className="absolute top-20 right-20 w-40 h-40 bg-teal-500/8 rounded-full blur-3xl animate-floatBackground"></div>
         <div className="absolute bottom-20 left-20 w-60 h-60 bg-indigo-500/8 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '3s' }}></div>
@@ -115,11 +115,7 @@ export default function WebsitesHero() {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <div className={`inline-block px-4 py-2 rounded-full bg-teal-900/20 border border-teal-700/20 text-teal-400 text-sm font-medium mb-6 backdrop-blur-sm shadow-lg transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-4'}`}>
-              Создание медицинских сайтов
-            </div>
-
+            
             {/* Main Heading */}
             <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold font-fixedsys mb-6 leading-tight transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'}`}>
               Сайты, которые{" "}
