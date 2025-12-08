@@ -42,7 +42,7 @@ export default function TargetingHero() {
     try {
       const cleanPhone = phone.replace(/\D/g, "")
       
-      const response = await fetch("https://telegram-bot-proxy.vercel.app/api/send-telegram", {
+      const response = await fetch("https://telegram-bot-proxy-ashy.vercel.app/api/send-telegram", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
