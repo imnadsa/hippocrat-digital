@@ -39,9 +39,9 @@ export default function MedicalPricing() {
   const plans = [
     {
       name: "Старт",
-      price: "41 000 ₽",
-      originalPrice: "55 000 ₽",
-      description: "Готовая интернет-площадка для частной практики",
+      price: "от 80 000 ₽",
+      originalPrice: "120 000 ₽",
+      description: "Лендинг для вашей клиники",
       popular: false,
       features: [
         "Современный отзывчивый дизайн",
@@ -52,14 +52,13 @@ export default function MedicalPricing() {
       ],
       notIncluded: [
         "CRM интеграция",
-        "Личный кабинет пациентов",
-        "Онлайн-консультации"
+        "CMS и SEO"
       ]
     },
     {
       name: "Стандарт",
-      price: "82 000 ₽", 
-      originalPrice: "110 000 ₽",
+      price: "150 000 ₽", 
+      originalPrice: "200 000 ₽",
       description: "Индивидуальная разработка с широким функционалом",
       popular: true,
       features: [
@@ -68,7 +67,6 @@ export default function MedicalPricing() {
         "Все возможности тарифа 'Старт'",
         "Логотип и фирменный стиль компании",
         "Продвижение и подготовка к запуску",
-        "Приоритетная работа по проекту",
         "Интеграция с внешними системами"
       ],
       notIncluded: [
@@ -78,8 +76,8 @@ export default function MedicalPricing() {
     },
     {
       name: "Престиж",
-      price: "240 000 ₽",
-      originalPrice: "320 000 ₽", 
+      price: "от 500 000 ₽",
+      originalPrice: "650 000 ₽", 
       description: "Сайт с вашим уникальным дизайном и контентным наполнением",
       popular: false,
       features: [
@@ -88,7 +86,9 @@ export default function MedicalPricing() {
         "Все возможности тарифа 'Стандарт'",
         "Уникальные тексты",
         "Заполнение контентом",
-        "Платформа телемедицины"
+        "Приоритетная работа по проекту",
+        "Установка на CMS и обучение",
+        "SEO продвижение 3 месяца"
       ],
       notIncluded: []
     }
@@ -208,11 +208,6 @@ export default function MedicalPricing() {
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >
               Получить консультацию
-            </button>
-            <button 
-              className="px-8 py-3 bg-slate-700/50 hover:bg-slate-600/50 text-white rounded-lg font-semibold border border-slate-600/50 transition-all"
-            >
-              Посмотреть примеры работ
             </button>
           </div>
         </div>
