@@ -72,7 +72,7 @@ export default function WebsitesHero() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('https://telegram-bot-proxy.vercel.app/api/send-telegram', {
+      const response = await fetch('https://telegram-bot-proxy-ashy.vercel.app/api/send-telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
