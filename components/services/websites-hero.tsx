@@ -194,10 +194,10 @@ export default function WebsitesHero() {
                     />
                   </div>
 
-                  <Button
+                 <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-semibold py-4 px-8 rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-fixedsys text-lg"
                   >
                     {isSubmitting ? "Отправка..." : "Получить стратегию"}
                   </Button>
