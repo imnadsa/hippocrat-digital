@@ -72,19 +72,20 @@ export default function TargetingHero() {
 
   return (
     <>
-      <section className="container mx-auto px-4 pt-32 pb-16 relative overflow-hidden">
+      {/* ИСПРАВЛЕНИЕ: Добавлен min-h-screen, flex-col и pt-32 для корректного отображения на мобильных */}
+      <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden">
+        
         {/* Декоративные элементы */}
         <div className="absolute top-0 right-0 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground"></div>
         <div className="absolute bottom-0 left-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '-3s' }}></div>
         
-        <div className="relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           
           {/* 1. Hero Title Section (Центральный блок) */}
           <div className="text-center max-w-4xl mx-auto mb-16">
             <div className={`space-y-6 ${isVisible ? 'animate-fadeIn' : 'opacity-0'}`}>
-              <div className="inline-block px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm">
-                Таргетированная реклама для клиник
-              </div>
+              
+              {/* Плашка удалена отсюда */}
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight font-fixedsys">
                 Приводим пациентов, <br />
@@ -96,7 +97,7 @@ export default function TargetingHero() {
                 Проходим модерацию даже со сложными медицинскими нишами.
               </p>
 
-              {/* Мини-статистика под заголовком (как в SMM) */}
+              {/* Мини-статистика под заголовком */}
               <div className="flex justify-center gap-4 pt-6 flex-wrap">
                 <div className="bg-slate-900/50 rounded-xl border border-slate-800 px-6 py-3 min-w-[140px]">
                   <div className="text-2xl font-bold font-fixedsys text-teal-400">40+</div>
@@ -220,7 +221,7 @@ export default function TargetingHero() {
                       {[
                         "Точный подбор ВАШЕЙ аудитории",
                         "Ретаргетинг на базу МИС (возвращаем пациентов)",
-                        "LAL-аудитории (ищем похожих на ваших VIP-клиентов)",
+                        "LAL-аудитории (ищем похожих на ваших пациентов)",
                         "Аналитика: от показа рекламы до чека в кассе"
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-slate-300">
