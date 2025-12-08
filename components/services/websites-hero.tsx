@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "phosphor-react"
+import { CheckCircle2, Quote } from "lucide-react"
 import { useEffect, useState } from "react"
 import PrivacyPolicyModal from "@/components/privacy-policy-modal"
 
@@ -237,25 +238,54 @@ export default function WebsitesHero() {
                 </form>
               </div>
 
-              {/* Right side - Text */}
-              <div className="flex flex-col justify-center space-y-6">
-                <p className="text-slate-300 text-lg leading-relaxed">
-                  Современный медицинский сайт — это не просто визитная карточка вашей клиники в интернете. 
-                  Это мощный инструмент привлечения новых пациентов, который работает 24/7.
-                </p>
-                <p className="text-slate-300 text-lg leading-relaxed">
-                  Мы создаем сайты, которые вызывают доверие с первых секунд, понятно объясняют преимущества 
-                  вашей клиники и делают запись на прием максимально простой и удобной.
-                </p>
-                <p className="text-slate-300 text-lg leading-relaxed">
-                  Каждый элемент продуман с учетом особенностей медицинской сферы: от соответствия ФЗ-323 
-                  и защиты персональных данных до оптимизации для записи через мобильные устройства.
-                </p>
-                <p className="text-slate-300 text-lg leading-relaxed">
-                  Получите бесплатную консультацию и узнайте, как правильно построенный сайт может увеличить 
-                  поток пациентов в вашу клинику на 40-60% уже в первые месяцы работы.
-                </p>
+              {/* Right side - Text Refactored */}
+              <div className="space-y-8 animate-fadeInRight">
+                <div className="prose prose-invert max-w-none space-y-6">
+                  
+                  {/* Вступление */}
+                  <p className="text-slate-300 text-lg leading-relaxed">
+                    Сайт клиники — это <span className="text-teal-400 font-bold">первый контакт</span> с пациентом. 
+                    В конкурентной среде важно не просто "быть в сети", а <span className="text-indigo-400 font-bold border-b border-indigo-500/30 pb-0.5">конвертировать визиты в записи</span>.
+                  </p>
+                  
+                  {/* Блок-цитата */}
+                  <div className="relative bg-slate-900/40 border-l-4 border-teal-500 p-6 rounded-r-xl overflow-hidden group hover:bg-slate-900/60 transition-colors">
+                    <Quote className="absolute top-4 right-4 w-12 h-12 text-teal-500/10 -rotate-12 group-hover:scale-110 transition-transform" />
+                    <p className="text-slate-200 text-base leading-relaxed relative z-10">
+                      Мы проектируем интерфейсы, которые <span className="text-white font-bold">интуитивно понятны</span> любому пациенту — от записи к врачу до поиска цен. 
+                      <br className="mb-3 block" />
+                      <span className="text-sm text-teal-400/80 font-mono mt-2 block">
+                        ✓ Адаптация под мобильные устройства и SEO
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Список преимуществ */}
+                  <div className="space-y-3 pt-2">
+                    <h3 className="text-white font-fixedsys text-lg mb-4">Ключевые особенности наших сайтов:</h3>
+                    <ul className="space-y-3">
+                      {[
+                        "Продуманная структура и UX для высокой конверсии",
+                        "Интеграция с МИС и онлайн-записью",
+                        "Полное соответствие 152-ФЗ и требованиям Минздрава",
+                        "Высокая скорость загрузки (Google PageSpeed Green Zone)"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-300">
+                          <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Заключение (вместо блока результата) */}
+                  <p className="text-slate-300 text-lg leading-relaxed pt-2">
+                    Получите бесплатную консультацию и узнайте, как правильно построенный сайт может увеличить поток пациентов в вашу клинику на <span className="text-white font-bold">40-60%</span> уже в первые месяцы работы.
+                  </p>
+
+                </div>
               </div>
+
             </div>
           </div>
         </div>
