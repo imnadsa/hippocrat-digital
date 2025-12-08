@@ -211,9 +211,9 @@ export default function SmmHero() {
                     <ul className="space-y-3">
                       {[
                         "Создание экспертного и образовательного контента",
-                        "Работа с отзывами и репутацией (SERM)",
+                        "Работа с репутацией и соц. сетями (SERM)",
                         "Таргетированная реклама на целевую аудиторию",
-                        "Сквозная аналитика до записи на прием"
+                        "Аналитика отслеживания результата"
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-slate-300">
                           <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
@@ -221,26 +221,6 @@ export default function SmmHero() {
                         </li>
                       ))}
                     </ul>
-                  </div>
-                  
-                  {/* Финальный Call-To-Action блок */}
-                  <div className="bg-gradient-to-br from-teal-900/30 via-slate-900/50 to-indigo-900/30 border border-teal-500/30 p-6 rounded-xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/20 blur-3xl rounded-full"></div>
-                    
-                    <div className="flex gap-4 items-start relative z-10">
-                      <div className="bg-teal-500/20 p-2 rounded-lg">
-                        <TrendingUp className="w-6 h-6 text-teal-400" />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg mb-1">Результат работы</h4>
-                        <p className="text-slate-300 text-sm leading-relaxed">
-                          Грамотная SMM-стратегия увеличивает поток первичных пациентов на <span className="text-white font-bold text-lg">40-60%</span> уже в первые 3 месяца. 
-                          <span className="block mt-2 text-teal-400 text-xs font-semibold uppercase tracking-wider">
-                            Заполните форму слева для аудита →
-                          </span>
-                        </p>
-                      </div>
-                    </div>
                   </div>
 
                 </div>
