@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import PrivacyPolicyModal from "@/components/privacy-policy-modal"
+import { CheckCircle2, Quote, TrendingUp } from "lucide-react"
 
 export default function SmmHero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -66,13 +67,6 @@ export default function SmmHero() {
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
     }
   }
 
@@ -189,70 +183,69 @@ export default function SmmHero() {
                 </form>
               </div>
 
-              {/* Description */}
               {/* Description Section */}
-                <div className="space-y-8 animate-fadeInRight">
-                  <div className="prose prose-invert max-w-none space-y-6">
-                    
-                    {/* Вступление с акцентами */}
-                    <p className="text-slate-300 text-lg leading-relaxed">
-                      Социальные сети для клиники — это <span className="text-teal-400 font-bold">доверие пациентов</span> до первого визита. 
-                      В эпоху цифровой медицины правильный SMM помогает не просто "постить картинки", а <span className="text-indigo-400 font-bold border-b border-indigo-500/30 pb-0.5">строить репутацию экспертов</span>.
+              <div className="space-y-8 animate-fadeInRight">
+                <div className="prose prose-invert max-w-none space-y-6">
+                  
+                  {/* Вступление с акцентами */}
+                  <p className="text-slate-300 text-lg leading-relaxed">
+                    Социальные сети для клиники — это <span className="text-teal-400 font-bold">доверие пациентов</span> до первого визита. 
+                    В эпоху цифровой медицины правильный SMM помогает не просто "постить картинки", а <span className="text-indigo-400 font-bold border-b border-indigo-500/30 pb-0.5">строить репутацию экспертов</span>.
+                  </p>
+                  
+                  {/* Блок-цитата */}
+                  <div className="relative bg-slate-900/40 border-l-4 border-teal-500 p-6 rounded-r-xl overflow-hidden group hover:bg-slate-900/60 transition-colors">
+                    <Quote className="absolute top-4 right-4 w-12 h-12 text-teal-500/10 -rotate-12 group-hover:scale-110 transition-transform" />
+                    <p className="text-slate-200 text-base leading-relaxed relative z-10">
+                      Мы создаем контент, который <span className="text-white font-bold">снимает страхи пациентов</span> и отвечает на их вопросы еще до звонка в клинику. 
+                      <br className="mb-3 block" />
+                      <span className="text-sm text-teal-400/80 font-mono mt-2 block">
+                        ✓ Полное соответствие ФЗ-323 и закону о рекламе
+                      </span>
                     </p>
+                  </div>
+
+                  {/* Список преимуществ */}
+                  <div className="space-y-3 pt-2">
+                    <h3 className="text-white font-fixedsys text-lg mb-4">Что входит в наш подход:</h3>
+                    <ul className="space-y-3">
+                      {[
+                        "Создание экспертного и образовательного контента",
+                        "Работа с отзывами и репутацией (SERM)",
+                        "Таргетированная реклама на целевую аудиторию",
+                        "Сквозная аналитика до записи на прием"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-300">
+                          <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Финальный Call-To-Action блок */}
+                  <div className="bg-gradient-to-br from-teal-900/30 via-slate-900/50 to-indigo-900/30 border border-teal-500/30 p-6 rounded-xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/20 blur-3xl rounded-full"></div>
                     
-                    {/* Блок-цитата */}
-                    <div className="relative bg-slate-900/40 border-l-4 border-teal-500 p-6 rounded-r-xl overflow-hidden group hover:bg-slate-900/60 transition-colors">
-                      <Quote className="absolute top-4 right-4 w-12 h-12 text-teal-500/10 -rotate-12 group-hover:scale-110 transition-transform" />
-                      <p className="text-slate-200 text-base leading-relaxed relative z-10">
-                        Мы создаем контент, который <span className="text-white font-bold">снимает страхи пациентов</span> и отвечает на их вопросы еще до звонка в клинику. 
-                        <br className="mb-3 block" />
-                        <span className="text-sm text-teal-400/80 font-mono mt-2 block">
-                          ✓ Полное соответствие ФЗ-323 и закону о рекламе
-                        </span>
-                      </p>
-                    </div>
-                
-                    {/* Список преимуществ (читается лучше, чем абзац) */}
-                    <div className="space-y-3 pt-2">
-                      <h3 className="text-white font-fixedsys text-lg mb-4">Что входит в наш подход:</h3>
-                      <ul className="space-y-3">
-                        {[
-                          "Создание экспертного и образовательного контента",
-                          "Работа с отзывами и репутацией (SERM)",
-                          "Таргетированная реклама на целевую аудиторию",
-                          "Сквозная аналитика до записи на прием"
-                        ].map((item, i) => (
-                          <li key={i} className="flex items-start gap-3 text-slate-300">
-                            <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {/* Финальный Call-To-Action блок */}
-                    <div className="bg-gradient-to-br from-teal-900/30 via-slate-900/50 to-indigo-900/30 border border-teal-500/30 p-6 rounded-xl relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/20 blur-3xl rounded-full"></div>
-                      
-                      <div className="flex gap-4 items-start relative z-10">
-                        <div className="bg-teal-500/20 p-2 rounded-lg">
-                          <TrendingUp className="w-6 h-6 text-teal-400" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-bold text-lg mb-1">Результат работы</h4>
-                          <p className="text-slate-300 text-sm leading-relaxed">
-                            Грамотная SMM-стратегия увеличивает поток первичных пациентов на <span className="text-white font-bold text-lg">40-60%</span> уже в первые 3 месяца. 
-                            <span className="block mt-2 text-teal-400 text-xs font-semibold uppercase tracking-wider">
-                              Заполните форму слева для аудита →
-                            </span>
-                          </p>
-                        </div>
+                    <div className="flex gap-4 items-start relative z-10">
+                      <div className="bg-teal-500/20 p-2 rounded-lg">
+                        <TrendingUp className="w-6 h-6 text-teal-400" />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Результат работы</h4>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                          Грамотная SMM-стратегия увеличивает поток первичных пациентов на <span className="text-white font-bold text-lg">40-60%</span> уже в первые 3 месяца. 
+                          <span className="block mt-2 text-teal-400 text-xs font-semibold uppercase tracking-wider">
+                            Заполните форму слева для аудита →
+                          </span>
+                        </p>
                       </div>
                     </div>
-                
                   </div>
+
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
