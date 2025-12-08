@@ -72,18 +72,19 @@ export default function SmmHero() {
 
   return (
     <>
-      <section className="container mx-auto px-4 pt-32 pb-16 relative overflow-hidden">
+      {/* ИСПРАВЛЕНИЕ: Добавлен min-h-screen, flex-col и pt-32 для корректного отображения на мобильных */}
+      <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden">
+        
         {/* Анимированные декоративные элементы */}
         <div className="absolute top-0 left-0 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl animate-floatBackground"></div>
         <div className="absolute bottom-0 right-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl animate-floatBackground" style={{ animationDelay: '-3s' }}></div>
         
-        <div className="relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           {/* Hero Section */}
           <div className="text-center max-w-4xl mx-auto mb-16">
             <div className={`space-y-6 ${isVisible ? 'animate-fadeIn' : 'opacity-0'}`}>
-              <div className="inline-block px-4 py-1 rounded-full bg-teal-900/30 border border-teal-700/30 text-teal-400 text-sm">
-                SMM для медицинских клиник
-              </div>
+              
+              {/* Плашка удалена отсюда */}
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight font-fixedsys">
                 Превращаем <span className="bg-gradient-to-r from-teal-400 via-indigo-500 to-teal-400 bg-clip-text text-transparent animate-gradient">соцсети в источник пациентов</span>
