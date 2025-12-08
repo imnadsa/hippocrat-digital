@@ -11,6 +11,8 @@ export default function WebsitesHero() {
   const [agreeToPrivacy, setAgreeToPrivacy] = useState(false)
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100)
@@ -50,13 +52,20 @@ export default function WebsitesHero() {
     if (cleaned.length <= 11) {
       setPhone(formatPhoneNumber(cleaned))
     }
+    setError("")
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
     
-    if (!phone || !agreeToPrivacy) {
-      alert('Пожалуйста, заполните номер телефона и согласитесь с обработкой персональных данных')
+    if (!phone) {
+      setError('Пожалуйста, заполните номер телефона')
+      return
+    }
+
+    if (!agreeToPrivacy) {
+      setError('Необходимо согласие на обработку персональных данных')
       return
     }
 
@@ -76,15 +85,20 @@ export default function WebsitesHero() {
       })
 
       if (response.ok) {
-        alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.')
+        setIsSuccess(true)
         setPhone('')
         setAgreeToPrivacy(false)
+        
+        // Скрываем сообщение об успехе через 5 секунд
+        setTimeout(() => {
+          setIsSuccess(false)
+        }, 5000)
       } else {
-        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте снова.')
+        setError('Произошла ошибка при отправке. Попробуйте снова.')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте снова.')
+      setError('Произошла ошибка при отправке. Попробуйте снова.')
     } finally {
       setIsSubmitting(false)
     }
@@ -166,13 +180,13 @@ export default function WebsitesHero() {
               {/* Left side - Form */}
               <div className="bg-slate-900/40 backdrop-blur-sm rounded-2xl border border-slate-800/60 p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-bold font-fixedsys text-white mb-6">
-                  Оставьте заявку и получите стратегию для роста бизнеса
+                  Оставьте заявку и получите стратегию по улучшению SEO с минимальным бюджетом
                 </h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <input
-                      type="tel"
+                      type="text"
                       value={phone}
                       onChange={handlePhoneChange}
                       placeholder="+7 (___) ___ - __ - __"
@@ -187,6 +201,20 @@ export default function WebsitesHero() {
                   >
                     {isSubmitting ? 'Отправка...' : 'Получить стратегию для роста бизнеса за 0 ₽'}
                   </Button>
+
+                  {/* Success Message */}
+                  {isSuccess && (
+                    <div className="bg-teal-900/30 border border-teal-500/50 rounded-xl p-4 text-teal-400 text-sm text-center">
+                      ✓ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.
+                    </div>
+                  )}
+
+                  {/* Error Message */}
+                  {error && (
+                    <div className="bg-red-900/30 border border-red-500/50 rounded-xl p-4 text-red-400 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
 
                   <label className="flex items-start gap-3 cursor-pointer group">
                     <input
