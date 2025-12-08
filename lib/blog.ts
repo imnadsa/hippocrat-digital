@@ -77,6 +77,16 @@ export const blogData: BlogMeta[] = [
     tags: ["Лояльность пациента", "маркетинг", "привлечение пациентов", "репутация"],
     image: "/blog/images/anatomy-trust.jpg",
     readTime: 10
+  },
+  {
+    slug: "agregatory",
+    title: "Заголовок твоей статьи про агрегаторы", 
+    description: "Краткое описание статьи для превью",
+    date: "2025-12-08",                                
+    category: "Маркетинг, Агрегаторы",                            
+    tags: ["агрегаторы", "ПроДокторов", "НаПоправку", "ЯндексКарты", "2ГИС", "Отзовики для клиник"], 
+    image: "/blog/images/agregatory.jpg",
+    readTime: 7                                       
   }
 ]
 
