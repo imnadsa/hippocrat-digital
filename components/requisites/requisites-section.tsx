@@ -16,7 +16,7 @@ const requisitesData = {
     items: [
       {
         label: "ИНН",
-        value: "7727990394",
+        value: "772799039046",
         copyable: true
       },
       {
