@@ -202,7 +202,7 @@ export default function PortfolioSection() {
                 </Button>
               </div>
           </div>
-
+        </div>
 
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
