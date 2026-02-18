@@ -203,24 +203,24 @@ export default function PortfolioSection() {
               </div>
           </div>
 
-          {/* Кейс 3 - Полный Порядок (реальный кейс) */}
-          <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
-            <div className="h-56 bg-gradient-to-br from-emerald-900/50 to-slate-900 relative overflow-hidden">
+          //{/* Кейс 3 - Полный Порядок (реальный кейс) */}
+          {/*<div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
+            <div className="h-56 bg-gradient-to-br from-emerald-900/50 to-slate-900 relative overflow-hidden">*/}
               {/* Основное изображение кейса */}
-              <img 
+              {/*<img 
                 src="/cases/polniy-poryadok/cover.jpg" 
                 alt="Стоматологическая клиника Полный Порядок" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               
               {/* Градиентный оверлей для читаемости */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+              {/*<div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
               
               {/* Цветной оверлей при ховере */}
-              <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/*<div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               {/* Hover саммари как у Belberry */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+              {/*<div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
                 <div className="bg-slate-900/95 backdrop-blur-md rounded-2xl p-6 mx-4 border border-emerald-500/30 shadow-2xl">
                   <div className="text-center mb-4">
                     <h4 className="text-white font-bold text-lg font-fixedsys mb-2">Результат</h4>
@@ -242,14 +242,14 @@ export default function PortfolioSection() {
               </div>
               
               {/* Бейдж категории */}
-              <div className="absolute top-4 right-4 z-10 group-hover:opacity-0 transition-opacity duration-300">
+              {/*<div className="absolute top-4 right-4 z-10 group-hover:opacity-0 transition-opacity duration-300">
                 <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/80 backdrop-blur-sm text-emerald-400 text-xs border border-emerald-500/30 hover:bg-emerald-900/90 transition-all duration-300 animate-fadeIn delay-500">
                   Долгосрочный таргетинг
                 </div>
               </div>
               
               {/* Заголовок поверх изображения */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent z-10 group-hover:opacity-0 transition-opacity duration-300">
+              {/*<div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent z-10 group-hover:opacity-0 transition-opacity duration-300">
                 <h3 className="text-xl font-bold text-white font-fixedsys text-shadow animate-fadeInUp delay-600 group-hover:text-emerald-300 transition-colors duration-300">
                   Стоматология "Полный Порядок"
                 </h3>
@@ -288,7 +288,7 @@ export default function PortfolioSection() {
               </Button>
             </div>
           </div>
-         </div> 
+         </div>*/} 
 
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
