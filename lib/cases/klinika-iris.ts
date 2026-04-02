@@ -8,7 +8,7 @@ export const klinikaIrisCase: CaseData = {
   shortDescription: 'Комплексная работа с сайтом клиники в Краснодаре и Дагестане: редизайн, EEAT-контент, система отзывов и кнопки записи в каждой точке пути пациента',
 
   images: [
-    '/cases/klinika-iris/cover.jpg',      // 👈 Hero-картинка кейса (сделать отдельно)
+    '/cases/klinika-iris/cover1.jpg',      // 👈 Hero-картинка кейса (сделать отдельно)
     '/cases/klinika-iris/gif1.gif',        // 👈 Гифка 1 из Craft
     '/cases/klinika-iris/gif2.gif',        // 👈 Гифка 2 из Craft
     '/cases/klinika-iris/gif3.gif',        // 👈 Гифка 3 из Craft
