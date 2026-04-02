@@ -6,6 +6,7 @@ export interface CaseData {
   title: string
   subtitle: string
   category: string
+  siteUrl?: string
   shortDescription: string
   images: string[]
   metrics: {
