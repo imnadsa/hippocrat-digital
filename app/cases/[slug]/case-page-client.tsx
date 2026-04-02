@@ -135,13 +135,24 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
       <div className="relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] bg-slate-900 md:rounded-t-2xl md:rounded-b-2xl overflow-hidden animate-slideUp md:animate-scaleUp z-10">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 p-4 md:p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white font-fixedsys">
-                {caseData.title}
-              </h1>
-              <p className="text-teal-400 text-sm md:text-base">{caseData.subtitle}</p>
-            </div>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl md:text-2xl font-bold text-white font-fixedsys">
+              {caseData.title}
+            </h1>
+            <p className="text-teal-400 text-sm md:text-base">{caseData.subtitle}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            {caseData.siteUrl && (
+              
+                href={caseData.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white text-sm font-medium rounded-lg transition-all duration-300"
+              >
+                Перейти на сайт →
+              </a>
+            )}
             <Button
               variant="ghost"
               size="icon"
