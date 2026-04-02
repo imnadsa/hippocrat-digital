@@ -62,7 +62,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
     const from = urlParams.get('from')
     
     if (from === 'home') {
-      // Возврат на главную с прокруткой к портфолио
       router.push('/')
       setTimeout(() => {
         const portfolioSection = document.getElementById('portfolio')
@@ -71,7 +70,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
         }
       }, 100)
     } else {
-      // Возврат на страницу кейсов
       router.push('/cases')
     }
   }
@@ -135,33 +133,34 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
       <div className="relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] bg-slate-900 md:rounded-t-2xl md:rounded-b-2xl overflow-hidden animate-slideUp md:animate-scaleUp z-10">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 p-4 md:p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-xl md:text-2xl font-bold text-white font-fixedsys">
-              {caseData.title}
-            </h1>
-            <p className="text-teal-400 text-sm md:text-base">{caseData.subtitle}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            {caseData.siteUrl && (
-              
-                href={caseData.siteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white text-sm font-medium rounded-lg transition-all duration-300"
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-white font-fixedsys">
+                {caseData.title}
+              </h1>
+              <p className="text-teal-400 text-sm md:text-base">{caseData.subtitle}</p>
+            </div>
+            <div className="flex items-center gap-3">
+              {caseData.siteUrl && (
+                <a
+                  href={caseData.siteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:inline-block px-4 py-2 bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-600 hover:to-indigo-700 text-white text-sm font-medium rounded-lg transition-all duration-300"
+                >
+                  Перейти на сайт →
+                </a>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleClose}
+                className="text-slate-400 hover:text-white hover:bg-slate-800"
+                aria-label="Закрыть кейс"
               >
-                Перейти на сайт →
-              </a>
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleClose}
-              className="text-slate-400 hover:text-white hover:bg-slate-800"
-              aria-label="Закрыть кейс"
-            >
-              <X size={24} weight="bold" />
-            </Button>
+                <X size={24} weight="bold" />
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -183,7 +182,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                   className="object-contain"
                 />
                 
-                {/* Navigation arrows */}
                 {caseData.images.length > 1 && (
                   <>
                     <button
@@ -204,7 +202,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 )}
               </div>
               
-              {/* Image indicators */}
               {caseData.images.length > 1 && (
                 <div className="flex justify-center mt-4 space-x-2">
                   {caseData.images.map((_, index) => (
@@ -243,7 +240,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.challenge}</div>
               </div>
 
-              {/* Дополнительная задача */}
               {caseData.content.challenge2 && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Дополнительные вызовы</h2>
@@ -251,7 +247,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Технические сложности */}
               {caseData.content.technicalChallenges && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Технические сложности</h2>
@@ -277,7 +272,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 <div className="text-slate-300 leading-relaxed whitespace-pre-line">{caseData.content.results}</div>
               </div>
 
-              {/* Дополнительные результаты */}
               {caseData.content.additionalResults && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Дополнительные результаты</h2>
@@ -285,7 +279,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Бизнес-результаты */}
               {caseData.content.businessResults && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Бизнес-результаты</h2>
@@ -293,7 +286,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Применение в клиниках */}
               {caseData.content.clinicApplications && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">🏥 Применение в медицинских клиниках</h2>
@@ -301,7 +293,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Проектная информация */}
               {(caseData.content.timeline || caseData.content.teamSize || caseData.content.budget) && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Информация о проекте</h2>
@@ -328,7 +319,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Технологии */}
               {caseData.content.technologies && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Технологии</h2>
@@ -343,7 +333,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Инструменты */}
               {caseData.content.tools && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Инструменты разработки</h2>
@@ -358,7 +347,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Процесс разработки */}
               {(caseData.content.methodology || caseData.content.testingApproach || caseData.content.qualityAssurance) && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Процесс разработки</h2>
@@ -385,7 +373,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Отзывы */}
               {(caseData.content.clientFeedback || caseData.content.userFeedback) && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Отзывы</h2>
@@ -406,7 +393,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Ключевые особенности */}
               {caseData.content.keyFeatures && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Ключевые особенности</h2>
@@ -421,7 +407,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Достижения */}
               {caseData.content.achievements && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">🏆 Достижения</h2>
@@ -436,7 +421,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Бизнес-эффект */}
               {(caseData.content.businessImpact || caseData.content.roi) && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Бизнес-эффект</h2>
@@ -454,7 +438,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Выводы и планы */}
               {(caseData.content.lessonsLearned || caseData.content.futureImprovements) && (
                 <div>
                   <h2 className="text-lg font-bold text-white mb-3 font-fixedsys">Выводы и планы</h2>
@@ -475,7 +458,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                 </div>
               )}
 
-              {/* Rich Content с markdown (если есть) */}
               {caseData.content.richContent && (
                 <div className="mt-8 border-t border-slate-700 pt-8">
                   <ReactMarkdown 
@@ -594,32 +576,15 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
 
       <style jsx>{`
         @keyframes slideUp {
-          from {
-            transform: translateY(100%);
-          }
-          to {
-            transform: translateY(0);
-          }
+          from { transform: translateY(100%); }
+          to { transform: translateY(0); }
         }
-        
         @keyframes scaleUp {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
         }
-        
-        .animate-slideUp {
-          animation: slideUp 0.3s ease-out;
-        }
-        
-        .animate-scaleUp {
-          animation: scaleUp 0.3s ease-out;
-        }
+        .animate-slideUp { animation: slideUp 0.3s ease-out; }
+        .animate-scaleUp { animation: scaleUp 0.3s ease-out; }
       `}</style>
     </div>
   )
