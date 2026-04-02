@@ -2,12 +2,14 @@ import { CaseData } from '@/lib/types/case'
 import { onlineOkoCase } from './online-oko'
 import { hippocratAiCase } from './hippocrat-ai'
 import { yasnyVzorCase } from './yasny-vzor'// 👈 Добавил импорт
+import { klinikaIrisCase } from './klinika-iris'
 
 // Объединяем все кейсы
 export const allCases: CaseData[] = [
   onlineOkoCase,
   hippocratAiCase,  // 👈 Добавил в массив
   yasnyVzorCase,
+  klinikaIrisCase,
   // aiMedicalCase,
 ]
 
