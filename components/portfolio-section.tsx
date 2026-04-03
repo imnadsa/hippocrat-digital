@@ -202,7 +202,6 @@ export default function PortfolioSection() {
                 </Button>
               </div>
           </div>
-        </div>
 
         {/* Кейс 3 - Клиника ИРИС */}
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
