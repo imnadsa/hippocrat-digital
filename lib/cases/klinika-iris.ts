@@ -8,32 +8,19 @@ export const klinikaIrisCase: CaseData = {
   shortDescription: 'Комплексная работа с сайтом клиники в Краснодаре и Дагестане: редизайн, EEAT-контент, система отзывов и кнопки записи в каждой точке пути пациента',
 
   images: [
-    '/cases/klinika-iris/cover1.jpg',      // 👈 Hero-картинка кейса (сделать отдельно)
-    '/cases/klinika-iris/gif1.gif',        // 👈 Гифка 1 из Craft
-    '/cases/klinika-iris/gif2.gif',        // 👈 Гифка 2 из Craft
-    '/cases/klinika-iris/gif3.gif',        // 👈 Гифка 3 из Craft
-    '/cases/klinika-iris/gif4.gif',        // 👈 Гифка 4 из Craft
+    '/cases/klinika-iris/cover1.jpg',
+    '/cases/klinika-iris/gif1.gif',
+    '/cases/klinika-iris/gif2.gif',
+    '/cases/klinika-iris/gif3.gif',
+    '/cases/klinika-iris/gif4.gif',
   ],
 
+  videoUrl: '/cases/klinika-iris/review.mp4',
+
   metrics: [
-    {
-      before: 'Мало пациентов с сайта',
-      after: 'Поток первичных заявок',
-      improvement: 'Конверсия выросла',
-      label: 'Заявки с сайта'
-    },
-    {
-      before: 'Устаревший дизайн',
-      after: 'Современная концепция',
-      improvement: 'Доверие растёт',
-      label: 'Дизайн и UX'
-    },
-    {
-      before: 'Отзывы не оформлены',
-      after: 'Полноценная система',
-      improvement: 'Репутация клиники',
-      label: 'Доверие пациентов'
-    }
+    { before: 'Мало пациентов с сайта', after: 'Поток первичных заявок', improvement: 'Конверсия выросла', label: 'Заявки с сайта' },
+    { before: 'Устаревший дизайн', after: 'Современная концепция', improvement: 'Доверие растёт', label: 'Дизайн и UX' },
+    { before: 'Отзывы не оформлены', after: 'Полноценная система', improvement: 'Репутация клиники', label: 'Доверие пациентов' }
   ],
 
   content: {
@@ -78,19 +65,16 @@ export const klinikaIrisCase: CaseData = {
 ## Блог и система контента
 
 Запустили блог, добавили статьи и настроили инфраструктуру для их регулярного пополнения — поведенческие факторы растут за счёт полезного контента.
-
 ![Блог и контент](/cases/klinika-iris/gif3.gif)
 
 ## Отзывы и доверие
 
 Создали отдельную страницу отзывов и внедрили систему их сбора прямо на сайте. Положительный опыт пациентов теперь работает на репутацию клиники, а не теряется.
-
 ![Секция отзывов](/cases/klinika-iris/gif4.gif)
 
 ## Страницы врачей
 
 Оформили детальные профили каждого врача — опыт, специализация, образование и фото. Это закрывает требования EEAT и помогает пациенту выбрать специалиста ещё до звонка в клинику.
-
 ![Страница врачей](/cases/klinika-iris/gif1.gif)
 
 ## Рост заявок с сайта — CTA-формы
