@@ -204,6 +204,81 @@ export default function PortfolioSection() {
           </div>
         </div>
 
+        {/* Кейс 3 - Клиника ИРИС */}
+        <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col hover:border-teal-500/30 hover:shadow-xl hover:shadow-teal-900/25 transition-all duration-500 group hover-lift blur-backdrop animate-slideInStagger delay-300">
+          <div className="h-56 bg-gradient-to-br from-teal-900/50 to-slate-900 relative overflow-hidden">
+            <img 
+              src="/cases/klinika-iris/cover1.jpg" 
+              alt="Клиника ИРИС — комплексная работа с сайтом" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-teal-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+              <div className="bg-slate-900/95 backdrop-blur-md rounded-2xl p-6 mx-4 border border-teal-500/30 shadow-2xl">
+                <div className="text-center mb-4">
+                  <h4 className="text-white font-bold text-lg font-fixedsys mb-2">Что сделали</h4>
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">EEAT</div>
+                    <div className="text-slate-300 text-sm">SEO-фундамент</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-teal-400 font-fixedsys mb-1">6</div>
+                    <div className="text-slate-300 text-sm">блоков работ</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="absolute top-4 right-4 z-10 group-hover:opacity-0 transition-opacity duration-300">
+              <div className="inline-block px-3 py-1 rounded-full bg-teal-900/80 backdrop-blur-sm text-teal-400 text-xs border border-teal-500/30">
+                Комплексная работа с сайтом
+              </div>
+            </div>
+            
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900 to-transparent z-10 group-hover:opacity-0 transition-opacity duration-300">
+              <h3 className="text-xl font-bold text-white font-fixedsys text-shadow">
+                Клиника ИРИС
+              </h3>
+              <p className="text-slate-300 text-sm mt-1">Краснодар и Дагестан</p>
+            </div>
+          </div>
+          
+          <div className="p-6 flex-grow flex flex-col">
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="text-center p-3 bg-slate-800/30 rounded-lg">
+                <div className="flex items-center justify-center mb-2">
+                  <Target size={20} className="text-teal-400 mr-2" weight="duotone" />
+                  <span className="text-teal-400 font-bold font-fixedsys text-lg">+CTR</span>
+                </div>
+                <p className="text-slate-400 text-xs">Заявки с сайта</p>
+              </div>
+              <div className="text-center p-3 bg-slate-800/30 rounded-lg">
+                <div className="flex items-center justify-center mb-2">
+                  <Eye size={20} className="text-teal-400 mr-2" weight="duotone" />
+                  <span className="text-teal-400 font-bold font-fixedsys text-lg">EEAT</span>
+                </div>
+                <p className="text-slate-400 text-xs">SEO-фундамент</p>
+              </div>
+            </div>
+            
+            <p className="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+              Редизайн, страницы врачей, система отзывов и кнопки записи в каждой точке пути пациента.
+            </p>
+            
+            <Button
+              onClick={() => openCase('klinika-iris')}
+              className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 justify-between group hover-lift transition-all duration-300"
+            >
+              <span>Изучить кейс</span>
+              <ArrowUpRight size={16} className="text-teal-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" weight="bold" />
+            </Button>
+          </div>
+        </div>
+
         {/* CTA для портфолио */}
         <div className="text-center mt-12 animate-fadeInUp delay-1300">
           <h3 className="text-xl font-semibold text-white mb-4 font-fixedsys text-shadow">
