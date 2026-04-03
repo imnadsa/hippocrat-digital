@@ -174,14 +174,16 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
 
             {/* Видеоотзыв */}
             {caseData.videoUrl && (
-              <div className="rounded-xl overflow-hidden bg-slate-800">
-                <video
-                  src={caseData.videoUrl}
-                  controls
-                  preload="metadata"
-                  className="w-full"
-                  aria-label="Видеоотзыв клиента"
-                />
+              <div className="flex justify-center">
+                <div className="rounded-xl overflow-hidden bg-slate-800 w-64">
+                  <video
+                    src={caseData.videoUrl}
+                    controls
+                    preload="metadata"
+                    className="w-full"
+                    aria-label="Видеоотзыв клиента"
+                  />
+                </div>
               </div>
             )}
 
