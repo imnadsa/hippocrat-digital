@@ -172,6 +172,20 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
               {caseData.category}
             </div>
 
+            {/* Видеоотзыв */}
+            {caseData.videoUrl && (
+              <div className="rounded-xl overflow-hidden bg-slate-800">
+                <video
+                  src={caseData.videoUrl}
+                  controls
+                  preload="metadata"
+                  className="w-full"
+                  aria-label="Видеоотзыв клиента"
+                />
+              </div>
+            )}
+
+            
             {/* Image Gallery */}
             <div className="relative">
               <div className="relative aspect-video bg-slate-800 rounded-xl overflow-hidden">
