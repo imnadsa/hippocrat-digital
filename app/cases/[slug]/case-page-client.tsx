@@ -172,21 +172,6 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
               {caseData.category}
             </div>
 
-            {/* Видеоотзыв */}
-            {caseData.videoUrl && (
-              <div className="flex justify-center">
-                <div className="rounded-xl overflow-hidden bg-slate-800 w-64">
-                  <video
-                    src={caseData.videoUrl}
-                    controls
-                    preload="metadata"
-                    className="w-full"
-                    aria-label="Видеоотзыв клиента"
-                  />
-                </div>
-              </div>
-            )}
-
             
             {/* Image Gallery */}
             <div className="relative">
@@ -217,6 +202,21 @@ export default function CasePageClient({ caseData }: CasePageClientProps) {
                   </>
                 )}
               </div>
+
+              {/* Видеоотзыв */}
+              {caseData.videoUrl && (
+                <div className="flex justify-center">
+                  <div className="rounded-xl overflow-hidden bg-slate-800 w-64">
+                    <video
+                      src={caseData.videoUrl}
+                      controls
+                      preload="metadata"
+                      className="w-full"
+                      aria-label="Видеоотзыв клиента"
+                    />
+                  </div>
+                </div>
+              )}
               
               {caseData.images.length > 1 && (
                 <div className="flex justify-center mt-4 space-x-2">
